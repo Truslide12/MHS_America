@@ -1,0 +1,40 @@
+.process {height:8em;margin:0 -10px;}
+.process ul li {font-size:120%;float:left;text-align:center;width:16%;margin:1em 4.5%;padding:0.5em 0 0;text-rendering:optimizeLegibility;letter-spacing:0.065em;}
+.process ul li.current {color:#fff !important;background:#09f;border-radius:4px;}
+.process ul li.previous {color:#999;}
+.process ul li.finish {background:#090;}
+.process ul li i.fa {font-size:180%;margin:0.25em;display:block;}
+.process hr {position:relative;top:-7em;border:none;background:#dedede;height:4.25em;}
+.process ul {position:relative;z-index:1;}
+.process.dark hr {background:#333 url(/_/images/order/credit-card-stripe-lol.png) center top no-repeat;}
+.process.dark ul li {color:#ccc;}
+.process.dark ul li.previous {color:#545454;}
+#us-county h1 {border:none;}
+.dashboard-box .grid {margin:0;width:745px;}
+#business-wizard .grid {width:auto;}
+#business-wizard.order_details {text-align:center;}
+.dashboard-box label, .dashboard-box .zocial {display:block;margin:1em;}
+.dashboard-box .profile-card .zocial {display:inline-block;margin:0.1em 0;}
+.dashboard-box label {font-size:120%;width:45%;}
+.dashboard-box label.r {margin-top:0;}
+.dashboard-box label.full, .dashboard-box .checks label {width:auto;}
+.dashboard-box label.chk {width:auto;margin:0;}
+.dashboard-box label.l {margin:-0.5em 1em 1em;}
+.checks, .k-widget {text-align:left;}
+.checks h3, .checks strong {margin-left:1em;}
+.checks > div > label {margin-left:2em;}
+#business-wizard label {font-size:100%;}
+#register label input {width:100%;}
+#captcha-box {margin:1em;width:45%;font-size:120%;}
+.dashboard-box .k-dropdown {font-size:120%;margin:0 0.5em 0 0;}
+.dashboard-box section {width:auto;}
+.tile-link {display:block;font-size:140%;height:1em;padding:1em;background:#ccf;color:#333;text-decoration:none;text-align:center;}
+.tile-link:hover {text-decoration:none;background:#09f;color:#fff;}
+.dashboard-box .profile-card {margin:0.5em 0;padding:0.8em;width:auto;float:none;height:auto;text-align:left;}
+.dashboard-box .profile-card .g3, .dashboard-box .profile-card .g6 {font-size:120%;margin:0 1% 0;}
+.dashboard-box .profile-card header {font-size:100%;font-weight:normal;line-height:1;}
+.dashboard-box .profile-card footer, .dashboard-box .profile-card footer a {width:auto;}
+#us-county h1.rarity {font-family: 'Pontano Sans';font-weight:400;padding:0;}
+#current_profiles label.chk {margin:-0.65em 0 0;}
+label.chk:before {top:0.35em;left:-0.65em;}
+#business-wizard label.chk {font-size: 115%;word-spacing:0.2em;}

@@ -1,0 +1,57 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^welcome$ index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)$ index.php?module=admin&page=$1 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/$ index.php?module=admin&page=$1 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)$ index.php?module=admin&page=$1&id=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)/$ index.php?module=admin&page=$1&id=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)/([0-9]+)$ index.php?module=admin&page=$1&id=$2&item=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)/([0-9]+)/$ index.php?module=admin&page=$1&id=$2&item=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9]+)/([a-zA-Z_-]+)$ index.php?module=admin&page=profile&id=$1&name=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9]+)/([a-zA-Z_-]+)/$ index.php?module=admin&page=profile&id=$1&name=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9]+)/([a-zA-Z_-]+)/([a-zA-Z_-]+)$ index.php?module=admin&page=profile&id=$1&name=$2&cmd=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9]+)/([a-zA-Z_-]+)/([a-zA-Z_-]+)/$ index.php?module=admin&page=profile&id=$1&name=$2&cmd=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([0-9]+)$ index.php?module=admin&page=$1&id=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([0-9]+)/$ index.php?module=admin&page=$1&id=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([0-9]+)/([a-zA-Z_-]+)$ index.php?module=admin&page=$1&id=$2&cmd=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([0-9]+)/([a-zA-Z_-]+)/$ index.php?module=admin&page=$1&id=$2&cmd=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)/([a-zA-Z_-]+)$ index.php?module=admin&page=$1&id=$2&cmd=$3 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z_-]+)/([a-zA-Z_-]+)/([a-zA-Z_-]+)/$ index.php?module=admin&page=$1&id=$2&cmd=$3 [QSA,L]
+
+
+<IfModule mod_env.c>
+	SetEnv SEO_SUPPORT 1
+</IfModule>

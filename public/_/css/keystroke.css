@@ -1,0 +1,9 @@
+div.wrapper > header {background: linear-gradient(to bottom, #333 0%,#000 100%);}
+div#submenu {background:#dedede;}
+div.wrapper > header > nav > ul li#page-direction {color:#333;}
+div.wrapper > header > nav > ul > li.right {width:248px;}
+div.wrapper > header > nav > ul > li > ul > li > a {color:#333;}
+body.page_profile, body.page_city {background:#000014;}
+div#content > footer {background:#141414;color:#545445;}
+div#content > footer ul > li > a {color:#999;}
+.dashie > .r > img {-moz-border-radius:16px;-webkit-border-radius:16px;-khtml-border-radius:16px;-o-border-radius:16px;border-radius:16px;}

@@ -1,0 +1,9 @@
+#ideas article {}
+#ideas article h2 {padding:10px;background:#fff;margin:9px 0;border:1px solid #999;font-size:120%;font-weight:normal;float:left;width:648px;}
+#ideas article aside {background:#fff;border:1px solid #ccc;float:left;height:80px;margin:0 10px 20px;width:80px;font-size:120%;}
+#ideas article aside span {display:block;float:left;height:30px;padding:5px;text-align:center;width:70px;line-height:30px;}
+#ideas article footer {font-size:85%;float:left;padding:0 11px;}
+#ideas article footer a {color:#999;text-decoration:none;}
+#ideas article footer a:hover {text-decoration:underline;}
+span.pos {color:#00de00;}
+span.neg {color:#de0000;}

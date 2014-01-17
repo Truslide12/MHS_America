@@ -1,0 +1,190 @@
+<?php
+$enabled = true;
+function alphaID($in, $to_num = false, $pad_up = 3, $passKey = 'xrokamaj')
+{
+  //$index = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  //$index = "nDlyF2e5rtGxBJXmoA93pbMUhVz4QfREaI6u1PC8kYiT0scLOgwNWqZj7KdSHv";
+  $index = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321";
+  //$index = "B9EDJO4UCN8XFAY30WG2PHLS5RTK1VMZ7Q6I";
+  if ($passKey !== null) {
+    // Although this function's purpose is to just make the
+    // ID short - and not so much secure,
+    // with this patch by Simon Franz (http://blog.snaky.org/)
+    // you can optionally supply a password to make it harder
+    // to calculate the corresponding numeric ID
+ 
+    for ($n = 0; $n<strlen($index); $n++) {
+      $i[] = substr ( $index,$n ,1);
+    }
+ 
+    $passhash = hash('sha256',$passKey);
+    $passhash = (strlen ($passhash) < strlen ($index))
+      ? hash('sha512',$passKey)
+      : $passhash;
+ 
+    for ($n=0; $n < strlen ($index); $n++) {
+      $p[] =  substr ($passhash, $n ,1);
+    }
+ 
+    array_multisort ($p,  SORT_DESC, $i);
+    $index = implode ($i);
+  }
+ 
+  $base  = strlen ($index);
+ 
+  if ($to_num) {
+    // Digital number  <<--  alphabet letter code
+    $in  = strrev ($in);
+    $out = 0;
+    $len = strlen ($in) - 1;
+    for ($t = 0; $t <= $len; $t++) {
+      $bcpow = bcpow ($base, $len - $t);
+      $out   = $out + strpos ($index, substr ($in, $t, 1)) * $bcpow;
+    }
+ 
+    if (is_numeric ($pad_up)) {
+      $pad_up--;
+      if ($pad_up > 0) {
+        $out -= pow ($base, $pad_up);
+      }
+    }
+    $out = sprintf ('%F', $out);
+    $out = substr ($out, 0, strpos ($out, '.'));
+  } else {
+    // Digital number  -->>  alphabet letter code
+    if (is_numeric ($pad_up)) {
+      $pad_up--;
+      if ($pad_up > 0) {
+        $in += pow ($base, $pad_up);
+      }
+    }
+ 
+    $out = "";
+    for ($t = floor (log ($in, $base)); $t >= 0; $t--) {
+      $bcp = bcpow ($base, $t);
+      $a   = floor ($in / $bcp) % $base;
+      $out = $out . substr ($index, $a, 1);
+      $in  = $in - ($a * $bcp);
+    }
+    $out = strrev ($out); // reverse
+  }
+ 
+  return $out;
+}
+
+/* gets the data from a URL */
+function get_data($url)
+{
+  $ch = curl_init();
+  $timeout = 5;
+  $userAgent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)';
+  curl_setopt($ch,CURLOPT_URL,$url);
+  curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+  $data = curl_exec($ch);
+  curl_close($ch);
+  return $data;
+}
+
+$tokenresponse = get_data("http://www.ponysquare.com/token.php?key=".$_GET['key']);
+$tokenjson = json_decode($tokenresponse);
+$token = $tokenjson->token;
+echo($tokenjson->token);
+$userresponse = get_data("http://www.ponysquare.com/api.php?token=".$token."&method=user.getUser");
+$user = json_decode($userresponse);
+
+if($enabled == true){ /* IF ENABLED */
+$username = ($user->output->full_name == "") ? $user->output->user_name : $user->output->full_name;
+if($user->output->email != "" && $user->output->user_id > 0){
+	$email = $user->output->email;
+	$uid = $user->output->user_id;	
+	$cont = true;
+}else{
+	$cont = false;
+}
+$user_loggedin = false;
+if($cont == true){
+	$dblink = mysql_connect("localhost", "metachry", "6yfcvb19");
+	if(!$dblink) {$cont = false; $dbfail = true; $dberr = "DBLINK";}
+	if(!$dbfail){
+		$dbslct = mysql_select_db("metachry_rokuaccts", $dblink);
+		if(!$dbslct) {$cont = false; $dbfail = true; $dberr = "DBSLCT";}
+		if(!$dbfail) {
+			$dbask = mysql_query("SELECT * FROM ponysquare WHERE confirm = '".alphaID($uid)."' LIMIT 1");
+			$dbasknum = mysql_num_rows($dbask);
+			if($dbasknum === false) {
+				$cont = false; $dbfail = true; $dberr = "DBASKNUM";
+			}elseif($dbasknum == 0) {
+				$dbquery = mysql_query("INSERT INTO ponysquare SET `confirm` = '".alphaID(intval($uid))."', `email` = '".$email."',`token` = '".$token."',`key` = '".addslashes($_GET['key'])."'");
+				if(!$dbquery) {$cont = false; $dbfail = true; $dberr = "DBQUERY";}
+			}else{
+				/* Already logged account */
+				$dbuser = mysql_fetch_assoc($dbask);
+				if(!$dbuser) {$cont = false; $dbfail = true; $dberr = "DBUSER";}else{
+					/* Verify the user id for good measure :P */
+					if($dbuser['confirm'] == alphaID($uid)) {
+						$updatemessage = "";
+						if(trim($dbuser['email']) != trim($email)) {
+							/* Emails don't match - Update the email in the database */
+							$dbemlupd = mysql_query("UPDATE ponysquare SET `email` = '".$email."' WHERE `confirm` = '".alphaID($uid)."'");
+							if(!$dbemlupd){$updatemessage .= " !!Your recent email change failed to update!!";}else{$updatemessage .= " Your recent email change has been updated.";}
+						}
+						if(trim($dbuser['token']) != trim($token)) {
+							/* Tokens don't match - Update the token in the database */
+							$dbtknupd = mysql_query("UPDATE ponysquare SET `token` = '".$token."' WHERE `confirm` = '".alphaID($uid)."'");
+							if(!$dbtknupd){$updatemessage .= " !!Your token failed to update!!";}else{$updatemessage .= " Your token has been updated.";}
+						}
+						if($dbuser['key'] != addslashes($_GET['key'])) {
+							/* Keys don't match - Update the key in the database */
+							$dbkeyupd = mysql_query("UPDATE ponysquare SET `key` = '".addslashes($_GET['key'])."' WHERE `confirm` = '".alphaID($uid)."'");
+							if(!$dbkeyupd){$updatemessage .= " !!Your key failed to update!!";}else{$updatemessage .= " Your key has been updated.";}
+						}
+						if(trim(addslashes($_GET['rokucode'])) != ""){
+							$insrtroku = mysql_query("INSERT INTO psrokus SET `id` = '".$dbuser['id']."', `rokuserial` = '".addslashes($_GET['rokucode'])."'");
+							if(!$insrtroku){$updatemessage .= " !!Failed to register your Roku!!";}else{$updatemessage .= " Your Roku has been registered.";}
+						}
+						/* User is logged, and everything is in order */
+						$user_loggedin = true;
+						$loggedinmessage = "Verified account.".$updatemessage;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+}else{ /* End of IF ENABLED */
+	/* If not... :P */
+	$cont = true;
+	$dbfail = false;
+	$loggedinmessage = "!!System Disabled!!";
+}
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link rel="stylesheet" href="inc/style/global.css" title="Cupcakes n Muffins"/>
+</head>
+<body>
+<div id="contain">
+<?php if($user->output->user_id == 10992) { ?>
+<div id="header"><span style="float:right;clear:none;vertical-align:middle;"><form method="get" action="index.php"><input type="hidden" name="key" value="<?php echo($_GET['key']); ?>"/>
+<?php if($_GET['step'] == 2 && $cont == true) { ?>
+<strong>STEP 2: </strong>On Roku, open <em>Settings</em> -&gt; <em>About</em>.<br/><label for="rokucodebox">Enter Serial: </label><input type="text" name="rokucode" maxlength="15" size="16" id="rokucodebox"/><input type="submit" value="Link Roku"/>
+<?php }else{ ?>
+<strong>STEP 1: </strong><input type="hidden" name="step" value="2"/><input type="submit" value="Verify PonySquare Account"/>
+<?php } ?></form></span><img src="inc/images/roku-logo.png" alt="roku"/></div>
+<div>
+<p class="paddi">
+<?php echo("Hi there, ".$username."!<br style=\"clear:both;\"/>".$loggedinmessage); if($cont == false){ ?><br/><span style="color:#990000;"><strong>Error: </strong><?php if($dbfail == true){ ?>The link database failed to respond. Error: <?php echo($dberr); ?><?php }else{ ?>Your email  on file on Ponysquare is required for linking. Check app permissions.<?php } ?></span><?php } ?>
+</p>
+<?php }else{ ?>
+<div id="header"><img src="inc/images/roku-logo.png" alt="roku"/></div>
+<p>
+This app is under development. Brohoof our page, and we'll keep you up-to-date on its progress...<br/>Thank you :)
+</p>
+<?php } ?>
+</div>
+</body>
+</html>

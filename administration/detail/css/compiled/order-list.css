@@ -1,0 +1,96 @@
+.orders-list .header h3 {
+  margin-top: 0px;
+}
+.orders-list .header input.search {
+  padding: 5px 6px;
+  position: relative;
+  top: 0px;
+}
+.orders-list .header input.search:focus {
+  box-shadow: none;
+  border: 1px solid #888;
+}
+.orders-list .header .ui-select {
+  margin: 3px 40px 0 0;
+}
+.orders-list .header .ui-dropdown {
+  margin-left: 20px;
+}
+.orders-list .header .ui-dropdown input.form-control {
+  width: 60px;
+  display: inline-block;
+  height: 28px;
+  margin: 0px 8px;
+}
+.orders-list .header a.btn-flat span {
+  font-size: 17px;
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
+.orders-list .table td {
+  vertical-align: middle;
+  font-size: 13px;
+}
+.orders-list .table img.avatar {
+  float: left;
+  margin-right: 7px;
+  max-width: 45px;
+  position: relative;
+}
+.orders-list .table a.name {
+  color: #3389d1;
+  display: block;
+  font-weight: 600;
+  margin: 7px 0 0 0;
+}
+.orders-list .table .subtext {
+  font-size: 12px;
+  margin-left: 0;
+  color: #778391;
+  font-style: italic;
+  margin-top: 0;
+}
+.orders-list .pagination {
+  margin-top: 25px;
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  .ui-dropdown .dialog .body {
+    width: 250px;
+    left: 58%;
+    position: relative;
+  }
+
+  .orders-list .table a.name {
+    font-size: 12px;
+  }
+  .orders-list .table td {
+    font-size: 12px;
+  }
+  .orders-list .table .avatar {
+    display: none;
+  }
+  .orders-list h3 {
+    display: block;
+    float: none;
+    margin-bottom: 30px;
+  }
+  .orders-list .header input.search {
+    margin-bottom: 18px;
+  }
+  .orders-list .header .ui-dropdown {
+    float: left;
+    margin-left: 0;
+  }
+
+  .ui-dropdown .dialog .body .form input[type="text"] {
+    margin-top: 10px;
+  }
+
+  .ui-dropdown .dialog .body .form a {
+    margin-top: 10px;
+    margin-left: 18px;
+  }
+}

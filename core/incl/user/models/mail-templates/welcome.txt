@@ -1,0 +1,14 @@
+Hi #DISPLAY#!
+
+We would like to thank you for joining #WEBSITENAME#. You will be able to bookmark communities, individual spaces and homes, and contractors - as well as rate communities and contractors.
+If you are a business owner seeking a profile, you can also do so now.
+ 
+To get started, go to #WEBSITEURL#/account and login using your username.
+ 
+Username: #USERNAME#
+Password: ******
+ 
+Thank you and we hope we help you find what you need.
+ 
+ 
+~MHS America Team

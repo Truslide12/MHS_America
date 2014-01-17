@@ -1,0 +1,85 @@
+body{padding-top:92px;background:#ccc}
+body.no_submenu{padding-top:50px;}
+#pagecanvas{position:fixed;top:0;left:0;width:100%;z-index:-1}
+#logo-container{position:relative}
+#beta{position:absolute;top:98px;right:204px}
+#footer{height:60px}
+#footer .container{background:#141414}
+.container .text-muted{margin:20px 0}
+.center{text-align:center}
+#main-header{background:#09f url(../images/header-grad-bg.png) top left repeat-x;border-color:#999}
+#main-header .navbar-brand {padding:5px 15px}
+#main-header .navbar-nav>li>a{color:#fff}
+#main-header .navbar-nav>li>a:hover,#main-header .navbar-nav>li>a:focus{color:#333;background:#ccc}
+#main-header .navbar-nav>.active>a,#main-header .navbar-nav>.active>a:hover,#main-header .navbar-nav>.active>a:focus{color:#555;background:#fff}
+#main-header p{margin:10px 0}
+#main-submenu{background:url(../../images/greeter-shadow.png) top left repeat-x;height:42px;color:#fff}
+#main-container{background:#fff;padding:15px;min-height:500px}
+.page_welcome #vmap {height:600px}
+.state_california #vmap {height:1000px}
+.well-primary{padding:19px 0}
+.well-primary .panel-default{padding:15px}
+.well-primary .image-box{padding:0}
+.well-primary .image-box img{width:100%}
+.well-primary .list-box{padding-right:0;text-align:right}
+.well-primary .list-box span{float:left}
+.plan{color:#fc0}
+.h1 small{font-size:50%}
+#label-state{font-size:180%;display:block;background:#dedede;text-align:center;border:1px solid #999;margin:6em 52% -6em !important;}
+#logo-container .lead.hidden-xs{float:right;width:50%;text-align:center}
+section#business-tiles{border-top:1px solid #999;border-bottom:1px solid #999;padding:5px 15px 15px;margin:0 -15px;text-align:center}
+section#business-tiles>header{color:#999;padding:0 0 4px 10px}
+section#business-tiles>div{display:inline-block;position:relative;width:180px;height:200px;text-align:center;margin:0 5px;background-color:#fefefe;background-color:rgba(254,254,254,.85);border:1px solid #999;-moz-border-radius:4px;-webkit-border-radius:4px;-o-border-radius:4px;-khtml-border-radius:4px;-ms-border-radius:4px;border-radius:4px}
+section#business-tiles>div img{position:absolute;top:0;left:0;width:100%;height:auto}
+section#business-tiles>div a{display:block;width:100%;height:auto;text-decoration:none;font-size:0;color:#333;-moz-border-radius:3px;-webkit-border-radius:3px;-o-border-radius:3px;-khtml-border-radius:3px;-ms-border-radius:3px;border-radius:3px}
+section#business-tiles>div a img.hover{display:none;}
+section#business-tiles>div a:hover img.static{display:none;}
+section#business-tiles>div a:hover img.hover{display:inline;}
+html.rgba section#business-tiles>header,section#business-tiles>header.black,span.black{color:#333}
+#main-container .container{padding:15px;margin:0 0 -15px -15px;background:#dedede}
+.loctile a{display:block;color:#333;line-height:80px;text-align:center;background:#ccc;border:1px solid #999;margin:0 0 15px;text-decoration:none}
+.loctile a:hover,.loctile a:focus{background:#09f;color:#fff;border-color:#09f;text-decoration:none}
+#footer>div>div{padding-top:15px}
+.panel-account{padding:15px}
+#footer .slogan{color:#ccc;line-height:2;margin-top:15px}
+#footer-menu>div{padding-right:0}
+#footer-menu .h4{color:#cd4545}
+#footer-menu ul{list-style:none;padding:0}
+#footer-menu ul a{color:#999;text-decoration:none}
+#footer-menu ul a:hover,#footer ul a:focus{color:#fff}
+@media (min-width:1200px) {
+#logo{margin-right:-10%}
+#logo-container .lead.hidden-xs{margin:45px 5% 0 0}
+#logo-container .lead{font-size:26px}
+.page_welcome #vmap{height:600px !important;}
+}
+@media (min-width:768px) {
+#main-container>.col-md-12{margin:0 0 20px}
+#logo-container .lead{font-size:24px}
+#logo-container .lead.hidden-xs{margin:45px 0 0 0}
+.page_welcome #vmap{height:500px}
+}
+@media (max-width: 991px) and (min-width: 768px) {
+body{padding-top:50px}
+#logo{height:85px}
+.lead{padding:0}
+#vmap{height:400px}
+section#business-tiles>div{width:150px;height:165px}
+.page_welcome #vmap{height:400px}
+}
+@media (max-width:767px) {
+body,body.no_submenu{padding-top:45px}
+#main-header{border:none;min-height:43px}
+#main-header .navbar-header{height:43px}
+#main-header .navbar-toggle{margin-top:4px;margin-bottom:4px}
+#logo{height:75px}
+.lead{padding:0}
+.page_welcome #vmap{height:300px}
+section#business-tiles>div{width:100px;height:90px}
+#footer{font-size:80%;line-height:1}
+}
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }

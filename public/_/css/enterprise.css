@@ -1,0 +1,11 @@
+body {padding-top:142px;background:#000054;}
+div#content {box-shadow:0 42px 500px #09f;-moz-box-shadow:0 42px 500px #09f;-webkit-box-shadow:0 42px 500px #09f;border:none;width:960px;}
+#submenu {display:none;}
+section#us-county {overflow:visible;}
+.county-content > div.content-box {width:940px;margin-left:-470px;}
+.county-content > div.content-box .grid {margin:0;width:100%;}
+#us-county h1 {border:none;font-size:300%;font-weight:normal;line-height:2em;margin:-100px -10px 20px;color:#fff;background:rgba(255,255,255,0.25);}
+.slider-wrapper {width:960px;}
+.theme-default .nivo-controlNav {padding:0;margin:-40px auto 20px;z-index:900;position:relative;}
+.jumbotron {width:100%;margin:-11px -10px 0;}
+.county-content > div.content-box .grid h3 {font-size:150%;}

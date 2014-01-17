@@ -1,0 +1,427 @@
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+	
+	Eric Meyer					:: http://ericmeyer.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+	
+-------------------------------------------------------------------------------*/
+
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}									
+
+html {
+	height:100%;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+body {
+	min-height:100%;
+	overflow:hidden;
+}
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+/* Responsive images and other embedded objects
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+   If this default setting for images is causing issues, you might want to replace it with a .responsive class instead. */
+img,
+object,
+embed {max-width: 100%;}
+
+/* force a vertical scrollbar to prevent a jumpy page 
+html {overflow-y: scroll;} */
+
+/* we use a lot of ULs that aren't bulleted. 
+	don't forget to restore the bullets within content. */
+ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before, 
+blockquote:after, 
+q:before, 
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* tables still need cellspacing="0" in the markup */
+table {border-collapse: collapse; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle;}
+
+pre {
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+ 
+/* Accessible focus treatment
+	people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active {outline: none;}
+
+small {font-size: 85%;}
+
+strong, th {font-weight: bold;}
+
+td, td img {vertical-align: top;} 
+
+/* Make sure sup and sub don't screw with your line-heights
+	gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label, 
+input[type=button], 
+input[type=submit], 
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button {width: auto; overflow: visible;}
+ 
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover */
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+
+/* let's clear some floats */
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
+.clearfix:after { clear: both; }  
+.clearfix { zoom: 1; }  
+
+
+
+/* Ok, this is where the fun starts.
+-------------------------------------------------------------------------------*/
+
+/* new Linux- and Windows-friendly sans-serif font stack: http://mky.be/fontstack */
+body {font: 13px Helmet, Freesans, sans-serif;padding-top:84px;}
+
+/* using local fonts? make sure to read up on Paul Irish's 
+	Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
+
+/* we like off-black for text */
+body, select, input, textarea {color: #333;}
+
+a {color: #03f;}
+a:hover {color: #69f;}
+
+/* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
+::-moz-selection{background: #fcd700; color: #fff; text-shadow: none;}
+::selection {background: #fcd700; color: #fff; text-shadow: none;} 
+
+/*	j.mp/webkit-tap-highlight-color */
+a:link {-webkit-tap-highlight-color: #fcd700;} 
+
+ins {background-color: #fcd700; color: #000; text-decoration: none;}
+mark {background-color: #fcd700; color: #000; font-style: italic; font-weight: bold;}
+
+
+/* Header styles */
+header {
+	background: 
+#00b7ea; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwYjdlYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDllYzMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #00b7ea 0%, #009ec3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b7ea), color-stop(100%,#009ec3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #00b7ea 0%,#009ec3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #00b7ea 0%,#009ec3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #00b7ea 0%,#009ec3 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #00b7ea 0%,#009ec3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-8 */
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	height:42px;
+	border:#000099;
+	text-align:left;
+	z-index:9001;
+}
+
+.ie9 header {
+	filter:none;
+}
+
+header > h2 {
+	font-weight:bold;
+	font-size:16px;
+	line-height:42px;
+	float:left;
+	margin:0px 20px;
+}
+
+header > nav {
+	
+}
+
+header > nav > ul {
+	height:42px;
+}
+
+header > nav > ul li {
+	float:left;
+	clear:none;
+	margin:0px;
+}
+
+header > nav > ul > li.right {
+	float:right;
+}
+
+header > nav > ul li > a {
+	padding:12px 10px 13px;
+	color:#ffffff;
+	text-shadow:-1px 0px 0px rgba(148,148,148,0.75),
+				1px 0px 0px rgba(0,0,0,0.5),
+				0px -1px 0px rgba(128,128,128,0.5),
+				0px 1px 2px rgba(0,0,0,0.75),
+				-1px -1px 0px rgba(128,128,128,0.5),
+				1px -1px 0px rgba(0,0,0,0.5),
+				-1px 1px 0px rgba(0,0,0,0.5),
+				1px 1px 0px rgba(0,0,0,0.5);
+	text-decoration:none;
+}
+
+header > nav > ul > li > a {
+	min-width:100px;
+	display:block;
+	text-align:center;
+	border-left:1px solid rgba(222,222,222,0.75);
+	border-right:1px solid rgba(153,153,153,0.75);
+}
+
+header > nav > ul li.end {
+	border-left:1px solid rgba(222,222,222,0.75);
+	display:block;
+	height:42px;
+	width:2px;
+}
+
+header > nav > ul > li:hover, header > nav > ul > li.active {
+	margin:0px;
+}
+
+header > nav > ul > li:hover > a, header > nav > ul > li.active > a {
+	font-weight:bold;
+	border-color:#cccccc;
+	border-style:solid;
+	border-width:0px 1px 0px;
+	background-color:#ffffff;
+	color: #69f;
+	text-shadow:none;
+}
+
+header > nav > ul > li > ul {
+	display:none;
+	height:42px;
+}
+
+header > nav > ul > li:hover > ul, header > nav > ul > li.active > ul {
+	display:inline;
+	position:absolute;
+	left:0px;
+	top:39px;
+	line-height:42px;
+	width:100%;
+	padding-left:20px;
+	border-top:3px solid #ffffff;
+}
+
+header > nav > ul > li > ul > li:hover, header > nav > ul > li > ul > li.active {
+	background-color:#efefef;
+}
+
+header > nav > ul > li > ul > li:hover > a, header > nav > ul > li > ul > li.active > a {
+	color:#333333;
+	text-shadow:none;
+}
+
+div#submenu {
+	position:fixed;
+	top:42px;
+	left:0px;
+	right:0px;
+	height:42px;
+	background: url('../images/greeter-shadow.png') top left repeat-x transparent;
+	z-index:9000;
+}
+
+/* Greeter styles */
+
+section#greeter {
+	height:300px;
+	padding:0px;
+	background:#efefef;
+}
+
+.shad {
+    z-index:1;
+    width:320px;
+    height:0px;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+    border-radius:1px;
+	-moz-box-shadow:0 -10px 20px 20px rgba(0,0,0,.3);
+	-webkit-box-shadow:0 -10px 20px 20px rgba(0,0,0,.3);
+    box-shadow:0 -10px 20px 20px rgba(0,0,0,.3);
+    left:-10px;
+}
+
+section#greeter > div#greeter-wrapper {
+	border-top:1px solid #cccccc;
+	padding:12px 12px 12px;
+}
+
+section#greeter > div#greeter-wrapper > h1 {
+	font-family:'DymaxionScript';
+	text-align:center;
+	font-size:64px;
+}
+
+section#greeter > div#greeter-wrapper > aside {
+	width:100%;
+	padding-left:50%;
+	color:#333333;
+	font-size:20px;
+}
+
+section#greeter > div#greeter-wrapper > aside > div {
+	width:600px;
+	margin-left:-300px;
+}
+
+
+/* US Map Styles */
+section#us-map {
+	padding-left:50%;
+}
+
+section#us-map > div#vmap {
+	margin:-210px 0px 40px -300px;
+}
+
+section#us-map-alt > div#vmap {
+	margin:-210px 0px 40px;
+}
+
+/* Search form styles */
+#search-form {
+	display:none;
+}
+
+#search-form > div > p {
+	font-size:13px;
+}
+
+#search-form input.search {
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	font-color:#333333;
+	outline:0px none;
+	font-size:20px;
+	height:24px;
+	padding:6px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	-moz-box-shadow: inset 0 0 5px #888;
+	-webkit-box-shadow: inset 0 0 5px#888;
+	box-shadow: inset 0 0 5px #888;
+}
+
+input.search::-webkit-input-placeholder {
+   color: #999999;
+}
+
+input.search:-moz-placeholder {  
+   color: #999999;  
+}
+
+#search-form input.search-btn {
+    background-color: #45719B;
+    border: 1px solid #26445F;
+    color: #FFFFFF;
+    display: inline-block;
+	float:right;
+	clear:none;
+    font-weight: bold;
+    outline: medium none;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #253E5C;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:5px 4px 6px;
+}
+
+
+
+
+/* Print styles!
+-------------------------------------------------------------------------------*/
+@media print {
+
+
+
+}
+
+
+/* Media queries!
+-------------------------------------------------------------------------------*/
+
+/* Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {
+	
+		
+}
+
+@media all and (orientation: portrait) {
+	
+}
+
+@media all and (orientation: landscape) {
+	
+}
+
