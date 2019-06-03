@@ -36,7 +36,7 @@ class Advertisement extends EloquentModel {
 			$possibilities = array_values($possibilities);
 		}
 
-		return new Illuminate\Database\Eloquent\Collection($items);
+		return new \Illuminate\Database\Eloquent\Collection($items);
 	}
 
 	public function scopeStateBlocks($query, $state)
@@ -72,7 +72,7 @@ class Advertisement extends EloquentModel {
 
 	public function profile()
 	{
-		return $this->belongsTo('Profile');
+		return $this->belongsTo(Profile::class);
 	}
 
 	public function pageWatching()

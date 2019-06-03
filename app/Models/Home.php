@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\Point;
 
@@ -37,7 +38,7 @@ class Home extends LocatableModel {
 
 	public function profiles()
 	{
-		return $this->belongsToMany('Profile');
+		return $this->belongsToMany(Profile::class);
 	}
 
 	public function sn($i=0)
@@ -54,17 +55,17 @@ class Home extends LocatableModel {
 
 	public function city()
 	{
-		return $this->belongsTo('Geoname', 'city_id', 'osm_id');
+		return $this->belongsTo(Geoname::class, 'city_id', 'osm_id');
 	}
 	
 	public function state()
 	{
-		return $this->belongsTo('State');
+		return $this->belongsTo(State::class);
 	}
 	
 	public function watchers()
 	{
-		return $this->belongsToMany('User', 'home_user_follows')->where('home_user_follows.watched', 1);
+		return $this->belongsToMany(User::class, 'home_user_follows')->where('home_user_follows.watched', 1);
 	}
 
 	public function scopeLatest($query, $how_many)
@@ -82,7 +83,7 @@ class Home extends LocatableModel {
 
 	public function subscription()
 	{
-		return $this->hasOne('Subscription', 'subscription_target');
+		return $this->hasOne(Subscription::class, 'subscription_target');
 	}
 
 

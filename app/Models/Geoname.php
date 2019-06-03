@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -51,7 +52,7 @@ class Geoname extends EloquentModel {
 	public function counties()
 	{
 		//return $this->spatiallyRelatesToMany('County', 'ContainedBy');
-		return $this->belongsToMany('County', 'city_county', 'city_id', 'county_id');
+		return $this->belongsToMany(County::class, 'city_county', 'city_id', 'county_id');
 	}
 
 	public function scopeByKnownCity($query, $city) {
@@ -70,7 +71,7 @@ class Geoname extends EloquentModel {
 
 	public function state()
 	{
-		return $this->belongsTo('State');
+		return $this->belongsTo(State::class);
 	}
 
 	public function scopeWithinRadius($query, $val, $radius = 50, $column = 'id')

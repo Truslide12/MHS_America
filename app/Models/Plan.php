@@ -8,7 +8,7 @@ class Plan extends EloquentModel {
 
 	public function features()
 	{
-		return $this->belongsToMany('Feature');
+		return $this->belongsToMany(Feature::class);
 	}
 
 	public function hasFeature($feature)

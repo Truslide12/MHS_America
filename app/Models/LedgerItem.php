@@ -9,8 +9,8 @@ class LedgerItem extends EloquentModel {
 	public function source()
 	{
 		return ($this->is_payment) ? 
-			$this->belongsTo('CompanyPayment', 'source_id', 'id') : 
-			$this->belongsTo('CompanyInvoice', 'source_id', 'id');
+			$this->belongsTo(CompanyPayment::class, 'source_id', 'id') : 
+			$this->belongsTo(CompanyInvoice::class, 'source_id', 'id');
 	}
 
 	public function amountUpToDate()

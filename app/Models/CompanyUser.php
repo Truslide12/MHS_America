@@ -22,17 +22,17 @@ class CompanyUser extends EloquentModel {
 
 	public function role()
 	{
-		return $this->belongsTo('Role');
+		return $this->belongsTo(Role::class);
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo(User::class);
 	}
 
 	public function company()
 	{
-		return $this->belongsTo('Company');
+		return $this->belongsTo(Company::class);
 	}
 
 	public function profiles()
@@ -42,7 +42,7 @@ class CompanyUser extends EloquentModel {
 
 	public function permissions()
 	{
-		return $this->hasMany('CompanyUserPermission');
+		return $this->hasMany(CompanyUserPermission::class);
 	}	
 
 }

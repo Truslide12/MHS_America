@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Config;
 
 class Settings extends EloquentModel {
 	

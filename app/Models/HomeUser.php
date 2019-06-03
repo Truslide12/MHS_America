@@ -21,17 +21,17 @@ class HomeUser extends EloquentModel {
 
 	public function role()
 	{
-		return $this->belongsTo('Role');
+		return $this->belongsTo(Role::class);
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo(User::class);
 	}
 
 	public function home()
 	{
-		return $this->belongsTo('Home');
+		return $this->belongsTo(Home::class);
 	}
 
 }

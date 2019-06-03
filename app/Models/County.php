@@ -14,7 +14,7 @@ class County extends Area {
 	
 	public function cities()
 	{
-		return $this->belongsToMany('Geoname', 'city_county', 'county_id', 'city_id');
+		return $this->belongsToMany(Geoname::class, 'city_county', 'county_id', 'city_id');
 		//return $this->spatiallyRelatesToMany('Geoname', 'Contains');
 		//return $this->hasMany('Geoname', 'county_id', 'admin_fips');
 		//return City::where('county', '=', $this->id)
@@ -26,7 +26,7 @@ class County extends Area {
 
 	public function state()
 	{
-		return $this->belongsTo('State');
+		return $this->belongsTo(State::class);
 	}
 
 	public function scopeByState($query, $state_id)
@@ -41,7 +41,7 @@ class County extends Area {
 
 	public function region()
 	{
-		return $this->belongsTo('Region');
+		return $this->belongsTo(Region::class);
 	}
 
 	public function isCityCounty()

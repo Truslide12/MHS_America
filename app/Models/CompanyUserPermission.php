@@ -8,7 +8,7 @@ class CompanyUserPermission extends EloquentModel {
 
 	public function permission()
 	{
-		return $this->belongsTo('Permission');
+		return $this->belongsTo(Permission::class);
 	}
 
 }

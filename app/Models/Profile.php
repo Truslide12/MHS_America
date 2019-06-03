@@ -3,7 +3,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Profile extends EloquentModel {
 	
 	use SoftDeletes;
@@ -193,8 +192,8 @@ class Profile extends EloquentModel {
 
 	public function findRep()
 	{		
-		if(!in_array(strtolower($this->type), $this->rep_types)) return new \ProfileTypes\Community();
-		$profiletype = '\\ProfileTypes\\'.$this->type;
+		if(!in_array(strtolower($this->type), $this->rep_types)) return new App\Models\Profiletypes\Community();
+		$profiletype = '\\App\\Models\\Profiletypes\\'.$this->type;
 
 		return new $profiletype();
 	}
@@ -224,67 +223,67 @@ class Profile extends EloquentModel {
 
 	public function kudos()
 	{
-		return $this->belongsToMany('User', 'profile_user_follows')->where('profile_user_follows.kudos', 1);
+		return $this->belongsToMany(User::class, 'profile_user_follows')->where('profile_user_follows.kudos', 1);
 	}
 
 	public function watchers()
 	{
-		return $this->belongsToMany('User', 'profile_user_follows')->where('profile_user_follows.watched', 1);
+		return $this->belongsToMany(User::class, 'profile_user_follows')->where('profile_user_follows.watched', 1);
 	}
 
 	public function homes()
 	{
-		return $this->hasMany('Home', 'profile_id', 'id');
+		return $this->hasMany(Home::class, 'profile_id', 'id');
 	}
 
 	public function spaces()
 	{
-		return $this->hasMany('Space');
+		return $this->hasMany(Space::class);
 	}
 
 	public function geoname()
 	{
-		return $this->belongsTo('Geoname', 'city_id', 'osm_id');
+		return $this->belongsTo(Geoname::class, 'city_id', 'osm_id');
 	}
 
 	public function city()
 	{
-		return $this->belongsTo('Geoname', 'city_id', 'osm_id');
+		return $this->belongsTo(Geoname::class, 'city_id', 'osm_id');
 	}
 
 	public function county()
 	{
-		return $this->belongsTo('County', 'county_id', 'id');
+		return $this->belongsTo(County::class, 'county_id', 'id');
 	}
 
 	public function state()
 	{
-		return $this->belongsTo('State');
+		return $this->belongsTo(State::class);
 	}
 
 	public function company()
 	{
-		return $this->belongsTo('Company');
+		return $this->belongsTo(Company::class);
 	}
 
 	public function plan()
 	{
-		return $this->belongsTo('Plan');
+		return $this->belongsTo(Plan::class);
 	}
 
 	public function photos()
 	{
-		return $this->hasMany('ProfilePhoto');
+		return $this->hasMany(ProfilePhoto::class);
 	}
 
 	public function updates()
 	{
-		return $this->hasMany('ProfileUpdate');
+		return $this->hasMany(ProfileUpdate::class);
 	}
 
 	public function subscription()
 	{
-		return $this->hasOne('Subscription', 'subscription_target');
+		return $this->hasOne(Subscription::class, 'subscription_target');
 	}
 
 	public static function listProperties()
@@ -316,7 +315,7 @@ class Profile extends EloquentModel {
 
 	public function hours()
 	{
-		return $this->hasMany('ProfileHour');
+		return $this->hasMany(ProfileHour::class);
 	}
 
 	public function hourSets()

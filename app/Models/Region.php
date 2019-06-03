@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cache;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
@@ -11,7 +12,7 @@ class Region extends Area {
 
 	public function counties()
 	{
-		return $this->hasMany('County');
+		return $this->hasMany(County::class);
 	}
 
 	// public function getCities()
@@ -39,7 +40,7 @@ class Region extends Area {
 
 	public function cities()
 	{
-		return $this->spatiallyRelatesToMany('Geoname', 'Contains', 'geometry', 'geometry');
+		return $this->spatiallyRelatesToMany(Geoname::class, 'Contains', 'geometry', 'geometry');
 	}
 
 	public function getCityIndex()

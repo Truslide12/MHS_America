@@ -10,22 +10,22 @@ class State extends Area {
 
 	public function counties()
 	{
-		return $this->hasMany('County');
+		return $this->hasMany(County::class);
 	}
 
 	public function cities()
 	{
-		return $this->hasMany('City');
+		return $this->hasMany(City::class);
 	}
 
 	public function places()
 	{
-		return $this->hasMany('Geoname')->where('enabled', 1);
+		return $this->hasMany(Geoname::class)->where('enabled', 1);
 	}
 
 	public function regions()
 	{
-		return $this->hasMany('Region');
+		return $this->hasMany(Region::class);
 	}
 
 	public function scopeByAbbr($query, $abbr)

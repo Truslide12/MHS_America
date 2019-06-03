@@ -11,8 +11,8 @@ class ProfileNew extends EloquentModel {
 	protected $table = 'new_profiles';
 
 	protected $allowed_types = [
-		'community' => '\Community',
-		'contractor' => '\Profiles\Contractor',
+		'community' => '\App\Models\Community',
+		'contractor' => '\App\Models\Contractor',
 	];
 
 }

@@ -53,7 +53,7 @@ class UserOld extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function roles()
     {
-        return $this->belongsToMany('Role', 'user_role');
+        return $this->belongsToMany(Role::class, 'user_role');
     }
 
 	public function isAdmin()

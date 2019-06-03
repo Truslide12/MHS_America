@@ -14,7 +14,7 @@ class StoreTransaction extends EloquentModel {
 
 	public function items()
 	{
-		return $this->hasMany('StorePurchase', 'transaction_id', 'id');
+		return $this->hasMany(StorePurchase::class, 'transaction_id', 'id');
 	}
 
 	public function getTransactionCodeAttribute($transaction_code)

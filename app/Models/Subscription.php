@@ -13,12 +13,12 @@ class Subscription extends EloquentModel {
 
 	public function profile()
 	{
-		return $this->belongsTo('Profile', 'subscription_target', 'id');
+		return $this->belongsTo(Profile::class, 'subscription_target', 'id');
 	}
 
 	public function plan()
 	{
-		return $this->belongsTo('StoreProducts', 'stripe_plan_id', 'stripe_product_name');
+		return $this->belongsTo(StoreProducts::class, 'stripe_plan_id', 'stripe_product_name');
 	}
 
 }

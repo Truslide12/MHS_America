@@ -16,7 +16,7 @@ class Space extends EloquentModel {
 
 	public function profile()
 	{
-		return $this->belongsTo('Profile');
+		return $this->belongsTo(Profile::class);
 	}
 
 }

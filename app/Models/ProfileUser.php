@@ -21,17 +21,17 @@ class ProfileUser extends EloquentModel {
 
 	public function role()
 	{
-		return $this->belongsTo('Role');
+		return $this->belongsTo(Role::class);
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo(User::class);
 	}
 
 	public function profile()
 	{
-		return $this->belongsTo('Profile');
+		return $this->belongsTo(Profile::class);
 	}
 
 }

@@ -8,7 +8,7 @@ class CompanyNewsItem extends EloquentModel {
 
 	public function company()
 	{
-		return $this->belongsTo('Company');
+		return $this->belongsTo(Company::class);
 	}
 
 }

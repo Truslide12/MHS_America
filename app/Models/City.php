@@ -8,14 +8,6 @@ class City extends Area {
 
 	private $geoname = null;
 
-	public function __construct($nogeo = null) {
-		parent::__construct();
-
-		if($nogeo === null) {
-			//$this->geoname = Geoname::where('place_name', $this->title)->where('state_id', $this->state_id)->first();
-		}
-	}
-
 	// public function counties()
 	// {
 	// 	return $this->belongsToMany('County');
@@ -23,12 +15,12 @@ class City extends Area {
 
 	public function counties()
 	{
-		return $this->spatiallyRelatesToMany('County', 'ContainedBy');
+		return $this->spatiallyRelatesToMany(County::class, 'ContainedBy');
 	}
 
 	public function state()
 	{
-		return $this->belongsTo('State');
+		return $this->belongsTo(State::class);
 	}
 
 	public function scopeByState($query, $state)

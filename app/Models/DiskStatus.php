@@ -27,7 +27,7 @@ class DiskStatus {
     $diskTotalSpace = @disk_total_space($this->diskPath);
 
     if ($diskTotalSpace === FALSE) {
-      throw new Exception('totalSpace(): Invalid disk path.');
+      throw new \Exception('totalSpace(): Invalid disk path.');
     }
 
     return $rawOutput ? $diskTotalSpace : $this->addUnits($diskTotalSpace);
@@ -38,7 +38,7 @@ class DiskStatus {
     $diskFreeSpace = @disk_free_space($this->diskPath);
 
     if ($diskFreeSpace === FALSE) {
-      throw new Exception('freeSpace(): Invalid disk path.');
+      throw new \Exception('freeSpace(): Invalid disk path.');
     }
 
     return $rawOutput ? $diskFreeSpace : $this->addUnits($diskFreeSpace);
@@ -48,7 +48,7 @@ class DiskStatus {
   public function usedSpace($precision = 1) {
     try {
       return round((100 - ($this->freeSpace(self::RAW_OUTPUT) / $this->totalSpace(self::RAW_OUTPUT)) * 100), $precision);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       throw $e;
     }
   }

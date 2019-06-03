@@ -13,11 +13,11 @@ class StorePurchase extends EloquentModel {
 
 	public function product()
 	{
-		return $this->hasOne('StoreProducts', 'id', 'product_id');
+		return $this->hasOne(StoreProducts::class, 'id', 'product_id');
 	}
 
 	public function target()
 	{
-		return $this->hasOne('Profile', 'id', 'product_target');
+		return $this->hasOne(Profile::class, 'id', 'product_target');
 	}
 }
