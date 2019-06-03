@@ -51,7 +51,7 @@ class ProfileAuthenticate {
 			return redirect()->route('account-business-activate');
 		}
 
-		$prof_id = $request->route()->getParameter('profile');
+		$prof_id = $request->route()->parameter('profile');
 		
 		$profile = is_object($prof_id) ? $prof_id : Profile::find($prof_id);
 		if(!is_object($profile)) return redirect()->route('account-business');

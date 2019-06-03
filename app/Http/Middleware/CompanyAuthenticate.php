@@ -51,7 +51,7 @@ class CompanyAuthenticate {
 			return redirect()->route('account-business-activate');
 		}
 
-		if (is_null($request->user()->companies->find( $request->route()->getParameter('company') ))) {
+		if (is_null($request->user()->companies->find( $request->route()->parameter('company') ))) {
 			return redirect()->route('account-business');
 		}
 
