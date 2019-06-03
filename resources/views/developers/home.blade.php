@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@show-navbar-divider
+@use-navbar-divider
 @section('incls-head')
 <style type="text/css">
 	#header-wrapper {margin-bottom:0;}

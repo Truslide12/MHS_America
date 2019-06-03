@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @fix-navbar
-@show-navbar-divider
+@use-navbar-divider
 
 @section('incls-head-early')
 <meta name="_token" content="{ csrf_token() }"/>

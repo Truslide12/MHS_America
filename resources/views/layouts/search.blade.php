@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @fix-navbar
-@show-navbar-divider
+@use-navbar-divider
 
 @section('incls-head-early')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">

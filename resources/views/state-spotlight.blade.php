@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@show-navbar-divider
+@use-navbar-divider
 @fix-navbar
 
 @section('incls-head')

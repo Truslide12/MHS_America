@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @fix-navbar
-@show-navbar-divider
+@use-navbar-divider
 @use-slim-footer
 
 @section('incls-head-early')

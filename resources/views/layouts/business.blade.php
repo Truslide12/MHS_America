@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @fix-navbar
-@show-navbar-divider
+@use-navbar-divider
 
 @section('content')
 <div class="row white">

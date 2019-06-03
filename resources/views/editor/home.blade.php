@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @fix-navbar
-@show-navbar-divider
+@use-navbar-divider
 
 @section('incls-head')
   <link href="{{ URL::route('welcome') }}/css/font-awesome.min.css" rel="stylesheet">

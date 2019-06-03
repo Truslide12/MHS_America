@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerBladeDirective('when-navbar-static', '${1}<?php if(!isset($navbarclass)):  ?>');
 
-        $this->registerBladeDirective('show-navbar-divider', '${1}<?php $show_navbar_divider = true;  ?>');
+        $this->registerBladeDirective('use-navbar-divider', '${1}<?php $show_navbar_divider = true;  ?>');
 
         $this->registerBladeDirective('use-slim-footer', '${1}<?php $use_slim_footer = true;  ?>');
 
