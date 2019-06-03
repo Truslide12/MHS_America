@@ -1,8 +1,8 @@
 <?php
 
-namespace MHSTraits;
-use Role;
-use Company;
+namespace App\Models\Traits;
+use App\Models\Role;
+use App\Models\Company;
 use Session;
 
 trait HasProfileRole {
@@ -20,14 +20,14 @@ trait HasProfileRole {
 
 	public function shared_profiles($company = null)
 	{
-		$query = $this->hasMany('ProfileUser', 'user_id');
+		$query = $this->hasMany(ProfileUser::class, 'user_id');
 
 		return $query;
 	}
 
 	public function shared_homes($company = null)
 	{
-		$query = $this->hasMany('HomeUser', 'user_id');
+		$query = $this->hasMany(HomeUser::class, 'user_id');
 
 		return $query;
 	}

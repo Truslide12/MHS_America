@@ -1,15 +1,16 @@
 <?php
 
-namespace MHSTraits;
-use Role;
-use CompanyUser;
+namespace App\Models\Traits;
+use App\Models\Role;
+use App\Models\Company;
+use App\Models\CompanyUser;
 use Session;
 
 trait HasCompanyRole {
 	
 	public function companies()
 	{
-		return $this->belongsToMany('Company')->withPivot('id', 'role_id');
+		return $this->belongsToMany(Company::class)->withPivot('id', 'role_id');
 	}
 
 	public function canForCompany($permission, $companyid)
@@ -163,7 +164,7 @@ trait HasCompanyRole {
         if(!is_int($role)) return false;
 
         //Verify role exists
-        if(!is_a(Role::find($role), 'Eloquent')) {
+        if(!is_a(Role::find($role), \Illuminate\Database\Eloquent\Model)) {
             return false;
         }
 
@@ -187,7 +188,7 @@ trait HasCompanyRole {
         if(!is_int($role)) return false;
 
         //Verify role exists
-        if(!is_a(Role::find($role), 'Eloquent')) {
+        if(!is_a(Role::find($role), \Illuminate\Database\Eloquent\Model)) {
             return false;
         }
 
