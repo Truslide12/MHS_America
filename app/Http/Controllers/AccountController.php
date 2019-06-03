@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Pony;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
+use App\Models\Canvas;
+use App\Models\News;
 
 /* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,8 +43,8 @@ class AccountController extends Pony {
 	public function getIndex()
 	{
 		return view('account.dashboard')
-					->with('canvas', \Canvas::getDefault())
-					->with('news', \News::take(5)->get());
+					->with('canvas', Canvas::getDefault())
+					->with('news', News::take(5)->get());
 	}
 
 	public function getLogin()
@@ -66,7 +68,7 @@ class AccountController extends Pony {
 		return view('account.login')
 					->with('noheader', true)
 					->with('redirect', $redirect)
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function postLogin()
@@ -110,7 +112,7 @@ class AccountController extends Pony {
 	public function getRegister()
 	{
 		return view('account.register')
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function postRegister()
@@ -197,7 +199,7 @@ class AccountController extends Pony {
 	public function getSettings()
 	{
 		return view('account.settings')
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function postSettings()
@@ -255,7 +257,7 @@ class AccountController extends Pony {
 							->where('type', 'Community')
 							->wherePivot('watched', 1)
 							->get())
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getHomes()
@@ -265,7 +267,7 @@ class AccountController extends Pony {
 						Auth::user()->followed_homes()
 							->wherePivot('watched', 1)
 							->get())
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getSpaces()
@@ -275,7 +277,7 @@ class AccountController extends Pony {
 						Auth::user()->followed_spaces()
 							->wherePivot('watched', 1)
 							->get())
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getProfessionals()
@@ -286,7 +288,7 @@ class AccountController extends Pony {
 							->where('type', '<>', 'Community')
 							->wherePivot('watched', 1)
 							->get())
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getCompanies()
@@ -296,19 +298,19 @@ class AccountController extends Pony {
 						Auth::user()->followed_companies()
 							->wherePivot('watched', 1)
 							->get())
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getHelp()
 	{
 		return view('account.help')
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getRecovery()
 	{
 		return view('account.recovery')
-					->with('canvas', \Canvas::getDefault());
+					->with('canvas', Canvas::getDefault());
 	}
 
 }
