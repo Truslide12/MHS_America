@@ -129,7 +129,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone ) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = phone($community->phone, 'US', 2);
+				$phone_formatted = phone($community->phone, ['US'], 2);
 			}
 			$feature = [
 				'type' => 'Feature',
@@ -413,7 +413,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone ) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = phone($community->phone, 'US', 2);
+				$phone_formatted = phone($community->phone, ['US'], 2);
 			}
 			$feature = [
 				'type' => 'Feature',
