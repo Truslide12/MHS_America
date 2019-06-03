@@ -73,7 +73,7 @@ Route::group(array('prefix' => 'luna'), function()
 
 			Route::bind('user_wt', function($val) {
 				//return User::withTrashed()->find($val);
-				return \App\Models\User::withTrashed()->find($val);
+				return \App\User::withTrashed()->find($val);
 			});
 			Route::bind('company_wt', function($val) {
 				return \App\Models\Company::withTrashed()->find($val);

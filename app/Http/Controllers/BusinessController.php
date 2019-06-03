@@ -11,7 +11,7 @@ use Input;
 use App\Models\Geoname;
 use App\Models\Role;
 use Validator;
-use User;
+use App\User;
 use App\Models\Profile;
 use App\Models\State;
 use Redirect;
