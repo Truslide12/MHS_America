@@ -16,6 +16,7 @@
         "league/flysystem-rackspace": "^1.0",
         "phaza/laravel-postgis": "^3.6",
         "predis/predis": "^1.1",
+        "propaganistas/laravel-intl": "^3.0",
         "propaganistas/laravel-phone": "^4.2",
         "stanley/geocodio-php": "^1.8",
         "stripe/stripe-php": "^6.37",
