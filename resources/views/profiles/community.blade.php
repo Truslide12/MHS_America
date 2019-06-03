@@ -128,11 +128,11 @@
 					</div>
 					<div class="col-md-3">
 						@if($profile->phone != '')<p>
-							<span class="pull-right"><em>{{ phone($profile->phone, 'US', 2) }}</em></span>
+							<span class="pull-right"><em>{{ phone($profile->phone, 'US') }}</em></span>
 							Phone
 						</p>@endif
 						@if($profile->fax != '')<p>
-							<span class="pull-right"><em>{{ phone($profile->fax, 'US', 2) }}</em></span>
+							<span class="pull-right"><em>{{ phone($profile->fax, 'US') }}</em></span>
 							Fax
 						</p>@endif
 						@if(1==2)<p>
