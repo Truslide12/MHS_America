@@ -126,7 +126,7 @@ class OctaviaController extends Pony {
 				$spaces = $community->spaces;
 			}
 
-			if ( ! $community->phone ) {
+			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
 				$phone_formatted = phone($community->phone, ['US'], 2);
@@ -410,7 +410,7 @@ class OctaviaController extends Pony {
 				$spaces = $community->spaces;
 			}
 
-			if ( ! $community->phone ) {
+			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
 				$phone_formatted = phone($community->phone, ['US'], 2);
