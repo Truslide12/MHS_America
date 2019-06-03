@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use View;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends EloquentModel {
