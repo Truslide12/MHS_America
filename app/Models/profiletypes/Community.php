@@ -1,7 +1,7 @@
 <?php
 
-namespace ProfileTypes;
-use Profile;
+namespace App\Models\Profiletypes;
+use App\Models\Profile;
 
 class Community implements ProfileTypeInterface {
 
