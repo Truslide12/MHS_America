@@ -79,6 +79,7 @@
 		<div class="jumbotron text-center" id="great-welcome" style="display:flex;background: url('{{ URL::route('welcome') }}./img/backdrops/panoramas/stockfreeimages-1663421-prairie-by-bruce2-high.jpg');background-size: auto 100%;background-position: center center;">
 
 <form action="search" method="post" style="width: 100%">
+		{{ csrf_field() }}
 		<div class="v2box" style="margin: 50px auto 10px auto;">
 			<div style="width: 100%;padding: auto auto;" class="">
 				<h1 style="font-size: 2.25em;text-align: center;color: #fff;">Search Mobile Home Spaces Across America</h1>
