@@ -61,13 +61,13 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'auth.business' => App\Http\Middleware\BusinessAuthenticate::class,
-        'auth.company' => App\Http\Middleware\CompanyAuthenticate::class,
-        'auth.profile' => App\Http\Middleware\ProfileAuthenticate::class,
-        'profiletype' => App\Http\Middleware\ProfileType::class,
-        'role' => App\Http\Middleware\RoleAuthenticate::class,
-        'admin' => App\Http\Middleware\AdminAuthenticate::class,
-        'admin.guest' => App\Http\Middleware\AdminGuestAuthenticate::class,
+        'auth.business' => \App\Http\Middleware\BusinessAuthenticate::class,
+        'auth.company' => \App\Http\Middleware\CompanyAuthenticate::class,
+        'auth.profile' => \App\Http\Middleware\ProfileAuthenticate::class,
+        'profiletype' => \App\Http\Middleware\ProfileType::class,
+        'role' => \App\Http\Middleware\RoleAuthenticate::class,
+        'admin' => \App\Http\Middleware\AdminAuthenticate::class,
+        'admin.guest' => \App\Http\Middleware\AdminGuestAuthenticate::class,
     ];
 
     /**
