@@ -200,7 +200,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Explore a city (GET) */
 		Route::get('{state}/{county}/{city}', array('uses' => 'ExploreController@getCity', 'as' => 'city'));
 
-		Route::post('{state}/city-query', array('uses' => 'ExploreController@getStateCityQuery', 'as' => 'state-city-query', 'middleware' => 'csrf'));
+		Route::post('{state}/city-query', array('uses' => 'ExploreController@getStateCityQuery', 'as' => 'state-city-query'));
 
 	});
 
@@ -230,7 +230,7 @@ Route::group(array('prefix' => 'luna'), function()
 			/* Account business activate (GET) */
 			Route::get('business/activate', array('uses' => 'BusinessController@getActivate', 'as' => 'account-business-activate'));		
 
-			Route::group(array('middleware' => 'csrf'), function()
+			Route::group([], function()
 			{	
 				/* Account settings (POST) */
 				Route::post('settings', array('uses' => 'AccountController@postSettings', 'as' => 'account-settings-post'));
@@ -266,7 +266,7 @@ Route::group(array('prefix' => 'luna'), function()
 					/* Account business create company (POST) */
 					Route::post('create', array('uses' => 'BusinessController@postCompanyCreate', 'as' => 'account-business-company-create-post'));
 					/* Account business link to company (POST) */
-					Route::post('link', array('uses' => 'BusinessController@postCompanyLink', 'as' => 'account-business-company-link-post', 'middleware' => 'csrf'));
+					Route::post('link', array('uses' => 'BusinessController@postCompanyLink', 'as' => 'account-business-company-link-post'));
 
 					Route::group(array('middleware' => 'auth.company'), function()
 					{
@@ -346,7 +346,7 @@ Route::group(array('prefix' => 'luna'), function()
 
 			});
 
-			Route::group(array('middleware' => 'csrf'), function() {
+			Route::group([], function() {
 			
 				/* Account business activate (POST) */
 				Route::post('business/activate', array('uses' => 'BusinessController@postActivate', 'as' => 'account-business-activate-post'));
@@ -371,7 +371,7 @@ Route::group(array('prefix' => 'luna'), function()
 			/* Account recovery (GET) */
 			Route::get('recovery', array('uses' => 'AccountController@getRecovery', 'as' => 'account-recovery'));	
 
-			Route::group(array('middleware' => 'csrf'), function() {
+			Route::group([], function() {
 			
 				/* Account login (POST) */
 				Route::post('login', array('uses' => 'AccountController@postLogin', 'as' => 'account-login-post'));
@@ -414,7 +414,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Profile watch (GET) */
 		//Route::get('{profile}/kudos', array('uses' => 'ProfileController@getKudos', 'as' => 'profile-kudos'));
 
-		Route::group(array('middleware' => 'csrf'), function()
+		Route::group([], function()
 		{
 			Route::group(array('middleware' => 'auth'), function()
 			{
@@ -441,7 +441,7 @@ Route::group(array('prefix' => 'luna'), function()
 			/* Profile editor photos (GET) */
 			Route::get('photos', array('uses' => 'EditorController@getPhotos', 'as' => 'editor-photos'));
 
-			Route::group(array('middleware' => 'csrf'), function(){
+			Route::group([], function(){
 				/* Profile editor (POST) */
 				Route::post('/', array('uses' => 'EditorController@postIndex', 'as' => 'editor-post'));
 				/* Profile editor (POST) */
@@ -482,7 +482,7 @@ Route::group(array('prefix' => 'luna'), function()
 				/* Profile editor edit home - ads (GET) */
 				Route::get('homes/{home}/ads', array('uses' => 'EditorController@getEditHomeAds', 'as' => 'editor-edithome-ads'));
 
-				Route::group(array('middleware' => 'csrf'), function() {
+				Route::group([], function() {
 					/* Profile editor add space (POST) */
 					Route::post('spaces/new', array('uses' => 'EditorController@postAddSpace', 'as' => 'editor-addspace-post'));
 					/* Profile editor edit space (POST) */
@@ -525,7 +525,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Company profiles (GET) */
 		Route::get('{company}/profiles', array('uses' => 'CompanyController@getProfiles', 'as' => 'company-profiles'));
 
-		Route::group(array('middleware' => 'csrf'), function()
+		Route::group([], function()
 		{
 			Route::group(array('middleware' => 'auth'), function()
 			{
@@ -680,7 +680,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Get profile (GET:JSON) */
 		Route::get('profile/{id}', array('uses' => 'DerpyController@getProfile'));
 
-		Route::group(array('middleware' => 'csrf'), function()
+		Route::group([], function()
 		{
 			Route::group(array('middleware' => 'auth'), function()
 			{
@@ -718,7 +718,7 @@ Route::group(array('prefix' => 'luna'), function()
 	/* PAYMENTS API ROUTES */
 	Route::group(array('prefix' => 'payments'), function()
 	{
-		Route::group(array('middleware' => 'csrf'), function()
+		Route::group([], function()
 		{
 			Route::group(array('middleware' => 'auth'), function()
 			{
@@ -811,7 +811,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Create Ticket (GET) */
 		Route::get('createticket', array('uses' => 'TicketSystemController@getIndex', 'as' => 'company'));
 
-		Route::group(array('middleware' => 'csrf'), function()
+		Route::group([], function()
 		{
 			Route::group(array('middleware' => 'auth'), function()
 			{
