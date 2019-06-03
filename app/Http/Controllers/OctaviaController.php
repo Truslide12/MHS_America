@@ -12,7 +12,7 @@ use App\Models\Profile;
 use Input;
 use Mail;
 use Phaza\LaravelPostgis\Geometries\Point;
-
+use Propaganistas\LaravelPhone\PhoneNumber;
 
 
 class OctaviaController extends Pony {
@@ -129,7 +129,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = phone($community->phone, ['US'], 2);
+				$phone_formatted = PhoneNumber::make($community->phone, 'US')->formatNational();
 			}
 			$feature = [
 				'type' => 'Feature',
@@ -413,7 +413,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = phone($community->phone, ['US'], 2);
+				$phone_formatted = PhoneNumber::make($community->phone, 'US')->formatNational();
 			}
 			$feature = [
 				'type' => 'Feature',
