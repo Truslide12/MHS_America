@@ -546,8 +546,8 @@ var loaded_homes = [];
 var loaded_profiles = [];
 
 @php
- 	$sp = $cuser->shared_profiles->lists('profile_id')->toArray();
- 	$sh = $cuser->shared_homes->lists('home_id')->toArray();
+ 	$sp = $cuser->shared_profiles->pluck('profile_id')->all();
+ 	$sh = $cuser->shared_homes->pluck('home_id')->all();
 @endphp
 
 @foreach($company->homes as $home)

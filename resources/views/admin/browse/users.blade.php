@@ -24,7 +24,7 @@
 					<td>{{ $one_user->id }}</td>
 					<td>{{ $one_user->first_name }}</td>
 					<td>{{ $one_user->last_name }}</td>
-					<td>{{ implode(', ', $one_user->roles->lists('name')->toArray()) }}</td>
+					<td>{{ implode(', ', $one_user->roles->pluck('name')->all()) }}</td>
 					<td class="text-right">
 						<a href="{{ URL::route('admin-browse-users-view', array('user' => $one_user->id)) }}" class="btn btn-xs btn-metis-4 btn-rect">View</a>
 						<a href="{{ URL::route('admin-browse-users-edit', array('user' => $one_user->id)) }}" class="btn btn-xs btn-default btn-rect">Edit</a>
