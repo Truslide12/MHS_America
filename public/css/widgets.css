@@ -1,0 +1,57 @@
+.profile-panel{position:relative;}
+.profile-title a{color:#000;}
+
+.redact{margin:-15px;overflow:hidden;position:relative;}
+.redact.with-cover{padding-left:50%;padding-top:25px;height:280px;}
+.redact .profile-cover{margin-left:-400px;width:800px;position:absolute;top:0;}
+
+
+.profile-panel.horizontal .redact{margin:15px -15px -15px;}
+.profile-panel.horizontal .redact.with-cover{height:175px;}
+.profile-panel.horizontal .redact .profile-cover{margin-left:-235px;width:500px;position:absolute;top:0;}
+
+.tape{display:inline;background:rgba(255,255,255,0.65);}
+
+p.properties{margin:0;}
+
+.tape{display:inline-block;margin:10px 10px 0 0;padding:2px 10px;font-size:1.28em !important;}
+.tape.bordered{border:1px solid #dedede;}
+.tape-btns{position:absolute;bottom:15px;left:15px;margin:0;}
+/*.tape-btns a.btn.tape{background:#efefef;border-bottom:1px solid #fff !important;}*/
+a.btn.tape{font-size:1em !important;}
+.redact .tape{position:relative;z-index:1;float:right;margin:10px 0 0;}
+
+.brick {border:1px solid #dedede;padding:9px 14px;margin:0 15px 15px 0;display:inline-block;}
+.brick.brick-gray {background:#dedede;border:none;padding:10px 15px;}
+
+/* background:#1477cc; */
+.space-block {background:#fff;border:1px solid #dedede;padding:10px 15px;margin:0 0 15px;color:#333;}
+.space-block .row{display:flex;justify-content:space-between;align-items:center;}
+.space-title, .space-size, .space-dimensions {margin:0;}
+.space-block .label {display:block;margin-top:5px;}
+
+.photo-block {background-color:#f0f0f0;border:1px solid #dedede;padding:0 15px;margin:0 0 15px;color:#333;}
+.photo-title {margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.photo-block .pull-left {margin-left:10px;}
+.photo-block .pull-right {margin-right:10px;margin-top:-45px;height:30px;position:relative;z-index:1;}
+.photo-block .label {display:block;margin-top:5px;}
+
+.home-block {border:1px solid #dedede;padding:10px 15px;margin:0 0 15px;color:#333;}
+.home-title {margin:0;font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sans',Arial,sans-serif;}
+.home-block .text-muted{font-family:'Lato','Droid Sans','Open Sans','Dejavu Sans',Arial,sans-serif;}
+.home-block .pull-left {margin-left:10px;}
+.home-block .pull-right {margin-right:10px;}
+.home-block .label {display:block;margin-top:5px;}
+
+@media (max-width: 767px) {
+	.redact{margin:10px -10px -10px;}
+	.profile-panel .profile-title{margin-top:5px;}
+}
+
+/*@media (min-width: 768px) {
+	.tape {
+		-moz-box-shadow:0 0 0 1px rgba(0,0,0,0.05) inset;
+		-webkit-box-shadow:0 0 0 1px rgba(0,0,0,0.05) inset;
+		box-shadow:0 0 0 1px rgba(0,0,0,0.05) inset;
+	}
+}*/

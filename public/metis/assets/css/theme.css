@@ -1,0 +1,139 @@
+/**
+* Metis - Bootstrap-Admin-Template v2.2.4
+* Author : onokumus 
+* Copyright 2014
+* Licensed under MIT (https://github.com/onokumus/Bootstrap-Admin-Template/blob/master/LICENSE.md)
+*/
+#top > .navbar {
+  border-top: 3px solid #428bca;
+}
+#top > .navbar .dropdown-menu > li > a:hover,
+#top > .navbar .dropdown-menu > li > a:focus {
+  background-color: #428bca;
+  color: #000;
+}
+#wrap,
+#left {
+  background-color: #333;
+}
+/*
+// First Level
+#menu > li {
+  &.active > a {
+    background-color: darken(@baseColor, 10%);
+  }
+  &:hover > a, &:focus > a {
+    background-color: darken(@baseColor, 10%);
+  }
+}
+
+// Second, Third, ... level
+#menu > li ul {
+  background: darken(@baseColor, 10%);
+}
+
+
+
+@media (min-width: 992px) {//992px
+  .sidebar-left-mini #menu {
+    > li > a {
+      .link-title {
+        background: darken(@baseColor, 10%);
+      }
+    }
+  }
+}
+
+
+body:not(.sidebar-left-mini) #menu {
+  .nav-header {
+    background: darken(@baseColor, 10%);
+  }
+}*/
+
+body {
+  background-image: url("../img/pattern/wood_1.png");
+}
+
+body.fixed #footer {
+  background:#080808;
+}
+
+#top .navbar-brand {
+  padding:13px 15px;
+}
+
+#top header .topnav {
+  margin:10px;
+  float:right;
+}
+
+.inner {
+  padding:8px 15px;
+  min-height:400px;
+}
+
+#right {
+  padding:15px;
+  background: #080808;
+  border-left: 1px solid #000;
+  box-shadow: 0 0 10px 0 #000 inset;
+}
+
+#right h3 {
+  color:#fff;
+}
+
+#content {
+  white-space:normal;
+}
+
+.user-media .media-body {
+  margin-left:5px;
+}
+
+.user-media .media-body h5.media-heading {
+  padding-top:15px;
+}
+
+.alert {
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+  -ms-border-radius:0;
+  -o-border-radius:0;
+  border-radius:0;
+}
+
+@media (min-width: 768px) {
+  .sidebar-left-hidden #left {
+    display:none;
+  }
+
+  .sidebar-left-hidden .search-bar {
+    width:0;
+    padding:0;
+    margin:0;
+    visibility:hidden;
+    -webkit-transition:all .3s ease-in-out;
+    transition:all .3s ease-in-out;
+  }
+}
+
+.bg-red {background-color:#b90000;}
+.bg-brick {background-color:#cd6723;}
+.bg-orange {background-color:#ff4e00;}
+.bg-green {background-color:#4b780a;}
+.bg-blue {background-color:#00caf2;}
+.bg-black {background-color:#222;}
+.bg-dark {background-color:#444;}
+.bg-red, .bg-brick, .bg-orange, .bg-green,
+.bg-blue, .bg-black, .bg-dark {color:#fff !important;}
+.bg-light {background-color:#eee;color:#333 !important;}
+
+.text-red {color:#C52F61 !important;}
+.text-brick {color:#cd6723 !important;}
+.text-orange {color:#ff4e00 !important;}
+.text-green {color:#46a546 !important;}
+.text-blue {color:#00caf2 !important;}
+.text-black {color:#222 !important;}
+.text-dark {color:#444 !important;}

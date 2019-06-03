@@ -1,0 +1,15 @@
+/* TEAM */
+	Founder / Creator: Paul Frazier
+	Site: http://mhsamerica.com/contact
+	From: Yucaipa, California, USA
+
+	Sole Developer: Kage-Mykel Edwards
+	Site: http://www.websitesbykage.com
+	Twitter: @keystrokebrony
+	From: Yucaipa, California, USA
+
+/* SITE */
+	Last update: 2014-05-17
+	Language: English
+	Doctype: HTML5
+	IDE: Sublime Text, Notepad++, FileZilla, Photoshop

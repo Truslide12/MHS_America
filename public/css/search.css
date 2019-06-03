@@ -1,0 +1,26 @@
+#whatabove .btn, #whatbelow .btn {overflow:hidden;text-overflow:ellipsis;}
+
+input.search-box, .search-form .input-group-addon .btn {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 46px;
+}
+
+input.form-control.search-box:focus {
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	border-right-color:#ddd;
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+	#logo{height:85px}
+}
+
+@media (max-width:767px) {
+	#logo{height:75px}
+}
+
+@media (max-width:480px) {
+	#logo {height:60px}
+}

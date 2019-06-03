@@ -1,0 +1,12 @@
+.error {
+	text-align:center;
+	font-size:10em;
+}
+.error small {
+	display:block;
+	font-size:0.4em;
+}
+
+@media (min-width: 768px) {
+	.error {padding:0.5em;}
+}

@@ -1,0 +1,7 @@
+@media (min-width:768px) {
+	#map {height:650px !important;}
+}
+
+@media (min-width:992px) {
+	#map {height:900px !important;}
+}

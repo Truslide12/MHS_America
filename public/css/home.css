@@ -1,0 +1,21 @@
+#header-wrapper{margin-bottom:0;}
+
+#infoMinimizer{margin:10px 10px -5px;}
+#ctrlPanel{float:left;}
+.trans{opacity:0.85;}
+#backdropCarousel{background:#000;}
+.texture-1 {background: #AEAEAE url(../img/skewed-print-white.png) center top repeat;}
+.texture-2 {background: #141414 url(../img/skewed-print-black.png) center top repeat;}
+
+
+
+
+@media (max-width: 767px) {
+
+	#right-column .panel-body {visibility:visible !important;}
+	#right-column .panel-default{background-color:#fff !important;border-color:#ddd !important;}
+}
+
+@media (min-width: 768px) {
+
+}

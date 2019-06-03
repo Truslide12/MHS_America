@@ -1,0 +1,11 @@
+#company-title {padding-top:47px;}
+.content {margin-bottom:80px;}
+
+
+@media (max-width:767px) {
+	
+	#company-title {padding-top:0;}
+	.list-group-minimal{margin:-11px -15px !important;border-left:1px solid #ddd;}
+	.content{margin-bottom:0;}
+
+}

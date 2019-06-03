@@ -1,0 +1,70 @@
+#logo-wrapper .lead.hidden-xs{float:right;width:50%;text-align:left;color:#999}
+#logoSticker{display:inline-block;width:40px;left:-51px;position:relative;top:54px;font-weight:bold;}
+
+/* .row.divider {margin:0 -16px;} */
+#citySearchBox {float:none !important;}
+
+#carousel-spotlight h1 {font-size: 2.14em;}
+
+.list-group-item {
+	border-color: #bbb;
+}
+
+.page-header h3, .page-header h5 {
+	margin-bottom:-5px;
+	font-weight:bold;
+}
+
+.page-header h3 small a {
+	color:#333;
+	margin-top: 10px;
+}
+
+.slicetab {
+	background-color: #fff;
+	background-position: top right;
+	height:auto;
+}
+
+@media (min-width:768px) {
+	#logo-wrapper .lead{font-size:24px}
+	#logo-wrapper .lead.hidden-xs{margin:24px 0 0 0}
+	#map{height:500px}
+}
+
+@media (min-width:1200px) {
+	#logo-wrapper .lead{font-size:32px}
+	#logo{width:450px;}
+	#map{height:700px !important;}
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+	#logo{height:85px}
+	#logo-wrapper .lead{padding:0}
+	#map{height:400px}
+}
+
+@media (max-width:767px) {
+	#logo{height:75px}
+	#logo-wrapper .lead{padding:0}
+	#map{display:none;}
+	.content {border:none;}
+	#carousel-spotlight h1 {font-size: 1.7em;padding-right: 0.75em;}
+}
+
+@media (max-width:480px) {
+	#logo {height:60px}
+	#carousel-spotlight h1 {font-size: 1.28em;padding-right: 0.5em;}
+}
+
+#great-welcome{
+	background:#fff url(/img/backdrops/panoramas/welcome-backdrop.jpg) center center;
+	background-size:cover;
+	min-height:450px;
+	color:#fff;
+	padding:80px;
+}
+#great-welcome h1{font-weight:700;padding-bottom:20px;}
+#great-welcome .btn-group-lg > .btn{padding:15px 24px;}
+#login-tray{padding-top:100px;font-size:14px;}
+#login-tray .btn{font-size:14px;}
