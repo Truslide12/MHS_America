@@ -278,8 +278,8 @@
 <script type="text/javascript">
 	var spending_report = {};
 	
-	@for ($i = 5; $i > -1; $i--)
-	  spending_report.{{ date('M', strtotime("-$i month")); }} = 0;
+	@for($i = 5; $i > -1; $i--)
+	  spending_report.{{ date('M', strtotime("-$i month")) }} = 0;
 	@endfor
 	@if($transactions)
 	@foreach($transactions as $transaction)
