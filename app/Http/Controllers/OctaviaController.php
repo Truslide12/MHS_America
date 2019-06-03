@@ -129,7 +129,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = PhoneNumber::make($community->phone, 'US')->formatNational();
+				$phone_formatted = $community->phone;
 			}
 			$feature = [
 				'type' => 'Feature',
@@ -413,7 +413,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = PhoneNumber::make($community->phone, 'US')->formatNational();
+				$phone_formatted = $community->phone;
 			}
 			$feature = [
 				'type' => 'Feature',
