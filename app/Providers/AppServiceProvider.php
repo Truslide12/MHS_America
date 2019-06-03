@@ -32,9 +32,9 @@ class AppServiceProvider extends ServiceProvider
                 endif;
                 $navbarclass = \' class="\' . $navbar_classes . \'"\';  ?>');
 
-        $this->registerBladeDirective('if-navbar-fixed', '${1}<?php if(isset($navbarclass)):  ?>');
+        $this->registerBladeDirective('when-navbar-fixed', '${1}<?php if(isset($navbarclass)):  ?>');
 
-        $this->registerBladeDirective('if-navbar-static', '${1}<?php if(!isset($navbarclass)):  ?>');
+        $this->registerBladeDirective('when-navbar-static', '${1}<?php if(!isset($navbarclass)):  ?>');
 
         $this->registerBladeDirective('show-navbar-divider', '${1}<?php $show_navbar_divider = true;  ?>');
 
