@@ -10,7 +10,7 @@
 	<div class="row white">
 		<div class="col-md-8 col-md-offset-2">
 			<form class="form-horizontal push-down search-form" id="primary-search" role="form" action="{{ URL::route('homes-query') }}" method="GET">
-				{{ csrf_token_field() }}
+				{{ csrf_field() }}
 				<div class="form-group">
 					<div class="input-group">
 						<input type="text" name="search" class="form-control input-lg search-box" id="normalSearchBox" placeholder="Enter a city and state or zip code...">
@@ -30,7 +30,7 @@
 				</div>
 			</form>
 			<form class="form-horizontal push-down search-form" id="advanced-search" style="display:none" role="form" action="{{ URL::route('homes-query') }}" method="GET">
-				{{ csrf_token_field() }}
+				{{ csrf_field() }}
 				<div class="form-group">
 					<div class="input-group">
 						<input type="text" name="search" class="form-control input-lg search-box" id="advancedSearchBox" placeholder="Enter a city and state or zip code...">

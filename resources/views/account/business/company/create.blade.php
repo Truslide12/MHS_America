@@ -126,7 +126,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 							</div>
 							<div class="form-group text-right">
 								<div class="col-md-12">
-									{{ csrf_token_field() }}
+									{{ csrf_field() }}
 									<button type="submit" class="btn bn-lg btn-success" id="submitbtn" disabled>Create company account</button>
 								</div>
 							</div>

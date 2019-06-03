@@ -26,7 +26,7 @@
                     <span class="glyphicon glyphicon-lock"></span> Login</div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ URL::route('account-login-post') }}" method="POST" role="form">
-                    {{ csrf_token_field() }}
+                    {{ csrf_field() }}
                     @if($redirect != '')
                     <input type="hidden" name="redirect" value="{{ $redirect }}">
                     @endif

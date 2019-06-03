@@ -10,7 +10,7 @@
 	<div class="row white">
 		<div class="col-md-8 col-md-offset-2">
 			<form class="form-horizontal push-down search-form" id="advanced-search" role="form" action="{{ URL::route('search-post') }}" method="post">
-				{{ csrf_token_field() }}
+				{{ csrf_field() }}
 				<input type="hidden" name="mode" value="0">
 				<div class="form-group">
 					<div class="input-group">
@@ -70,7 +70,7 @@
 								<button type="submit" class="btn btn-primary cta"><i class="fa fa-search"></i></button>
 							</span>
 						</div>
-						{{ csrf_token_field() }}
+						{{ csrf_field() }}
 					</form>
 				</div>
 			</div>

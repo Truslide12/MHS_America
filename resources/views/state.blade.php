@@ -148,7 +148,7 @@
 								</div>
 								<div class="form-group input-group">
 						            <input type="text" class="form-control" placeholder="" name="city" id="citySearchBox">
-									{{ csrf_token_field() }}
+									{{ csrf_field() }}
 						            <div class="input-group-btn">
 						                <button class="btn btn-primary cta" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 						            </div>

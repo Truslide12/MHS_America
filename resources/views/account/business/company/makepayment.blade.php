@@ -183,7 +183,7 @@
 							@endif
 							<hr>
 							<div class="text-center">
-								{{ csrf_token_field() }}
+								{{ csrf_field() }}
 								<button type="submit" id="submitbtn" class="btn btn-lg btn-primary" disabled>Confirm Payment</button>
 							</div>
 						</div>

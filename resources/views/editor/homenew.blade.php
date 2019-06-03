@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-{{ csrf_token_field() }}
+{{ csrf_field() }}
 <div class="row white">
 	<div class="col-md-12">
 		<a href="{{ URL::route('editor', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}" class="btn btn-default pull-right visible-xs visible-sm">Back to profile</a>

@@ -55,7 +55,7 @@
         <div class="panel-body">
         	<p>Already have an account? Sign in to get started.</p>
             <form class="form-horizontal" action="{{ URL::route('account-login-post') }}" method="POST" role="form">
-            {{ csrf_token_field() }}
+            {{ csrf_field() }}
             @if($redirect != '')
             <input type="hidden" name="redirect" value="{{ $redirect }}">
             @endif

@@ -22,7 +22,7 @@
 			{{ implode(', ', $errors->all()) }}
 		@endif
 		<form role="form" action="{{ URL::route('account-business-activate-post') }}" method="POST">
-			{{ csrf_token_field() }}
+			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="firstname">First Name</label>
 				<input type="text" class="form-control" id="firstname" name="firstname" value="{{ Input::old('firstname') }}">

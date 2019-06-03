@@ -10,7 +10,7 @@
 	<div class="row white">
 		<div class="col-md-8 col-md-offset-2">
 			<form class="form-horizontal push-down search-form" id="primary-search" role="form" action="{{ URL::route('search-post') }}" method="post">
-				{{ csrf_token_field() }}
+				{{ csrf_field() }}
 				<input type="hidden" name="mode" value="2">
 				<div class="form-group">
 					<div class="input-group">
@@ -31,7 +31,7 @@
 				</div>
 			</form>
 			<form class="form-horizontal push-down search-form" id="advanced-search" style="display:none" role="form" action="{{ URL::route('search-post') }}" method="post">
-				{{ csrf_token_field() }}
+				{{ csrf_field() }}
 				<input type="hidden" name="mode" value="2">
 				<div class="form-group">
 					<div class="input-group">

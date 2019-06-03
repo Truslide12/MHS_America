@@ -32,7 +32,7 @@
 		<button class="btn btn-lg btn-info btn-block" type="submit">
 			Sign In
 		</button>
-		{{ csrf_token_field() }}
+		{{ csrf_field() }}
 	</form>
 
 </div>

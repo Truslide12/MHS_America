@@ -68,7 +68,7 @@
 				<div class="panel-body">
 					<h5 class="">
 						<form action="{{ URL::route('company-cmd-watch-post', array('company' => $company->id)) }}" method="POST" class="pull-right">
-							{{ csrf_token_field() }}
+							{{ csrf_field() }}
 							<input type="hidden" name="ref" value="account-watched">
 							<button type="submit" class="btn btn-xs btn-info" style="margin:-5px">Unwatch</button>
 						</form>

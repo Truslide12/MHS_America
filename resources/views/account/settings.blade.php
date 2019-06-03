@@ -87,7 +87,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-md-9 col-md-offset-3">
-					{{ csrf_token_field() }}
+					{{ csrf_field() }}
 					<button type="submit" class="btn btn-primary cta">Submit changes</button>
 					<p></p>
 				</div>

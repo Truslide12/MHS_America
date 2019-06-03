@@ -25,7 +25,7 @@
 						Transporters</label>
 				</div>
 				<div class="push-down professional-search" id="primary-search">
-					{{ csrf_token_field() }}
+					{{ csrf_field() }}
 					<div class="form-group">
 						<div class="input-group">
 							<div class="text-left">

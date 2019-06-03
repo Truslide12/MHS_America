@@ -1,5 +1,5 @@
 @if(Auth::check())				<form action="{{ URL::route('company-cmd-watch-post', array('company' => $company->id)) }}" method="POST" style="display:inline-block;">
-					{{ csrf_token_field() }}
+					{{ csrf_field() }}
 					@if($user->watchesCompany($company->id))
 					<button type="submit" class="btn btn-info margin-r">Unwatch<span class="hidden-xs"> company</span></button>
 					@else
@@ -12,7 +12,7 @@
 					@endif
 				</form>
 				<form action="{{ URL::route('company-cmd-kudos-post', array('company' => $company->id)) }}" method="POST" style="display:inline-block;">
-					{{ csrf_token_field() }}
+					{{ csrf_field() }}
 					@if($user->kudosCompany($company->id))
 					<button type="submit" class="btn btn-success margin-r"><i class="glyphicon glyphicon-ok"></i> Kudo'd</button>
 					@else

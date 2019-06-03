@@ -28,7 +28,7 @@
 	<div class="col-md-12">
 
 <form id="orderform" class="form-horizontal" action="{{ URL::route('getstarted-community') }}/checkgeo" method="POST" role="form">
-{{ csrf_token_field() }}
+{{ csrf_field() }}
 
 			<div class="panel heavypad">
 				<!-- <div class="panel-heading">Current Location</div> -->

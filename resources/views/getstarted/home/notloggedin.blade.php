@@ -60,7 +60,7 @@
 	<div class="col-md-3 col-md-offset-1" style="border-left: 1px solid #e8e8e8;background:none;">
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ URL::route('account-login-post') }}" method="POST" role="form">
-                    {{ csrf_token_field() }}
+                    {{ csrf_field() }}
                     @if($redirect != '')
                     <input type="hidden" name="redirect" value="{{ $redirect }}">
                     @endif

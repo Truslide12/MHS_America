@@ -26,7 +26,7 @@
 							@if(Auth::check())
 							<p class="tape-btns-dis">
 								<form action="{{ URL::route('profile-cmd-watch-post', array('profile' => $professional->id)) }}" method="POST" style="display:inline-block;">
-									{{ csrf_token_field() }}
+									{{ csrf_field() }}
 									@if(!Request::is('profile*'))
 									<input type="hidden" name="ref" value="{{ substr(Request::fullUrl(), strpos(Request::fullUrl(), '/', 8)) }}">
 									@endif
@@ -44,7 +44,7 @@
 									@endif
 								</form>
 								<form action="{{ URL::route('profile-cmd-kudos-post', array('profile' => $professional->id)) }}" method="POST" style="display:inline-block;">
-									{{ csrf_token_field() }}
+									{{ csrf_field() }}
 									@if(!Request::is('profile*'))
 									<input type="hidden" name="ref" value="{{ substr(Request::fullUrl(), strpos(Request::fullUrl(), '/', 8)) }}">
 									@endif

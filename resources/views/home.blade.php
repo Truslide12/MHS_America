@@ -472,7 +472,7 @@
 		<div class="row texture-1" style="padding-top: 20px;">
 			<div class="col-md-12 padding-b" style="text-align: right;">
 					@if(Auth::check())
-						{{ csrf_token_field() }}
+						{{ csrf_field() }}
 						@if($user->watchesHome($home->id))
 						<a href="#" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large" class="watch-home-{{ $home->id }} btn btn-info margin-r">
 							Unwatch<span class="hidden-xs"> Home</span>

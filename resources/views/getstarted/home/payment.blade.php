@@ -38,7 +38,7 @@
 	<div class="col-md-12">
 
 <form class="form-horizontal" action="{{ URL::route('getstarted-home') }}/submitpayment" method="POST" role="form"  id="payment-form">
-{{ csrf_token_field() }}
+{{ csrf_field() }}
 
 			<div class="panel heavypad">
 				<!-- <div class="panel-heading">Current Location</div> -->

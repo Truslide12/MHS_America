@@ -32,7 +32,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 							<div class="form-group">
 								<div class="col-md-6">
 									<div class="input-group">
-										{{ csrf_token_field() }}
+										{{ csrf_field() }}
 										<input type="text" class="form-control input-lg" id="code" name="code" value="" required>
 										<span class="input-group-btn">
 											<button type="submit" class="btn btn-lg btn-success">

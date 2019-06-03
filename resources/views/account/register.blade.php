@@ -43,7 +43,7 @@
 						@endif
 					</div>
 				<form class="form-horizontal" action="{{ URL::route('account-register-post') }}" method="POST" role="form">
-					{{ csrf_token_field() }}
+					{{ csrf_field() }}
 					<div class="col-sm-6">
 						<div class="form-group @if($errors->has('username')) has-error @endif">
 		                    <label for="inputUsername" class="col-sm-3 control-label">

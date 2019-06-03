@@ -58,7 +58,7 @@
 								<input type="checkbox" name="spaces" value="1" @if(Input::has('spaces'))checked @endif> Only with spaces &nbsp;
 							</label>
 						</div>
-						{{ csrf_token_field() }}
+						{{ csrf_field() }}
 						<button class="btn btn-primary pull-right">
 							<i class="fa fa-search"></i>
 							Search

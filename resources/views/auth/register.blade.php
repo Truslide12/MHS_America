@@ -19,7 +19,7 @@
 					@endif
 
 					<form class="form-horizontal" role="form" method="POST" action="/auth/register">
-						<input type="hidden" name="_token" value="{{ csrf_token_field() }}">
+						<input type="hidden" name="_token" value="{{ csrf_field() }}">
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Name</label>
