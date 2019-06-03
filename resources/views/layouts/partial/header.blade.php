@@ -1,4 +1,4 @@
-<div id="header-wrapper" {{ $navbarclass or '' }}>
+<div id="header-wrapper" {{ $navbarclass ?? '' }}>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
