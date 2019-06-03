@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use App\Models\Traits\HasCompanyRole;
@@ -17,7 +18,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Eloquent
 {
     use EntrustUserTrait, HasCompanyRole, HasProfileRole, FollowsProfiles, FollowsCompanies, FollowsHomes, FollowsSpaces, SoftDeletes, Notifiable;
 
