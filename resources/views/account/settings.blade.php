@@ -98,7 +98,7 @@
 		<h3>Avatar</h3>
 		<div class="row">
 			<div class="col-xs-4 col-md-6">
-				<img src="{{ $user->gravatar(200) }}" class="img-thumbnail img-responsive">
+				<img src="{!! $user->gravatar(200) !!}" class="img-thumbnail img-responsive">
 			</div>
 			<div class="col-xs-8 col-md-6">
 				<p><small>For simplicity, our display pictures (avatars) are powered by Gravatar, a cross-site avatar service commonly used on discussion forums and blogs.</small></p>

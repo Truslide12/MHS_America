@@ -66,7 +66,7 @@
 		<div class="col-sm-8 col-md-6 column">
 			<div class="row flexrow">
 				<div class="col-sm-3" id="footerAvatarContainer">
-					<img src="{{ Auth::check() ? $user->gravatar(100) : '//www.gravatar.com/avatar/?s=100&amp;f=y&amp;d=mm' }}" class="img-responsive img-thumbnail pull-right" id="footerAvatar">
+					<img src="{!! Auth::check() ? $user->gravatar(100) : '//www.gravatar.com/avatar/?s=100&amp;f=y&amp;d=mm' !!}" class="img-responsive img-thumbnail pull-right" id="footerAvatar">
 				</div>
 				<div class="col-xs-12 col-sm-9">
 					@if(Auth::check())

@@ -5,7 +5,7 @@
 	                                <div class="navbar-content">
 	                                    <div class="row">
 	                                        <div class="col-md-4 col-sm-4">
-	                                            <p><img src="{{ $user->gravatar(100) }}" class="img-thumbnail"></p>
+	                                            <p><img src="{!! $user->gravatar(100) !!}" class="img-thumbnail"></p>
 	                                        </div>
 	                                        <div class="col-md-8 col-sm-8">
 	                                            <h4>{{ ($user->first_name =='' || $user->last_name == '') ? $user->username : $user->first_name . ' ' . $user->last_name }}</h4>
