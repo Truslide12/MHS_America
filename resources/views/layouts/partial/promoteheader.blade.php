@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	@yield('navbar-after')
-	@if-navbar-fixed
+	@when-navbar-fixed
 		@if(isset($show_navbar_divider))
 		<div class="row divider blue hidden-xs"></div>
 		@endif

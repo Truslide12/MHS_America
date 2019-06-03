@@ -15,7 +15,7 @@
 @yield('content-above')
 
 <div class="container content {{ $contentclass or '' }}">
-	@if-navbar-static
+	@when-navbar-static
 		@if(isset($show_navbar_divider))
 		<div class="row divider blue hidden-xs"></div>
 		@endif
