@@ -184,6 +184,7 @@ return [
 
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Propaganistas\LaravelIntl\IntlServiceProvider::class,
         Propaganistas\LaravelPhone\PhoneServiceProvider::class,
         Phaza\LaravelPostgis\DatabaseServiceProvider::class,
         Stanley\Geocodio\ServiceProviders\LaravelServiceProvider::class
