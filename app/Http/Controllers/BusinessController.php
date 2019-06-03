@@ -14,6 +14,7 @@ use Validator;
 use App\User;
 use App\Models\Profile;
 use App\Models\State;
+use App\Models\Permission;
 use Redirect;
 use Request;
 use Response;

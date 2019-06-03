@@ -104,7 +104,7 @@
 									<hr>
 										<div class="row">
 											<div class="col-md-12">
-												@foreach(Permission::where('category', 1)->get() as $right)
+												@foreach(\App\Models\Permission::where('category', 1)->get() as $right)
 												<div xclass="checkbox">
 													<label for="perm_{{ $right->name }}"><input id="perm_{{ $right->name }}" type="checkbox" name="{{ $right->name }}" value="{{ $right->id }}" class="comp_perm_boxes" @if($role->perms()->where('permissions.id', $right->id)->count() > 0) selected="selected" @endif> {{ $right->display_name }}</label>
 												</div>
