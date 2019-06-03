@@ -5,7 +5,7 @@
 @if(isset($canvas) && is_object($canvas) && 1==2)
 <div id="canvas-wrapper">
 <div class="container-fluid">
-	<img src="{{ URL::route('welcome') }}/img/backdrops/{{ $canvas->file or '' }}" id="pagecanvas" class="img-fill hidden-xs">
+	<img src="{{ URL::route('welcome') }}/img/backdrops/{{ $canvas->file ?? '' }}" id="pagecanvas" class="img-fill hidden-xs">
 </div>
 </div>
 @endif
@@ -14,7 +14,7 @@
 @endif
 @yield('content-above')
 
-<div class="container content {{ $contentclass or '' }}">
+<div class="container content {{ $contentclass ?? '' }}">
 	@when-navbar-static
 		@if(isset($show_navbar_divider))
 		<div class="row divider blue hidden-xs"></div>
