@@ -658,7 +658,7 @@ class BusinessController extends Pony {
 		$has_stripe = false;
 
 		//Find upcoming renewals..
-		$renews = \Subscription::where('company_id', $company->id)
+		$renews = Subscription::where('company_id', $company->id)
 						->orderBy('ends_at', 'desc')
 						->take(5)
 						->get();
@@ -714,7 +714,7 @@ class BusinessController extends Pony {
 		$has_stripe = false;
 
 		//Find upcoming renewals..
-		$renews = \Subscription::where('company_id', $company->id)
+		$renews = Subscription::where('company_id', $company->id)
 						->orderBy('ends_at', 'desc')
 						->take(5)
 						->get();
@@ -768,7 +768,7 @@ class BusinessController extends Pony {
 		$customer 	= \Stripe\Customer::retrieve($company->stripe_customer_id);
 		$t = $customer->subscriptions->retrieve($sub->stripe_subscription_id)->cancel(array("at_period_end" => true ));
 		if( $t->cancel_at_period_end ) {
-			$store_subscription = \Subscription::where('stripe_subscription_id', $t->id)->first();
+			$store_subscription = Subscription::where('stripe_subscription_id', $t->id)->first();
 			$store_subscription->auto_renew = false;
 			$store_subscription->save();
 			return redirect()->back();
@@ -799,7 +799,7 @@ class BusinessController extends Pony {
 		$t->save();
 
 		if( ! $t->cancel_at_period_end ) {
-			$store_subscription = \Subscription::where('stripe_subscription_id', $t->id)->first();
+			$store_subscription = Subscription::where('stripe_subscription_id', $t->id)->first();
 			$store_subscription->auto_renew = true;
 			$store_subscription->save();
 			return redirect()->back();
@@ -825,7 +825,7 @@ class BusinessController extends Pony {
 		$has_stripe = false;
 
 		//Find upcoming renewals..
-		$renews = \Subscription::where('company_id', $company->id)
+		$renews = Subscription::where('company_id', $company->id)
 						->orderBy('ends_at', 'desc')
 						->take(5)
 						->get();
@@ -1356,7 +1356,7 @@ class BusinessController extends Pony {
 
 
 	protected function addCardToCompany($params) {
-		$target_company = \Company::where('id', $params['company_id'])->first();
+		$target_company = Company::where('id', $params['company_id'])->first();
 
 		if( $target_company->stripe_customer_id == null ) {
 			//create new stripe customer (with the source)..
