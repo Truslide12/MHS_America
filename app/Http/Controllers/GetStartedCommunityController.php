@@ -1,21 +1,25 @@
 <?php namespace App\Http\Controllers;
 
-use  App\Http\Controllers\Pony;
 use Auth;
-use App\Models\Company;
 use Input;
 use Request;
-use App\Models\State;
 use Validator;
-use User;
 use Hash;
+use App\User;
+use App\Models\State;
 use App\Models\Geoname;
-use Session;
 use App\Models\Profile;
+use App\Models\Company;
 use App\Models\StorePaymentSources;
 use App\Models\StoreTransaction;
 use App\Models\StorePurchase;
 use App\Models\Subscription;
+
+/*{
+use Stripe\Customer
+use Stripe\Charge
+use Illuminate\Support\MessageBag
+}*/
 
 class GetStartedCommunityController extends Pony {
 
@@ -25,11 +29,11 @@ class GetStartedCommunityController extends Pony {
 
 	public function getIndex(Company $company, State $states)
 	{
-		if( Session::get("product") != $this->PRODUCT_ID && Session::get("product") != 0 ) { self::clearSession(); }
-		//Session::forget("active_step");
+		if( session("product") != $this->PRODUCT_ID && session("product") != 0 ) { self::clearSession(); }
+		//session()->forget("active_step");
 		$title = "Whoa, lets get to know each other first!"; //Pick something, Kage
 		$has_account = $is_upgraded = $has_companies = FALSE;
-		$states = \State::all();
+		$states = State::all();
 		$user = Auth::user();
 
 		if ( $user === null ) {
@@ -48,7 +52,7 @@ class GetStartedCommunityController extends Pony {
 			//lets get some more info..
 			$has_account = TRUE;
 			$is_upgraded = $user->business;
-			if ( count($user->companies()->pluck('companies.id')->toArray()) > 0 ) {
+			if ( count($user->companies()->pluck('companies.id')->all()) > 0 ) {
 				//$user->companies()->pluck('companies.id', 'companies.title');
 				$has_companies = TRUE;
 			}
@@ -65,7 +69,7 @@ class GetStartedCommunityController extends Pony {
 		//here is where logic starts
 		if ( $has_account && $is_upgraded && $has_companies) {
 			$title = "Promote Your Community";
-			$step = Session::get('active_step');
+			$step = session('active_step');
 			if ( empty($step) ) { $step = 2; }
 			//the magick...ssss so tired
 			switch ( $step ) {
@@ -120,7 +124,7 @@ class GetStartedCommunityController extends Pony {
 	public function postUserForm()
 	{
 		$user = Auth::user();
-		$states = \State::all();
+		$states = State::all();
 		$messageBag = new \Illuminate\Support\MessageBag(); //$messageBag->add('error', 'Username not filled in');
 		$has_account = $is_upgraded = $has_companies = FALSE;
 
@@ -405,7 +409,7 @@ class GetStartedCommunityController extends Pony {
 			
 			$city = Geoname::where('state_id' ,Input::get('business-state'))->where('osm_id', Input::get('business-city'))->first();
 
-			if(!is_a($city, 'Eloquent')) {
+			if(!is_a($city, Eloquent::class)) {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CityLookupFailed)');
@@ -488,7 +492,7 @@ class GetStartedCommunityController extends Pony {
 		
 		//check if this address is taken??
 		$addr_available = false;
-		$addr_available = \Profile::where('address', Input::get('community-address1'))
+		$addr_available = Profile::where('address', Input::get('community-address1'))
 									->where('zipcode', Input::get('community-zip'))
 									->where('state_id', Input::get('community-state'))
 									->where('city_id', Input::get('community-city'))->first();
@@ -509,9 +513,8 @@ class GetStartedCommunityController extends Pony {
 			
 			if ( $orderdata['company_data'] == null ) { return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors(["Failed to set business account.."]); }
 
-			Session::put('order_data', $orderdata);
+			session(['order_data' => $orderdata, 'active_step' => 3]);
 
-			Session::put('active_step', 3);
 			return redirect()->route($this->PRODUCT_ROUTE);
 		}else{
 			return redirect()->route($this->PRODUCT_ROUTE)->withInput(Input::all())->withErrors(['There seems to already be a park in this location']);
@@ -543,7 +546,7 @@ class GetStartedCommunityController extends Pony {
 
 
 			//Create free profile
-			$d = Session::get("order_data");
+			$d = session("order_data");
 			$pd = (object)[
 			'title' 	=> $d['community-name'],
 			'phone' 	=> null,
@@ -557,12 +560,12 @@ class GetStartedCommunityController extends Pony {
 
 			$test = self::createBaseProfile($d['company_data']['id'], $pd);
 			if ( $test->status ) {
-				$order_data = Session::get("order_data");
+				$order_data = session("order_data");
 				$order_data['profile_data'] = $test->profile;
-				Session::put("order_data", $order_data);
+				session(["order_data" => $order_data]);
 			}
 
-		if ( Session::get('plan') == "free" ) {
+		if ( session('plan') == "free" ) {
 			$price = 0;
 		} else {
 			$price = 149.99;
@@ -570,10 +573,10 @@ class GetStartedCommunityController extends Pony {
 
 		if ( $price == 0 ) {
 			//go to success screen
-			Session::put('active_step', 5);
+			session(['active_step' => 5]);
 		} else {
 			//go to payment screen
-			Session::put('active_step', 4);
+			session(['active_step', 4]);
 		}
 
 		return redirect()->route($this->PRODUCT_ROUTE);
@@ -595,8 +598,8 @@ class GetStartedCommunityController extends Pony {
 			
 			$subdata =[
 			'product_id' => $product_id,
-			'profile_id' => Session::get("order_data")['profile_data']->id,
-			'profile_name' => Session::get("order_data")['profile_data']->title,
+			'profile_id' => session("order_data")['profile_data']->id,
+			'profile_name' => session("order_data")['profile_data']->title,
 			'company_id' => $comp->id,
 			'payment_source_id' => Request::get('payment_source')
 			];
@@ -604,10 +607,10 @@ class GetStartedCommunityController extends Pony {
 			$receipt = self::purchaseProfileSubscription($subdata);
 
 			if ( $receipt->status ) {
-				Session::put('active_step', 5);
-				$order_data = Session::get("order_data");
+				session(['active_step' => 5]);
+				$order_data = session("order_data");
 				$order_data['transaction_data'] = $receipt->transaction;
-				Session::put("order_data", $order_data);
+				session(["order_data" => $order_data]);
 				return redirect()->route($this->PRODUCT_ROUTE);
 			} else {
 				return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors($receipt->errors);
@@ -665,7 +668,7 @@ class GetStartedCommunityController extends Pony {
 	{
 		$product_id = 1;
 		$user = Auth::user();
-		$company = $user->companies->where('id', Session::get('order_data')['company_data']['id'])->first();
+		$company = $user->companies->where('id', session('order_data')['company_data']['id'])->first();
 
 		if ( Request::get('payment_source') != 0 ) {
 			return self::postSubmitPaymentProcess($company);
@@ -684,25 +687,24 @@ class GetStartedCommunityController extends Pony {
 	public function getFree()
 	{
 		self::clearSession(true);
-		Session::set("product", 0);
-		Session::set("plan", "free");
+		session(["product" => 0, "plan" => "free"]);
 		return redirect()->route($this->PRODUCT_ROUTE);
 	}
 
 	public function getPremium()
 	{
 		self::clearSession(true);
-		Session::set("product", 1);
-		Session::set("plan", "premium");
+		session(["product" => 1]);
+		session(["plan" => "premium"]);
 		return redirect()->route($this->PRODUCT_ROUTE);
 	}
 
 	public function clearSession($no_redir = false)
 	{
-		Session::forget("order_data");
-		Session::forget("active_step");
-		Session::forget("plan");
-		Session::forget("product");
+		session()->forget("order_data");
+		session()->forget("active_step");
+		session()->forget("plan");
+		session()->forget("product");
 		if ( $no_redir == true ) { return; } else {
 		  return redirect()->route('page', ['slug' => 'community-plans']);
 		}
@@ -886,7 +888,7 @@ class GetStartedCommunityController extends Pony {
 		$subscription->auto_renew 				= true;
 		$subscription->save();
 
-		$profile = \Profile::where('id', $params['profile_id'])->first();
+		$profile = Profile::where('id', $params['profile_id'])->first();
 		$profile->subscription_id = $subscription->id;
 		$profile->save();
 
