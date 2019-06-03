@@ -36,7 +36,7 @@
 			<div class="panel-body">
 				<h4 class="no-margin-t">
 					<a href="{{ URL::route('account-business-company-user-edit', array('company' => $company->id, $cuser->id)) }}">{{ $cuser->first_name }} {{ $cuser->last_name }}</a>
-					<br><small>{{ Role::find($cuser->pivot->role_id)->title }}</small>
+					<br><small>{{ \App\Models\Role::find($cuser->pivot->role_id)->title }}</small>
 				</h4>
 			</div>
 		</div>

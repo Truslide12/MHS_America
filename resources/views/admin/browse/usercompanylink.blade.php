@@ -45,7 +45,7 @@
 				<div class="">
 					<div class="input-group">
 						<select class="form-control" id="roleSelect">
-						@foreach(Role::all() as $role)
+						@foreach(\App\Models\Role::all() as $role)
 							<option value="{{ $role->id }}"@if($role->id == $link->role_id) selected @endif>{{ $role->name }}</option>
 						@endforeach
 						</select>

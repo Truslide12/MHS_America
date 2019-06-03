@@ -78,7 +78,7 @@
 				</thead>
 				<tbody>
 
-					@foreach(Role::where('is_generic',true)->orderBy('display_name')->get() as $possible_role)
+					@foreach(\App\Models\Role::where('is_generic',true)->orderBy('display_name')->get() as $possible_role)
 					@if($possible_role->display_name)
 					<tr>
 						<td><input name="user-role" type="radio" value="{{ $possible_role->permissions }}" onclick="setPerms('{{ $possible_role->permissions }}');"></td>
