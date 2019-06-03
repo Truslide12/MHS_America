@@ -1,13 +1,14 @@
 <?php
 
-namespace MHSTraits;
-use Role;
+namespace App\Models\Traits;
+use App\Models\Role;
+use App\Models\Company;
 
 trait FollowsCompanies {
 
 	public function followed_companies()
 	{
-		return $this->belongsToMany('Company', 'company_user_follows')->withPivot('watched', 'kudos');
+		return $this->belongsToMany(Company::class, 'company_user_follows')->withPivot('watched', 'kudos');
 	}
 
 	public function watchesCompany($companyid)

@@ -1,13 +1,14 @@
 <?php
 
-namespace MHSTraits;
-use Role;
+namespace App\Models\Traits;
+use App\Models\Role;
+use App\Models\Space;
 
 trait FollowsSpaces {
 
     public function followed_spaces()
     {
-        return $this->belongsToMany('Space', 'space_user_follows')->withPivot('watched', 'kudos');
+        return $this->belongsToMany(Space::class, 'space_user_follows')->withPivot('watched', 'kudos');
     }
 
     public function watchesSpace($space_id)

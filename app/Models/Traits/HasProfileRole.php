@@ -3,13 +3,16 @@
 namespace App\Models\Traits;
 use App\Models\Role;
 use App\Models\Company;
+use App\Models\Profile;
+use App\Models\ProfileUser;
+use App\Models\HomeUser;
 use Session;
 
 trait HasProfileRole {
 	
 	public function profiles($company = null)
 	{
-		$query = $this->belongsToMany('Profile');
+		$query = $this->belongsToMany(Profile::class);
 
 		if(is_object($company)) $query = $query->where('profiles.company_id', $company->id);
 

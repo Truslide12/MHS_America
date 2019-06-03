@@ -1,13 +1,14 @@
 <?php
 
-namespace MHSTraits;
-use Role;
+namespace App\Models\Traits;
+use App\Models\Role;
+use App\Models\Home;
 
 trait FollowsHomes {
 
     public function followed_homes()
     {
-        return $this->belongsToMany('Home', 'home_user_follows')->withPivot('watched', 'kudos');
+        return $this->belongsToMany(Home::class, 'home_user_follows')->withPivot('watched', 'kudos');
     }
 
     public function watchesHome($homeid)
