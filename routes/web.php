@@ -73,13 +73,13 @@ Route::group(array('prefix' => 'luna'), function()
 
 			Route::bind('user_wt', function($val) {
 				//return User::withTrashed()->find($val);
-				return User::withTrashed()->find($val);
+				return \App\Models\User::withTrashed()->find($val);
 			});
 			Route::bind('company_wt', function($val) {
-				return Company::withTrashed()->find($val);
+				return \App\Models\Company::withTrashed()->find($val);
 			});
 			Route::bind('profile_wt', function($val) {
-				return Profile::withTrashed()->find($val);
+				return \App\Models\Profile::withTrashed()->find($val);
 			});
 			/*-----------------*/
 
@@ -243,11 +243,11 @@ Route::group(array('prefix' => 'luna'), function()
 				
 				/*-----------------*/
 				Route::pattern('company', '[0-9]+');
-				Route::model('company', 'Company');
+				Route::model('company', \App\Models\Company::class);
 				Route::pattern('profile', '[0-9]+');
-				Route::model('profile', 'Profile');
+				Route::model('profile', \App\Models\Profile::class);
 				Route::pattern('user', '[0-9]+');
-				Route::model('user', 'User');
+				Route::model('user', \App\User::class);
 				/*-----------------*/
 
 				/* Account business (GET) */
@@ -401,7 +401,7 @@ Route::group(array('prefix' => 'luna'), function()
 	{
 		/*-----------------*/
 		Route::pattern('profile', '[0-9]+');
-		Route::model('profile', 'Profile');
+		Route::model('profile', \App\Models\Profile::class);
 		/*-----------------*/
 
 		/* Profile (GET) */
@@ -433,7 +433,7 @@ Route::group(array('prefix' => 'luna'), function()
 			/******************/
 			Route::pattern('photo', '[0-9]+');
 			
-			Route::model('photo', 'ProfilePhoto');
+			Route::model('photo', \App\Models\ProfilePhoto::class);
 			/******************/
 
 			/* Profile editor (GET) */
@@ -460,8 +460,8 @@ Route::group(array('prefix' => 'luna'), function()
 				Route::pattern('space', '[0-9]+');
 				Route::pattern('home', '[0-9]+');
 
-				Route::model('space', 'Space');
-				Route::model('home', 'Home');
+				Route::model('space', \App\Models\Space::class);
+				Route::model('home', \App\Models\Home::class);
 				/******************/
 
 				/* Profile editor spaces (GET) */
@@ -513,7 +513,7 @@ Route::group(array('prefix' => 'luna'), function()
 	{
 		/*-----------------*/
 		Route::pattern('company', '[0-9]+');
-		Route::model('company', 'Company');
+		Route::model('company', \App\Models\Company::class);
 		/*-----------------*/
 
 		/* Company (GET) */
@@ -583,7 +583,7 @@ Route::group(array('prefix' => 'luna'), function()
 	{
 		/*-----------------*/
 		Route::pattern('home', '[0-9]+');
-		Route::model('home', 'Home');
+		Route::model('home', \App\Models\Home::class);
 		/*-----------------*/
 
 		/* Mobile Home (GET) */
@@ -614,10 +614,10 @@ Route::group(array('prefix' => 'luna'), function()
 		Route::pattern('professional', '[0-9a-zA-Z]+');
 		Route::bind('professional', function($id, $route) {
 			$ident = rand_uniqid($id, true, 6, 'derpy');
-			$professional = Professional::find($ident);
+			$professional = \App\Models\Professional::find($ident);
 
 		    if(!is_object($professional) || !is_a($professional, 'Professional')) {
-		    	throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+		    	throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		    }
 		    return $professional;
 		});
@@ -700,7 +700,7 @@ Route::group(array('prefix' => 'luna'), function()
 				/*-----------------*/
 				Route::pattern('photo', '[0-9]+');
 			
-				Route::model('photo', 'ProfilePhoto');
+				Route::model('photo', \App\Models\ProfilePhoto::class);
 				/*-----------------*/
 
 
@@ -805,7 +805,7 @@ Route::group(array('prefix' => 'luna'), function()
 	{
 		/*-----------------*/
 		//Route::pattern('company', '[0-9]+');
-		//Route::model('company', 'Company');
+		//Route::model('company', \App\Models\Company::class);
 		/*-----------------*/
 
 		/* Create Ticket (GET) */

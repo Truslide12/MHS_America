@@ -2,7 +2,7 @@
 
 use Closure;
 use Session;
-use Profile;
+use App\Models\Profile;
 use Illuminate\Contracts\Auth\Guard;
 
 class ProfileType {
