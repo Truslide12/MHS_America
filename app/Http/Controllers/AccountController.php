@@ -8,21 +8,21 @@ use App\Http\Controllers\Pony;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+/* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails; */
 use User;
 use Hash;
 
 
 class AccountController extends Pony {
 	
-	use AuthenticatesUsers, RegistersUsers, ResetsPasswords, SendsPasswordResetEmails {
+	/* use AuthenticatesUsers, RegistersUsers, ResetsPasswords, SendsPasswordResetEmails {
 	    AuthenticatesUsers::redirectPath insteadof RegistersUsers;
 	    AuthenticatesUsers::guard insteadof RegistersUsers;
 	    AuthenticatesUsers::credentials insteadof RegistersUsers;
-	}
+	}*/
 
 	//public $redirectAfterLogout = '/';
 	private $redirectTo = '';
