@@ -84,11 +84,11 @@
 			</div>
 			<div class="row" style="border-bottom:0px solid black; margin-bottom: 20px;text-align: center;">
 			  <div class="col-xs-3 col-md-8" style="text-align: left;">Home Listings</div>
-			  <div class="col-xs-3 col-md-4">{{count($company->home)}}</div>
+			  <div class="col-xs-3 col-md-4">{{ $company->home->count() }}</div>
 			</div>
 			<div class="row" style="border-bottom:0px solid black; margin-bottom: 20px;text-align: center;">
 			  <div class="col-xs-3 col-md-8" style="text-align: left;">Community Profiles</div>
-			  <div class="col-xs-3 col-md-4">{{count($company->profiles)}}</div>
+			  <div class="col-xs-3 col-md-4">{{ $company->profiles->count() }}</div>
 			</div>
 
 			<hr>
