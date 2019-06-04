@@ -2,6 +2,7 @@
 @use-slim-footer
 
 @section('incls-head')
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/static-footer.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/login.css">
 @stop
@@ -92,10 +93,12 @@
 									}
 								}
 							</script>
-							<div class="checkbox padding-x">
-                					<input type="checkbox" name="agree" style="-webkit-transform: scale(1);opacity: 1;" name="agree" value="1" tabindex="7"> 
-                					I agree to the <a href="{{ URL::route('page', array('slug' => 'terms')) }}" tabindex="5">terms of use</a> and understand the <a href="{{ URL::route('page', array('slug' => 'privacy')) }}" tabindex="6">privacy policy</a>
-                			</div>
+							<div class="padding-x">
+								<div class="checkbox">
+                					<input type="checkbox" name="agree" id="optAgree" value="1" tabindex="7"> 
+                					<label for="optAgree">I agree to the <a href="{{ URL::route('page', array('slug' => 'terms')) }}" tabindex="5">terms of use</a> and understand the <a href="{{ URL::route('page', array('slug' => 'privacy')) }}" tabindex="6">privacy policy</a></label>
+                				</div>
+							</div>
 						</div>
 					</div>
 	                <div class=" col-md-offset-6 col-md-6">
