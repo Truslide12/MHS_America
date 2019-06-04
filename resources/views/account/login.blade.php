@@ -2,8 +2,9 @@
 @use-slim-footer
 
 @section('incls-head')
-    <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/static-footer.css">
-    <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/static-footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 @stop
 
 @section('content-above')
