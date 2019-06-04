@@ -2,6 +2,11 @@
 
 namespace App\Models;
 
+use DB;
+use App\Models\Advertisement;
+use App\Models\Profile;
+use Illuminate\Database\Eloquent\Collection;
+
 class Advertisement extends EloquentModel {
 	
 	protected $table = 'advertisements';
@@ -36,7 +41,7 @@ class Advertisement extends EloquentModel {
 			$possibilities = array_values($possibilities);
 		}
 
-		return new \Illuminate\Database\Eloquent\Collection($items);
+		return new Collection($items);
 	}
 
 	public function scopeStateBlocks($query, $state)
