@@ -302,7 +302,7 @@
 	<div>
 		@include('layouts.partial.errors')
 	</div>
-	@if(1==2)
+
 	<div class="row clearfix nudge white">
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
@@ -406,8 +406,6 @@
 		@endforeach
 		@endif
 	</div>
-
-	@endif
 
 	@endif
 @stop
