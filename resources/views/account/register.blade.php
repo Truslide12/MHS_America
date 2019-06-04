@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/static-footer.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/login.css">
+    <style type="text/css">.checkbox label:after{text-align:left;}</style>
 @stop
 
 @section('content-above')
