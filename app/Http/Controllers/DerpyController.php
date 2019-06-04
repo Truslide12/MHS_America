@@ -63,7 +63,7 @@ class DerpyController extends Pony {
 							->where('companies.is_private', '=', FALSE)
 							->leftJoin('states', 'companies.state_id', '=', 'states.id')
 							->leftJoin('users', 'companies.state_id', '=', 'users.id')
-							->leftJoin('places', 'places.osm_id', '::bigint=', 'companies.city_id')
+							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'companies.city_id')
 							->select('users.username', 'companies.id', 'companies.name', 'companies.title', 'companies.claimed', 'companies.zip_code', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 			return Response::json($data, 200);
@@ -83,16 +83,16 @@ class DerpyController extends Pony {
 		if ( !$company_id && !$company_name) {
 			$data = Profile::where('profiles.title', 'ilike', Input::get('query').'%')
 							->where('profiles.type', '=', 'Community')
-							->leftJoin('states', 'profiles.state_id', '::bigint=', 'states.id')
-							->leftJoin('places', 'places.osm_id', '::bigint=', 'profiles.city_id')
+							->leftJoin('states', DB::raw('profiles.state_id::bigint'), '=', 'states.id')
+							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.id', 'profiles.title',  'profiles.zipcode', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 			return Response::json($data, 200);
 		}
 
 		$data = Profile::where('profiles.id',  $company_id)->where('profiles.zipcode',  $company_name)
-							->leftJoin('states', 'profiles.state_id', '::bigint=', 'states.id')
-							->leftJoin('places', 'places.osm_id', '::bigint=', 'profiles.city_id')
+							->leftJoin('states', DB::raw('profiles.state_id::bigint'), '=', 'states.id')
+							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.*', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 
