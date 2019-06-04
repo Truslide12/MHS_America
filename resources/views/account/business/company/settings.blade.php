@@ -84,7 +84,7 @@
 								<div class="col-md-9">
 									<select id="statebox" class="form-control" name="state" required>
 										<option>State...</option>
-										@foreach(State::all() as $state)
+										@foreach(\App\Models\State::all() as $state)
 										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($state->id == $company->state_id) selected @endif>{{ $state->title }}</option>
 										@endforeach
 									</select>
