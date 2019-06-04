@@ -40,7 +40,7 @@
             }
 
             .logo {
-                width:20em;
+                width:20rem;
                 height:auto;
                 max-width:98vw;
             }
