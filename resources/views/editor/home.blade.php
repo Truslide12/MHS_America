@@ -222,7 +222,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">State</label>
 				<div class="col-md-3">
-					<input type="text" name="state" class="form-control" value="{{ $profile->state->title }}">
+					<input type="text" name="state" class="form-control" value="{{ $profile->state->title }}" disabled>
 				</div>
 				<label class="control-label col-md-3">Zip code</label>
 				<div class="col-md-3">
