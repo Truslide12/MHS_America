@@ -4,7 +4,7 @@
 						<div class="panel-body">
 							<h2 class="no-margin-t">Communities</h2>
 							<hr>
-							@if(isset($results) && is_object($results))
+							@if(is_populated($results))
 							@foreach($results as $community)
 							@include('layouts.partial.community-block')
 							@endforeach

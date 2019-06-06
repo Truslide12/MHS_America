@@ -4,7 +4,7 @@
 						<div class="panel-body">
 							<h2 class="no-margin-t">Homes</h2>
 							<hr>
-							@if(isset($results) && is_object($results))
+							@if(is_populated($results))
 							@foreach($results as $home)
 							@include('layouts.partial.home-block')
 							@endforeach
