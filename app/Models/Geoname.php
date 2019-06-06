@@ -76,7 +76,7 @@ class Geoname extends EloquentModel {
 
 	public function scopeWithinRadius($query, $val, $radius = 50, $column = 'id')
 	{
-		$midpointval = (is_a($val, 'Eloquent')) ? $val->$column : $val;
+		$midpointval = (is_a($val, Eloquent::class)) ? $val->$column : $val;
 		return Geoname::hydrate(DB::select(DB::raw("SELECT locs.*, ST_Distance(locs.geometry::geography, origin.geometry::geography) AS distance FROM places AS origin LEFT JOIN places AS locs ON origin.id = ".$midpointval." AND ST_DWithin(locs.geometry::geography, origin.geometry::geography, ".$radius."*1609.34) WHERE locs.enabled = 1 ORDER BY ST_Distance(locs.geometry::geography, origin.geometry::geography) ASC")));
 	}
 
