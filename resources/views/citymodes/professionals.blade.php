@@ -4,7 +4,7 @@
 						<div class="panel-body">
 							<h2 class="no-margin-t">Professionals</h2>
 							<hr>
-							@if(is_populated($results))
+							@if(isset($results) && is_object($results))
 							@foreach($results as $professional)
 							@include('layouts.partial.professional-block-horizontal')
 							@endforeach
