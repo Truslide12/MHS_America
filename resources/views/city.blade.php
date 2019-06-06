@@ -16,7 +16,7 @@
 	<div class="row clearfix slicetab">
 		<div class="col-md-12">
 			<div class="page-header-dis">
-			  @if(is_populated($region))
+			  @if(isset($region) && is_object($region))
 			  <h1 class="h2">
 			  	<a href="{{ URL::route('region', array('state' => $state->abbr, 'region' => $region->name)) }}">{{ $region->prefix }} {{ $region->title }}@if($region->hidesuffix != 1)<span class="hidden-inline-xs"> {{ ($region->micro == 1) ? 'Micropolitan' : 'Metropolitan' }} Area</span>@endif{{ $region->suffix ? ' '.$region->suffix : '' }}</a><br>
 			  	&nbsp;&raquo; {{ $city->place_name }}, {{ strtoupper($state->abbr) }}
