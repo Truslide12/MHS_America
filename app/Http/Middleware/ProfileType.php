@@ -24,7 +24,7 @@ class ProfileType {
 			return redirect()->route('account-business-activate');
 		}
 
-		$profile = $request->route()->getParameter('profile');
+		$profile = $request->route('profile');
 
 		if(!is_object($profile)) return redirect()->route('account-business');
 
