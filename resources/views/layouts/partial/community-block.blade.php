@@ -30,7 +30,7 @@
 							</p>
 							<p class="properties">
 								<span class="tape bg-info text-info">{{ ($community->senior == 1) ? 'Senior' : 'All Ages' }}</span>
-							@foreach(Profile::listProperties() as $p_name => $property)
+							@foreach(\App\Models\Profile::listProperties() as $p_name => $property)
 								@if($community->$p_name == 1)
 								<span class="tape bordered text-info">
 									{{ $property }}
