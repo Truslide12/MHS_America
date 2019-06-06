@@ -33,7 +33,7 @@ class ExploreController extends Pony {
 		if($state == 'dc') return redirect()->route('state', array('state' => 'md'));
 
 		$stateobj = State::byAbbr($state);
-		if(!is_object($stateobj) || !is_a($stateobj, 'Eloquent')) return App::abort(404);
+		if(!is_object($stateobj)) return App::abort(404);
 
 		return view('state')
 					->with('state', $stateobj)
