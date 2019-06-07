@@ -194,7 +194,7 @@
 							<a href="#top" class="up-anchor scroll-to pull-right" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" data-content="Back to top">
 								<span class="glyphicon glyphicon-chevron-up"></span>
 							</a>
-							By county</h3>
+							By {{ $state->suffix != '' ? $state->suffix : 'county' }}</h3>
 					</div>
 					<div class="row">
 						@if(Config::get('app.angular') == true)
