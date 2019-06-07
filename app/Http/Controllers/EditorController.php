@@ -26,13 +26,6 @@ class EditorController extends Pony {
 
 	public function getIndex(Profile $profile)
 	{
-		/* Just here to play with the api...
-		
-		$fields = [];
-		$key = '10c5a094ff51dfcffc0ff85fccf14d4fd000fcf';
-		$data = Geocodio::get('341 Wildwood Canyon Rd, Yucaipa, CA', $fields, $key);
-		return response()->json($data);
-		*/
 
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 		return view('editor.home')
