@@ -10,9 +10,9 @@
 
 @section('content')
 <?php 
-	$latest_user	= User::take(1)->orderBy('id','desc')->first();
-	$latest_company = Company::take(1)->orderBy('id','desc')->first();
-	$latest_profile = Profile::take(1)->orderBy('id','desc')->first();
+	$latest_user	= \App\Models\User::take(1)->orderBy('id','desc')->first();
+	$latest_company = \App\Models\Company::take(1)->orderBy('id','desc')->first();
+	$latest_profile = \App\Models\Profile::take(1)->orderBy('id','desc')->first();
 ?>
 <div class="row">
 	<div class="col-md-4">
