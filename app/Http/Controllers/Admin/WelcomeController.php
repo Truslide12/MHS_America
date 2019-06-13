@@ -9,8 +9,11 @@ use Response;
 use Input;
 use View;
 use Server;
+use App\Models\Page;
+use App\Models\News;
 use App\Models\Amenities;
 use App\Models\DiskStatus;
+use App\Models\Server;
 
 class WelcomeController extends Pony {
 	
@@ -37,7 +40,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.content-pages')
 					->with('title', 'Content')
-					->with('pages', \Page::all())
+					->with('pages', Page::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -46,7 +49,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.content-news')
 					->with('title', 'Content')
-					->with('news', \News::all())
+					->with('news', News::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -119,7 +122,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.communities')
 					->with('title', 'Content')
-					->with('communities', \News::all())
+					->with('communities', News::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -127,7 +130,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.communities-spotlight')
 					->with('title', 'Content')
-					->with('communities', \News::all())
+					->with('communities', News::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -135,7 +138,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.communities-amenities')
 					->with('title', 'Content')
-					->with('amenities', \Amenities::orderBy("order")->get() )
+					->with('amenities', Amenities::orderBy("order")->get() )
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -162,7 +165,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.communities-plans')
 					->with('title', 'Content')
-					->with('communities', \News::all())
+					->with('communities', News::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
@@ -170,7 +173,7 @@ class WelcomeController extends Pony {
 	{
 		return view('admin.communities-settings')
 					->with('title', 'Content')
-					->with('communities', \News::all())
+					->with('communities', News::all())
 					->with('menutitle', 'Dashboard Menu');
 	}
 
