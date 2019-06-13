@@ -154,7 +154,7 @@
 
         <!-- #menu -->
         <ul id="menu" class="">
-          <li class="nav-header">{{ $menutitle or $title.' Menu' }}</li>
+          <li class="nav-header">{{ $menutitle ?? $title.' Menu' }}</li>
           <li class="nav-divider"></li>
           @yield('sidemenu')
         </ul><!-- /#menu -->
