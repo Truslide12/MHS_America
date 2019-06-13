@@ -463,4 +463,22 @@ class Profile extends EloquentModel {
 
 	protected $dates = ['deleted_at'];
 
+	public function utility($name)
+	{
+		$td = json_decode($this->utilities);
+		switch ($name) {
+			case 'water':
+				return $td[0];
+				break;
+			case 'sewer':
+				return $td[1];
+				break;
+			case 'gas':
+				return $td[2];
+				break;
+			default:
+				return null;
+				break;
+		}
+	}
 }

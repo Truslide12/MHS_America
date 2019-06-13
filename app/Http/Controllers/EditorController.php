@@ -21,16 +21,19 @@ use Imagick;
 use URL;
 use App\Models\Amenities;
 use Geocodio;
+use App\Models\State;
 
 class EditorController extends Pony {
 
 	public function getIndex(Profile $profile)
 	{
 
+		$states = State::all();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
+					->with('states', $states)
 					->with('plan', $profile->plan);
 					//->with('canvas', Canvas::getDefault());
 	}
@@ -136,38 +139,23 @@ class EditorController extends Pony {
 		$validator = Validator::make(Input::all(),
 		[
 			'title' => 'required',
-
-			'senior' => 'boolean',
-			'gated' => 'boolean',
 			'pets' => 'boolean',
-
-			'rec' => 'boolean',
-			'pool' => 'boolean',
-			'basketball' => 'boolean',
-			'tennis' => 'boolean',
-			'shuffleboard' => 'boolean',
-			'bingo' => 'boolean',
-			'picnic' => 'boolean',
-			'playground' => 'boolean',
-			'fitness' => 'boolean',
-
-			'fishing' => 'boolean',
-			'golf' => 'boolean',
-			'gambling' => 'boolean',
-			'hiking' => 'boolean',
-			'horsies' => 'boolean',
-			'shopping' => 'boolean',
-
-			'description' => '',
-
+			'description' => 'string|max:500|nullable',
 			'space_count' => 'numeric',
-			'rent' => '',
+			'rent' => 'numeric',
 			'phone' => 'phone:US',
-			'fax' => 'phone:US',
+			'fax' => 'phone:US|nullable',
 			'address' => '',
+			/*
+			 * get from geoio not form
 			'city' => 'required_with:address',
 			'state' => 'required_with_all:city,address',
+			*/
 			'zipcode' => 'numeric',
+			'community_type' => 'numeric|between:0,2',
+			'utility_water' => 'numeric|between:0,2|nullable',
+			'utility_sewer' => 'numeric|between:0,2|nullable',
+			'utility_gas' => 'numeric|between:0,2|nullable',
 		],
 		[
 			'' => ''
@@ -178,16 +166,26 @@ class EditorController extends Pony {
 							->withErrors($validator);
 		}else{
 			$profile_array = [];
-
 			/* Update title */
 			if($profile->title != Input::get('title')) {
 				$profile_array['title'] = Input::get('title');
+			}
+
+			/*Age type*/
+			if($profile->age_type != Input::get('community_type')) {
+				$profile_array['age_type'] = Input::get('community_type');
+			}
+
+			/*Description*/
+			if($profile->description != Input::get('description')) {
+				$profile_array['description'] = Input::get('description');
 			}
 
 			/* Update space count and rent */
 			if($profile->spaces != Input::get('space_count', 0)) {
 				$profile_array['spaces'] = (Input::get('space_count', 0) < 1000) ? Input::get('space_count') : 0;
 			}
+
 
 			$rent = Input::get('rent', '');
 			if($profile->rent != e($rent)) {
@@ -210,6 +208,10 @@ class EditorController extends Pony {
 			if(strlen($fax) == 10) {
 				$profile_array['fax'] = $fax;
 			}
+
+			/* Utilities */
+			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
+
 
 			/* Address check */
 			if($profile->address != Input::get('address') || $profile->city != Input::get('city') || $profile->zipcode != Input::get('zipcode')) {

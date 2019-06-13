@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Geoname;
+use App\Models\State;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +25,18 @@ Route::group(array('prefix' => 'geotools'), function()
 	/*
 		Still working on all of this..
 	*/
-	Route::get('lookup/{state}/{zip}/{q}', function ($state, $zip, $q) {
+	Route::get('lookup/{state}/{city}/{zip}/{q}', function ($state, $city, $zip, $q) {
 		if ( !$zip && !$state ) { return response()->json([]); }
 		$fields = [];
 		$key = '10c5a094ff51dfcffc0ff85fccf14d4fd000fcf';
-		$data = Geocodio::get("{$q}, {$state}, {$zip}", $fields, $key);
+		$data = Geocodio::get("{$q}, {$city} {$state} {$zip}", $fields, $key);
 		$nd = Array();
 		$memo = Array();
 		foreach( $data->response->results as $result ) {
 			if (!in_array($result->formatted_address, $memo) && 
 				isset($result->address_components->number)
 			){
-				$nd[] = array('title'=>$result->formatted_address);
+				$nd[] = $memo = array('title'=>$result->formatted_address);
 			}
 		}
 		return response()->json($nd);
@@ -47,5 +50,42 @@ Route::group(array('prefix' => 'geotools'), function()
 		return response()->json($data);
 	});
 
+
+	Route::get('detailzip/{zip}', function ($zip) {
+		$fields = [];
+		$key = '10c5a094ff51dfcffc0ff85fccf14d4fd000fcf';
+		$data = Geocodio::get($zip, $fields, $key);
+		$nd = Array();
+		$memo = Array();
+		$clean_data = Array();
+
+		/* Clean geocodio response..*/
+		foreach ($data->response->results as $result ) {
+			if (!in_array($result->formatted_address, $memo)) {
+				$memo[] = $result->formatted_address;
+
+				$state_id = State::where("abbr", strtolower($result->address_components->state))->first();
+				$mhsdata = Geoname::where("place_name", $result->address_components->city)
+									->where("state_id", $state_id->id)
+									->first();
+				$nd[] = array(
+					'zip'    => $result->address_components->zip,
+					'city'   => $result->address_components->city,
+					'county' => $result->address_components->county,
+					'state'  => $result->address_components->state,
+					'title'  => $result->formatted_address,
+					'latitude'   => $result->location->lat,
+					'longitude'  => $result->location->lng,
+					'city_id' => (int)$mhsdata->osm_id,
+					'state_id' => $state_id->id,
+					'county_id' => $mhsdata->place_name,
+				);
+			}
+		}
+
+
+		return response()->json($nd);
+
+	});
 
 });

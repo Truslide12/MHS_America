@@ -17,13 +17,23 @@
 		<hr>
 	</div>
 </div>
+
 	@if(Session::has('success'))
-	<div class="col-md-offset-3 col-md-6">
+	<div class="col-md-offset-1 col-md-8">
 		<div class="alert alert-success">
 			{{ Session::get('success') }}
 		</div>
 	</div>
+	@elseif($errors->any())
+		@foreach($errors->all() as $error)
+		<div class="col-md-offset-1 col-md-8">
+			<div class="alert alert-danger">
+				{{ $error }}
+			</div>
+		</div>
+		@endforeach
 	@endif
+
 <div class="row white">
 	<div class="col-sm-8 col-md-offset-1">
 		<h1 class="padding-l">Your Community Profile</h1>
@@ -69,26 +79,26 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">Community Type</label>
 				<div class="col-xs-4 col-md-3">
-					<div class="checkbox">
-						<input type="checkbox" name="community_type" id="senior" value="1"@if($profile->senior == 1) checked @endif>
-						<label for="senior">
+					<div class="radio">
+						<input type="radio" name="community_type" id="t_family" value="0"@if($profile->age_type == 0) checked @endif>
+						<label for="t_family">
 							Family
 						</label>
 					</div>
 				</div>
 				<div class="col-xs-4 col-md-3">
-					<div class="checkbox">
-						<input type="checkbox" name="community_type" id="gated" value="1"@if($profile->gated == 1) checked @endif>
-						<label for="gated">
-							Senior
+					<div class="radio">
+						<input type="radio" name="community_type" id="t_ffp" value="1"@if($profile->age_type == 1) checked @endif>
+						<label for="t_ffp">
+							55+
 						</label>
 					</div>
 				</div>
 				<div class="col-xs-4 col-md-3">
-					<div class="checkbox">
-						<input type="checkbox" name="community_type" id="pets" value="1"@if($profile->pets == 1) checked @endif>
-						<label for="pets">
-							55+
+					<div class="radio">
+						<input type="radio" name="community_type" id="t_senior" value="2"@if($profile->age_type == 2) checked @endif>
+						<label for="t_senior">
+							Senior
 						</label>
 					</div>
 				</div>
@@ -112,7 +122,7 @@
 				</div>
 				<label class="control-label col-md-2">Space rent</label>
 				<div class="col-md-4">
-					<input type="text" name="rent" class="form-control" value="{{ $profile->rent }}" data-toggle="tooltip" data-placement="right" title="How much do spaces cost? If this varies, feel free to leave it empty or enter a range.">
+					<input type="number" step="25" name="rent" class="form-control dollarformat" value="{{ $profile->rent }}" data-toggle="tooltip" data-placement="right" title="How much do spaces cost? If this varies, feel free to leave it empty or enter a range.">
 				</div>
 			</div>
 
@@ -198,11 +208,11 @@
 				<div class="push-down"></div>
 				<label class="control-label col-md-3">Phone</label>
 				<div class="col-md-4">
-					<input type="text" name="phone" class="form-control" value="{{ $profile->phone }}" data-toggle="tooltip" data-placement="right" title="Please use +1(###) ###-#### format.">
+					<input type="tel" name="phone" id="phone" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" class="form-control phoneformat" value="{{ $profile->phone }}" data-toggle="tooltip" data-placement="right" title="Please use (###) ###-#### format.">
 				</div>
 				<label class="control-label col-md-1">Fax</label>
 				<div class="col-md-4">
-					<input type="text" name="fax" class="form-control" value="{{ $profile->fax }}" data-toggle="tooltip" data-placement="right" title="Leave blank if not accepting fax.">
+					<input type="tel" name="fax" id="fax" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" class="form-control phoneformat" value="{{ $profile->fax }}" data-toggle="tooltip" data-placement="right" title="Leave blank if not accepting fax.">
 				</div>
 			</div>
 
@@ -214,16 +224,30 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">City</label>
+				<label class="control-label col-md-3"></label>
 				<div class="col-md-9">
-					<input type="text" name="city" class="form-control" value="{{ $profile->city_id }}">
+					<input type="text" name="addressb" id="addressb" class="form-control" value="{{ $profile->address2 }}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">State</label>
-				<div class="col-md-3">
-					<input type="text" name="state" class="form-control" value="{{ $profile->state->title }}" disabled>
-				</div>
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>City</label>
+		    <div class="col-sm-9">
+		      <select class="form-control" id="city" name="city" @if($user && $user->state) readonly disabled @endif>
+		      	 <option value="0" data-abbr="xx">First Select State</option>
+		      	 <option value="{{$user->city}}" selected>{{$profile->city->place_name}}</option>
+		      </select>
+		    </div>
+			</div>
+			<div class="form-group">
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>State</label>
+		    <div class="col-sm-3">
+		      <select class="form-control" id="state" name="state" @if($user && $user->state) readonly disabled @endif>
+		      		<option value="0" data-abbr="xx">Select State</option>
+		      		@foreach($states as $state)
+		      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($user && $state->id == $user->state) selected @endif>{{ $state->title }}</option>
+					@endforeach
+		      </select>
+		    </div>
 				<label class="control-label col-md-3">Zip code</label>
 				<div class="col-md-3">
 					<input type="text" name="zipcode" class="form-control" value="{{ $profile->zipcode }}">
@@ -316,26 +340,26 @@
 				<label class="control-label col-md-3 hidden-xs hidden-sm">Utilities</label>
 				<div class="col-xs-4 col-md-3" data-toggle="tooltip" data-placement="right" title="How is water accessed?">
 					<label class="control-label push-down">Water:</label>
-					<select class="form-control">
-						<option>--Choose--</option>
-		  				<option @if($profile->water == 1) selected @endif>City</option>
-		  				<option @if($profile->water == 2) selected @endif>Well</option>
+					<select class="form-control" name="utility_water" id="utility_water">
+						<option value="0">--Choose--</option>
+		  				<option value="1" @if($profile->utility("water") == 1) selected @endif>City</option>
+		  				<option value="2" @if($profile->utility("water") == 2) selected @endif>Well</option>
 		  			</select>
 				</div>
 				<div class="col-xs-4 col-md-3" data-toggle="tooltip" data-placement="right" title="How is seweged removed?">
 					<label class="control-label push-down">Sewer:</label>
-					<select class="form-control">
-						<option>--Choose--</option>
-		  				<option @if($profile->sewer == 1) selected @endif>Sewer</option>
-		  				<option @if($profile->sewer == 2) selected @endif>Septic</option>
+					<select class="form-control" name="utility_sewer" id="utility_sewer">
+						<option value="0">--Choose--</option>
+		  				<option value="1" @if($profile->utility("sewer") == 1) selected @endif>Sewer</option>
+		  				<option value="2" @if($profile->utility("sewer") == 2) selected @endif>Septic</option>
 		  			</select>
 				</div>
 				<div class="col-xs-4 col-md-3" data-toggle="tooltip" data-placement="right" title="What type of gas is available?">
 					<label class="control-label push-down">Gas:</label>
-					<select class="form-control">
-						<option>--Choose--</option>
-		  				<option @if($profile->gas == 1) selected @endif>Natural</option>
-		  				<option @if($profile->gas == 2) selected @endif>Propane</option>
+					<select class="form-control" name="utility_gas" id="utility_gas">
+						<option value="0">--Choose--</option>
+		  				<option value="1" @if($profile->utility("gas") == 1) selected @endif>Natural</option>
+		  				<option value="2" @if($profile->utility("gas") == 2) selected @endif>Propane</option>
 		  			</select>
 				</div>
 			</div>
@@ -433,7 +457,38 @@
 <script>
 
 
+	$('#state').change(function() {
+		var abbr = $('#state option:selected').data('abbr');
 
+		$('#city')
+			.prop('disabled', 'disabled')
+			.find('option')
+			.remove()
+			.end()
+			.append('<option>Select a city...</option>');
+
+		$('#submitbtn').prop('disabled', 'disabled');
+
+		if(abbr != '') {
+			$.getJSON("/derpy/cities/" + abbr, function(result) {
+				var options = $("#city");
+				$.each(result, function() {
+					options.append($("<option/>").val(this.name).text(this.title));
+				});
+
+				options.prop('disabled', false);
+			});
+		}
+	});
+	$('#city').change(function() {
+		var city = $('#city').val();
+
+		if(city == '') {
+			$('#submitbtn').prop('disabled', 'disabled');
+		}else{
+			$('#submitbtn').prop('disabled', false);
+		}
+	});
 
 function campaign_speech(e)
 {
@@ -471,7 +526,7 @@ function campaign_speech(e)
 
 			pony['bloodhound'] = new Bloodhound({
 				name: 'address',
-				remote: '/api/geotools/lookup/CA/92399/%QUERY',
+				remote: '/api/geotools/lookup/CA/YUCAIPA/92399/%QUERY',
 				datumTokenizer: function(d) {
 					return Bloodhound.tokenizers.whitespace(d.name);
 				},
@@ -481,7 +536,7 @@ function campaign_speech(e)
 			pony.bloodhound.initialize();
 
 
-			$('#address').typeahead({minLength: 3}, {
+			$('#address').typeahead({minLength: 6}, {
 				displayKey: 'title',
 				source: pony.bloodhound.ttAdapter(),
 			});
@@ -539,6 +594,176 @@ function removeItem(i){
 		}
 	}
 	$("#amenitiesSearchBox").val("");
+}
+
+
+
+function format_dollar() {
+    var curr_val = parseFloat($(this).val());
+    $(this).val(curr_val.toFixed(2));
+}
+
+var throttle = false;
+
+function format_phone(field, evt) {
+	if ( throttle ) {
+		return false;
+	} else {
+		throttle = true;
+	}
+	var editing = false;
+	var ff = false;
+	var curr_val = $("#"+field).val();
+	if( curr_val.length == 1 ) {
+		ff = true;
+	}
+	if ( evt ) {
+		if ( (evt.keyCode >= 48 && evt.keyCode <= 57) ||
+			 (evt.keyCode >= 96 && evt.keyCode <= 105) ) {
+			//
+
+		} else if (evt.keyCode == 8 || evt.keyCode == 46) {
+			//
+			//var pos = doGetCaretPosition( document.getElementById(field) );
+			editing = true;
+			//return false;
+		} else {
+			throttle = false;
+			return false;
+		}
+	}
+	var poss = pos = doGetCaretPosition( document.getElementById(field) );
+	
+      if ( ! curr_val ) { return; }
+    var chars = curr_val.split("");
+    var nums_only = Array();
+    var clean_format = "";
+    var digit = 0;
+    
+
+    for(char in chars) {
+    	if (!isNaN(chars[char]) && chars[char] != " " ) {
+    		nums_only[nums_only.length] = chars[char];
+    	}
+    }
+    for(d=0;d<10;d++) {
+    	switch( digit ) {
+    			case 0:
+    			  clean_format = clean_format + "(";
+    			  if(ff) {
+    			  pos++;
+    			  }
+    			break;
+    			case 3:
+    			  clean_format = clean_format + ") ";
+    			  if(ff) {
+    			  pos++;
+    			  pos++;
+    			  }
+    			break;
+    			case 6:
+    			  clean_format = clean_format + "-";
+    			  if(ff) {
+    			  pos++;
+    			  }
+    			break;
+    			default:
+    			break;
+    	}
+    	if (nums_only[digit] && !isNaN(nums_only[digit])) {
+    		clean_format = clean_format +""+ nums_only[digit];
+    		digit++;
+    	} else {
+    		if( pos == 0 ) {
+    			pos = clean_format.length;
+    		}
+    		clean_format = clean_format + "_";
+    		digit++;
+    	}
+    }
+    if( pos == 0 ) {
+    	pos = clean_format.length;
+    } else if ( editing || pos < nums_only.length ) {
+    	pos = poss;
+    } else {
+		pos = findplace(clean_format);
+    }
+    console.log(pos, clean_format.length);
+	$("#"+field).val(clean_format);
+	//if ( ff ) { pos++; }
+	setCaretToPos(document.getElementById(field), pos);
+	throttle = false;
+}
+
+function findplace(str) {
+	var ch = str.split("");
+	for ( c in ch ) {
+		if ( ch[c] == "_" ) {
+			return c;
+		}
+	}
+	return str.length;
+}
+
+/*
+** Returns the caret (cursor) position of the specified text field (oField).
+** Return value range is 0-oField.value.length.
+*/
+function doGetCaretPosition (oField) {
+
+  // Initialize
+  var iCaretPos = 0;
+
+  // IE Support
+  if (document.selection) {
+
+    // Set focus on the element
+    oField.focus();
+
+    // To get cursor position, get empty selection range
+    var oSel = document.selection.createRange();
+
+    // Move selection start to 0 position
+    oSel.moveStart('character', -oField.value.length);
+
+    // The caret position is selection length
+    iCaretPos = oSel.text.length;
+  }
+
+  // Firefox support
+  else if (oField.selectionStart || oField.selectionStart == '0')
+    iCaretPos = oField.selectionDirection=='backward' ? oField.selectionStart : oField.selectionEnd;
+
+  // Return results
+  return iCaretPos;
+}
+
+$(".dollarformat").each(format_dollar);
+//$(".dollarformat").keyup(function (e) {format_phone(e);});
+
+$(".phoneformat").keyup	(function (e, v) {
+	format_phone(e.target.id, e);
+});
+
+format_phone("phone");
+format_phone("fax");
+
+function setSelectionRange(input, selectionStart, selectionEnd) {
+  if (input.setSelectionRange) {
+    input.focus();
+    input.setSelectionRange(selectionStart, selectionEnd);
+  }
+  else if (input.createTextRange) {
+    var range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
+  }
+}
+
+function setCaretToPos (input, pos) {
+  setSelectionRange(input, pos, pos);
 }
 
 
