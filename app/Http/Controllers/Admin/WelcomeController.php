@@ -8,7 +8,6 @@ use Request;
 use Response;
 use Input;
 use View;
-use Server;
 use App\Models\Page;
 use App\Models\News;
 use App\Models\Amenities;
