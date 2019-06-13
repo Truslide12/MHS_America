@@ -210,7 +210,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">Street address</label>
 				<div class="col-md-9">
-					<input type="text" name="address" class="form-control" value="{{ $profile->address }}">
+					<input type="text" name="address" id="address" class="form-control" value="{{ $profile->address }}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -417,7 +417,9 @@
 }
 	.modal-content { margin-top: 20%; }
 	.modal-header .close { float: right; }
-	.tt-dropdown-menu {
+
+
+	.modal-content .tt-dropdown-menu {
 		margin-top: 34px;
 	}
 	.badge {
@@ -467,6 +469,24 @@ function campaign_speech(e)
 		    return false;
 }
 
+			pony['bloodhound'] = new Bloodhound({
+				name: 'address',
+				remote: '/api/geotools/lookup/CA/92399/%QUERY',
+				datumTokenizer: function(d) {
+					return Bloodhound.tokenizers.whitespace(d.name);
+				},
+				queryTokenizer: Bloodhound.tokenizers.whitespace
+			});
+
+			pony.bloodhound.initialize();
+
+
+			$('#address').typeahead({minLength: 3}, {
+				displayKey: 'title',
+				source: pony.bloodhound.ttAdapter(),
+			});
+
+			console.log("loading bloodhound geo..");
 
 function init()
 {
@@ -483,6 +503,8 @@ function init()
 	  $('#myModal').on('hidden.bs.modal', function () {
     	$("#additional_amenities_counter").html("+"+additional_amenities.length+" additional amenities");
 	  });
+
+
 
 }
 
