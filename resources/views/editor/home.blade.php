@@ -640,7 +640,7 @@ function format_phone(field, evt) {
 	}
 	var poss = pos = doGetCaretPosition( document.getElementById(field) );
 	
-      if ( ! curr_val ) { return; }
+      if ( ! curr_val ) { throttle = false; return; }
     var chars = curr_val.split("");
     var nums_only = Array();
     var clean_format = "";
@@ -747,7 +747,7 @@ function doGetCaretPosition (oField) {
 $(".dollarformat").each(format_dollar);
 //$(".dollarformat").keyup(function (e) {format_phone(e);});
 
-$(".phoneformat").keyup	(function (e, v) {
+$(".phoneformat").keyup(function (e, v) {
 	format_phone(e.target.id, e);
 });
 
