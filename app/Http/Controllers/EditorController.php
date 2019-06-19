@@ -187,6 +187,12 @@ class EditorController extends Pony {
 			}
 
 
+			/* Update amenity */
+			if($profile->amenities != Input::get('amenityinp')) {
+				$profile_array['amenities'] = json_encode(["has" => str_getcsv(Input::get('amenityinp'))]);
+			}
+
+
 			$rent = Input::get('rent', '');
 			if($profile->rent != e($rent)) {
 				if(is_numeric($rent) && $rent > 0 && $rent < 10000) {
@@ -213,61 +219,7 @@ class EditorController extends Pony {
 			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
 
 
-			/* Address check */
-			if($profile->address != Input::get('address') || $profile->city != Input::get('city') || $profile->zipcode != Input::get('zipcode')) {
-				$address = trim(Input::get('address').', '.Input::get('city').', '.Input::get('state').' '.Input::get('zipcode'));
-				
-				$guz = new GuzzleClient('https://maps.googleapis.com/maps/api');
-				$req = $guz->get('geocode/json?key='.Config::get('services.google.api.server_key').'&address='.urlencode($address));
-				$geocode_data = $req->send()->json();
 
-				/* Address validation / preparation */
-				if($geocode_data['status'] == 'OK') {
-					$street_number = '';
-					$route = '';
-					$city = '';
-					$state = '';
-					$zipcode = '';
-					$county = '';
-
-					$components = $geocode_data['results'][0]['address_components'];
-
-					/* Pull whatever valid info we can */
-					foreach($components as $component) {
-						if(in_array('street_number', $component['types'])) {
-							$street_number = $component['short_name'];
-						}elseif(in_array('route', $component['types'])) {
-							$route = $component['short_name'];
-						}elseif(in_array('locality', $component['types'])) {
-							$city = $component['short_name'];
-						}elseif(in_array('administrative_area_level_1', $component['types'])) {
-							$state = $component['short_name'];
-						}elseif(in_array('postal_code', $component['types'])) {
-							$zipcode = $component['short_name'];
-						}elseif(in_array('administrative_area_level_2', $component['types'])) {
-							$county = $component['short_name'];
-						}
-					}
-
-					/* Update city, state, address */
-					if($city != '' && strlen($state) == 2) {
-						$city_lookup = Geoname::searchPlaces($city.', '.$state);
-						if(is_object($city_lookup[0])) {
-							if($street_number != '' && $route != '') {
-								$profile->address = $street_number.' '.$route;
-							}
-							$profile_array['city_id'] = $city_lookup[0]->id;
-							$profile_array['state_id'] = $city_lookup[0]->state_id;
-						}
-					}
-
-					/* Update zipcode */
-					if(strlen($zipcode) == 5) {
-						$profile_array['zipcode'] = $zipcode;
-					}
-
-				} /* End of Address preparation */
-			}/* End of Address check */
 
 			/* Update checkboxes */
 			$bools = [

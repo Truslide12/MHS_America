@@ -481,4 +481,15 @@ class Profile extends EloquentModel {
 				break;
 		}
 	}
+
+	public function hasAmenity($id)
+	{
+		$amenities = json_decode($this->amenities);
+		if ( is_array($amenities->has) || is_object($amenities->has) ) {
+			foreach ( $amenities->has as $amenity ) {
+				if ( $amenity == $id ) { return true; }
+			}
+		}
+		return false;
+	}
 }

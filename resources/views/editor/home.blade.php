@@ -37,7 +37,7 @@
 <div class="row white">
 	<div class="col-sm-8 col-md-offset-1">
 		<h1 class="padding-l">Your Community Profile</h1>
-		<form class="form-horizontal" action="{{ URL::route('editor-post', ['profile' => $profile->id, 'from_company' => Input::get('from_company')]) }}" method="POST">
+		<form id="pform" name="pform" class="form-horizontal" action="{{ URL::route('editor-post', ['profile' => $profile->id, 'from_company' => Input::get('from_company')]) }}" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-group" style="font-size:130%;line-height:1.8em">
 				<label class="col-md-3 control-label">Community name</label>
@@ -260,14 +260,15 @@
 			<div class="clearfix visible-xs visible-sm"></div>
 			<div class="form-group">
 				<div class="push-down hidden-xs hidden-sm"></div>
+				<input type="hidden" name="amenityinp" id="amenityinp">
 				<label class="control-label col-md-3 hidden-xs hidden-sm">Site amenities</label>
 
 
 				@php $i = 1; @endphp
 				@foreach ( $amenities as $amenity )
 				<div class="col-xs-4 col-md-3 @if( ($i-1) % 3 == 0 && $i != 1 ) col-md-offset-3 @else blah @endif">
-					<div class="checkbox">
-						<input type="checkbox" name="{{ $amenity->name }}" id="{{ $amenity->name }}" value="1">
+					<div class="checkbox amenitybox">
+						<input type="checkbox" name="{{ $amenity->name }}" id="{{ $amenity->name }}" value="{{ $amenity->id }}" @if($profile->hasAmenity($amenity->id)) checked @endif>
 						<label for="{{ $amenity->name }}">
 							{{ $amenity->title }}
 						</label>
@@ -546,7 +547,6 @@ function campaign_speech(e)
 function init()
 {
 	$("#additional_amenities_counter").click(function(e) {
-		console.log("clicky")
 		e.stopPropagation();
 		e.preventDefault();
         campaign_speech();
@@ -563,6 +563,12 @@ function init()
 
 }
 
+	$('#pform').on('submit', function() {
+	  collectAmenities();
+	});
+
+
+var amenities = [];
 var additional_amenities = [];
 
 function addAmenities(i){
@@ -766,6 +772,27 @@ function setCaretToPos (input, pos) {
   setSelectionRange(input, pos, pos);
 }
 
+
+function collectAmenities() {
+  $(".amenitybox input:checkbox:checked").each(function(e, i){
+    for (item in amenities)
+	{
+		if (amenities[item]==i.value)
+		{
+			return;
+		}
+	}
+	amenities.push(i.value);
+  });
+
+    for (item in additional_amenities)
+	{
+		amenities.push(additional_amenities[item].id);
+	}
+
+  //amenities.concat(additional_amenities);
+  $("#amenityinp").val(amenities)
+}
 
 </script>
 @stop
