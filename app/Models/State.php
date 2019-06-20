@@ -20,7 +20,7 @@ class State extends Area {
 
 	public function places()
 	{
-		return $this->hasMany(Geoname::class)->where('enabled', 1);
+		return $this->hasMany(Geoname::class);
 	}
 
 	public function regions()
