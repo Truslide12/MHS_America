@@ -230,24 +230,24 @@
 				</div>
 			</div>
 			<div class="form-group">
-		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>City</label>
-		    <div class="col-sm-9">
-		      <select class="form-control" id="city" name="city" @if($user && $user->state) readonly disabled @endif>
-		      	 <option value="0" data-abbr="xx">First Select State</option>
-		      	 <option value="{{$user->city}}" selected>{{$profile->city->place_name}}</option>
-		      </select>
-		    </div>
+			    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>City</label>
+			    <div class="col-sm-9">
+			      <select class="form-control" id="city" name="city" @if($user && $user->state) readonly disabled @endif>
+			      	 <option value="0" data-abbr="xx">First Select State</option>
+			      	 <option value="{{$user->city}}" selected>{{$profile->city->place_name}}</option>
+			      </select>
+			    </div>
 			</div>
 			<div class="form-group">
-		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>State</label>
-		    <div class="col-sm-3">
-		      <select class="form-control" id="state" name="state" @if($user && $user->state) readonly disabled @endif>
-		      		<option value="0" data-abbr="xx">Select State</option>
-		      		@foreach($states as $state)
-		      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($user && $state->id == $user->state) selected @endif>{{ $state->title }}</option>
-					@endforeach
-		      </select>
-		    </div>
+			    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>State</label>
+			    <div class="col-sm-3">
+			      <select class="form-control" id="state" name="state" @if($user && $user->state) readonly disabled @endif>
+			      		<option value="0" data-abbr="xx">Select State</option>
+			      		@foreach($states as $state)
+			      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($user && $state->id == $user->state) selected @endif>{{ $state->title }}</option>
+						@endforeach
+			      </select>
+			    </div>
 				<label class="control-label col-md-3">Zip code</label>
 				<div class="col-md-3">
 					<input type="text" name="zipcode" class="form-control" value="{{ $profile->zipcode }}">

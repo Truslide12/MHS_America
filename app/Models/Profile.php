@@ -301,9 +301,22 @@ class Profile extends EloquentModel {
 	{
 		if(!$this->plan->hasFeature('manage_amenities')) return false;
 
-		foreach(self::$com_properties as $key => $val) {
+		/* foreach(self::$com_properties as $key => $val) {
 			if($this->$key == 1) {
 				return true;
+			}
+		} */
+
+		$amenities = json_decode($this->amenities, true);
+		return ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) && count($amenities['has']) > 0 );
+	}
+
+	public function hasAmenity($id)
+	{
+		$amenities = json_decode($this->amenities, true);
+		if ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) ) {
+			foreach ( $amenities['has'] as $amenity ) {
+				if ( $amenity == $id ) { return true; }
 			}
 		}
 		return false;
@@ -482,14 +495,4 @@ class Profile extends EloquentModel {
 		}
 	}
 
-	public function hasAmenity($id)
-	{
-		$amenities = json_decode($this->amenities);
-		if ( is_array($amenities->has) || is_object($amenities->has) ) {
-			foreach ( $amenities->has as $amenity ) {
-				if ( $amenity == $id ) { return true; }
-			}
-		}
-		return false;
-	}
 }

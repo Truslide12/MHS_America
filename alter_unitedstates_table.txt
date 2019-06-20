@@ -1,0 +1,2 @@
+ALTER TABLE unitedstates ADD COLUMN center_point geometry(Point, 4326);
+UPDATE unitedstates SET center_point = ST_SetSrid(ST_Point(cast(intptlon as double precision), cast(intptlat as double precision)), 4326);
