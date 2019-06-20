@@ -265,7 +265,7 @@ class Geoname extends EloquentModel {
 
 			$results = json_decode(file_get_contents($url), true);
 
-			if(is_array($results) && count($results['places']) > 0) {
+			if(is_array($results) && array_key_exists('places', $results) && count($results['places']) > 0) {
 				$is_zip = true;
 				$place = $results['places'][0];
 
