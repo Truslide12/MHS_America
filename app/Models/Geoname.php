@@ -4,6 +4,7 @@ namespace App\Models;
 
 use DB;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\MultiPolygon;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
@@ -18,7 +19,8 @@ class Geoname extends EloquentModel {
 	public $cityobj;
 
 	protected $postgisFields = [
-		'geometry' => Point::class,
+		'geometry' => MultiPolygon::class,
+		'center_point' => Point::class,
 	];
 
 	public function scopeByZipCode($query, $str)
@@ -35,6 +37,11 @@ class Geoname extends EloquentModel {
 	public function scopeByOSM($query, $osm_id)
 	{
 		return $query->where('osm_id', $osm_id)->first();
+	}
+
+	public function scopeByFIPS($query, $osm_id)
+	{
+		return $query->where('fips_code', $osm_id)->first();
 	}
 
 	public function scopeByCounty($query, $county, $state)
@@ -77,7 +84,7 @@ class Geoname extends EloquentModel {
 	public function scopeWithinRadius($query, $val, $radius = 50, $column = 'id')
 	{
 		$midpointval = (is_a($val, Eloquent::class)) ? $val->$column : $val;
-		return Geoname::hydrate(DB::select(DB::raw("SELECT locs.*, ST_Distance(locs.geometry::geography, origin.geometry::geography) AS distance FROM places AS origin LEFT JOIN places AS locs ON origin.id = ".$midpointval." AND ST_DWithin(locs.geometry::geography, origin.geometry::geography, ".$radius."*1609.34) WHERE locs.enabled = 1 ORDER BY ST_Distance(locs.geometry::geography, origin.geometry::geography) ASC")));
+		return Geoname::hydrate(DB::select(DB::raw("SELECT locs.*, ST_Distance(locs.center_point::geography, origin.center_point::geography) AS distance FROM places AS origin LEFT JOIN places AS locs ON origin.id = ".$midpointval." AND ST_DWithin(locs.center_point::geography, origin.center_point::geography, ".$radius."*1609.34) WHERE locs.enabled = 1 ORDER BY ST_Distance(locs.center_point::geography, origin.center_point::geography) ASC")));
 	}
 
 	public function scopeByDistance($query)
@@ -89,7 +96,7 @@ class Geoname extends EloquentModel {
 	{
 		return $query->select(DB::raw('DISTINCT ON (place_name) places.*'))->join('regions', function($query) use ($region) {
 			$query->on('regions.id', '=', DB::raw($region))
-			->on(DB::raw('ST_ContainsProperly(regions.geometry::geography, places.geometry::geography)'), '=', DB::raw('true'));
+			->on(DB::raw('ST_Intersects(regions.geometry::geography, places.geometry::geography)'), '=', DB::raw('true'));
 		});
 	}
 
@@ -252,18 +259,23 @@ class Geoname extends EloquentModel {
 		$zip_matches = [];
 		$zip_format = preg_match('/^([\d]{5})$/', trim($input), $zip_matches);
 		if($zip_format == 1) {
-			$selector = Geoname::with('state')->where('zipcode', $zip_matches[1])->first();
 
-			if(is_object($selector)) {
+			/* Zippopotamus */
+			$url = "https://api.zippopotam.us/us/".$zip_matches[1];
+
+			$results = json_decode(file_get_contents($url), true);
+
+			if(is_array($results) && count($results['places']) > 0) {
 				$is_zip = true;
+				$place = $results['places'][0];
 
 				$final_location = [
 					'bounds' => false,
 					'location' => [
-						'lat' => $selector->geometry->getLat(),
-						'lon' => $selector->geometry->getLng()
+						'lat' => $place['latitude'],
+						'lon' => $place['longitude']
 					],
-					'title' => $selector->place_name.', '.strtoupper($selector->state->abbr),
+					'title' => $place['place name'].', '.$place['state abbreviation']
 					'valid' => true,
 					'zoom' => 13,
 					'pitch' => 0
