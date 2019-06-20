@@ -234,7 +234,7 @@
 			    <div class="col-sm-9">
 			      <select class="form-control" id="city" name="city" disabled>
 			      	 <option value="0" data-abbr="xx">First Select State</option>
-			      	 <option value="{{$user->city}}" selected>{{$profile->city->place_name}}</option>
+			      	 <option value="{{$profile->city->id}}" selected>{{$profile->city->place_name}}</option>
 			      </select>
 			    </div>
 			</div>
@@ -244,7 +244,7 @@
 			      <select class="form-control" id="state" name="state">
 			      		<option value="0" data-abbr="xx">Select State</option>
 			      		@foreach($states as $state)
-			      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($user && $state->id == $user->state) selected @endif>{{ $state->title }}</option>
+			      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($profile->state_id == $state->id) selected @endif>{{ $state->title }}</option>
 						@endforeach
 			      </select>
 			    </div>
@@ -367,7 +367,7 @@
 			<div class="form-group">
 				<div class="push-down"></div>
 				<div class="col-md-offset-3 col-md-9">
-				<p>By clicking Save Profile, you agree to our <a href="{{ URL::route('welcome') }}/page/terms" target="_blank">terms of service</a> and our <a href="{{ URL::route('welcome') }}/page/privacy" target="_blank">privacy policy</a>.</p>					<button type="submit" class="btn btn-success btn-lg">Save Profile<i class="fa fa-chevron-right padding-l"></i></button>
+				<p>By clicking Save Profile, you agree to our <a href="{{ URL::route('welcome') }}/page/terms" target="_blank">terms of service</a> and our <a href="{{ URL::route('welcome') }}/page/privacy" target="_blank">privacy policy</a>.</p>					<button type="submit" class="btn btn-success btn-lg" id="submitbtn">Save Profile<i class="fa fa-chevron-right padding-l"></i></button>
 				</div>
 			</div>
 			<div class="push-down">
