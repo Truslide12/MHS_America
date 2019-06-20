@@ -63,14 +63,14 @@ class DerpyController extends Pony {
 							->where('companies.is_private', '=', FALSE)
 							->leftJoin('states', 'companies.state_id', '=', 'states.id')
 							->leftJoin('users', 'companies.state_id', '=', 'users.id')
-							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'companies.city_id')
+							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'companies.city_id')
 							->select('users.username', 'companies.id', 'companies.name', 'companies.title', 'companies.claimed', 'companies.zip_code', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 			return Response::json($data, 200);
 		}
 
 		$data = Company::where('id',  $company_id)->where('name',  $company_name)->select('id', 'name', 'title', 'street_addr', 'street_addr2', 'zip_code', 'claimed', 'phone', 'fax', 'state_id', 'city_id', 'lockout' )->get()->toArray();
-		$data[0]['city_name'] = Geoname::where('osm_id', $data[0]['city_id'] )->pluck('place_name')->first();;
+		$data[0]['city_name'] = Geoname::where('id', $data[0]['city_id'] )->pluck('place_name')->first();;
 		$data[0]['state_name'] = State::where('id', $data[0]['state_id'])->pluck('title')->first();
 
 		return Response::json($data, 200);
@@ -84,7 +84,7 @@ class DerpyController extends Pony {
 			$data = Profile::where('profiles.title', 'ilike', Input::get('query').'%')
 							->where('profiles.type', '=', 'Community')
 							->leftJoin('states', DB::raw('profiles.state_id::bigint'), '=', 'states.id')
-							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'profiles.city_id')
+							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.id', 'profiles.title',  'profiles.zipcode', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 			return Response::json($data, 200);
@@ -92,7 +92,7 @@ class DerpyController extends Pony {
 
 		$data = Profile::where('profiles.id',  $company_id)->where('profiles.zipcode',  $company_name)
 							->leftJoin('states', DB::raw('profiles.state_id::bigint'), '=', 'states.id')
-							->leftJoin('places', DB::raw('places.osm_id::bigint'), '=', 'profiles.city_id')
+							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.*', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 
@@ -116,7 +116,7 @@ class DerpyController extends Pony {
 	{
 		$county = State::byAbbr($state)->counties()->where('name', $county)->firstOrFail();
 
-		$cities = $county->cities()->select([DB::raw('DISTINCT ON (place_name) 1'),'places.*'])->where('enabled', 1)->orderBy('place_name', 'asc')->get();
+		$cities = $county->cities()->select([DB::raw('DISTINCT ON (place_name) 1'),'places.*'])->orderBy('place_name', 'asc')->get();
 
 		$cityArray = array();
 		foreach($cities as $city) {
