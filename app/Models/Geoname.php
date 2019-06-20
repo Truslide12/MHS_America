@@ -275,7 +275,7 @@ class Geoname extends EloquentModel {
 						'lat' => $place['latitude'],
 						'lon' => $place['longitude']
 					],
-					'title' => $place['place name'].', '.$place['state abbreviation']
+					'title' => $place['place name'].', '.$place['state abbreviation'],
 					'valid' => true,
 					'zoom' => 13,
 					'pitch' => 0
