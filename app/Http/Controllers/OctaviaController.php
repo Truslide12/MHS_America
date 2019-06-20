@@ -30,7 +30,7 @@ class OctaviaController extends Pony {
 
 		$text = $limits['sw']['lng'].', '.$limits['sw']['lat'].', '.$limits['ne']['lng'].', '.$limits['ne']['lat'];
 
-		$cities = Geoname::select(DB::raw('place_name AS title, ST_Y("geometry") AS latitude, ST_X("geometry") AS longitude'))->whereRaw('"geometry" && ST_MakeEnvelope('.$text.', 4326) AND "enabled" = 1')->get()->toArray();
+		$cities = Geoname::select(DB::raw('place_name AS title, ST_Y("center_point") AS latitude, ST_X("center_point") AS longitude'))->whereRaw('"center_point" && ST_MakeEnvelope('.$text.', 4269) AND "enabled" = 1')->get()->toArray();
 		//Fetch communities in this region
 		//Return successful array
 		return $this->jsonAPI($cities);
@@ -65,7 +65,7 @@ class OctaviaController extends Pony {
 		$query = Profile::with('photos')
 						->with(
 							['city' => function($query) {
-								$query->select('id', 'osm_id', 'place_name');
+								$query->select('id', 'place_name');
 							}, 'state' => function($query) {
 								$query->select('id', DB::raw('upper(abbr) AS abbr'), 'title');
 							}, 'spaces' => function($query) {
@@ -93,7 +93,7 @@ class OctaviaController extends Pony {
 			$query = $query->where('profiles.age_type', Input::get('filters.age'));
 		}
 
-		$query = $query->whereRaw('"location" && ST_MakeEnvelope('.$text.', 4326) AND type = \'Community\'');
+		$query = $query->whereRaw('"location" && ST_MakeEnvelope('.$text.', 4269) AND type = \'Community\'');
 
 
 		$communities = $query->get();
@@ -179,7 +179,7 @@ class OctaviaController extends Pony {
 
 		$query = Profile::with(
 							['city' => function($query) {
-								$query->select('id', 'osm_id', 'place_name');
+								$query->select('id', 'place_name');
 							}, 'state' => function($query) {
 								$query->select('id', DB::raw('upper(abbr) AS abbr'), 'title');
 							}, 'homes' => function($query) {
