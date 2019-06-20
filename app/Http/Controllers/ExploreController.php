@@ -123,19 +123,19 @@ class ExploreController extends Pony {
 		}else{
 			switch($mode) {
 				case 'h':
-					$results = Home::whereIn('city_id', $countyobj->cities()->pluck('places.osm_id'))
+					$results = Home::whereIn('city_id', $countyobj->cities()->pluck('places.id'))
 					->whereIn('status', [1, 3])
 					->paginate(25);
 					break;
 				case 's':
-					$results = Space::whereIn('city_id', $countyobj->cities()->pluck('places.osm_id'))->paginate(25);
+					$results = Space::whereIn('city_id', $countyobj->cities()->pluck('places.id'))->paginate(25);
 					break;
 				case 'p':
-					$results = Profile::byType('Professional')->whereIn('city_id', $countyobj->cities()->pluck('places.osm_id'))->paginate(25);
+					$results = Profile::byType('Professional')->whereIn('city_id', $countyobj->cities()->pluck('places.id'))->paginate(25);
 					break;
 				case 'c':
 				default:
-					$results = Profile::byType('Community')->whereIn('city_id', $countyobj->cities()->pluck('places.osm_id'))
+					$results = Profile::byType('Community')->whereIn('city_id', $countyobj->cities()->pluck('places.id'))
 															->paginate(25);
 					break;
 			}
@@ -207,17 +207,17 @@ class ExploreController extends Pony {
 
 		switch($mode) {
 			case 'h':
-				$results = Home::whereIn('city_id', $cities->pluck('osm_id')->all())->paginate(25);
+				$results = Home::whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				break;
 			case 's':
-				$results = Space::whereIn('city_id', $cities->pluck('osm_id')->all())->paginate(25);
+				$results = Space::whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				break;
 			case 'p':
-				$results = Profile::byType('Professional')->whereIn('city_id', $cities->pluck('osm_id')->all())->paginate(25);
+				$results = Profile::byType('Professional')->whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				break;
 			case 'c':
 			default:
-				$results = Profile::byType('Community')->whereIn('city_id', $cities->pluck('osm_id')->all())->paginate(25);
+				$results = Profile::byType('Community')->whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				break;
 		}
 
