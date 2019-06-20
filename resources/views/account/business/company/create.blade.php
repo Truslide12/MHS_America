@@ -106,7 +106,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 								<div class="col-md-9">
 									<select id="statebox" class="form-control" name="state" required>
 										<option>State...</option>
-										@foreach(\App\Models\State::all() as $state)
+										@foreach(\App\Models\State::orderBy('id', 'asc')->get() as $state)
 										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
 										@endforeach
 									</select>
