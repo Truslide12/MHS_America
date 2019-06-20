@@ -28,7 +28,7 @@ class EditorController extends Pony {
 	public function getIndex(Profile $profile)
 	{
 
-		$states = State::all();
+		$states = State::orderBy('id', 'asc')->get();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 		return view('editor.home')
 					->with('profile', $profile)
