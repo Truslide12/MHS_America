@@ -80,16 +80,16 @@
 
 							<div style="margin:10px 20px;">
 							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Payment Receipt</div>
-							<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total']/100)  }}<br>
-							<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code']  }}<br>
+							<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total'] / 100) }}<br>
+							<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code'] }}<br>
 
 							<br>
 							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Address:</div>
-							{{ Session::get('order_data')['profile_data']['title']; }}
+							{{ Session::get('order_data')['profile_data']['title'] }}
 							<br>
-							{{ Session::get('order_data')['profile_data']['address']; }} {{ Session::get('order_data')['profile_data']['address2']; }} 
+							{{ Session::get('order_data')['profile_data']['address'] }} {{ Session::get('order_data')['profile_data']['address2'] }} 
 							<br>
-							{{ Session::get("order_data")['profile_data']['city']['place_name']  }} {{ strtoupper(Session::get("order_data")['profile_data']['state']['abbr'])  }}, {{ Session::get('order_data')['profile_data']['zipcode']; }}
+							{{ Session::get("order_data")['profile_data']['city']['place_name']  }} {{ strtoupper(Session::get("order_data")['profile_data']['state']['abbr'])  }}, {{ Session::get('order_data')['profile_data']['zipcode'] }}
 
 							<br><br>
 							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>

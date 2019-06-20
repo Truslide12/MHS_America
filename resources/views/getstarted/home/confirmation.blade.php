@@ -84,24 +84,24 @@
 									</div>
 			      					<div class="form-group" style="padding-left: 25%;">
 										<div class="col-md-3">Community:</div>
-										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['profile_data']['title']; }}</div>
+										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['profile_data']['title'] }}</div>
 									</div>
 									<div class="form-group" style="padding-left: 25%;">
 										<div class="col-md-3">Address:</div>
-										<div class="col-md-9 underline">{{ Session::get('order_data')['profile_data']['address']; }}</div>
+										<div class="col-md-9 underline">{{ Session::get('order_data')['profile_data']['address'] }}</div>
 										@if ( Session::get('order_data')['profile_data']['addressb'] )
 										<div class="col-md-3"></div>
-										<div class="col-md-9 underline">{{ Session::get('order_data')['profile_data']['addressb']; }}</div>
+										<div class="col-md-9 underline">{{ Session::get('order_data')['profile_data']['addressb'] }}</div>
 										@endif
 										<div class="col-md-3"></div>
 										<div class="col-md-9 underline" style="margin-bottom: 40px;"> 
-										{{ Session::get('order_data')['profile_data']['city']['place_name']; }}
-										{{ strtoupper(Session::get('order_data')['profile_data']['state']['abbr']); }},
-										{{ Session::get('order_data')['profile_data']['zipcode']; }}</div>
+										{{ Session::get('order_data')['profile_data']['city']['place_name'] }}
+										{{ strtoupper(Session::get('order_data')['profile_data']['state']['abbr']) }},
+										{{ Session::get('order_data')['profile_data']['zipcode'] }}</div>
 									</div>
 									<div class="form-group" style="padding-left: 25%;">
 										<div class="col-md-3">Space:</div>
-										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['space']; }}</div>
+										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['space'] }}</div>
 									</div>
 								</div>
 							</div>
