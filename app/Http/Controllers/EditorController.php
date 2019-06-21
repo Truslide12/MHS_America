@@ -281,7 +281,7 @@ class EditorController extends Pony {
 
 					/* Verify city and state - from lookup */
 					if( (strtolower(str_simplify($firstItem['address_components']['city'])) != strtolower(str_simplify($profile->city->place_name)) || strtolower($firstItem['address_components']['state']) != $profile->state->abbr) && $firstItem['accuracy'] >= 0.8) {
-						$newcity = Geoname::byCityAndState( $firstItem['address_components']['city'], State::byAbbr(strtolower($firstItem['address_components']['state'])) );
+						$newcity = Geoname::byCityState( $firstItem['address_components']['city'], State::byAbbr(strtolower($firstItem['address_components']['state'])) );
 						if(is_object($newcity) && is_a($newcity, Eloquent::class)) {
 							$profile_array['city_id'] = $newcity->id;
 							$profile_array['state_id'] = $newcity->state_id;
