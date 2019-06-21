@@ -104,9 +104,9 @@ class DerpyController extends Pony {
 	{
 		$state = State::byAbbr($state);
 		if(Input::get('query', '') == '') {
-			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.*'])->where('state_id', $state->id)->orderBy('place_name', 'asc')->get();
+			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', $state->id)->orderBy('place_name', 'asc')->get();
 		}else{
-			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.*'])->where('state_id', $state->id)->where('place_name', 'like', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
+			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', $state->id)->where('place_name', 'like', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
 		}
 		$cityArray = array();
 		foreach($cities as $city) {
