@@ -129,7 +129,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "($1) $2-$3", $community->phone);
+				$phone_formatted = $community->phone;
 			}
 			$feature = [
 				'type' => 'Feature',
