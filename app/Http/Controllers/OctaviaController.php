@@ -30,7 +30,7 @@ class OctaviaController extends Pony {
 
 		$text = $limits['sw']['lng'].', '.$limits['sw']['lat'].', '.$limits['ne']['lng'].', '.$limits['ne']['lat'];
 
-		$cities = Geoname::select(DB::raw('place_name AS title, ST_Y("center_point") AS latitude, ST_X("center_point") AS longitude'))->whereRaw('"center_point" && ST_MakeEnvelope('.$text.', 4269) AND "enabled" = 1')->get()->toArray();
+		$cities = Geoname::select(DB::raw('place_name AS title, ST_Y("center_point") AS latitude, ST_X("center_point") AS longitude'))->whereRaw('"center_point" && ST_MakeEnvelope('.$text.', 4269)')->get()->toArray();
 		//Fetch communities in this region
 		//Return successful array
 		return $this->jsonAPI($cities);
@@ -129,7 +129,7 @@ class OctaviaController extends Pony {
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
 				$phone_formatted = "Unknown";
 			} else {
-				$phone_formatted = $community->phone;
+				$phone_formatted = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "($1) $2-$3", $community->phone);
 			}
 			$feature = [
 				'type' => 'Feature',
