@@ -104,13 +104,15 @@ class DerpyController extends Pony {
 	{
 		$state = State::byAbbr($state);
 		if(Input::get('query', '') == '') {
-			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1'), 'places.*'])->where('state_id', $state->id)->orderBy('place_name', 'asc')->get();
+			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.*'])->where('state_id', $state->id)->orderBy('place_name', 'asc')->get();
 		}else{
-			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1'), 'places.*'])->where('state_id', $state->id)->where('place_name', 'like', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
+			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.*'])->where('state_id', $state->id)->where('place_name', 'like', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
 		}
 		$cityArray = array();
 		foreach($cities as $city) {
-			if($city->place_name != '')$cityArray[] = array('name' => $city->id, 'title' => $city->place_name);
+			if($city->place_name != '') {
+				$cityArray[] = array('name' => $city->id, 'title' => $city->place_name);
+			}
 		}
 
 		return Response::json($cityArray, 200);

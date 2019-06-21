@@ -21,7 +21,6 @@ use App\Models\Space;
 use App\Models\State;
 use App\Models\Profile;
 use App\Models\Amenities;
-use App\Models\State;
 use App\Models\ProfilePhoto;
 use Geocodio;
 use Illuminate\Database\Eloquent\Model as Eloquent;
