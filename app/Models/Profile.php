@@ -3,16 +3,29 @@ namespace App\Models;
 
 use View;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 class Profile extends EloquentModel {
 	
-	use SoftDeletes;
+	use SoftDeletes, PostgisTrait;
 
 	protected $table = 'profiles';
 
 	protected $visible = array('id','title','tagline','type', 'address', 'addressb', 'zipcode', 'city', 'state', 'city_id', 'state_id');
 
 	protected $guarded = [];
+
+	protected $postgisFields = [
+		'location'
+	];
+
+	/* protected $postgisTypes = [
+		'location' => [
+			'geomtype' => 'geometry',
+			'srid' => 4326
+		]
+	]; */
 
 	protected $rep_types = array(
 			'agent',
