@@ -45,6 +45,8 @@ return [
     ],
 
     'geocodio' => [
+        'geocode' => 'https://api.geocod.io/v1.3/geocode',
+        'reverse' => 'https://api.geocod.io/v1.3/reverse',
         'api_key' => env('GEOCODIO_API_KEY')
     ]
 
