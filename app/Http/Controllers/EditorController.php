@@ -285,7 +285,8 @@ class EditorController extends Pony {
 						if(is_object($newcity) && is_a($newcity, Eloquent::class)) {
 							$profile_array['city_id'] = $newcity->id;
 							$profile_array['state_id'] = $newcity->state_id;
-							$profile_array['county_id'] = $newcity->county->id;
+							/* TODO: Find correct county by lookup response */
+							//$profile_array['county_id'] = $newcity->county->id;
 						}
 					}
 
