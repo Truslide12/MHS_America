@@ -301,12 +301,6 @@ class Profile extends EloquentModel {
 	{
 		if(!$this->plan->hasFeature('manage_amenities')) return false;
 
-		/* foreach(self::$com_properties as $key => $val) {
-			if($this->$key == 1) {
-				return true;
-			}
-		} */
-
 		$amenities = json_decode($this->amenities, true);
 		return ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) && count($amenities['has']) > 0 );
 	}
@@ -314,12 +308,7 @@ class Profile extends EloquentModel {
 	public function hasAmenity($id)
 	{
 		$amenities = json_decode($this->amenities, true);
-		if ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) ) {
-			foreach ( $amenities['has'] as $amenity ) {
-				if ( $amenity == $id ) { return true; }
-			}
-		}
-		return false;
+		return ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) && in_array($id, $amenities['has']) );
 	}
 
 	public function hasCarousel()
@@ -478,7 +467,7 @@ class Profile extends EloquentModel {
 
 	public function utility($name)
 	{
-		$td = json_decode($this->utilities);
+		$td = json_decode($this->utilities, true);
 		switch ($name) {
 			case 'water':
 				return $td[0];

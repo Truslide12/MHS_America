@@ -56,9 +56,25 @@ return [
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => 'Laravel Log',
+            'username' => 'Laravel',
+            'emoji' => ':grey_exclamation:',
+            'level' => 'warning',
+        ],
+
+        'slack_geocodio_critical' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => 'Geocod.io API',
             'emoji' => ':boom:',
             'level' => 'critical',
+        ],
+
+        'slack_geocodio_warning' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => 'Geocod.io API',
+            'emoji' => ':grey_exclamation:',
+            'level' => 'warning',
         ],
 
         'papertrail' => [

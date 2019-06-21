@@ -220,37 +220,42 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">Street address</label>
 				<div class="col-md-9">
-					<input type="text" name="address" id="address" class="form-control" value="{{ $profile->address }}">
+					<input type="text" name="address" id="address" class="form-control" value="{{ $profile->address }}" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3"></label>
 				<div class="col-md-9">
-					<input type="text" name="addressb" id="addressb" class="form-control" value="{{ $profile->address2 }}">
+					<input type="text" name="addressb" id="addressb" class="form-control" value="{{ $profile->address2 }}" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group">
 			    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>City</label>
 			    <div class="col-sm-9">
-			      <select class="form-control" id="city" name="city" disabled>
+			      <select class="form-control" id="city" name="city" autocomplete="off" disabled>
 			      	 <option value="0" data-abbr="xx">First Select State</option>
-			      	 <option value="{{$profile->city->id}}" selected>{{$profile->city->place_name}}</option>
+			      	 <option value="{{$profile->city_id}}" selected>{{$profile->city->place_name}}</option>
 			      </select>
 			    </div>
 			</div>
 			<div class="form-group">
 			    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>State</label>
 			    <div class="col-sm-3">
-			      <select class="form-control" id="state" name="state">
-			      		<option value="0" data-abbr="xx">Select State</option>
-			      		@foreach($states as $state)
-			      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($profile->state_id == $state->id) selected @endif>{{ $state->title }}</option>
+			      <div class="input-group">
+			      	<select class="form-control" id="state" name="state" autocomplete="off">
+						<option value="0" data-abbr="xx">Select State</option>
+						@foreach($states as $state)
+						<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($profile->state_id == $state->id) selected @endif>{{ $state->title }}</option>
 						@endforeach
-			      </select>
+					</select>
+					<span class="input-group-btn">
+						<button class="btn btn-default" id="stateUpdate"><span class="sr-only">Update</span><i class="fa fa-level-up"></i></button>
+					</span>
+			      </div>
 			    </div>
 				<label class="control-label col-md-3">Zip code</label>
 				<div class="col-md-3">
-					<input type="text" name="zipcode" class="form-control" value="{{ $profile->zipcode }}">
+					<input type="text" name="zipcode" class="form-control" value="{{ $profile->zipcode }}" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group visible-xs visible-sm">
@@ -456,30 +461,15 @@
 <script src="{{ URL::route('welcome') }}/js/license_module.js"></script>
 <script src="{{ URL::route('welcome') }}/js/typeahead.bundle.js"></script>
 <script>
+	var currcity = {{ $profile->city_id }},
+		currabbr = '{{ $profile->state->abbr }}';
 
+	$('#stateUpdate').click(function() {
+		update_cities();
+	});
 
 	$('#state').change(function() {
-		var abbr = $('#state option:selected').data('abbr');
-
-		$('#city')
-			.prop('disabled', 'disabled')
-			.find('option')
-			.remove()
-			.end()
-			.append('<option>Select a city...</option>');
-
-		$('#submitbtn').prop('disabled', 'disabled');
-
-		if(abbr != '') {
-			$.getJSON("/derpy/cities/" + abbr, function(result) {
-				var options = $("#city");
-				$.each(result, function() {
-					options.append($("<option/>").val(this.name).text(this.title));
-				});
-
-				options.prop('disabled', false);
-			});
-		}
+		update_cities();
 	});
 	$('#city').change(function() {
 		var city = $('#city').val();
@@ -490,6 +480,35 @@
 			$('#submitbtn').prop('disabled', false);
 		}
 	});
+
+function update_cities(callback)
+{
+	var abbr = $('#state option:selected').data('abbr');
+
+	$('#city')
+		.prop('disabled', 'disabled')
+		.find('option')
+		.remove()
+		.end()
+		.append('<option>Select a city...</option>');
+
+	$('#submitbtn').prop('disabled', 'disabled');
+
+	if(abbr != '') {
+		$.getJSON("/derpy/cities/" + abbr, function(result) {
+			var options = $("#city");
+			$.each(result, function() {
+				var opt = $("<option/>").val(this.name).text(this.title);
+				if($('#state option:selected').data('abbr') == currabbr && this.name == currcity) {
+					opt.prop('selected', true);
+				}
+				options.append(opt);
+			});
+
+			options.prop('disabled', false);
+		});
+	}
+}
 
 function campaign_speech(e)
 {

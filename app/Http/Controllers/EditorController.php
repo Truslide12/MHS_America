@@ -22,6 +22,7 @@ use URL;
 use App\Models\Amenities;
 use Geocodio;
 use App\Models\State;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class EditorController extends Pony {
 
@@ -145,12 +146,11 @@ class EditorController extends Pony {
 			'rent' => 'numeric',
 			'phone' => 'phone:US',
 			'fax' => 'phone:US|nullable',
-			'address' => '',
-			/*
-			 * get from geoio not form
-			'city' => 'required_with:address',
-			'state' => 'required_with_all:city,address',
-			*/
+			'address' => 'required',
+
+			'city' => 'required|exists:places,id',
+			'state' => 'required|exists:states,id',
+			
 			'zipcode' => 'numeric',
 			'community_type' => 'numeric|between:0,2',
 			'utility_water' => 'numeric|between:0,2|nullable',
@@ -235,6 +235,65 @@ class EditorController extends Pony {
 				$profile_array[$val] = Input::get($val, false) ? 1 : 0;
 			}
 
+			/* Address change */
+			if(Input::get('address') != $profile->address || Input::get('addressb') != $profile->addressb || Input::get('city') != $profile->city_id || Input::get('state') != $profile->state_id || Input::get('zipcode') != $profile->zipcode) {
+
+				/* GEOCOD.IO */
+				$geocoding_works = true;
+
+				/* The validator checked if these exist aready. */
+				$cityobj = Geoname::where('id', Input::get('city'))->first();
+				$stateobj = State::where('id', Input::get('state'))->first();
+
+
+				$full_address = trim( Input::get('address').(Input::get('addressb') != '' ? ', '.Input::get('addressb') : '').', '.$cityobj->place_name.','.$stateobj->abbr.' '.Input::get('zipcode') );
+
+				/* API call */
+				$req = Config::get('services.geocodio.geocode').'?q='.urlencode($full_address).'&fields=census&api_key='.Config::get('services.geocodio.api_key');
+				$res = json_decode(file_get_contents($req), true);
+				
+				/* Log errors and skip processing if necessary */
+				if(is_array($res) && array_key_exists('error', $res)) {
+					$geocoding_works = false;
+					Log::channel('slack_geocodio_critical')->critical($res['error']);
+				}
+
+				/* Log warnings */
+				if($geocoding_works && is_array($res) && array_key_exists('_warnings', $res)) {
+					Log::channel('slack_geocodio_warning')->warning('Warnings', $res['_warnings']);
+				}
+
+				/* Process results */
+				if($geocoding_works && is_array($res) && array_key_exists('results', $res) && count($res['results']) > 0) {
+					$firstItem = $res['results'][0]; // The first lookup result
+					$formatted = $res['input']['address_components']; // The formatted version of the input
+
+					/* Formatted address - from lookup */
+					$profile_array['address'] = $firstItem['address_components']['number'].' '.$firstItem['address_components']['formatted_street'];
+					/* Formatted addressb - based on input */
+					if( array_key_exists('secondaryunit', $formatted) || array_key_exists('secondarynumber', $formatted) ) {
+						$profile_array['addressb'] = implode(' ', [( $formatted['secondaryunit'] ?? '' ), ( $formatted['secondarynumber'] ?? '' )]);
+					}
+
+					/* Correct zip code - from lookup */
+					$profile_array['zipcode'] = $firstItem['address_components']['zip'];
+
+					/* Verify city and state - from lookup */
+					if( (strtolower(str_simplify($firstItem['address_components']['city'])) != strtolower(str_simplify($profile->city->place_name)) || strtolower($firstItem['address_components']['state']) != $profile->state->abbr) && $firstItem['accuracy'] >= 0.8) {
+						$newcity = Geoname::byCityAndState( $firstItem['address_components']['city'], State::byAbbr(strtolower($firstItem['address_components']['state'])) );
+						if(is_object($newcity) && is_a($newcity, Eloquent::class)) {
+							$profile_array['city_id'] = $newcity->id;
+							$profile_array['state_id'] = $newcity->state_id;
+							$profile_array['county_id'] = $newcity->county->id;
+						}
+					}
+
+					/* Coordinates */
+					$profile_array['location'] = new Point($firstItem['location']['lat'], $firstItem['location']['lng']);
+
+				}
+
+			}
 
 			/* Save! */
 			$profile->update($profile_array);
