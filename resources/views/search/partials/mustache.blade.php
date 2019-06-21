@@ -147,8 +147,8 @@
                         <div class="col-md-3 bold">Address:</div>
                         <div class="col-md-9" style="margin-bottom: 10px;">
                             @{{ address }}<br>
-                            @{{ city }}
-                            @{{ state }},
+                            @{{ city }}, 
+                            @{{ state }}
                             @{{ zipcode }}
                         </div>
                         <div class="col-md-3 bold">Phone:</div>

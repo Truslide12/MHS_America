@@ -4,10 +4,10 @@ var map, gcd;
 var Lyra = {
     renderCommunityResult: function(item) {
       var t = $('#communityResultItem').html();
-      var phone_string = ('' + item.properties.phone).replace(/\D/g, '');
+      var phone_string = ('' + item.phone).replace(/\D/g, '');
       var phone_match = phone_string.match(/^(\d{3})(\d{3})(\d{4})$/)
       if (phone_match) {
-        item.properties.phone = '('+phone_match[1]+') '+phone_match[2]+'-'+phone_match[3];
+        item.phone = '('+phone_match[1]+') '+phone_match[2]+'-'+phone_match[3];
       }
       Mustache.parse(t);
       return Mustache.render(t, item);
