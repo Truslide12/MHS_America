@@ -249,7 +249,7 @@
 						@endforeach
 					</select>
 					<span class="input-group-btn">
-						<button class="btn btn-default" id="stateUpdate"><span class="sr-only">Update</span><i class="fa fa-level-up"></i></button>
+						<button type="button" class="btn btn-default" id="stateUpdate"><span class="sr-only">Update</span><i class="fa fa-level-up"></i></button>
 					</span>
 			      </div>
 			    </div>
