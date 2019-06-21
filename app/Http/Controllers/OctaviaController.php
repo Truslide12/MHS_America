@@ -252,7 +252,7 @@ class OctaviaController extends Pony {
 
 		$query = Profile::with(
 							['city' => function($query) {
-								$query->select('id', 'osm_id', 'place_name');
+								$query->select('id', 'place_name');
 							}, 'state' => function($query) {
 								$query->select('id', DB::raw('upper(abbr) AS abbr'), 'title');
 							}, 'spaces' => function($query) {
@@ -352,7 +352,7 @@ class OctaviaController extends Pony {
 		$query = Profile::with('photos')
 						->with(
 							['city' => function($query) {
-								$query->select('id', 'osm_id', 'place_name');
+								$query->select('id', 'place_name');
 							}, 'state' => function($query) {
 								$query->select('id', DB::raw('upper(abbr) AS abbr'), 'title');
 							}, 'spaces' => function($query) {
