@@ -33,7 +33,7 @@ class GetStartedCommunityController extends Pony {
 		//session()->forget("active_step");
 		$title = "Whoa, lets get to know each other first!"; //Pick something, Kage
 		$has_account = $is_upgraded = $has_companies = FALSE;
-		$states = State::all();
+		$states = State::orderBy('id', 'asc')->get();
 		$user = Auth::user();
 
 		if ( $user === null ) {
@@ -124,7 +124,7 @@ class GetStartedCommunityController extends Pony {
 	public function postUserForm()
 	{
 		$user = Auth::user();
-		$states = State::all();
+		$states = State::orderBy('id', 'asc')->get();
 		$messageBag = new \Illuminate\Support\MessageBag(); //$messageBag->add('error', 'Username not filled in');
 		$has_account = $is_upgraded = $has_companies = FALSE;
 
