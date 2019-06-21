@@ -104,6 +104,7 @@ class DerpyController extends Pony {
 	{
 		if($state != 'pr') {
 			$stateobj = State::byAbbr($state);
+			if(!is_object($stateobj)) return Response::json([], 200);
 		}
 		if(Input::get('query', '') == '') {
 			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', ($state == 'pr' ? 51 : $stateobj->id ) )->orderBy('place_name', 'asc')->get();
