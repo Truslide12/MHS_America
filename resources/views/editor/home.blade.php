@@ -497,15 +497,20 @@ function update_cities()
 	if(abbr != '') {
 		$.getJSON("/derpy/cities/" + abbr, function(result) {
 			var options = $("#city");
+			var activateSubmit = false;
 			$.each(result, function() {
 				var opt = $("<option/>").val(this.name).text(this.title);
 				if($('#state option:selected').data('abbr') == currabbr && this.name == currcity) {
 					opt.prop('selected', true);
+					activateSubmit = true;
 				}
 				options.append(opt);
 			});
 
 			options.prop('disabled', false);
+			if(activateSubmit) {
+				$('#city').trigger('change');
+			}
 		});
 	}
 }
