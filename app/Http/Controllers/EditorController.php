@@ -1,15 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 //use Auth;
-use App\Models\Canvas;
+use Log;
 use Config;
-use App\Models\Geoname;
-use App\Models\Home;
 use Input;
 use Illuminate\Http\Request;
-use App\Models\Space;
-use App\Models\Profile;
-use App\Models\ProfilePhoto;
 use Response;
 use Redirect;
 use Validator;
@@ -19,9 +14,16 @@ use Phaza\LaravelPostgis\Geometries\Point;
 use App\Upload;
 use Imagick;
 use URL;
-use App\Models\Amenities;
-use Geocodio;
+use App\Models\Canvas;
+use App\Models\Geoname;
+use App\Models\Home;
+use App\Models\Space;
 use App\Models\State;
+use App\Models\Profile;
+use App\Models\Amenities;
+use App\Models\State;
+use App\Models\ProfilePhoto;
+use Geocodio;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class EditorController extends Pony {

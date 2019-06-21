@@ -481,7 +481,7 @@
 		}
 	});
 
-function update_cities(callback)
+function update_cities()
 {
 	var abbr = $('#state option:selected').data('abbr');
 
