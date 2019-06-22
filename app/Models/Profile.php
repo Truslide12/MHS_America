@@ -407,10 +407,10 @@ class Profile extends EloquentModel {
 		if($this->company_id > 0 && is_object($this->company)) $view->with('company', $this->company);
 
 		//$business_hours = '1:8,18|5:9,14|7:x';
-		$hour_sets = explode('|', $this->getHours());
+		$hour_sets = array_filter(explode('|', $this->getHours()), 'strlen');
 		$final_hours = [];
 
-		//if(count($hour_sets) > 0) {
+		if(count($hour_sets) > 0) {
 
 			$stored_days = [0];
 			$cur_hours = '';
@@ -474,7 +474,7 @@ class Profile extends EloquentModel {
 				$yesteropen = $open;
 				
 			}
-		//}
+		}
 		$view->with('business_hours', $final_hours);
 
 		return $view;

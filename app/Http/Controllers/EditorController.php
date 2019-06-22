@@ -33,10 +33,10 @@ class EditorController extends Pony {
 		$states = State::orderBy('id', 'asc')->get();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 
-		$hour_sets = explode('|', $profile->getHours());
+		$hour_sets = array_filter(explode('|', $profile->getHours()), 'strlen');
 		$final_hours = [];
 
-		//if(count($hour_sets) > 0) {
+		if(count($hour_sets) > 0) {
 
 			$stored_days = [0];
 			$cur_hours = ['open' => '', 'close' => ''];
@@ -57,7 +57,7 @@ class EditorController extends Pony {
 				$stored_days[$i] = $cur_hours;
 			}
 			$final_hours = $stored_days;
-		//}
+		}
 
 		$hour_texts = array(
 			'12:00am', //0
