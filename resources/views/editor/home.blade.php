@@ -35,9 +35,9 @@
 	@endif
 
 <div class="row white">
+	<form id="pform" name="pform" class="form-horizontal" action="{{ URL::route('editor-post', ['profile' => $profile->id, 'from_company' => Input::get('from_company')]) }}" method="POST">
 	<div class="col-sm-8 col-md-offset-1">
 		<h1 class="padding-l">Your Community Profile</h1>
-		<form id="pform" name="pform" class="form-horizontal" action="{{ URL::route('editor-post', ['profile' => $profile->id, 'from_company' => Input::get('from_company')]) }}" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-group" style="font-size:130%;line-height:1.8em">
 				<label class="col-md-3 control-label">Community name</label>
@@ -156,13 +156,14 @@
 				</div>
 			</div>
 
+		</div>
+		<div class="col-md-9 col-md-offset-1">
 
-
-
+			<hr>
 			<div class="form-group">
+				<label class="control-label col-md-12">Office Hours</label>
 				<div class="push-down"></div>
-				<label class="control-label col-md-3">Hours</label>
-				<div class="col-md-9">
+				<div class="col-md-12">
 					<table class="table">
 						<tr>
 							<th>&nbsp;</th>
@@ -210,8 +211,10 @@
 					</table>
 				</div>
 			</div>
+			<hr>
 
-
+		</div>
+		<div class="col-md-8 col-md-offset-1">
 
 
 			<div class="form-group">
@@ -388,11 +391,11 @@
 			<div class="push-down">
 				&nbsp;
 			</div>
-		</form>
 	</div>
 	<div class="col-sm-4">
 
 	</div>
+	</form>
 </div>
 
 
