@@ -329,9 +329,10 @@ class Profile extends EloquentModel {
 		return $this->plan->hasFeature('manage_photos') && (count($this->photos->pluck('id')->all()) > 0);
 	}
 
-	public function hours()
+	public function getHours()
 	{
-		return $this->hasMany(ProfileHour::class);
+		//return $this->hasMany(ProfileHour::class);
+		return $this->tagline;
 	}
 
 	public function hourSets()
@@ -405,72 +406,75 @@ class Profile extends EloquentModel {
 
 		if($this->company_id > 0 && is_object($this->company)) $view->with('company', $this->company);
 
-		$business_hours = '1:8,18|5:9,14|7:x';
-		$hour_sets = explode('|', $business_hours);
-
-		$stored_days = [0];
-		$cur_hours = '';
-		for ($i=1; $i < 8; $i++) {
-			for ($j=0; $j < count($hour_sets); $j++) { 
-				list($day, $hours) = explode(':', $hour_sets[$j]);
-
-				if ($day == $i) {
-					$cur_hours = $hours;
-				}
-			}
-			$stored_days[$i] = $cur_hours;
-		}
-
+		//$business_hours = '1:8,18|5:9,14|7:x';
+		$hour_sets = explode('|', $this->getHours());
 		$final_hours = [];
-		$yesteropen = false;
-		$lastseg = 0;
-		$lastindex = 0;
-		$lasthours = '';
-		for($x = 1; $x < 8; $x++) {
-			
-			$current = $stored_days[$x];
-			$open = !($current == 'x');
 
-			if ($open) {
-				list($start, $end) = explode(',', $current);
-			}else{
-				$start = 48;
-				$end = 48;
-			}
+		//if(count($hour_sets) > 0) {
 
-			if($current != $lasthours || $open <> $yesteropen || $x == 1) {
-				if($x - $lastseg == 1) {
-					$title = self::$longdays[$x];
-					$final_hours[$lastindex] = array(
-						'title' => $title,
-						'start' => self::$hour_texts[$start],
-						'end' => self::$hour_texts[$end],
-						'open' => $open
-					);
-				}else{
-					$final_hours[$lastindex-1]['title'] = self::$shortdays[$lastseg] . '-' . self::$shortdays[$x-1];
-					$title = self::$longdays[$x];
-					$final_hours[$lastindex] = array(
-						'title' => $title,
-						'start' => self::$hour_texts[$start],
-						'end' => self::$hour_texts[$end],
-						'open' => $open
-					);
+			$stored_days = [0];
+			$cur_hours = '';
+			for ($i=1; $i < 8; $i++) {
+				for ($j=0; $j < count($hour_sets); $j++) { 
+					list($day, $hours) = explode(':', $hour_sets[$j]);
+
+					if ($day == $i) {
+						$cur_hours = $hours;
+					}
 				}
-				$lastseg = $x;
-				$lasthours = $current;
-				$lastindex++;
+				$stored_days[$i] = $cur_hours;
 			}
 
-			/* if($current != $lasthours || $open <> $yesteropen || $x == 1) {
-				$lastindex++;
-			}else{
-				$lastseg++;
-			}*/
+			$yesteropen = false;
+			$lastseg = 0;
+			$lastindex = 0;
+			$lasthours = '';
+			for($x = 1; $x < 8; $x++) {
+				
+				$current = $stored_days[$x];
+				$open = !($current == 'x');
 
-			$yesteropen = $open;
-			
-		}
+				if ($open) {
+					list($start, $end) = explode(',', $current);
+				}else{
+					$start = 48;
+					$end = 48;
+				}
+
+				if($current != $lasthours || $open <> $yesteropen || $x == 1) {
+					if($x - $lastseg == 1) {
+						$title = self::$longdays[$x];
+						$final_hours[$lastindex] = array(
+							'title' => $title,
+							'start' => self::$hour_texts[$start],
+							'end' => self::$hour_texts[$end],
+							'open' => $open
+						);
+					}else{
+						$final_hours[$lastindex-1]['title'] = self::$shortdays[$lastseg] . '-' . self::$shortdays[$x-1];
+						$title = self::$longdays[$x];
+						$final_hours[$lastindex] = array(
+							'title' => $title,
+							'start' => self::$hour_texts[$start],
+							'end' => self::$hour_texts[$end],
+							'open' => $open
+						);
+					}
+					$lastseg = $x;
+					$lasthours = $current;
+					$lastindex++;
+				}
+
+				/* if($current != $lasthours || $open <> $yesteropen || $x == 1) {
+					$lastindex++;
+				}else{
+					$lastseg++;
+				}*/
+
+				$yesteropen = $open;
+				
+			}
+		//}
 		$view->with('business_hours', $final_hours);
 
 		return $view;

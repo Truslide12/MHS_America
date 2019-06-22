@@ -176,23 +176,33 @@
 						</tr>
 						<tr>
 							<th>Open</th>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
+							@for($y=1; $y < 8; $y++)
+							<td>
+								<select class="form-control hours-box open" data-action="hours" data-open-id="{{ $y }}">
+									<option{{ $business_hours[$y]['open'] == '' ? ' selected' : '' }}>&nbsp;</option>
+									<option{{ $business_hours[$y]['open'] == 48 ? ' selected' : '' }}>Closed</option>
+									@for($z = 0; $z < 24; $z++)
+									<option{{ $business_hours[$y]['open'] == $z ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
+									<option{{ $business_hours[$y]['open'] == $z+24 ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
+									@endfor
+								</select>
+							</td>
+							@endfor
 						</tr>
 						<tr>
 							<th>Close</th>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
-							<td><input type="text" class="form-control"></td>
+							@for($y=1; $y < 8; $y++)
+							<td>
+								<select class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
+									<option{{ $business_hours[$y]['close'] == '' ? ' selected' : '' }}>&nbsp;</option>
+									<option{{ $business_hours[$y]['close'] == 48 ? ' selected' : '' }}>Closed</option>
+									@for($z = 0; $z < 24; $z++)
+									<option{{ $business_hours[$y]['close'] == $z ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
+									<option{{ $business_hours[$y]['close'] == $z+24 ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
+									@endfor
+								</select>
+							</td>
+							@endfor
 						</tr>
 						<tr>
 						<td colspan="8" align="right">*24hr time or AM for Open, PM for close</td>

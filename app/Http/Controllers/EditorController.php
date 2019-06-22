@@ -32,11 +32,95 @@ class EditorController extends Pony {
 
 		$states = State::orderBy('id', 'asc')->get();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
+
+		$hour_sets = explode('|', $profile->getHours());
+		$final_hours = [];
+
+		//if(count($hour_sets) > 0) {
+
+			$stored_days = [0];
+			$cur_hours = ['open' => '', 'close' => ''];
+			for ($i=1; $i < 8; $i++) {
+				for ($j=0; $j < count($hour_sets); $j++) { 
+					list($day, $hours) = explode(':', $hour_sets[$j]);
+
+					if ($day == $i) {
+						if($hours == 'x') {
+							$start = 48;
+							$end = 48;
+						}else{
+							list($start, $end) = explode(',', $hours);
+						}
+						$cur_hours = ['open' => $start, 'close' => $end];
+					}
+				}
+				$stored_days[$i] = $cur_hours;
+			}
+			$final_hours = $stored_days;
+		//}
+
+		$hour_texts = array(
+			'12:00am', //0
+			'1:00am',
+			'2:00am',
+			'3:00am',
+			'4:00am',
+			'5:00am',
+			'6:00am',
+			'7:00am',
+			'8:00am',
+			'9:00am',
+			'10:00am',
+			'11:00am',
+
+			'12:00pm',
+			'1:00pm',
+			'2:00pm',
+			'3:00pm',
+			'4:00pm',
+			'5:00pm',
+			'6:00pm',
+			'7:00pm',
+			'8:00pm',
+			'9:00pm',
+			'10:00pm',
+			'11:00pm', //23
+
+			'12:30am', //24
+			'1:30am',
+			'2:30am',
+			'3:30am',
+			'4:30am',
+			'5:30am',
+			'6:30am',
+			'7:30am',
+			'8:30am',
+			'9:30am',
+			'10:30am',
+			'11:30am',
+
+			'12:30pm',
+			'1:30pm',
+			'2:30pm',
+			'3:30pm',
+			'4:30pm',
+			'5:30pm',
+			'6:30pm',
+			'7:30pm',
+			'8:30pm',
+			'9:30pm',
+			'10:30pm',
+			'11:30pm', //47
+			'' //48
+		);
+
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
 					->with('states', $states)
-					->with('plan', $profile->plan);
+					->with('plan', $profile->plan)
+					->with('business_hours', $final_hours)
+					->with('hour_texts', $hour_texts);
 					//->with('canvas', Canvas::getDefault());
 	}
 
