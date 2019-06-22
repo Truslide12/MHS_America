@@ -167,13 +167,13 @@
 					<table class="table">
 						<tr>
 							<th>&nbsp;</th>
-							<th>Sun</th>
 							<th>Mon</th>
 							<th>Tue</th>
 							<th>Wed</th>
 							<th>Thu</th>
 							<th>Fri</th>
 							<th>Sat</th>
+							<th>Sun</th>
 						</tr>
 						<tr>
 							<th>Open</th>
