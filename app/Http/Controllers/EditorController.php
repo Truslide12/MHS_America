@@ -33,7 +33,9 @@ class EditorController extends Pony {
 		$states = State::orderBy('id', 'asc')->get();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 
-		$hour_sets = array_filter(explode('|', $profile->getHours()), 'strlen');
+		$business_hours = '1:8,18|5:9,14|7:x';
+		//$business_hours = $profile->getHours();
+		$hour_sets = array_filter(explode('|', $business_hours), 'strlen');
 		$final_hours = [];
 
 		if(count($hour_sets) > 0) {
