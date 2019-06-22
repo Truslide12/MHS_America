@@ -161,7 +161,7 @@
 
 			<hr>
 			<div class="form-group">
-				<label class="control-label col-md-12">Office Hours</label>
+				<label class="control-label col-md-12" style="text-align:center;">Office Hours</label>
 				<div class="push-down"></div>
 				<div class="col-md-12">
 					<table class="table">
@@ -204,9 +204,6 @@
 								</select>
 							</td>
 							@endfor
-						</tr>
-						<tr>
-						<td colspan="8" align="right">*24hr time or AM for Open, PM for close</td>
 						</tr>
 					</table>
 				</div>
@@ -469,6 +466,10 @@
 		border-radius: 100%!important;
 		background-color: red;
 		cursor: pointer;
+	}
+	.hours-box {
+		font-size:0.8em;
+		padding:6px;
 	}
 </style>
 <script src="{{ URL::route('welcome') }}/js/license_module.js"></script>
