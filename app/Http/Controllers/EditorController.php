@@ -230,22 +230,44 @@ class EditorController extends Pony {
 			'pets' => 'boolean',
 			'description' => 'string|max:500|nullable',
 			'space_count' => 'numeric',
-			'rent' => 'numeric',
-			'phone' => 'phone:US',
+			'rent' => '',
+			'phone' => 'phone:US|nullable',
 			'fax' => 'phone:US|nullable',
 			'address' => 'required',
 
 			'city' => 'required|exists:places,id',
 			'state' => 'required|exists:states,id',
 			
-			'zipcode' => 'numeric',
+			'zipcode' => 'numeric|max:99999',
 			'community_type' => 'numeric|between:0,2',
 			'utility_water' => 'numeric|between:0,2|nullable',
 			'utility_sewer' => 'numeric|between:0,2|nullable',
 			'utility_gas' => 'numeric|between:0,2|nullable',
 		],
 		[
-			'' => ''
+			'title.required' => 'Community name is required',
+			'description.max' => 'Description must be under 500 characters',
+			'space_count.numeric' => 'Total space count is not a number',
+
+			'phone.phone' => 'Phone number is invalid',
+			'fax.phone' => 'Fax number is invalid',
+			'address.required' => 'Street address is required',
+			
+			'city.required' => 'City is required',
+			'city.exists' => 'Error looking up city',
+			'state.required' => 'State is required',
+			'state.exists' => 'Error looking up state',
+
+			'zipcode.numeric' => 'Zip code is invalid',
+			'zipcode.max' => 'Zip code is invalid',
+			'community_type.numeric' => 'Community type not selected',
+			'community_type.between' => 'Community type not selected',
+			'utility_water.numeric' => 'Error linking to utilities options in database',
+			'utility_sewer.numeric' => 'Error linking to utilities options in database',
+			'utility_gas.numeric' => 'Error linking to utilities options in database',
+			'utility_water.between' => 'Error linking to utilities options in database',
+			'utility_sewer.between' => 'Error linking to utilities options in database',
+			'utility_gas.between' => 'Error linking to utilities options in database'
 		]);
 
 		if($validator->fails()) {
