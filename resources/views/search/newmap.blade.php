@@ -85,6 +85,10 @@
             margin:0 -20px 20px;
         }
 
+        #capper .panel-body .btn {
+            margin:5px;
+        }
+
         .pricebox {
             text-align: center;
             padding: 24px;

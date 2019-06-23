@@ -130,7 +130,7 @@
             @{{/photos.0}}
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="/profile/@{{id}}" class="btn btn-primary" target="_blank">View Full Profile</a><br>
+                    <a href="/profile/@{{id}}" class="btn btn-warning" target="_blank">View Full Profile</a><br>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="overview" disabled>Overview</button>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="homes"><span class="fa fa-home"></span> @{{ home_count }}</button>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="spaces"><span class="fa fa-square-o"></span> @{{ space_count }} Spaces</button> 
