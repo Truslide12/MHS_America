@@ -160,7 +160,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @{{#description}}
+                    @{{^description}}
                     <h3 class="text-muted"><em>No description</em></h3>
                     @{{/description}}
                     @{{#description}}
