@@ -482,7 +482,7 @@ class GetStartedCommunityController extends Pony {
 				'company-id' => 'required|exists:companies,id',
 				'community-name' => 'required|between:5,32',
 				'community-address1' => 'required',
-				'community-address2' => 'between:1,23',
+				'community-address2' => '',
 				'community-state' => 'required|exists:states,id',
 				'community-city' => 'required|exists:places,id,state_id,'.intval(Input::get('community-state', 0)),
 				'community-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
