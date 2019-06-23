@@ -16,11 +16,12 @@ use App\Models\Traits\FollowsHomes;
 use App\Models\Traits\FollowsSpaces;
 use App\Models\Role;
 use App\Models\Permission;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Scopes\SimpleSoftDeletes;
 
 class User extends Authenticatable
 {
-    use EntrustUserTrait, HasCompanyRole, HasProfileRole, FollowsProfiles, FollowsCompanies, FollowsHomes, FollowsSpaces, Notifiable, SoftDeletes;
+    use EntrustUserTrait, HasCompanyRole, HasProfileRole, FollowsProfiles, FollowsCompanies, FollowsHomes, FollowsSpaces, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +49,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('deleted_at', new SimpleSoftDeletes);
+    }
 
     /**
      * Get the link to the user's gravatar image.
@@ -115,4 +123,5 @@ class User extends Authenticatable
     {
         return ($this->first_name == '' || $this->last_name == '') ? $this->username : $this->first_name.' '.$this->last_name;
     }
+
 }
