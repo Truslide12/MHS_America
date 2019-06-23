@@ -212,7 +212,7 @@ class ExploreController extends Pony {
 			case 'h':
 				//$results = Home::whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				$results = Home::select('homes.*', DB::raw('ST_Distance(places.center_point, homes.location) AS distance'))
-						->join('places', function($qry) use ($cityobj) {
+						->join('places', function($qry) use ($cityobj, $radius) {
 							$qry->where('places.id', '=', $cityobj->id)
 								->where(DB::raw('ST_DWithin(places.center_point, homes.location, '.$radius.' * 1609.34)'), '=', '1');
 						})->orderBy(DB::raw('distance'), 'asc')
@@ -221,7 +221,7 @@ class ExploreController extends Pony {
 			case 's':
 				//$results = Space::whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				$local_profiles = Profile::select('profiles.id', DB::raw('ST_Distance(places.center_point, profiles.location) AS distance'))
-						->join('places', function($qry) use ($cityobj) {
+						->join('places', function($qry) use ($cityobj, $radius) {
 							$qry->where('places.id', '=', $cityobj->id)
 								->where(DB::raw('ST_DWithin(places.center_point, profiles.location, '.$radius.' * 1609.34)'), '=', '1');
 						})->where('profiles.type', '=', 'Community')->orderBy(DB::raw('distance'), 'asc')
@@ -231,7 +231,7 @@ class ExploreController extends Pony {
 			case 'p':
 				//$results = Profile::byType('Professional')->whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				$results = Profile::select('profiles.*', DB::raw('ST_Distance(places.center_point, profiles.location) AS distance'))
-						->join('places', function($qry) use ($cityobj) {
+						->join('places', function($qry) use ($cityobj, $radius) {
 							$qry->where('places.id', '=', $cityobj->id)
 								->where(DB::raw('ST_DWithin(places.center_point, profiles.location, '.$radius.' * 1609.34)'), '=', '1');
 						})->where('profiles.type', '<>', 'Community')->orderBy(DB::raw('distance'), 'asc')
@@ -241,7 +241,7 @@ class ExploreController extends Pony {
 			default:
 				//$results = Profile::byType('Community')->whereIn('city_id', $cities->pluck('id')->all())->paginate(25);
 				$results = Profile::select('profiles.*', DB::raw('ST_Distance(places.center_point, profiles.location) AS distance'))
-						->join('places', function($qry) use ($cityobj) {
+						->join('places', function($qry) use ($cityobj, $radius) {
 							$qry->where('places.id', '=', $cityobj->id)
 								->where(DB::raw('ST_DWithin(places.center_point, profiles.location, '.$radius.' * 1609.34)'), '=', '1');
 						})->where('profiles.type', '=', 'Community')->orderBy(DB::raw('distance'), 'asc')
