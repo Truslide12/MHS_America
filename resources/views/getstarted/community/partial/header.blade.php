@@ -139,7 +139,7 @@
 @php
 
 	if ( Session::get('plan') == "free" ) {
-		$plan = "Free Profile (1 Year)";
+		$plan = "Free Profile";
 		$price = "$0.00";
 	} else {
 		$plan = "Paid Profile (1 Year)";

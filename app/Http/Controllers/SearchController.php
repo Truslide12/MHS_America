@@ -235,7 +235,7 @@ class SearchController extends Pony {
 		if(!$error && count($cities) > 0) {
 			
 			//Get communities
-			$query = Profile::byType('Community')->whereIn('city_id', $cities->pluck('osm_id')->all());
+			$query = Profile::byType('Community')->whereIn('city_id', $cities->pluck('id')->all());
 
 			//Narrow results
 			if(Input::get('spaces') == 1) {
@@ -420,7 +420,7 @@ class SearchController extends Pony {
 			$type = studly_case($type);
 
 			//Get professionals
-			$query = Profile::byType($type)->whereIn('city_id', $cities->pluck('osm_id')->all());
+			$query = Profile::byType($type)->whereIn('city_id', $cities->pluck('id')->all());
 
 			$professionals = $query->paginate(25);
 		}

@@ -99,8 +99,8 @@
 								<div class="col-md-9">
 									<select id="citybox" class="form-control" name="city" required>
 										<option>Select a city...</option>
-										@foreach($company->state->places()->select([DB::raw('DISTINCT ON (place_name) 1'), 'places.*'])->where('enabled', 1)->orderBy('place_name')->orderBy('osm_id')->get() as $place)
-										<option value="{{ $place->osm_id }}" @if($place->osm_id == $company->city_id) selected @endif>{{ $place->place_name }}</option>
+										@foreach($company->state->places()->select([DB::raw('DISTINCT ON (place_name) 1'), 'places.*'])->orderBy('place_name')->orderBy('places.id')->get() as $place)
+										<option value="{{ $place->id }}" @if($place->id == $company->city_id) selected @endif>{{ $place->place_name }}</option>
 										@endforeach
 									</select>
 								</div>

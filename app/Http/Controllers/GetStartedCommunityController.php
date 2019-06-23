@@ -401,7 +401,7 @@ class GetStartedCommunityController extends Pony {
 				'business-address-1' => 'required|between:5,48',
 				'business-address-2' => 'between:5,48',
 				'business-state' => 'required|exists:states,id',
-				'business-city' => 'required|exists:places,osm_id,state_id,'.intval(Input::get('business-state', 0)),
+				'business-city' => 'required|exists:places,id,state_id,'.intval(Input::get('business-state', 0)),
 				'business-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
 			)
 		);
@@ -411,7 +411,7 @@ class GetStartedCommunityController extends Pony {
 
 		}else{
 			
-			$city = Geoname::where('state_id' ,Input::get('business-state'))->where('osm_id', Input::get('business-city'))->first();
+			$city = Geoname::where('state_id' ,Input::get('business-state'))->where('id', Input::get('business-city'))->first();
 
 			if(!is_a($city, Eloquent::class)) {
 				/* Nuuuuuuuu! D: */
@@ -433,7 +433,7 @@ class GetStartedCommunityController extends Pony {
 			$company->phone = Input::get('business-phone');
 			$company->fax = Input::get('business-fax');
 			$company->state_id = Input::get('business-state');
-			$company->city_id = $city->osm_id;
+			$company->city_id = $city->id;
 			$company->verified = 0;
 			$company->sec_hash = $sec_hash;
 			$company->about_us = '';
@@ -576,10 +576,12 @@ class GetStartedCommunityController extends Pony {
 			'phone' 	=> null,
 			'fax' 		=> null,
 			'address' 	=> $d['community-address1'],
+			'addressb' 	=> $d['community-address2'],
 			'zipcode' 	=> $d['community-zip'],
 			'state_id' 	=> $d['state_data']['id'],
 			'county_id' => 0, /*need to find how to retrieve this..*/
-			'city_id' 	=> $d['city_data']['osm_id']
+			'city_id' 	=> $d['city_data']['id'],
+			'location'	=> $d['location'] 
 			];
 
 			$test = self::createBaseProfile($d['company_data']['id'], $pd);

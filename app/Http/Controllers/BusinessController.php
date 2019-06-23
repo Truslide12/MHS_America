@@ -75,7 +75,7 @@ class BusinessController extends Pony {
 				'fax' => 'phone:US',
 				'address' => 'required|between:5,48',
 				'state' => 'required|exists:states,id',
-				'city' => 'required|exists:places,osm_id,state_id,'.intval(Input::get('state', 0)),
+				'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 0)),
 			),
 			array(
 				'name.required' => 'A name is required for the company.',
@@ -97,7 +97,7 @@ class BusinessController extends Pony {
 							->withErrors($validator);
 		}else{
 			
-			$city = Geoname::where('state_id' ,Input::get('state'))->where('osm_id', Input::get('city'))->first();
+			$city = Geoname::where('state_id' ,Input::get('state'))->where('id', Input::get('city'))->first();
 
 			if(!is_a($city, 'Eloquent')) {
 				/* Nuuuuuuuu! D: */
@@ -119,7 +119,7 @@ class BusinessController extends Pony {
 			$company->phone = Input::get('phone');
 			$company->fax = Input::get('fax');
 			$company->state_id = Input::get('state');
-			$company->city_id = $city->osm_id;
+			$company->city_id = $city->id;
 			$company->verified = 0;
 			$company->sec_hash = $sec_hash;
 			$company->about_us = '';
@@ -1080,7 +1080,7 @@ class BusinessController extends Pony {
 			'cv_code' => 'required',
 			'address' => 'required',
 			'state' => 'required|exists:states,id',
-			'city' => 'required|exists:places,osm_id'
+			'city' => 'required|exists:places,id'
 		], [
 			'amount_choice.required' => '',
 			'amount_choice.in' => '',
