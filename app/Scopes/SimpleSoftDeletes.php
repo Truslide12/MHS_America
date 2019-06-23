@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Builder;
 class SimpleSoftDeletes implements Scope
 {
     /**
-     * Restrict results to users aged 18 or over.
+     * Restrict results to users not banned.
      *
      * @param Builder $builder
      * @param Model  $model
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereNull('deleted_at');
+        $builder->whereNull('users.deleted_at');
     }
 
     /**
