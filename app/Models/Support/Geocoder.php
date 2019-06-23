@@ -49,7 +49,7 @@ class Geocoder {
 			if(array_key_exists('number', $firstItem['address_components']) && array_key_exists('formatted_street', $firstItem['address_components'])){
 				/* Formatted address - from lookup */
 				$profile_array['address'] = $firstItem['address_components']['number'].' '.$firstItem['address_components']['formatted_street'];
-			}elseif{
+			}else{
 				/* Formatted address - from input - worst case (likely remote area, rural) */
 				$profile_array['address'] = $addrA;
 			}
