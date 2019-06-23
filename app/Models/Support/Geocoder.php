@@ -66,7 +66,7 @@ class Geocoder {
 
 			$city_updated = false;
 			/* Verify city and state - from lookup */
-			if(is_null($profile) || !is_object($profile) || ((strtolower(str_simplify($firstItem['address_components']['city'])) != strtolower(str_simplify($profile->city->place_name)) || strtolower($firstItem['address_components']['state']) != $profile->state->abbr) && $firstItem['accuracy'] >= 0.8) ) {
+			if(is_null($profile) || !is_object($profile) || ($profile->county_id == 0) || ((strtolower(str_simplify($firstItem['address_components']['city'])) != strtolower(str_simplify($profile->city->place_name)) || strtolower($firstItem['address_components']['state']) != $profile->state->abbr) && $firstItem['accuracy'] >= 0.8) ) {
 				$newstate = State::byAbbr(strtolower($firstItem['address_components']['state']));
 				if(is_object($newstate) && is_a($newstate, Eloquent::class)) {
 					$newcity = Geoname::byCityState( $firstItem['address_components']['city'], $newstate->id );
