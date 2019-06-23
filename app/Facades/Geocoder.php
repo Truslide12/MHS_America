@@ -3,12 +3,12 @@
 namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use App\Models\Support\Geocoder;
+use App\Models\Support\Geocoder as GeocoderClass;
 
 class Geocoder extends Facade {
 	
 	protected static function getFacadeAccessor() {
-		return Geocoder::class;
+		return GeocoderClass::class;
 	}
 
 }
