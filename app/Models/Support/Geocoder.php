@@ -5,8 +5,8 @@ namespace App\Models\Support;
 use Log;
 use Config;
 
-use Geoname;
-use State;
+use App\Models\Geoname;
+use App\Models\State;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
