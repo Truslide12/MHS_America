@@ -45,11 +45,20 @@ class Geocoder {
 			$firstItem = $res['results'][0]; // The first lookup result
 			$formatted = $res['input']['address_components']; // The formatted version of the input
 
-			/* Formatted address - from lookup */
-			$profile_array['address'] = $firstItem['address_components']['number'].' '.$firstItem['address_components']['formatted_street'];
+			
+			if(array_key_exists('number', $firstItem['address_components']) && array_key_exists('formatted_street', $firstItem['address_components'])){
+				/* Formatted address - from lookup */
+				$profile_array['address'] = $firstItem['address_components']['number'].' '.$firstItem['address_components']['formatted_street'];
+			}elseif{
+				/* Formatted address - from input - worst case (likely remote area, rural) */
+				$profile_array['address'] = $addrA;
+			}
+			
 			/* Formatted addressb - based on input */
-			if( array_key_exists('secondaryunit', $formatted) || array_key_exists('secondarynumber', $formatted) ) {
+			if(array_key_exists('secondaryunit', $formatted) || array_key_exists('secondarynumber', $formatted) ) {
 				$profile_array['addressb'] = implode(' ', [( $formatted['secondaryunit'] ?? '' ), ( $formatted['secondarynumber'] ?? '' )]);
+			}elseif(strlen(trim($addrB)) > 0) {
+				$profile_array['addressb'] = $addrB;
 			}
 
 			/* Correct zip code - from lookup */
@@ -67,6 +76,27 @@ class Geocoder {
 						$city_updated = true;
 						/* TODO: Find correct county by lookup response */
 						//$profile_array['county_id'] = $newcity->county->id;
+						$county_name_pre = explode(" ", $firstItem['address_components']['county']);
+
+						$county_name = str_replace([' Municipality', ' Borough', ' Parish', ' County', ' Census Area'], '', $firstItem['address_components']['county']);
+						if(count($county_name_pre) > 1 && in_array($county_name_pre[count($county_name_pre)-1], ['Municipality', 'Borough', 'Parish', 'County'])) {
+							$county_name_pre = array_slice($county_name_pre, 0, -1);
+						}elseif(count($county_name_pre) > 2 && $county_name_pre[count($county_name_pre)-2] == 'Census' && $county_name_pre[count($county_name_pre)-1] == 'Area') {
+							$county_name_pre = array_slice($county_name_pre, 0, -2);
+						}
+						$county_name = implode(" ", $county_name_pre);
+
+						$newcounty = $newcity->counties()->where('name', 'LIKE', str_ident($county_name))->first();
+						if(is_object($newcounty)) {
+							$profile_array['county_id'] = $newcounty->id;
+						}else{
+							$newcounty = $newcity->counties()->first();
+							if(is_object($newcounty)) {
+								$profile_array['county_id'] = $newcounty->id;
+							}else{
+								$profile_array['county_id'] = 0;
+							}
+						}
 					}else{
 						$geocoding_works = false;
 					}

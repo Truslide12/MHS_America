@@ -53,7 +53,7 @@ function str_simplify($str) {
 function str_ident($str, $sep = '') {
     $str = str_simplify($str);
     $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
-    $str = str_slug($str, $sep);
+    $str = \Illuminate\Support\Str::slug($str, $sep);
     return $str;
 }
 

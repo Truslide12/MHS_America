@@ -524,6 +524,7 @@ class GetStartedCommunityController extends Pony {
 			$orderdata['community-zip'] = $geocode['data']['zipcode'];
 			$orderdata['community-city'] = $geocode['data']['city_id'];
 			$orderdata['community-state'] = $geocode['data']['state_id'];
+			$orderdata['community-county'] = $geocode['data']['county_id'];
 			$orderdata['community-location'] = $geocode['data']['location'];
 			$orderdata['city_data'] = $geocode['city_data'];
 			$orderdata['state_data'] = $geocode['state_data'];
@@ -579,7 +580,7 @@ class GetStartedCommunityController extends Pony {
 			'addressb' 	=> $d['community-address2'],
 			'zipcode' 	=> $d['community-zip'],
 			'state_id' 	=> $d['state_data']['id'],
-			'county_id' => 0, /*need to find how to retrieve this..*/
+			'county_id' => $d['community-county'],
 			'city_id' 	=> $d['city_data']['id'],
 			'location'	=> $d['community-location'] 
 			];
