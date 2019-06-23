@@ -17,6 +17,7 @@ use App\Models\Geoname;
 use DB;
 use View;
 use App\Models\Amenities;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DerpyController extends Pony {
 
@@ -313,7 +314,7 @@ class DerpyController extends Pony {
 		switch($relation) {
 			case 'profile':
 				$profile = Profile::find($id);
-				if(is_a($profile, 'Eloquent') && $user->toggleWatchProfile($profile)) {
+				if(is_a($profile, Eloquent::class) && $user->toggleWatchProfile($profile)) {
 					if(Input::has('small')){
 						$type = '';
 					}elseif($profile->type == 'Community') {
@@ -334,7 +335,7 @@ class DerpyController extends Pony {
 				break;
 			case 'company':
 				$company = Company::find($id);
-				if(is_a($company, 'Eloquent') && $user->toggleWatchCompany($company)) {
+				if(is_a($company, Eloquent::class) && $user->toggleWatchCompany($company)) {
 					if($user->watchesCompany($company)) {
 						$ret = 'Unwatch<span class="hidden-xs"> company</span>';
 						$watchStatus = 'on';
@@ -348,7 +349,7 @@ class DerpyController extends Pony {
 				break;
 			case 'space':
 				$space = Space::find($id);
-				if(is_a($space, 'Eloquent') && $user->toggleWatchSpace($space)) {
+				if(is_a($space, Eloquent::class) && $user->toggleWatchSpace($space)) {
 					if($user->watchesSpace($space)) {
 						$ret = 'Unwatch<span class="hidden-xs"> space</span>';
 						$watchStatus = 'on';
@@ -363,7 +364,7 @@ class DerpyController extends Pony {
 				return Response::json(array('success' => false));
 			case 'home':
 				$home = Home::find($id);
-				if(is_a($home, 'Eloquent') && $user->toggleWatchHome($home)) {
+				if(is_a($home, Eloquent::class) && $user->toggleWatchHome($home)) {
 					if($user->watchesHome($home)) {
 						$ret = Input::get('size') == 'small' ? 'Unwatch' : 'Unwatch<span class="hidden-xs"> Home</span>';
 						$watchStatus = 'on';
