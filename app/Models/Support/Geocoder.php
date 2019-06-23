@@ -76,17 +76,9 @@ class Geocoder {
 						$city_updated = true;
 						/* TODO: Find correct county by lookup response */
 						//$profile_array['county_id'] = $newcity->county->id;
-						$county_name_pre = explode(" ", $firstItem['address_components']['county']);
+						$county_name = trim(str_replace(['Municipality', 'Borough', 'Parish', 'County', 'Census Area'], '', $firstItem['address_components']['county']));
 
-						$county_name = str_replace([' Municipality', ' Borough', ' Parish', ' County', ' Census Area'], '', $firstItem['address_components']['county']);
-						if(count($county_name_pre) > 1 && in_array($county_name_pre[count($county_name_pre)-1], ['Municipality', 'Borough', 'Parish', 'County'])) {
-							$county_name_pre = array_slice($county_name_pre, 0, -1);
-						}elseif(count($county_name_pre) > 2 && $county_name_pre[count($county_name_pre)-2] == 'Census' && $county_name_pre[count($county_name_pre)-1] == 'Area') {
-							$county_name_pre = array_slice($county_name_pre, 0, -2);
-						}
-						$county_name = implode(" ", $county_name_pre);
-
-						$newcounty = $newcity->counties()->where('name', 'LIKE', str_ident($county_name))->first();
+						$newcounty = $newcity->counties()->where('countyshapes.name', 'LIKE', str_ident($county_name))->first();
 						if(is_object($newcounty)) {
 							$profile_array['county_id'] = $newcounty->id;
 						}else{
