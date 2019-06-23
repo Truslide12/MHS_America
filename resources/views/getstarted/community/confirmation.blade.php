@@ -88,17 +88,17 @@
 									</div>
 			      					<div class="form-group" style="padding-left: 25%;">
 										<div class="col-md-3">Community:</div>
-										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['community-name']; }}</div>
+										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['community-name'] }}</div>
 									</div>
 									<div class="form-group" style="padding-left: 25%;">
 										<div class="col-md-3">Address:</div>
-										<div class="col-md-9 underline">{{ Session::get('order_data')['community-address1']; }}</div>
+										<div class="col-md-9 underline">{{ Session::get('order_data')['community-address1'] }}</div>
 										@if ( Session::get('order_data')['community-address2'] )
 										<div class="col-md-3"></div>
-										<div class="col-md-9 underline">{{ Session::get('order_data')['community-address2']; }}</div>
+										<div class="col-md-9 underline">{{ Session::get('order_data')['community-address2'] }}</div>
 										@endif
 										<div class="col-md-3"></div>
-										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['city_data']['place_name'] }} {{ strtoupper(Session::get('order_data')['state_data']['abbr']) }}, {{ Session::get('order_data')['community-zip']; }}</div>
+										<div class="col-md-9 underline" style="margin-bottom: 40px;">{{ Session::get('order_data')['city_data']['place_name'] }} {{ strtoupper(Session::get('order_data')['state_data']['abbr']) }}, {{ Session::get('order_data')['community-zip'] }}</div>
 									</div>
 								</div>
 							</div>
