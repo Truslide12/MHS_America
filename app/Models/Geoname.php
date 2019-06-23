@@ -34,14 +34,15 @@ class Geoname extends EloquentModel {
 					 ->where('state_id', $state)->first();
 	}
 
+	/* DEFUNCT */
 	public function scopeByOSM($query, $osm_id)
 	{
 		return $query->where('osm_id', $osm_id)->first();
 	}
 
-	public function scopeByFIPS($query, $osm_id)
+	public function scopeByFIPS($query, $fips_code)
 	{
-		return $query->where('fips_code', $osm_id)->first();
+		return $query->where('fips_code', $fips_code)->first();
 	}
 
 	public function scopeByCounty($query, $county, $state)
