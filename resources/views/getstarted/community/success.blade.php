@@ -86,29 +86,33 @@
 					<div class="col-md-7">
 						<div class="receipt_box">
 							<h3 class="cool">Success!</h3><hr class="hr-blue">
-							You are now subscribed to our annual community promotion. Your community profile has been created, and you can begin editing your profile.<br><br>
+							Welcome to MHS America! Your community profile has been created, and you can now begin expanding on your profile.<br><br>
 
 							<div style="margin:10px 20px;">
-							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Payment Receipt</div>
-							<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total']/100)  }}<br>
-							<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code']  }}<br>
+								@if(array_key_exists('transaction_data', Session::get("order_data")))
+								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Payment Receipt</div>
+								<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total']/100)  }}<br>
+								<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code']  }}<br>
+								@else
+								<strong>You Paid:</strong> Free Profile<br>
+								<strong>Transaction Code:</strong> N/A<br>
+								@endif
+								<br>
+								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Address:</div>
+								{{ Session::get("order_data")['community-name']  }} 
+								<br>
+								{{ Session::get("order_data")['community-address1']  }} {{ Session::get("order_data")['community-address2']  }} 
+								<br>
+								{{ Session::get("order_data")['city_data']['place_name']  }} {{ strtoupper(Session::get("order_data")['state_data']['abbr'])  }}, {{ Session::get("order_data")['community-zip']  }}
 
-							<br>
-							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Address:</div>
-							{{ Session::get("order_data")['community-name']  }} 
-							<br>
-							{{ Session::get("order_data")['community-address1']  }} {{ Session::get("order_data")['community-address2']  }} 
-							<br>
-							{{ Session::get("order_data")['city_data']['place_name']  }} {{ strtoupper(Session::get("order_data")['state_data']['abbr'])  }}, {{ Session::get("order_data")['community-zip']  }}
-
-							<br><br>
-							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>
-							<ul>
-								<li><a target="_blank" href="{{ URL::route('profile', array('profile' => Session::get('order_data')['profile_data']->id)) }}">View Profile Here</a></li>
-								<li><a target="_blank" href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Edit Profile Here</a></li>
-								<li><a target="_blank" href="{{ URL::route('editor-spaces', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Manage Vacant Spaces</a></li>
-								<li><a target="_blank" href="{{ URL::route('editor-homes', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Purchase Home Listings</a></li>
-							</ul>
+								<br><br>
+								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>
+								<ul>
+									<li><a target="_blank" href="{{ URL::route('profile', array('profile' => Session::get('order_data')['profile_data']->id)) }}">View Profile Here</a></li>
+									<li><a target="_blank" href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Edit Profile Here</a></li>
+									<li><a target="_blank" href="{{ URL::route('editor-spaces', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Manage Vacant Spaces</a></li>
+									<li><a target="_blank" href="{{ URL::route('editor-homes', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Purchase Home Listings</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
