@@ -485,6 +485,11 @@
 	$('#state').change(function() {
 		update_cities();
 	});
+
+	$(function() {
+		update_cities();
+	});
+
 	$('#city').change(function() {
 		var city = $('#city').val();
 
