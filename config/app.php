@@ -245,7 +245,9 @@ return [
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         //'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
-        'Geocodio' => Stanley\Geocodio\Geocodio::class
+        'Geocodio' => Stanley\Geocodio\Geocodio::class,
+
+        'Geocoder' => App\Facades\Geocoder::class 
 
     ],
 

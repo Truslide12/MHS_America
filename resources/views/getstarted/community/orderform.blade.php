@@ -83,13 +83,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Street address</label>
 									<div class="col-md-9">
-										<input type="text" name="community-address1" id="community-address1" class="form-control" value="{{ old('community-address') }}">
+										<input type="text" name="community-address1" id="community-address1" class="form-control" autocomplete="nope" value="{{ old('community-address1') }}">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3"></label>
 									<div class="col-md-9">
-										<input type="text" name="community-address2" id="community-address2" class="form-control" value="{{ old('community-address') }}">
+										<input type="text" name="community-address2" id="community-address2" class="form-control" autocomplete="nope" value="{{ old('community-address2') }}">
 									</div>
 								</div>
 								<div class="form-group">
@@ -114,7 +114,7 @@
 									</div>
 									<label class="control-label col-md-3">Zip code</label>
 									<div class="col-md-3">
-										<input type="text" name="community-zip" id="community-zip" class="form-control" value="">
+										<input type="text" name="community-zip" id="community-zip" class="form-control" autocomplete="nope" value="">
 									</div>
 								</div>
 								<div class="form-group">

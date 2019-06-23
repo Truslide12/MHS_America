@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers;
 
+use Log;
 use Auth;
 use Input;
 use Request;
 use Validator;
 use Hash;
+use Config;
+use Geocoder;
 use App\User;
 use App\Models\State;
 use App\Models\Geoname;
@@ -14,6 +17,7 @@ use App\Models\StorePaymentSources;
 use App\Models\StoreTransaction;
 use App\Models\StorePurchase;
 use App\Models\Subscription;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 /*{
 use Stripe\Customer
@@ -477,10 +481,10 @@ class GetStartedCommunityController extends Pony {
 			array(
 				'company-id' => 'required|exists:companies,id',
 				'community-name' => 'required|between:5,32',
-				'community-address1' => 'required|between:5,48',
+				'community-address1' => 'required',
 				'community-address2' => 'between:1,23',
 				'community-state' => 'required|exists:states,id',
-				'community-city' => 'required|exists:places,osm_id,state_id,'.intval(Input::get('community-state', 0)),
+				'community-city' => 'required|exists:places,id,state_id,'.intval(Input::get('community-state', 0)),
 				'community-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
 			)
 		);
@@ -489,22 +493,42 @@ class GetStartedCommunityController extends Pony {
 			return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors($validator);
 		}
 
+		/** 
+		 * Geocoding helper
+		 * see App\Models\Support\Geocoder
+		 **/
+		$geocode = Geocoder::address(
+			Input::get('community-address1'), 
+			Input::get('community-address2', ''), 
+			Input::get('community-city'), 
+			Input::get('community-state'), 
+			Input::get('community-zip', '')
+		);
+
+		if(!$geocode['success']) {
+			return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors(["Address lookup failed. Try again later or contact support if this persists."]);
+		}
 		
 		//check if this address is taken??
 		$addr_available = false;
-		$addr_available = Profile::where('address', Input::get('community-address1'))
-									->where('zipcode', Input::get('community-zip'))
-									->where('state_id', Input::get('community-state'))
-									->where('city_id', Input::get('community-city'))->first();
+		$addr_available = Profile::where('address', $geocode['data']['address'])
+									->where('zipcode', $geocode['data']['zipcode'])
+									->where('state_id', $geocode['data']['state_id'])
+									->where('city_id', $geocode['data']['city_id'])->first();
 		if(!$addr_available) {
 			//return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors(["pass", Input::all()]);
-			$city = Geoname::where('state_id' ,Input::get('community-state'))->where('osm_id', Input::get('community-city'))->first();
-			$state = State::where('id' ,Input::get('community-state'))->first();
 
 			$orderdata = Input::except('_token');
-			$orderdata['city_data'] = $city;
-			$orderdata['state_data'] = $state;
+			$orderdata['community-address1'] = $geocode['data']['address'];
+			$orderdata['community-address2'] = $geocode['data']['addressb'];
+			$orderdata['community-zip'] = $geocode['data']['zipcode'];
+			$orderdata['community-city'] = $geocode['data']['city_id'];
+			$orderdata['community-state'] = $geocode['data']['state_id'];
+			$orderdata['community-location'] = $geocode['data']['location'];
+			$orderdata['city_data'] = $geocode['city_data'];
+			$orderdata['state_data'] = $geocode['state_data'];
 			$orderdata['company_data'] = null;
+
 			foreach ( Auth::user()->companies as $company ) {
 				if ( $company->id == Input::get('company-id') ) {
 					$orderdata['company_data'] = $company;
