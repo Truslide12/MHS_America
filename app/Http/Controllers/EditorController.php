@@ -323,7 +323,7 @@ class EditorController extends Pony {
 			}
 
 			/* Address change */
-			if(Input::get('address') != $profile->address || Input::get('addressb') != $profile->addressb || Input::get('city') != $profile->city_id || Input::get('state') != $profile->state_id || Input::get('zipcode') != $profile->zipcode) {
+			if(Input::get('address') != $profile->address || Input::get('addressb') != $profile->addressb || Input::get('city') != $profile->city_id || Input::get('state') != $profile->state_id || Input::get('zipcode') != $profile->zipcode || $profile->county_id == 0) {
 
 				/** 
 				 * Geocoding helper
