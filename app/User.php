@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use EntrustUserTrait, HasCompanyRole, HasProfileRole, FollowsProfiles, FollowsCompanies, FollowsHomes, FollowsSpaces, Notifiable;
+    use EntrustUserTrait, HasCompanyRole, HasProfileRole, FollowsProfiles, FollowsCompanies, FollowsHomes, FollowsSpaces, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
