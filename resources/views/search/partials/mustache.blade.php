@@ -161,7 +161,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     @{{^description}}
-                    <h3 class="text-muted"><em>No description</em></h3>
+                    <h4 class="text-muted"><em>No description</em></h4>
                     @{{/description}}
                     @{{#description}}
                     <div class="row">
