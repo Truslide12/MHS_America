@@ -55,6 +55,7 @@ class Geocoder {
 			/* Correct zip code - from lookup */
 			$profile_array['zipcode'] = $firstItem['address_components']['zip'];
 
+			$city_updated = false;
 			/* Verify city and state - from lookup */
 			if(is_null($profile) || !is_object($profile) || ((strtolower(str_simplify($firstItem['address_components']['city'])) != strtolower(str_simplify($profile->city->place_name)) || strtolower($firstItem['address_components']['state']) != $profile->state->abbr) && $firstItem['accuracy'] >= 0.8) ) {
 				$newstate = State::byAbbr(strtolower($firstItem['address_components']['state']));
@@ -63,6 +64,7 @@ class Geocoder {
 					if(is_object($newcity) && is_a($newcity, Eloquent::class)) {
 						$profile_array['city_id'] = $newcity->id;
 						$profile_array['state_id'] = $newcity->state_id;
+						$city_updated = true;
 						/* TODO: Find correct county by lookup response */
 						//$profile_array['county_id'] = $newcity->county->id;
 					}else{
@@ -83,7 +85,7 @@ class Geocoder {
 
 		}
 		
-		return ['success' => $geocoding_works, 'data' => $profile_array, 'city_data' => ($geocoding_works ? $newcity : false), 'state_data' => ($geocoding_works ? $newstate : false)];
+		return ['success' => $geocoding_works, 'data' => $profile_array, 'city_data' => (($geocoding_works && $city_updated) ? $newcity : false), 'state_data' => (($geocoding_works && $city_updated) ? $newstate : false)];
 	}
 
 }
