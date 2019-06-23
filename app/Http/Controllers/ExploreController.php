@@ -1,15 +1,15 @@
 <?php namespace App\Http\Controllers;
 
-use App\Models\Advertisement;
+use DB;
 use App;
-use App\Models\Canvas;
 use Config;
-//use City;
+use Input;
+use App\Models\Advertisement;
+use App\Models\Canvas;
 use App\Models\Geoname;
 use App\Models\County;
 use App\Models\CityCountyLink;
 use App\Models\Home;
-use Input;
 use App\Models\Profile;
 use App\Models\Region;
 use App\Models\State;
