@@ -581,7 +581,7 @@ class GetStartedCommunityController extends Pony {
 			'state_id' 	=> $d['state_data']['id'],
 			'county_id' => 0, /*need to find how to retrieve this..*/
 			'city_id' 	=> $d['city_data']['id'],
-			'location'	=> $d['location'] 
+			'location'	=> $d['community-location'] 
 			];
 
 			$test = self::createBaseProfile($d['company_data']['id'], $pd);
