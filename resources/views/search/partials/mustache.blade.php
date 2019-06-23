@@ -37,10 +37,10 @@
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">@{{ title }}<br><small>@{{ city }}, @{{ state }}</small></h4>
 
-                            @{{^spaces.0}}<small class="attrbadge">No spaces</small>@{{/spaces.0}}
                             @{{#spaces.0}}<small class="attrbadge">@{{spaces.length}} space@{{#spaces.1}}s@{{/spaces.1}}</small>@{{/spaces.0}}
-                            @{{^homes.0}}<small class="attrbadge">No homes</small>@{{/homes.0}}
                             @{{#homes.0}}<small class="attrbadge">@{{homes.length}} home@{{#homes.1}}s@{{/homes.1}}</small>@{{/homes.0}}
+                            @{{^spaces.0}}<small>&nbsp;</small>@{{/spaces.0}}
+                            @{{^homes.0}}<small>&nbsp;</small>@{{/homes.0}}
 
                         </div>
                     </a>
@@ -133,7 +133,7 @@
                     <a href="/profile/@{{id}}" class="btn btn-warning" target="_blank">View Full Profile</a><br>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="overview" disabled>Overview</button>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="homes"><span class="fa fa-home"></span> @{{ home_count }}</button>
-                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="spaces"><span class="fa fa-square-o"></span> @{{ space_count }} Spaces</button> 
+                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="spaces"><span class="fa fa-square-o"></span> @{{ space_count }}</button> 
                 </div>
             </div>
             <div id="preview-tab">
@@ -158,16 +158,19 @@
                     </div>
                 </div>
             </div>
-            @{{#description}}
             <div class="panel panel-default">
                 <div class="panel-body">
+                    @{{#description}}
+                    <h3 class="text-muted"><em>No description</em></h3>
+                    @{{/description}}
+                    @{{#description}}
                     <div class="row">
                         <div class="col-md-3 bold">About:</div>
                         <div class="col-md-9" style="clear:all;">@{{ description }}</div>
                     </div>
+                    @{{/description}}
                 </div>
             </div>
-            @{{/description}}
 </script>
 <script id="communityTabHomes" type="x-tmpl-mustache">
 @{{#homes}}
