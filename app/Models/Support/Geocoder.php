@@ -75,7 +75,7 @@ class Geocoder {
 			}
 
 			/* Coordinates */
-			if(is_null($profile) || !$is_object($profile)) {
+			if(is_null($profile) || !is_object($profile)) {
 				$profile_array['location'] = $firstItem['location'];
 			}else{
 				$profile_array['location'] = new Point($firstItem['location']['lat'], $firstItem['location']['lng']);
