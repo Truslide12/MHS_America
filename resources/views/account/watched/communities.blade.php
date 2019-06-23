@@ -68,7 +68,7 @@
 			<div class="panel panel-default panel-flat">
 				<div class="panel-body font-bump-xs">
 					<h5 class="no-margin-t margin-b">
-						<a href="#" data-action="watch" data-relation="profile" data-id="{{ $profile->id }}" class="btn btn-sm btn-danger pull-right hidden-xs" style="margin:-5px"><i class="fa fa-times"></i></a>
+						<a href="#" data-action="watch" data-relation="profile" data-id="{{ $community->id }}" class="btn btn-sm btn-danger pull-right hidden-xs" style="margin:-5px"><i class="fa fa-times"></i></a>
 						<a href="{{ URL::route('profile', array('profile' => $community->id)) }}">
 							{{ $community->title }}
 						</a>

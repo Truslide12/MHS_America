@@ -68,7 +68,7 @@
 			<div class="panel panel-default panel-flat">
 				<div class="panel-body">
 					<h5 class="no-margin-t margin-b">
-						<a href="#" class="btn btn-sm btn-danger pull-right" style="margin:-5px"><i class="fa fa-times"></i></a>
+						<a href="#" data-action="watch" data-relation="profile" data-id="{{ $professional->id }}" class="btn btn-sm btn-danger pull-right" style="margin:-5px"><i class="fa fa-times"></i></a>
 						<a href="{{ URL::route('profile', array('profile' => $professional->id)) }}">
 							{{ $professional->title }}
 						</a>
@@ -104,4 +104,8 @@
 	@endif
 	</div>
 </div>
+@stop
+
+@section('incls-body')
+<script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
 @stop
