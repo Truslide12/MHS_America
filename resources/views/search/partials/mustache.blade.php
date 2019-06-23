@@ -130,10 +130,10 @@
             @{{/photos.0}}
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <a href="/profile/@{{id}}" class="btn btn-primary" target="_blank">View Full Profile</a><br>
                     <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="overview" disabled>Overview</button>
-                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="homes">@{{ home_count }} Homes</button>
-                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="spaces">@{{ space_count }} Spaces</button> 
-                    <a href="/profile/@{{id}}" class="btn btn-primary" target="_blank">View Full Profile</a>
+                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="homes"><span class="fa fa-home"></span> @{{ home_count }}</button>
+                    <button class="btn btn-default" data-action="previewtab" data-id="@{{ id }}" data-tab="spaces"><span class="fa fa-square-o"></span> @{{ space_count }} Spaces</button> 
                 </div>
             </div>
             <div id="preview-tab">
@@ -151,11 +151,14 @@
                             @{{ state }}
                             @{{ zipcode }}
                         </div>
+                        @{{#phone}}
                         <div class="col-md-3 bold">Phone:</div>
                         <div class="col-md-9">@{{ phone }}</div>
+                        @{{/phone}}
                     </div>
                 </div>
             </div>
+            @{{#description}}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
@@ -164,6 +167,7 @@
                     </div>
                 </div>
             </div>
+            @{{/description}}
 </script>
 <script id="communityTabHomes" type="x-tmpl-mustache">
 @{{#homes}}
