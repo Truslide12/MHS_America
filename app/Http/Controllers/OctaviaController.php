@@ -127,7 +127,7 @@ class OctaviaController extends Pony {
 			}
 
 			if ( ! $community->phone || strlen($community->phone) != 10 || ! is_numeric($community->phone)) {
-				$phone_formatted = "Unknown";
+				$phone_formatted = '';
 			} else {
 				$phone_formatted = $community->phone;
 			}
