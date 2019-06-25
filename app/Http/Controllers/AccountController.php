@@ -5,6 +5,7 @@ use Auth;
 use Request;
 use URL;
 use Hash;
+use Input;
 use Validator;
 use App\User;
 use App\Models\Canvas;
