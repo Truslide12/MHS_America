@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use App\Models\Canvas;
 use App\Models\News;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -329,12 +330,55 @@ class AccountController extends Pony {
 
 	public function postRecoveryUsername()
 	{
-		//derp
+		$validator = Validator::make(Request::all(), [
+			'email' => 'required|email'
+		], [
+			'email.required' => 'You must provide an email address.',
+			'email.email' => 'The value provided is not a valid email address.',
+		]);
+
+		if($validator->fails()) {
+			return redirect()->route('account-recovery-username')
+						->withErrors($validator)
+						->withInput(Request::all());
+		}else{
+			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))->first();
+
+			if(is_object($user) && is_a($user, Eloquent::class)) {
+				//$user->resetPassword();
+			}
+
+			return redirect()->route('account-login')
+						->with('success', 'If the email is associated with an account, a message with the username was sent.');
+		}
 	}
 
 	public function postRecoveryPassword()
 	{
-		//derp
+		$validator = Validator::make(Request::all(), [
+			'email' => 'required|email',
+			'username' => 'required'
+		], [
+			'email.required' => 'You must provide an email address.',
+			'email.email' => 'The value provided is not a valid email address.',
+			'username.required' => 'You must provide a username.',
+		]);
+
+		if($validator->fails()) {
+			return redirect()->route('account-recovery-username')
+						->withErrors($validator)
+						->withInput(Request::all());
+		}else{
+			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))
+						->('username', '=', Input::get('username'))->first();
+
+			if(is_object($user) && is_a($user, Eloquent::class)) {
+				//$user->resetPassword();
+			}
+
+			return redirect()->route('account-login')
+						->with('success', 'If the email is associated with an account, a message with the username was sent.');
+		}
 	}
 
 }

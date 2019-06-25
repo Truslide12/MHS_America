@@ -22,6 +22,11 @@
                 {{ Session::get('error') }}
             </div>
             @endif
+            @if(Input::get('success', '') != '')
+            <div class="alert alert-success" role="alert">
+                {{ Input::get('success') }}
+            </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-lock"></span> Login</div>
