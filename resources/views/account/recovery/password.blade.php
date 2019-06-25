@@ -23,7 +23,7 @@
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="panel-heading">Forgot Username</div>
+                <div class="panel-heading">Forgot Password</div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ URL::route('account-recovery-password-post') }}" method="POST" role="form">
                     {{ csrf_field() }}
@@ -38,7 +38,7 @@
                         <label for="inputEmail" class="col-sm-3 control-label">
                             Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Username" required>
+                            <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="form-group last">
