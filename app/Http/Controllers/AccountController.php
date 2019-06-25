@@ -325,4 +325,14 @@ class AccountController extends Pony {
 					->with('canvas', Canvas::getDefault());
 	}
 
+	public function postRecoveryUsername()
+	{
+		//derp
+	}
+
+	public function postRecoveryPassword()
+	{
+		//derp
+	}
+
 }

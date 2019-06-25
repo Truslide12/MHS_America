@@ -373,10 +373,15 @@ Route::group(array('prefix' => 'luna'), function()
 				/* Account recovery (GET) */
 				Route::get('/', array('uses' => 'AccountController@getRecovery', 'as' => 'account-recovery'));
 
-				/* Account recovery (GET) */
+				/* Account recovery - username (GET) */
 				Route::get('username', array('uses' => 'AccountController@getRecoveryUsername', 'as' => 'account-recovery-username'));
-				/* Account recovery (GET) */
+				/* Account recovery - password (GET) */
 				Route::get('password', array('uses' => 'AccountController@getRecoveryPassword', 'as' => 'account-recovery-password'));
+
+				/* Account recovery - username (POST) */
+				Route::post('username', array('uses' => 'AccountController@postRecoveryUsername', 'as' => 'account-recovery-username-post'));
+				/* Account recovery - password (POST) */
+				Route::post('password', array('uses' => 'AccountController@postRecoveryPassword', 'as' => 'account-recovery-password-post'));
 			});
 			
 			/* Account login (POST) */
