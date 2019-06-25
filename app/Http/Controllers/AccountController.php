@@ -370,7 +370,7 @@ class AccountController extends Pony {
 						->withInput(Request::all());
 		}else{
 			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))
-						->('username', '=', Input::get('username'))->first();
+						->where('username', '=', Input::get('username'))->first();
 
 			if(is_object($user) && is_a($user, Eloquent::class)) {
 				//$user->resetPassword();
