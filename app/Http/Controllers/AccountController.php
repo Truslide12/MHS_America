@@ -309,7 +309,19 @@ class AccountController extends Pony {
 
 	public function getRecovery()
 	{
-		return view('account.recovery')
+		return view('account.recovery.home')
+					->with('canvas', Canvas::getDefault());
+	}
+
+	public function getRecoveryUsername()
+	{
+		return view('account.recovery.username')
+					->with('canvas', Canvas::getDefault());
+	}
+
+	public function getRecoveryPassword()
+	{
+		return view('account.recovery.password')
 					->with('canvas', Canvas::getDefault());
 	}
 

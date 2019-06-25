@@ -367,19 +367,22 @@ Route::group(array('prefix' => 'luna'), function()
 			/* Account login (GET) */
 			Route::get('login', array('uses' => 'AccountController@getLogin', 'as' => 'account-login'));
 			/* Account register (GET) */
-			Route::get('register', array('uses' => 'AccountController@getRegister', 'as' => 'account-register'));	
-			/* Account recovery (GET) */
-			Route::get('recovery', array('uses' => 'AccountController@getRecovery', 'as' => 'account-recovery'));	
+			Route::get('register', array('uses' => 'AccountController@getRegister', 'as' => 'account-register'));
 
-			Route::group([], function() {
-			
-				/* Account login (POST) */
-				Route::post('login', array('uses' => 'AccountController@postLogin', 'as' => 'account-login-post'));
-				/* Account register (POST) */
-				Route::post('register', array('uses' => 'AccountController@postRegister', 'as' => 'account-register-post'));
+			Route::group(['prefix' => 'recovery'], function() {
+				/* Account recovery (GET) */
+				Route::get('/', array('uses' => 'AccountController@getRecovery', 'as' => 'account-recovery'));
 
+				/* Account recovery (GET) */
+				Route::get('username', array('uses' => 'AccountController@getRecoveryUsername', 'as' => 'account-recovery-username'));
+				/* Account recovery (GET) */
+				Route::get('password', array('uses' => 'AccountController@getRecoveryPassword', 'as' => 'account-recovery-password'));
 			});
-
+			
+			/* Account login (POST) */
+			Route::post('login', array('uses' => 'AccountController@postLogin', 'as' => 'account-login-post'));
+			/* Account register (POST) */
+			Route::post('register', array('uses' => 'AccountController@postRegister', 'as' => 'account-register-post'));
 		});
 
 		/* Account help (GET) */
