@@ -29,9 +29,9 @@
             </div>
             @endforeach
             @endif
-            @if(Input::get('success', '') != '')
+            @if(Session::get('success', '') != '')
             <div class="alert alert-success" role="alert">
-                {{ Input::get('success') }}
+                {{ Session::get('success') }}
             </div>
             @endif
             <div class="panel panel-default">
