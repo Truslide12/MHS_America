@@ -3,7 +3,7 @@
 @section('helpcontent')
 <h3 class="margin-b">Account recovery</h3>
 <div class="row">
-	<div class="col-md-4 col-md-offset-2">
+	<div class="col-md-4">
 		<h4>
 			<a href="{{ URL::route('account-recovery-username') }}" class="btn btn-default btn-block" style="padding:20px 15px">
 				I forgot my username.
