@@ -3,20 +3,20 @@
 use Auth;
 use Request;
 use URL;
+use Hash;
 use Validator;
+use App\User;
+use App\Models\Canvas;
+use App\Models\News;
 use App\Http\Controllers\Pony;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
-use App\Models\Canvas;
-use App\Models\News;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails; */
-use User;
-use Hash;
 
 
 class AccountController extends Pony {
