@@ -316,12 +316,14 @@ class AccountController extends Pony {
 	public function getRecoveryUsername()
 	{
 		return view('account.recovery.username')
+					->with('noheader', true)
 					->with('canvas', Canvas::getDefault());
 	}
 
 	public function getRecoveryPassword()
 	{
 		return view('account.recovery.password')
+					->with('noheader', true)
 					->with('canvas', Canvas::getDefault());
 	}
 
