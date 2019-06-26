@@ -367,7 +367,7 @@ class AccountController extends Pony {
 
 	public function postRecoveryPassword()
 	{
-		$validator = Validator::make(Request::all(), [
+		$validator = Validator::make(Request::only('email', 'username'), [
 			'email' => 'required|email',
 			'username' => 'required'
 		], [
@@ -397,7 +397,7 @@ class AccountController extends Pony {
 			}
 
 			return redirect()->route('account-login')
-						->with('success', 'If the email is associated with an account, a message with the username was sent.');
+						->with('success', 'If the account was found, a reset link was sent to your email.');
 		}
 	}
 
