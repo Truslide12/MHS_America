@@ -13,6 +13,8 @@
 
 use Illuminate\Http\Request;
 
+Auth::routes();
+
 //Route::group(array('domain' => 'luna.mhsamerica.com'), function()
 Route::group(array('prefix' => 'luna'), function()
 {
