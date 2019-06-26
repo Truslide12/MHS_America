@@ -8,6 +8,7 @@ use Hash;
 use Input;
 use Validator;
 use Password;
+use Mail;
 
 use App\User;
 use App\Models\Canvas;
