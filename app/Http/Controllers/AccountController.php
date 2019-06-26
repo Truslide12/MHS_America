@@ -7,6 +7,8 @@ use URL;
 use Hash;
 use Input;
 use Validator;
+use Password;
+
 use App\User;
 use App\Models\Canvas;
 use App\Models\News;
@@ -14,6 +16,10 @@ use App\Http\Controllers\Pony;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+
+use App\Mail\AccountCreated;
+use App\Mail\UsernameSent;
+use App\Mail\PasswordResetSent;
 
 /* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -347,7 +353,11 @@ class AccountController extends Pony {
 			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))->first();
 
 			if(is_object($user) && is_a($user, Eloquent::class)) {
-				//$user->resetPassword();
+				/* Send username reminder email
+				   see: App\Mail\UsernameSent
+				*/
+				$message = (new UsernameSent($user))->onQueue('emails');
+				Mail::to($user)->send($message);
 			}
 
 			return redirect()->route('account-login')
@@ -371,11 +381,19 @@ class AccountController extends Pony {
 						->withErrors($validator)
 						->withInput(Request::all());
 		}else{
-			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))
-						->where('username', '=', Input::get('username'))->first();
+			$user = User::where('email', request()->input('email'))
+						->where('username', request()->input('username'))->first();
 
 			if(is_object($user) && is_a($user, Eloquent::class)) {
-				//$user->resetPassword();
+				
+				//Generate a password reset token
+				$token = Password::getRepository()->create($user);
+				
+				/* Send password reset link in email
+				   see: App\Mail\PasswordResetSent
+				*/
+				$message = (new PasswordResetSent($token))->onQueue('emails');
+				Mail::to($user)->queue($message);
 			}
 
 			return redirect()->route('account-login')

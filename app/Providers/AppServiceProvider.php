@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Queue\Events\JobFailed;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /** FAILURE EVENT HANDLERS **/
+        Queue::failing(function (JobFailed $event) {
+            Log::channel('slack')->critical('Job failure in queue `'.$event->job->getQueue().'`on '.$event->connectionName.': '.$event->job->resolveName().' : '.$event->exception->getMessage());
+        });
+
         /** BLADE EXTENSIONS **/
         $this->registerBladeDirective('fix-navbar', '${1}<?php
                 $navbar_classes = \'navbar-fixed-top\';
