@@ -97,6 +97,9 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
     <tr>
       <td align="center" valign="top"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
           <tr>
+            <td height="45" style="height:45px;" class="em_h20">&nbsp;</td>
+          </tr>
+          <tr>
             <td align="center" valign="top" style="padding:0 25px; background-color:#005499;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
               <tr>
                 <td height="25" style="height:25px;" class="em_h20">&nbsp;</td>
@@ -135,7 +138,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
                 <td height="26" style="height:26px;" class="em_h20">&nbsp;</td>
               </tr>
               <tr>
-                <td align="center" valign="top"><table width="250" style="width:250px; background-color:#6bafb2; border-radius:4px;" border="0" cellspacing="0" cellpadding="0" align="center">
+                <td align="center" valign="top"><table width="250" style="width:250px; background-color:#005499; border-radius:4px;" border="0" cellspacing="0" cellpadding="0" align="center">
                   <tr>
                     <td class="em_white" height="42" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 16px; color:#ffffff; font-weight:bold; height:42px;"><a href="{{ url('password/reset/'.$token) }}" target="_blank" style="text-decoration:none; color:#ffffff; line-height:42px; display:block;">RESET YOUR PASSWORD</a></td>
                   </tr>
@@ -172,7 +175,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
               <tr>
                 <td align="center" valign="top"><table border="0" cellspacing="0" cellpadding="0" align="left" class="em_wrapper">
                   <tr>
-                    <td class="em_grey" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 16px; color:#434343;">&copy; {{ date('Y') }} MHS America.</td>
+                    <td class="em_grey" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 16px; color:#434343; text-align:center;">&copy; {{ date('Y') }} MHS America</td>
                   </tr>
                 </table>
                 </td>
