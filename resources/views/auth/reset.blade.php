@@ -1,9 +1,19 @@
-@extends('app')
+@extends('layouts.master')
+@use-slim-footer
+
+@section('incls-head')
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/static-footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+@stop
+
+@section('content-above')
+<div id="wrap">
+@stop
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+<div class="row">
+        <div class="col-md-4 col-md-push-4 col-sm-10 col-sm-push-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">Reset Password</div>
 				<div class="panel-body">
@@ -23,7 +33,7 @@
 						<input type="hidden" name="token" value="{{ $token }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
+							<label class="col-md-4 control-label">Emain</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
@@ -54,6 +64,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 @endsection

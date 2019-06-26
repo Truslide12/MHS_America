@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container-fluid">
@@ -28,7 +28,7 @@
 						<input type="hidden" name="_token" value="{{ csrf_field() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
+							<label class="col-md-4 control-label">Email</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
