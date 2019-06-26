@@ -102,7 +102,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
                 <td height="25" style="height:25px;" class="em_h20">&nbsp;</td>
               </tr>
               <tr>
-                <td align="center" valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="{{ $message->embed('public/img/logo-2014-mini.png') }}" width="139" height="24" alt="MHS America" border="0" style="display:block;line-height:25px;max-width:208px;" class="em_w150" /></a></td>
+                <td align="center" valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="{{ $message->embed(public_path().'/img/logo-2014-mini.png') }}" width="139" height="24" alt="MHS America" border="0" style="display:block;line-height:25px;max-width:208px;" class="em_w150" /></a></td>
               </tr>
               <tr>
                 <td height="28" style="height:28px;" class="em_h20">&nbsp;</td>
@@ -162,7 +162,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
     <tr>
       <td align="center" valign="top"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
            <tr>
-            <td height="1" bgcolor="#dadada" style="font-size:0px; line-height:0px; height:1px;"><img src="{{ $message->embed('public/img/spacer.gif') }}" width="1" height="1" alt="" border="0" style="display:block;" /></td>
+            <td height="1" bgcolor="#dadada" style="font-size:0px; line-height:0px; height:1px;"><img src="{{ $message->embed(public_path().'/img/spacer.gif') }}" width="1" height="1" alt="" border="0" style="display:block;" /></td>
           </tr>
            <tr>
             <td align="center" valign="top" style="padding:0 25px;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -184,7 +184,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
             </td>
           </tr>
           <tr>
-            <td class="em_hide" style="line-height:1px;min-width:650px;background-color:#efefef;"><img alt="" src="{{ $message->embed('public/img/spacer.gif') }}" height="1" width="650" style="max-height:1px; min-height:1px; display:block; width:650px; min-width:650px;" border="0" /></td>
+            <td class="em_hide" style="line-height:1px;min-width:650px;background-color:#efefef;"><img alt="" src="{{ $message->embed(public_path().'/img/spacer.gif') }}" height="1" width="650" style="max-height:1px; min-height:1px; display:block; width:650px; min-width:650px;" border="0" /></td>
           </tr>
         </table>
       </td>

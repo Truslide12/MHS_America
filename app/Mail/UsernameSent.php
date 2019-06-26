@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -31,7 +32,13 @@ class UsernameSent extends Mailable
     public function build()
     {
         return $this->view('emails.username')
-                    ->with('name', $this->user->full_name())
+                    ->with('name', $this->user->getFullName())
                     ->with('username', $this->user->username);
     }
+
+    public function failed(Exception $exception)
+    {
+        //
+    }
+
 }
