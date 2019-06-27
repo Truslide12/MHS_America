@@ -97,7 +97,10 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
     <tr>
       <td align="center" valign="top"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
           <tr>
-            <td align="center" valign="top" style="padding:0 25px;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <td height="45" style="height:45px;" class="em_h20">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="center" valign="top" style="padding:0 25px; background-color:#005499;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
               <tr>
                 <td height="25" style="height:25px;" class="em_h20">&nbsp;</td>
               </tr>
@@ -155,7 +158,7 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
               <tr>
                 <td align="center" valign="top"><table border="0" cellspacing="0" cellpadding="0" align="left" class="em_wrapper">
                   <tr>
-                    <td class="em_grey" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 16px; color:#434343;">&copy; MHS America 2019  &nbsp;|&nbsp;  <a href="#" target="_blank" style="text-decoration:underline; color:#434343;"></a></td>
+                    <td class="em_grey" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 16px; color:#434343; text-align:center;">&copy; {{ date('Y') }} MHS America</td>
                   </tr>
                 </table>
                 </td>
