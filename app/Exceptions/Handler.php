@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Log;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -37,7 +38,9 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
 
-        Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
+        if(!is_a($exception, NotFoundHttpException::class)) {
+            Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
+        }
     }
 
     /**
