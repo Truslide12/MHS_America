@@ -22,6 +22,8 @@ use App\Mail\AccountCreated;
 use App\Mail\UsernameSent;
 use App\Mail\PasswordResetSent;
 
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset as PasswordResetEvent;
 /* use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -131,7 +133,7 @@ class AccountController extends Pony {
 			array(
 				'username' => 'required|unique:users,username|alpha_num|between:5,32',
 				'email' => 'required|email|unique:users,email',
-				'password' => 'required',
+				'password' => 'required|min:8',
 				'password_confirmation' => 'required|same:password',
 				'agree' => 'required'
 			),
@@ -146,6 +148,7 @@ class AccountController extends Pony {
 				'email.unique' => 'An account already exists with that email.',
 
 				'password.required' => 'A password is required.',
+				'password.min' => 'Passwords must be at least 8 characters.',
 				'password_confirmation.required' => 'You must enter the password twice.',
 				'password_confirmation.same' => 'The passwords did not match.',
 
@@ -218,7 +221,7 @@ class AccountController extends Pony {
 			'first_name' => 'required|between:2,48|alpha_dash',
 			'last_name' => 'required|between:2,48|alpha_dash',
 			'email' => 'required|email',
-			'password_confirmation' => 'required_with:password|same:password'
+			'password_confirmation' => 'required_with:password|same:password|min:8'
 		),
 		array(
 			'first_name.required' => 'Your first name is required.',
@@ -337,6 +340,14 @@ class AccountController extends Pony {
 					->with('canvas', Canvas::getDefault());
 	}
 
+	public function getResetPassword($token)
+	{
+		return view('account.recovery.newpassword')
+					->with('noheader', true)
+					->with('token', $token)
+					->with('canvas', Canvas::getDefault());
+	}
+
 	public function postRecoveryUsername()
 	{
 		$validator = Validator::make(Request::all(), [
@@ -399,6 +410,50 @@ class AccountController extends Pony {
 
 			return redirect()->route('account-login')
 						->with('success', 'If the account was found, a reset link was sent to your email.');
+		}
+	}
+
+	public function postResetPassword()
+	{
+		$req = Request::only('token', 'email', 'password', 'password_confirmation');
+
+		$validator = Validator::make($req, [
+			'token' => 'required',
+			'email' => 'required|email',
+			'password' => 'required|confirmed|min:8'
+		], [
+			'token.required' => 'The token is invalid. Please try requesting a new password reset email.',
+			'email.required' => 'The email on the account is required.',
+			'email.email' => 'The email provided is not a valid email.',
+			'password.required' => 'A new password is required.',
+			'password.confirmed' => 'The new password must be entered twice.',
+			'password.min' => 'The new password must be at least 8 characters.',
+		]);
+
+		if($validator->fails()) {
+			return redirect()->route('account-recovery-reset-password')
+							->withErrors($validator);
+		}else{
+			$res = Password::broker()->reset($req, function($user, $password) {
+				
+				$user->password = Hash::make($password);
+				$user->setRememberToken(Str::random(60));
+				$user->save();
+				
+				event(new PasswordResetEvent($user));
+				
+				Auth::login($user);
+
+			});
+
+			if($res == Password::PASSWORD_RESET) {
+				return redirect()->route('account')
+								->with('success', 'Your password has been successfully reset.');
+			}else{
+				return redirect()->back()
+                    		->withInput(Request::only('email'))
+                    		->withErrors(['email' => trans($res)]);
+			}
 		}
 	}
 

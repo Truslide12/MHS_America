@@ -69,6 +69,11 @@
 			</div>
 		</div>
 		@endif
+		@if(Session::has('success'))
+		<div class="alert alert-success">
+			{{ Session::get('success') }}
+		</div>
+		@endif
 		<h3>Latest MHS News</h3>
 		@if(count($news) == 0)
 		<div class="panel panel-default">

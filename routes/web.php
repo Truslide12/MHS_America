@@ -13,7 +13,6 @@
 
 use Illuminate\Http\Request;
 
-Auth::routes();
 
 //Route::group(array('domain' => 'luna.mhsamerica.com'), function()
 Route::group(array('prefix' => 'luna'), function()
@@ -384,6 +383,11 @@ Route::group(array('prefix' => 'luna'), function()
 				Route::post('username', array('uses' => 'AccountController@postRecoveryUsername', 'as' => 'account-recovery-username-post'));
 				/* Account recovery - password (POST) */
 				Route::post('password', array('uses' => 'AccountController@postRecoveryPassword', 'as' => 'account-recovery-password-post'));
+
+				/* Account recovery - password - enter new password (GET) */
+				Route::get('reset/{token}', array('uses' => 'AccountController@getResetPassword', 'as' => 'account-recovery-reset-password'));
+				/* Account recovery - password - enter new password (POST) */
+				Route::post('reset', array('uses' => 'AccountController@postResetPassword', 'as' => 'account-recovery-reset-password-post'));
 			});
 			
 			/* Account login (POST) */
