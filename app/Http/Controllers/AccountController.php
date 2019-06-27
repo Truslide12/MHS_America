@@ -350,26 +350,26 @@ class AccountController extends Pony {
 
 	public function postRecoveryUsername()
 	{
-		$validator = Validator::make(Request::all(), [
+		$validator = Validator::make(Request::only('email'), [
 			'email' => 'required|email'
 		], [
 			'email.required' => 'You must provide an email address.',
-			'email.email' => 'The value provided is not a valid email address.',
+			'email.email' => 'The value provided is not a valid email address.'
 		]);
 
 		if($validator->fails()) {
-			return redirect()->route('account-recovery-username')
+			return redirect()->back()
 						->withErrors($validator)
 						->withInput(Request::all());
 		}else{
-			$user = User::where(DB::raw('lower(email)'), '=', strtolower(Input::get('email')))->first();
+			$user = User::where('email', Request::input('email'))->first();
 
 			if(is_object($user) && is_a($user, Eloquent::class)) {
 				/* Send username reminder email
 				   see: App\Mail\UsernameSent
 				*/
 				$message = (new UsernameSent($user))->onQueue('emails');
-				Mail::to($user)->send($message);
+				Mail::to($user)->queue($message);
 			}
 
 			return redirect()->route('account-login')
