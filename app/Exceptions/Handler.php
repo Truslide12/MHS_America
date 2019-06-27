@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Log;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
