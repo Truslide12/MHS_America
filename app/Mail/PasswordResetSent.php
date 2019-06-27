@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,7 +12,6 @@ class PasswordResetSent extends Mailable
 {
     use Queueable, SerializesModels;
 
-    //protected $user;
     protected $token;
 
     /**
@@ -21,7 +21,6 @@ class PasswordResetSent extends Mailable
      */
     public function __construct($token)
     {
-        //$this->user = $user;
         $this->token = $token;
     }
 
@@ -32,7 +31,13 @@ class PasswordResetSent extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.password')
+        return $this->subject('Password Reset Link')
+                    ->view('emails.password')
                     ->with('token', $this->token);
+    }
+
+    public function failed(Exception $exception)
+    {
+        //
     }
 }

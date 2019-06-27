@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -35,5 +36,10 @@ class BusinessFeaturesActivated extends Mailable
         return $this->view('emails.businessfeatures')
                     ->with('name', $this->user->full_name())
                     ->with('company_title', $this->company->title);
+    }
+
+    public function failed(Exception $exception)
+    {
+        //
     }
 }

@@ -31,8 +31,8 @@ class UsernameSent extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.username')
-                    ->with('name', $this->user->getFullName())
+        return $this->subject('Username Reminder')
+                    ->view('emails.username')
                     ->with('username', $this->user->username);
     }
 

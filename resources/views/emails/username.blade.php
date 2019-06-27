@@ -123,30 +123,13 @@ u + .em_body .em_full_wrap { width:100% !important; width:100vw !important;}
                 <td height="45" style="height:45px;" class="em_h20">&nbsp;</td>
               </tr>
               <tr>
-                <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#264780; font-weight:bold;">Forgot your password?</td>
-              </tr>
-              <tr>
-                <td height="14" style="height:14px; font-size:0px; line-height:0px;">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 26px; color:#434343;">It happens to the best of us. The good news is you can change it&nbsp;right&nbsp;now.</td>
+                <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 26px; color:#434343;">Your username is:</td>
               </tr>
               <tr>
                 <td height="26" style="height:26px;" class="em_h20">&nbsp;</td>
               </tr>
               <tr>
-                <td align="center" valign="top"><table width="250" style="width:250px; background-color:#005499; border-radius:4px;" border="0" cellspacing="0" cellpadding="0" align="center">
-                  <tr>
-                    <td class="em_white" height="42" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 16px; color:#ffffff; font-weight:bold; height:42px;"><a href="{{ url('password/reset/'.$token) }}" target="_blank" style="text-decoration:none; color:#ffffff; line-height:42px; display:block;">RESET YOUR PASSWORD</a></td>
-                  </tr>
-                </table>
-                </td>
-              </tr>
-              <tr>
-                <td height="25" style="height:25px;" class="em_h20">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 26px; color:#434343;">If you didn&rsquo;t request a password reset, you don&rsquo;t have to do anything.</td>
+                <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#264780; font-weight:bold;">{{ $username }}</td>
               </tr>
               <tr>
                 <td height="44" style="height:44px;" class="em_h20">&nbsp;</td>
