@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Log;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -15,7 +14,11 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -38,9 +41,7 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
 
-        if(!is_a($exception, NotFoundHttpException::class)) {
-            Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
-        }
+        Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
     }
 
     /**

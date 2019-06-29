@@ -235,7 +235,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@if($transactions->count() > 0 )
+					@if(is_object($transactions) && $transactions->count() > 0 )
 					@foreach($transactions as $transaction)
 		            <tr style="cursor:pointer;" onclick="showDetails('{{$transaction->transaction_code}}');">
 		            	<td>{{$transaction->transaction_code}}</td>
