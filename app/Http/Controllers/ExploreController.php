@@ -159,6 +159,7 @@ class ExploreController extends Pony {
 
 	public function getCity($state, $county, $city)
 	{
+		$city = str_replace('-', '', $city);
 		$stateobj = State::byAbbr($state);
 		if(!is_object($stateobj)) return App::abort(404);
 
