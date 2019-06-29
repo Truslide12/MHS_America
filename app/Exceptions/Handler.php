@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Log;
+use Request;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -41,7 +42,7 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
 
-        Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
+        Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['url' => Request::url(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
     }
 
     /**

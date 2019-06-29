@@ -79,7 +79,7 @@
 				<hr>
 
 			<div class="row" style="border-bottom:0px solid black; margin-bottom: 20px;font-weight: bold;text-align: center;">
-			  <div class="col-xs-3 col-md-8" style="text-align: left;">Items</div>
+			  <div class="col-xs-3 col-md-8" style="text-align: left;">Service</div>
 			  <div class="col-xs-3 col-md-4">Qty.</div>
 			</div>
 			<div class="row" style="border-bottom:0px solid black; margin-bottom: 20px;text-align: center;">
