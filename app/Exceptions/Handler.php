@@ -42,7 +42,9 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
 
-        Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['url' => Request::url(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
+        if(!$this->shouldntReport($exception)) {
+            Log::channel('slack')->critical('Exception: '.$exception->getMessage(), ['url' => Request::url(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTraceAsString()]);
+        }
     }
 
     /**
