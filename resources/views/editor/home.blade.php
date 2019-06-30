@@ -157,21 +157,20 @@
 			</div>
 
 		</div>
-		<div class="col-md-9 col-md-offset-1">
+		<div class="col-sm-8 col-md-offset-1">
 
 			<hr>
 			<div class="form-group">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3">Office Hours</label>
-				<div class="col-md-6">
+				<div class="col-md-9">
 					@for($y=1; $y < 8; $y++)
 					<div class="row">
-						<div class="control-label col-xs-4">
+						<div class="control-label col-xs-3">
 							{{ $weekdays[$y] }}
 						</div>
-						<div class="col-xs-4">
+						<div class="col-xs-9">
 							<div class="input-group">
-								<span class="input-group-addon">Open</span>
 								<select name="open_hours[{{$y}}]" class="form-control hours-box open" data-action="hours" data-open-id="{{ $y }}">
 									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == '') ? ' selected' : '' }}>&nbsp;</option>
 									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == 48) ? ' selected' : '' }}>Closed</option>
@@ -180,20 +179,16 @@
 									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
 									@endfor
 								</select>
+								<span class="input-group-addon">&nbsp;-&nbsp;</span>
 							</div>
-						</div>
-						<div class="col-xs-4">
-							<div class="input-group">
-								<span class="input-group-addon">Close</span>
-								<select name="close_hours[{{$y}}]" class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
-									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
-									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
-									@for($z = 0; $z < 24; $z++)
-									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
-									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
-									@endfor
-								</select>
-							</div>
+							<select name="close_hours[{{$y}}]" class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
+								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
+								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
+								@for($z = 0; $z < 24; $z++)
+								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
+								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
+								@endfor
+							</select>
 						</div>
 					</div>
 					@endfor
