@@ -344,10 +344,11 @@ class EditorController extends Pony {
 			$close_times = Input::get('close_hours');
 			$curr = '';
 
-			for ($i=1; $i < 8; $i++) { 
-				if($curr != $open_times[$i].','.$close_times[$i] && !in_array('x', [ $open_times[$i], $close_times[$i] ]) ) {
-					$curr = $open_times[$i].','.$close_times[$i];
-					$hours_array[] = $i.':'.$curr;
+			for ($i=1; $i < 8; $i++) {
+				$hourchunk = (in_array('x', [ $open_times[$i], $close_times[$i] ])) ? ( (count($hours_array) > 0) ? '48,48' : '' ) : $open_times[$i].','.$close_times[$i];
+				if($curr != $hourchunk ) {
+					$hours_array[] = $i.':'.$hourchunk;
+					$curr = $hourchunk;
 				}
 			}
 
