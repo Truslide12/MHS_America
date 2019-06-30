@@ -182,6 +182,9 @@ Route::group(array('prefix' => 'luna'), function()
 	/* City shortcut redirect (GET) */
 	Route::get('city/{id}', array('uses' => 'ExploreController@getCityShortcut', 'as' => 'city-shortcut'));
 
+	/* Explore the nation (GET) */
+	Route::get('locale/{path}', array('uses' => 'ExploreController@getLocaleRedirect'))->where('path', '.*');
+
 	/* EXPLORE ROUTES */
 	Route::group(array('prefix' => 'explore'), function()
 	{

@@ -292,4 +292,9 @@ class ExploreController extends Pony {
 					//->with('canvas', Canvas::forState($stateobj->name));
 	}
 
+	public function getLocaleRedirect($path)
+	{
+		return redirect('explore/'.$path, 301);
+	}
+
 }
