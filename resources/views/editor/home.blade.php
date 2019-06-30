@@ -491,6 +491,7 @@
 			if(hoursync) {
 				hoursync = false;
 			}else{
+				hoursync = true;
 				if($(this).hasClass('open')) {
 					$('.hours-box.close[data-close-id='+$(this).data('open-id')+']').val($(this).val());
 				}else{
