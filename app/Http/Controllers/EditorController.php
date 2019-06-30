@@ -339,7 +339,7 @@ class EditorController extends Pony {
 			/* Utilities */
 			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
 
-			$hours_array = '';
+			$hours_array = [];
 			$open_times = Input::get('open_hours');
 			$close_times = Input::get('close_hours');
 			$curr = '';
