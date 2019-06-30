@@ -169,7 +169,7 @@
 						<div class="control-label col-xs-3">
 							{{ $weekdays[$y] }}
 						</div>
-						<div class="col-xs-9">
+						<div class="col-xs-5">
 							<div class="input-group">
 								<select name="open_hours[{{$y}}]" class="form-control hours-box open" data-action="hours" data-open-id="{{ $y }}">
 									<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == '') ? ' selected' : '' }}>&nbsp;</option>
@@ -181,6 +181,8 @@
 								</select>
 								<span class="input-group-addon">&nbsp;-&nbsp;</span>
 							</div>
+						</div>
+						<div class="col-xs-4">
 							<select name="close_hours[{{$y}}]" class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
 								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
 								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
