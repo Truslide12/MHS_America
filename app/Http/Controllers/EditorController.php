@@ -352,7 +352,9 @@ class EditorController extends Pony {
 				}
 			}
 
-			$profile_array['tagline'] = implode('|', $hours_array);
+			if(count($hours_array) > 0) {
+				$profile_array['tagline'] = implode('|', $hours_array);
+			}
 
 			/* Update checkboxes */
 			$bools = [
