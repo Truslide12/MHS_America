@@ -116,13 +116,25 @@ class EditorController extends Pony {
 			'' //48
 		);
 
+		$weekdays = [
+			0,
+			'Monday',
+			'Tuesday',
+			'Wednesday',
+			'Thursday',
+			'Friday',
+			'Saturday',
+			'Sunday'
+		];
+
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
 					->with('states', $states)
 					->with('plan', $profile->plan)
 					->with('business_hours', $final_hours)
-					->with('hour_texts', $hour_texts);
+					->with('hour_texts', $hour_texts)
+					->with('weekdays', $weekdays);
 					//->with('canvas', Canvas::getDefault());
 	}
 
