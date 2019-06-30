@@ -33,8 +33,8 @@ class EditorController extends Pony {
 		$states = State::orderBy('id', 'asc')->get();
 		$amenities = Amenities::where('visible', true)->orderBy("order")->take(16)->get();
 
-		$business_hours = '1:8,18|5:9,14|7:x';
-		//$business_hours = $profile->getHours();
+		//$business_hours = '1:8,18|5:9,14|7:x';
+		$business_hours = $profile->getHours();
 		$hour_sets = array_filter(explode('|', $business_hours), 'strlen');
 		$final_hours = [];
 
@@ -339,8 +339,19 @@ class EditorController extends Pony {
 			/* Utilities */
 			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
 
+			$hours_array = '';
+			$open_times = Input::get('open_hours');
+			$close_times = Input::get('close_hours');
+			$curr = '';
 
+			for ($i=1; $i < 8; $i++) { 
+				if($curr != $open_times[$i].','.$close_times[$i]) {
+					$curr = $open_times[$i].','.$close_times[$i];
+					$hours_array[] = $i.':'.$curr;
+				}
+			}
 
+			$profile_array['tagline'] = implode('|', $hours_array);
 
 			/* Update checkboxes */
 			$bools = [
