@@ -162,7 +162,7 @@
 			<hr>
 			<div class="form-group">
 				<div class="push-down"></div>
-				<label class="control-label col-md-3">Office Hours<br>&nbsp;</label>
+				<label class="control-label col-md-3">Office Hours<br><button type="button" id="clearHours" class="btn btn-small btn-default">Clear hours</button><br>&nbsp;</label>
 				<div class="col-md-9">
 					@for($y=1; $y < 8; $y++)
 					<div class="row">
@@ -483,6 +483,10 @@
 		}else{
 			$('#submitbtn').prop('disabled', false);
 		}
+	});
+
+	$('#clearHours').click(function() {
+		$('.hours-box').val('x');
 	});
 
 	$('.hours-box').change(function() {
