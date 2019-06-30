@@ -345,7 +345,7 @@ class EditorController extends Pony {
 			$curr = '';
 
 			for ($i=1; $i < 8; $i++) { 
-				if($curr != $open_times[$i].','.$close_times[$i]) {
+				if($curr != $open_times[$i].','.$close_times[$i] && !in_array('x', [ $open_times[$i], $close_times[$i] ]) ) {
 					$curr = $open_times[$i].','.$close_times[$i];
 					$hours_array[] = $i.':'.$curr;
 				}

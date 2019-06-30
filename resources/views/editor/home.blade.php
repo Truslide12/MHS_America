@@ -171,7 +171,7 @@
 						</div>
 						<div class="col-xs-6 col-md-4">
 							<select name="open_hours[{{$y}}]" class="form-control hours-box open" data-action="hours" data-open-id="{{ $y }}">
-								<option value=""{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == '') ? ' selected' : '' }}>&nbsp;</option>
+								<option value="x"{{ (array_key_exists($y, $business_hours) && in_array($business_hours[$y]['close'], ['', 'x'])) ? ' selected' : '' }}>&nbsp;</option>
 								<option value="48"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == 48) ? ' selected' : '' }}>Closed</option>
 								@for($z = 0; $z < 24; $z++)
 								<option value="{{ $z }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
@@ -181,7 +181,7 @@
 						</div>
 						<div class="col-xs-6 col-md-4">
 							<select name="close_hours[{{$y}}]" class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
-								<option value=""{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
+								<option value="x"{{ (array_key_exists($y, $business_hours) && in_array($business_hours[$y]['close'], ['', 'x'])) ? ' selected' : '' }}>&nbsp;</option>
 								<option value="48"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
 								@for($z = 0; $z < 24; $z++)
 								<option value="{{ $z }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
@@ -461,8 +461,7 @@
 <script src="{{ URL::route('welcome') }}/js/typeahead.bundle.js"></script>
 <script>
 	var currcity = {{ $profile->city_id }},
-		currabbr = '{{ $profile->state->abbr }}',
-		hoursync = false;
+		currabbr = '{{ $profile->state->abbr }}';
 
 	$('#stateUpdate').click(function() {
 		update_cities();
@@ -487,7 +486,7 @@
 	});
 
 	$('.hours-box').change(function() {
-		if($(this).val() == '' || $(this).val() == 48) {
+		if($(this).val() == 'x' || $(this).val() == 48) {
 			if($(this).hasClass('open')) {
 				$('.hours-box.close[data-close-id='+$(this).data('open-id')+']').val($(this).val());
 			}else{
