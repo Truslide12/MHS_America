@@ -488,15 +488,10 @@
 
 	$('.hours-box').change(function() {
 		if($(this).val() == '' || $(this).val() == 48) {
-			if(hoursync) {
-				hoursync = false;
+			if($(this).hasClass('open')) {
+				$('.hours-box.close[data-close-id='+$(this).data('open-id')+']').val($(this).val());
 			}else{
-				hoursync = true;
-				if($(this).hasClass('open')) {
-					$('.hours-box.close[data-close-id='+$(this).data('open-id')+']').val($(this).val());
-				}else{
-					$('.hours-box.open[data-open-id='+$(this).data('close-id')+']').val($(this).val());
-				}
+				$('.hours-box.open[data-open-id='+$(this).data('close-id')+']').val($(this).val());
 			}
 		}
 	});
