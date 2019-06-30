@@ -368,6 +368,7 @@ class EditorController extends Pony {
 			}
 
 			/* Address change */
+			$geocoding = false;
 			if(Input::get('address') != $profile->address || Input::get('addressb') != $profile->addressb || Input::get('city') != $profile->city_id || Input::get('state') != $profile->state_id || Input::get('zipcode') != $profile->zipcode || $profile->county_id == 0) {
 
 				/** 
@@ -382,11 +383,12 @@ class EditorController extends Pony {
 					Input::get('zipcode'),
 					$profile
 				);
+				$geocoding = $geocode['success'];
 
 			}
 
 			/* Save! */
-			if($geocode['success']) {
+			if($geocoding) {
 				$profile->update(array_merge($profile_array, $geocode['data']));
 			}else{
 				$profile->update($profile_array);
