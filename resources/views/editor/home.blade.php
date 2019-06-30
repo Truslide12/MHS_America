@@ -162,7 +162,7 @@
 			<hr>
 			<div class="form-group">
 				<div class="push-down"></div>
-				<label class="control-label col-md-3">Office Hours</label>
+				<label class="control-label col-md-3">Office Hours<br>&nbsp;</label>
 				<div class="col-md-9">
 					@for($y=1; $y < 8; $y++)
 					<div class="row">
@@ -171,21 +171,21 @@
 						</div>
 						<div class="col-xs-6 col-md-4">
 							<select name="open_hours[{{$y}}]" class="form-control hours-box open" data-action="hours" data-open-id="{{ $y }}">
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == '') ? ' selected' : '' }}>&nbsp;</option>
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == 48) ? ' selected' : '' }}>Closed</option>
+								<option value=""{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == '') ? ' selected' : '' }}>&nbsp;</option>
+								<option value="48"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == 48) ? ' selected' : '' }}>Closed</option>
 								@for($z = 0; $z < 24; $z++)
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
+								<option value="{{ $z }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
+								<option value="{{ $z+24 }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['open'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
 								@endfor
 							</select>
 						</div>
 						<div class="col-xs-6 col-md-4">
 							<select name="close_hours[{{$y}}]" class="form-control hours-box close" data-action="hours" data-close-id="{{ $y }}">
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
+								<option value=""{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == '') ? ' selected' : '' }}>&nbsp;</option>
+								<option value="48"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == 48) ? ' selected' : '' }}>Closed</option>
 								@for($z = 0; $z < 24; $z++)
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
-								<option{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
+								<option value="{{ $z }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z) ? ' selected' : '' }}>{{ $hour_texts[$z] }}</option>
+								<option value="{{ $z+24 }}"{{ (array_key_exists($y, $business_hours) && $business_hours[$y]['close'] == $z+24) ? ' selected' : '' }}>{{ $hour_texts[$z+24] }}</option>
 								@endfor
 							</select>
 						</div>
@@ -461,7 +461,8 @@
 <script src="{{ URL::route('welcome') }}/js/typeahead.bundle.js"></script>
 <script>
 	var currcity = {{ $profile->city_id }},
-		currabbr = '{{ $profile->state->abbr }}';
+		currabbr = '{{ $profile->state->abbr }}',
+		hoursync = false;
 
 	$('#stateUpdate').click(function() {
 		update_cities();
@@ -482,6 +483,20 @@
 			$('#submitbtn').prop('disabled', 'disabled');
 		}else{
 			$('#submitbtn').prop('disabled', false);
+		}
+	});
+
+	$('.hours-box').change(function() {
+		if($(this).val() == '' || $(this).val() == 48) {
+			if(hoursync) {
+				hoursync = false;
+			}else{
+				if($(this).hasClass('open')) {
+					$('.hours-box.close[data-close-id='+$(this).data('open-id')+']').val($(this).val());
+				}else{
+					$('.hours-box.open[data-open-id='+$(this).data('close-id')+']').val($(this).val());
+				}
+			}
 		}
 	});
 
