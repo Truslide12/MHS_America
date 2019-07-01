@@ -806,7 +806,7 @@ class GetStartedCommunityController extends Pony {
 	*******************************/
 
 	protected function addCardToCompany($params) {
-		$target_company = \Company::where('id', $params['company_id'])->first();
+		$target_company = Company::where('id', $params['company_id'])->first();
 
 		if( $target_company->stripe_customer_id == null ) {
 			//create new stripe customer (with the source)..
