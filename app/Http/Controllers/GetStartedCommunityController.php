@@ -764,7 +764,7 @@ class GetStartedCommunityController extends Pony {
 			$orderdata['community-county'] = $profile->county_id;
 			$orderdata['community-location'] = $profile->location;
 			$orderdata['city_data'] = Geoname::where('state_id', $profile->state_id)
-												->where('osm_id', $profile->city_id)->first();
+												->where('id', $profile->city_id)->first();
 
 			$orderdata['state_data'] = State::where('id', $profile->state_id)->first();
 
