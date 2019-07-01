@@ -569,6 +569,18 @@ class GetStartedCommunityController extends Pony {
 		}
 
 
+		if ( session('is_upgrade') === true ) {
+			$profile = Profile::where('id', session("profile_id"))->first();
+			foreach ( Auth::user()->companies as $company ) {
+				if ( $company->id == $profile->company_id ) {
+					$order_data = session("order_data");
+					$order_data['profile_data'] = $profile;
+					session(["order_data" => $order_data, "active_step" => 4]);
+				}
+			}
+			//return session('active_step') . "|" . $profile->id;;
+			return redirect()->route($this->PRODUCT_ROUTE);
+		}
 
 			//Create free profile
 			$d = session("order_data");
@@ -726,6 +738,43 @@ class GetStartedCommunityController extends Pony {
 		return redirect()->route($this->PRODUCT_ROUTE);
 	}
 
+
+	public function getUpgrade()
+	{
+		self::clearSession(true);
+
+		$pid = Request::input('profile');
+		if ( $pid ) {
+
+			$profile = Profile::where('id', $pid)->first();
+			$orderdata['company_data'] = null;
+			foreach ( Auth::user()->companies as $company ) {
+				if ( $company->id == $profile->company_id ) {
+					$orderdata['company_data'] = $company;
+				}
+			}
+			if ( $orderdata['company_data'] == null ) { return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors(["Failed to set business account.."]); }
+
+			$orderdata['community-name'] =$profile->title;
+			$orderdata['community-address1'] =$profile->address;
+			$orderdata['community-address2'] = $profile->addressb;
+			$orderdata['community-zip'] = $profile->zipcode;
+			$orderdata['community-city'] = $profile->city_id;
+			$orderdata['community-state'] = $profile->state_id;
+			$orderdata['community-county'] = $profile->county_id;
+			$orderdata['community-location'] = $profile->location;
+			$orderdata['city_data'] = Geoname::where('state_id', $profile->state_id)
+												->where('osm_id', $profile->city_id)->first();
+
+			$orderdata['state_data'] = State::where('id', $profile->state_id)->first();
+
+			session(["product" => 1, "plan" => "premium", "order_data" => $orderdata, "active_step" => 3, "is_upgrade" => true, "profile_id" => $profile->id ]);
+			return redirect()->route($this->PRODUCT_ROUTE);
+		} else {
+			//
+		}
+	}
+
 	public function clearSession($no_redir = false)
 	{
 		session()->forget("order_data");
@@ -824,7 +873,7 @@ class GetStartedCommunityController extends Pony {
 		$company = $user->companies->where('id', $params['company_id'])->first();
 
 		$params['profile_id'];
-		$check_sub = \Subscription::where('subscription_target', $params['profile_id'])->where('stripe_plan_id', $plan_id)->exists();
+		$check_sub = Subscription::where('subscription_target', $params['profile_id'])->where('stripe_plan_id', $plan_id)->exists();
 		if ( $check_sub ) {
 			return (object)[
 			  "status" => false,

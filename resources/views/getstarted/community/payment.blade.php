@@ -37,7 +37,7 @@
 <div class="row white mb-0" >
 	<div class="col-md-12">
 
-<form class="form-horizontal" action="{{ URL::route('getstarted') }}/submitpayment" method="POST" role="form"  id="payment-form">
+<form class="form-horizontal" action="{{ URL::route('getstarted-community') }}/submitpayment" method="POST" role="form"  id="payment-form">
 {{ csrf_field() }}
 
 			<div class="panel heavypad">
@@ -57,7 +57,16 @@
 										<select name="payment_source" id="payment_source" class="form-control" onchange="updateSource(this.value);" >
 											<option value="0">Select a Payment Source...</option>
 											@php
-												$company = \Company::where('id', Session::get('order_data')['company_data']->id)->first();
+												$d = session('order_data');
+												$company = null;
+												foreach($companies as $c ) {
+													if ( $c->id == $d['company_data']->id ) {
+														$company = $c;
+													}
+												}
+												if( $company === null ) {
+													
+												}
 											@endphp
 											@foreach( $company->paysources as $src )
 											  <option id="{{$src->id}}" value="{{$src->id}}">{{$src->card_nickname}} ({{$src->card_brand}} ···· ···· ···· {{$src->card_last_four}}) </option>

@@ -217,10 +217,13 @@
 				@foreach($profiles as $profile)
 				<li class="list-group-item">
 					<span class="pull-right">
+						@if( empty($profile->subscription_id) )
+						<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => $profile->id)) }}" class="btn btn-success btn-sm btn-align-fix">Upgrade</a>
+						@endif
 						<a href="{{ URL::route('profile', array('profile' => $profile->id)) }}" class="btn btn-info btn-sm btn-align-fix" target="_blank">View</a> 
 						<a href="{{ URL::route('editor', array('profile' => $profile->id, 'from_company' => $company->id)) }}" class="btn btn-warning btn-sm btn-align-fix">Manage</a>
 					</span>
-					<h4>{{ $profile->title }} <small>({{ $profile->type }}) {{ \Carbon\Carbon::parse($profile->updated_at)->diffForHumans() }}</small></h4>
+					<h4>{{ $profile->title }} <small>(@if($profile->subscription_id)Paid @Else()Free @endif {{ $profile->type }} Profile) <!--{{ \Carbon\Carbon::parse($profile->updated_at)->diffForHumans() }} --></small></h4>
 				</li>
 				@endforeach
 			</ul>

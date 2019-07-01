@@ -800,6 +800,7 @@ Route::group(array('prefix' => 'luna'), function()
 		Route::post('confirmorder', array('uses' => 'GetStartedCommunityController@postOrderConfirmation', 'as' => 'getstarted-community-confirmorder'));
 		Route::post('submitpayment', array('uses' => 'GetStartedCommunityController@postSubmitPayment', 'as' => 'getstarted-community-submitpayment'));
 
+		Route::get('upgrade', array('uses' => 'GetStartedCommunityController@getUpgrade', 'as' => 'getstarted-community-upgrade'));
 	});
 
 	Route::group(array('prefix' => 'getstarted/home'), function()
