@@ -41,6 +41,7 @@
 			<div class="panel-body">
 				<p>To grant a user access to the company, enter their email address. They will receive a temporary verification code and instructions on how to link to the company.</p>
 				<form class="form-horizontal" role="form" action="{{ URL::route('account-business-company-users-create-post', array('company' => $company->id)) }}" method="POST">
+					{{ csrf_field() }}
 					<div class="form-group">
 						<div class="col-md-12">
 							<div class="input-group">
