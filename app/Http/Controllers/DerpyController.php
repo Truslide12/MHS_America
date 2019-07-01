@@ -462,4 +462,26 @@ class DerpyController extends Pony {
 		}
 	}
 	
+
+	public function getLatestHomes($zip = null)
+	{
+
+		if ( $zip === null ) {
+			//latest on site
+			$h = Home::where('status', '>', 0)->paginate(4);
+			return $h;
+		} else {
+			if ( strlen($zip) == 2 ) {
+				//by state
+				return 3;
+			} else {
+				//by zipcode
+				$h = Home::where('status', '>', 0)->where('zipcode', $zip)->paginate(4);
+			}
+		}
+
+
+
+	}
+	
 }

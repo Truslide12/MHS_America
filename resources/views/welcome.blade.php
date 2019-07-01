@@ -1,15 +1,43 @@
 @php
-		$img = Array("/img/example_home.jpg", 
-					 "/img/example_home.jpg", 
-					 "/img/example_home.jpg", 
-					 "/img/example_home.jpg", 
-					 "/img/example_home.jpg", 
-					 "/img/example_home.jpg",
-					 "/img/example_home.jpg", 
-					 "/img/example_home.jpg");
-		$title = Array("3 Bed 2 Bath Home", "2 Bed 2 Bath Home", "1 Bed 1 Bath Home", "3 Bed 2 Bath Home", "", "", "", "");
-		$place = Array("Yucaipa, CA", "Riverside, CA", "Colton, CA", "Corona, CA", "", "", "", "");
-		$demo = 1;
+
+	/*******************************************
+	* From dummy values to dumb values..
+	* I know this needs work just improving a bit
+	* from what we had.
+	********************************************/
+	$da = file_get_contents("http://mhsamerica.loc/api/latest/homes");
+	$da = json_decode($da);
+	$img = $title = $place = Array();
+
+	foreach( $da->data as $d ) {
+
+		$title[] = $d->title;
+		$place[] = $d->zipcode;
+
+		if ( $d->photos ) {
+			$p = (array) json_decode(stripslashes($d->photos));
+			if ( ! empty($p) ) {
+				$p = array_values($p)[0];
+				$img[] = $p->url;
+			} else {
+				$img[] = "/img/nophoto.png"; 
+			}
+		} else {
+			$img[] = "/img/nophoto.png"; 
+		}
+	}
+
+	if ( sizeof($title) <= 3 ) {
+		for ( $r = 0; $r <= 3; $r++) {
+			if( ! array_key_exists($r, $title) ){
+				$title[] = "";
+				$place[] = "";
+				$img[] = ""; 
+			}
+		}
+	}
+
+	$demo = 1;
 @endphp
 
 @extends('layouts.master')
@@ -321,6 +349,7 @@
 					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
 					<div class="mhs-slideshow-loader"><small>Loading</small></div>
 					@for ( $h = 0; $h <= 3; $h++ )
+					@if( $img[$h] )
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
@@ -335,6 +364,7 @@
 
 			            </div>
 					</div>
+					@endif
 					@endfor
 				</div>
 			</div>

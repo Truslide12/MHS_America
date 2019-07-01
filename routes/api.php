@@ -20,6 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::group(array('prefix' => 'latest'), function()
+{
+	Route::get('homes', array('uses' => 'DerpyController@getLatestHomes', 'as' => 'homes-all'));
+	Route::get('homes/{zip}', array('uses' => 'DerpyController@getLatestHomes', 'as' => 'homes-zip'));
+
+});
+
+
+
+/*************************************
+	Everything below I was using
+	when I started implementing
+	geocodio.. then kage took over..
+	not sure if any of this is used?
+**************************************/
 Route::group(array('prefix' => 'geotools'), function()
 {
 	/*
