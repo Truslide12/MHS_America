@@ -764,7 +764,7 @@ class GetStartedCommunityController extends Pony {
 			$orderdata['community-county'] = $profile->county_id;
 			$orderdata['community-location'] = $profile->location;
 			$orderdata['city_data'] = Geoname::where('state_id', $profile->state_id)
-												->where('osm_id', $profile->city_id)->first();
+												->where('id', $profile->city_id)->first();
 
 			$orderdata['state_data'] = State::where('id', $profile->state_id)->first();
 
@@ -980,7 +980,7 @@ class GetStartedCommunityController extends Pony {
 			'payment_source_id' => $c->id,
 			'stripe_charge_id' => null,
 			'stripe_invoice_id' => $stripe_call->latest_invoice,
-			'amount' => $stripe_call->plan->amount
+			'amount' => (is_null($stripe_call->plan->amount) ? $stripe_call->plan->tiers->{'0'}->unit_amount : $stripe_call->plan->amount) * $stripe_call->quantity	
 		];
 
 		return (object)[
