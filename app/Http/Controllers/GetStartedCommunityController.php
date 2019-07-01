@@ -980,7 +980,7 @@ class GetStartedCommunityController extends Pony {
 			'payment_source_id' => $c->id,
 			'stripe_charge_id' => null,
 			'stripe_invoice_id' => $stripe_call->latest_invoice,
-			'amount' => (is_null($stripe_call->plan->amount) ? $stripe_call->plan->tiers->{'0'}->unit_amount : $stripe_call->plan->amount) * $stripe_call->quantity	
+			'amount' => (is_null($stripe_call->plan->amount) ? $stripe_call->plan->tiers[0]->unit_amount : $stripe_call->plan->amount) * $stripe_call->quantity	
 		];
 
 		return (object)[
