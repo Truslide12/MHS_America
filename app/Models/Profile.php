@@ -281,9 +281,14 @@ class Profile extends EloquentModel {
 		return $this->belongsTo(Company::class);
 	}
 
+	public function getPlanIdAttribute()
+	{
+		return ($this->subscription_id) ? Plan::where('name', 'premier')->first()->id : Plan::where('name', 'free')->first()->id;
+	}
+
 	public function plan()
 	{
-		return ($this->subscription_id) ? Plan::where('name', 'premier') : Plan::where('name', 'free');
+		return $this->belongsTo(Plan::class);
 	}
 
 	public function photos()
