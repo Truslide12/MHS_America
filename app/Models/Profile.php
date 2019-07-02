@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use View;
+use App\Models\Plan;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\Point;
@@ -278,6 +279,11 @@ class Profile extends EloquentModel {
 	public function company()
 	{
 		return $this->belongsTo(Company::class);
+	}
+
+	public function getPlanIdAttribute()
+	{
+		return ($this->subscription_id) ? Plan::where('name', 'premier')->first()->id : Plan::where('name', 'free')->first()->id;
 	}
 
 	public function plan()
