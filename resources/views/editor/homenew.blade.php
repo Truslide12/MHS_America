@@ -3,7 +3,7 @@
 @use-navbar-divider
 
 @section('incls-head-early')
-<meta name="_token" content="{ csrf_token() }"/>
+<meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
@@ -421,7 +421,7 @@ function newPony(ponyName)
 
   $('#form-container').html("<center><img src='{{ URL::route('welcome') }}/img/loading.gif'><br>Loading..</center>");
   init = null;
-  pony.fetch('forms/'+ponyName, function(data) {
+  pony.fetch('forms/'+ponyName, {}, function(data) {
 
     //$('#form-container').hide().html(data).fadeIn("slow");
     $('#form-container').html(data);
@@ -432,6 +432,8 @@ function newPony(ponyName)
       init(); 
     } else { console.log("no instr loaded"); }
     if ( ponyName == "home-finish") { build_review(); }
+  }, function(){
+    $('#form-container').hide().html("Error: Failed to load data..").show();//.fadeIn("slow");
   });
 }
 
