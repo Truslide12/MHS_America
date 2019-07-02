@@ -805,7 +805,7 @@ class GetStartedHomeController extends Pony {
 			$order_data = session("order_data");
 			//create the home...
 			$new_home = new Home;
-			$new_home->community_id 	= $order_data['profile_data']->id;
+			//$new_home->community_id 	= $order_data['profile_data']->id;
 			$new_home->city_id 			= $order_data['profile_data']->city_id;
 			$new_home->title 			= "New Home";
 			$new_home->profile_id 		= $order_data['profile_data']->id;	/*of community?*/
