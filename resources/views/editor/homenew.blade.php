@@ -449,7 +449,7 @@ function shortCutPony(ponyName)
   });
   init = null;
   //$('#form-container').html("<center><img src='{{ URL::route('welcome') }}/img/loading.gif'><br>Loading..</center>");
-  pony.fetch('forms/'+ponyName, function(data) {
+  pony.fetch('forms/'+ponyName, {}, function(data) {
     $('#form-container').hide().html(data).show();//.fadeIn("slow");
     if (typeof init == 'function') { 
       console.log("exe loaded init");
@@ -459,6 +459,8 @@ function shortCutPony(ponyName)
     $('[data-toggle="tooltip"]').tooltip();
 
 
+  }, function(){
+    $('#form-container').hide().html("Error: Failed to load data..").show();//.fadeIn("slow");
   });
 }
 
