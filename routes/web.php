@@ -266,6 +266,8 @@ Route::group(array('prefix' => 'luna'), function()
 					Route::get('create', array('uses' => 'BusinessController@getCompanyCreate', 'as' => 'account-business-company-create'));
 					/* Account business link to company (GET) */
 					Route::get('link', array('uses' => 'BusinessController@getCompanyLink', 'as' => 'account-business-company-link'));
+					/* Account business link to company (GET) */
+					Route::get('activate/{invite_code}', array('uses' => 'BusinessController@getCompanyLinkActivate', 'as' => 'account-business-company-link-activate'));
 
 					/* Account business create company (POST) */
 					Route::post('create', array('uses' => 'BusinessController@postCompanyCreate', 'as' => 'account-business-company-create-post'));

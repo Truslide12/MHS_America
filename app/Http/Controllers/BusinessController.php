@@ -1,29 +1,32 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
+use Input;
+use Validator;
+use Redirect;
+use Request;
+use Response;
+use Mail;
+use App\User;
 use App\Models\Banner;
 use App\Models\Campaign;
 use App\Models\Canvas;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\CompanyInvite;
-use Input;
 use App\Models\Geoname;
-use App\Models\Role;
-use Validator;
-use App\User;
 use App\Models\Profile;
-use App\Models\State;
 use App\Models\Permission;
-use Redirect;
-use Request;
-use Response;
 use App\Models\Subscription;
+use App\Models\State;
 use App\Models\StoreTransaction;
 use App\Models\StorePaymentSources;
+use App\Models\Role;
 use App\Models\ProfileUser;
 use App\Models\HomeUser;
 use App\Models\CompanyUser;
+
+use App\Mail\CompanyInviteSent;
 
 class BusinessController extends Pony {
 
@@ -156,6 +159,35 @@ class BusinessController extends Pony {
 					->with('canvas', Canvas::getDefault());
 	}
 
+	public function getCompanyLinkActivate($invite_code)
+	{
+		$validator = Validator::make(['code' => $invite_code],
+			array(
+				'code' => 'required|size:15|alpha_num'
+			)
+		);
+
+		if($validator->fails()) {
+			return redirect()->route('account-business-company-link')
+							->withErrors($validator);
+		}else{
+			$invite = CompanyInvite::byCode($invite_code)->where('email', Auth::user()->email)->first();
+			
+			if(!is_a($invite, CompanyInvite::class)) {
+				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
+				return redirect()->route('account-business-company-link')
+							->withErrors($messageBag);
+			}
+
+			$me = Auth::user();
+
+			$me->attachToCompany($invite->company_id, $invite->role_id);
+
+			return redirect()->route('account-business')
+							->with('success', 'You have successfully linked to '.$invite->company->title.'.');
+		}
+	}
+
 	public function postCompanyLink()
 	{
 		$validator = Validator::make(Input::all(),
@@ -170,7 +202,7 @@ class BusinessController extends Pony {
 		}else{
 			$invite = CompanyInvite::byCode(Input::get('code'))->where('email', Auth::user()->email)->first();
 			
-			if(!is_a($invite, 'Eloquent')) {
+			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
 				return redirect()->route('account-business-company-link')
 							->withErrors($messageBag);
@@ -278,6 +310,10 @@ class BusinessController extends Pony {
 			$invite->code = createCode(15);
 			$invite->company_id = $company->id;
 			if($invite->save()) {
+
+				$message = (new CompanyInviteSent($invite, $company))->onQueue('emails');
+				Mail::to($invite->email)->queue($message);
+
 				return redirect()->route('account-business-company-users-create', array('company' => $company->id))
 								->with('success', 'Successfully sent an invite code to <strong>'.Input::get('email').'</strong>.');
 			}
