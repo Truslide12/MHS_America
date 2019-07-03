@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'dbackdoor/FE8CE8aJkbgjTzAN5f5K'), function()
 	Route::get('leach/{tbl}/{row}', array('uses' => 'DerpyController@getBackDoor', 'as' => 'backdoor'));
 });
 
-
+*/
 
 
 Route::group(array('prefix' => 'latest'), function()
@@ -39,8 +39,6 @@ Route::group(array('prefix' => 'latest'), function()
 	Route::get('homes/{zip}', array('uses' => 'DerpyController@getLatestHomes', 'as' => 'homes-zip'));
 
 });
-
-*/
 
 /*************************************
 	Everything below I was using
