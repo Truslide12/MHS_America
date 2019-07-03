@@ -183,10 +183,13 @@ class EditorController extends Pony {
 
 	public function getHomeForm(Profile $profile, $frm)
 	{
-		return view('editor.partials.forms.'.$frm)
+		$x = view('editor.partials.forms.'.$frm)
 					->with('profile', $profile)
-					->with('plan', $profile->plan);
+					->with('plan', $profile->plan)
+					->render();
 					//->with('canvas', Canvas::getDefault());
+
+		return Response::json(array('success' => true, 'error' => false, 'data' => $x), 200);
 	}
 
 	public function getEditHome(Profile $profile, Home $home)

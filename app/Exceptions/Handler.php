@@ -40,6 +40,14 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        /***************************************************
+         * skip out this slack shit on local environment...
+         * because otherwise the only error that comes out is
+         * cURL errors.. even if it worked, no need to messy up
+         * slack with local dev errors..
+         ***************************************************/
+        if ( env("APP_ENV") == "local" ) { return false; }
+
         parent::report($exception);
 
         if(!$this->shouldntReport($exception)) {
