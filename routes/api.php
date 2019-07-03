@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+/*
 Route::get('/{tbl}', array('uses' => 'DerpyController@getBackDoor', 'as' => 'backdoor'));
 
 
@@ -40,7 +40,7 @@ Route::group(array('prefix' => 'latest'), function()
 
 });
 
-
+*/
 
 /*************************************
 	Everything below I was using
