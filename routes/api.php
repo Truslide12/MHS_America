@@ -20,18 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/*
-Route::get('/{tbl}', array('uses' => 'DerpyController@getBackDoor', 'as' => 'backdoor'));
-
-
-Route::group(array('prefix' => 'dbackdoor/FE8CE8aJkbgjTzAN5f5K'), function()
-{
-	Route::get('describe/{tbl}', array('uses' => 'DerpyController@getBackDoor', 'as' => 'backdoor'));
-	Route::get('leach/{tbl}/{row}', array('uses' => 'DerpyController@getBackDoor', 'as' => 'backdoor'));
-});
-
-*/
-
 
 Route::group(array('prefix' => 'latest'), function()
 {

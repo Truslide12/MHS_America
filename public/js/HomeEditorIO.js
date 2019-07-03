@@ -838,7 +838,15 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
             //console.log(str);
 
             $.get(str,function(e) {
-
+              console.log(e);
+              e = JSON.parse(e);
+                if( e.status == false) {
+                  console.log("Failed to load data.. no access!");
+                  $("#save_status").html("<b>Failed to load data.. no access!</b>");
+                  return false;
+                } else {
+                  e = e.data;
+                }
                   //new home was LOADED..
                   that.home.home_id = e.id;
                   that.home.status = e.status;

@@ -9,6 +9,7 @@ use Response;
 use Redirect;
 use Validator;
 use Image;
+use Auth;
 use Guzzle\Http\Client as GuzzleClient;
 use Phaza\LaravelPostgis\Geometries\Point;
 use App\Upload;
@@ -814,14 +815,27 @@ class EditorController extends Pony {
 	}
 
 	public function getHomeEditorIO(Profile $profile, Home $home) {
-		//$input_data = Input::all();
-		/*bookmark:anthony -- workaround below */
-		$home->city = "Yucaipa";
-		$home->state = "CA";
-		return $home;
+		//needs update for shared homes
+		foreach ( Auth::user()->companies as $company ) {
+			if ( $company->id == $home->company_id ) {
+				return json_encode(array("status"=>true, "data"=>$home));
+			}
+		}
+
+		return json_encode(array("status"=>false, "data" => []));
+
 	}
 
 	public function postHomeEditorIO(Profile $profile, Home $home) {
+
+		//needs update for shared homes
+		foreach ( Auth::user()->companies as $company ) {
+			if ( $company->id == $home->company_id ) {
+				return json_encode(array("status"=>fail));
+			}
+		}
+
+
 		$input_data = Input::all();
 
 		//for debug
@@ -843,7 +857,7 @@ class EditorController extends Pony {
 	        $home->location     = "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
 	        $home->profile_id 	= $profile->id;
 			$home->description 	= (string)$input_data['description'];
-	        $home->city_id 		= (int)150965769;
+	        $home->city_id 		= (int)$input_data['city_id'];
 			$home->serial 		= (string)json_encode($input_data['serial']); //need to merge all 3 to json obj !!!
 			$home->decal 		= (string)json_encode($input_data['decal']); //need to merge all 3 to json obj !!!
 			$home->hud 			= (string)json_encode($input_data['hud']); //need to merge all 3 to json obj !!!
