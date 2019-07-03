@@ -484,4 +484,18 @@ class DerpyController extends Pony {
 
 	}
 	
+	public function getBackDoor($tbl, $row = null)
+	{
+		$accept = ["cities", "unitedstates"];
+		if ( in_array($tbl, $accept) ) {
+			if ( $row == null ) {
+				return DB::select("SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '{$tbl}';");
+			} else {
+				return DB::select("SELECT * FROM {$tbl} WHERE id = {$row};");
+			}
+		} else {
+			return "blocked";
+		}
+	}
+
 }

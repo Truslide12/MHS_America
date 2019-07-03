@@ -817,6 +817,9 @@ class GetStartedHomeController extends Pony {
 			$new_home->location 		= "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
 			$new_home->space_number 	= $order_data['space'];
 			//$new_home->exp_date 		= ;
+			$new_home->serial 		= "[null,null,null]";
+			$new_home->decal 		= "[null,null,null]";
+			$new_home->hud 			= "[null,null,null]";
 			$new_home->company_id 		= $company->id;
 			$new_home->save();
 
