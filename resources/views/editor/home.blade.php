@@ -229,7 +229,9 @@
 			    <div class="col-sm-9">
 			      <select class="form-control" id="city" name="city" autocomplete="off" disabled>
 			      	 <option value="0" data-abbr="xx">First Select State</option>
+			      	 @if ( $profile->city )
 			      	 <option value="{{$profile->city_id}}" selected>{{$profile->city->place_name}}</option>
+			      	 @endif
 			      </select>
 			    </div>
 			</div>
