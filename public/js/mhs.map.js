@@ -88,8 +88,7 @@ function initMap(params) {
       center: {lat: params['latitude'], lon: params['longitude']},
       minZoom: params['minZoom'],
       maxZoom: params['maxZoom'],
-      pitch: params['pitch'],
-      pitchWithRotate
+      pitch: params['pitch']
     });
 
     if(params['bounds'] && params['zoom'] != 11) {
