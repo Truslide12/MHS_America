@@ -69,8 +69,7 @@ var Lyra = {
 };
 
 function initMap(params) {
-    //mapboxgl.accessToken = 'pk.eyJ1Ijoia2FnZWVkd2FyZHMiLCJhIjoiY2pzMjVpOGdnMTVkZzQ0bWc1eDhmZHI2ZiJ9.2jUXv-aCsmXEe3f73wBvvA'; ..Kage
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYW50aG9ueW1hdmlsYSIsImEiOiJjanV5azZnZDYwMGdvNDltdTQ3YW5lN3p3In0.lpbLIuU4veq3zAYmcwcDBw'; //Anthony
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2FnZWVkd2FyZHMiLCJhIjoiY2pzMjVpOGdnMTVkZzQ0bWc1eDhmZHI2ZiJ9.2jUXv-aCsmXEe3f73wBvvA';
 
     if ( ! params ) { params = new Array(); }
       //paramater handling now..
@@ -89,7 +88,8 @@ function initMap(params) {
       center: {lat: params['latitude'], lon: params['longitude']},
       minZoom: params['minZoom'],
       maxZoom: params['maxZoom'],
-      pitch: params['pitch']
+      pitch: params['pitch'],
+      pitchWithRotate
     });
 
     if(params['bounds'] && params['zoom'] != 11) {
