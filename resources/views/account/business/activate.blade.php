@@ -51,8 +51,7 @@
 				<div class="form-group col-md-4">
 					<label for="state">State</label>
 					<select id="state" name="state" class="form-control">
-					<option value="CA">ca</option>
-						@foreach(\App\Models\State::all() as $state)
+						@foreach(\App\Models\State::orderBy('title', 'asc')->get() as $state)
 						<option value="{{ $state->id }}" @if(Input::old('state') == $state->id) selected @endif>{{ $state->title }}</option>
 						@endforeach
 					</select>
