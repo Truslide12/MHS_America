@@ -41,11 +41,11 @@ class BusinessController extends Pony {
 	public function getIndex(Company $company)
 	{
 		$me = Auth::user();
-		$companies = $me->companies()->pluck('companies.id')->toArray();
+		/* $companies = $me->companies()->pluck('companies.id')->toArray();
 		if ( count($companies) == 1 ) {
 			return redirect()->route('account-business-company', [ 'id' => $companies[0] ]);
 
-		}
+		} */
 		
 		return view('account.business.dashboard')
 					->with('companies', Auth::user()->companies)
