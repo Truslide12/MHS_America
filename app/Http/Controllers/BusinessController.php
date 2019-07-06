@@ -310,6 +310,7 @@ class BusinessController extends Pony {
 			$invite->email = Input::get('email');
 			$invite->code = createCode(15);
 			$invite->company_id = $company->id;
+			$invite->role_id = Role::where('name', 'editor')->first()->id;
 			if($invite->save()) {
 
 				$message = (new CompanyInviteSent($invite, $company))->onQueue('emails');
