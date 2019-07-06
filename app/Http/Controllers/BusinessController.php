@@ -164,7 +164,7 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(['code' => $invite_code],
 			array(
-				'code' => 'required|size:15|alpha_num'
+				'code' => 'required|between:15,16|alpha_num'
 			)
 		);
 
@@ -193,7 +193,7 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(Input::all(),
 			array(
-				'code' => 'required|size:15|alpha_num'
+				'code' => 'required|between:15,16|alpha_num'
 			)
 		);
 
