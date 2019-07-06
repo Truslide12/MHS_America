@@ -6,6 +6,7 @@ use Validator;
 use Redirect;
 use Request;
 use Response;
+use Session;
 use Mail;
 use App\User;
 use App\Models\Banner;
