@@ -1384,7 +1384,13 @@ class BusinessController extends Pony {
 
 			$user->save();
 
-			return redirect()->route('account-business');
+			if(Session::has('task')) {
+				$path = session('task');
+				Session::forget('task');
+				return redirect($path);
+			}else{
+				return redirect()->route('account-business');
+			}
 		}
 
 	}
