@@ -68,7 +68,7 @@
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9">
 							<button type="submit" class="btn btn-success cta btn-sm">Sign in</button>
-							<button type="reset" class="btn btn-default cta btn-sm">Reset</button>
+							<a href="{{ URL::route('account-recovery') }}" class="btn btn-default cta btn-sm">Help</a>
                         </div>
                     </div>
                     </form>
