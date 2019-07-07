@@ -23,7 +23,7 @@ class ExploreController extends Pony {
 					->with('latest_communities', Profile::byType('Community')->latest(5))
 					->with('latest_homes', Home::latest(5))
 					->with('hide_community_images', true)
-					->with('hide_home_images', true);
+					->with('hide_home_images', true)
 					->with('states', State::az()->get());
 					//->with('canvas', Canvas::getDefault());
 	}
