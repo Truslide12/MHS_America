@@ -26,8 +26,7 @@
 	                                        <div class="col-md-12 text-right">
 	                                        	<p>
 													<small>
-														<a href="{{ URL::route('account-help') }}">Help</a> - 
-														<a href="{{ URL::route('account-recovery') }}">Lost password?</a>
+														<a href="{{ URL::route('account-recovery') }}">Account Help</a>
 													</small>
 												</p>
 	                                        </div>
