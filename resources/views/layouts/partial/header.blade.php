@@ -56,21 +56,13 @@
 					</ul>
 					@endif
 					@if( !Route::currentRouteNamed('account-login') && !Route::currentRouteNamed('account-register'))
+					<ul class="nav navbar-nav navbar-right">
 					@if(!Auth::guest())
-					<ul class="nav navbar-nav navbar-right">
 						@include('layouts.partial.usermenu')
-					</ul>
 					@else
-					<div class="nav navbar-right hidden-xs">
-						<a href="{{ URL::route('account-register') }}" class="btn btn-info navbar-btn">Register</a> 
-						<p class="navbar-text">
-							<a href="{{ URL::route('account-login') }}" class="navbar-link">Login</a>
-						</p>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
 						@include('layouts.partial.guestmenu')
-					</ul>
 					@endif
+					</ul>
 					@endif
 					<ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
 						<li @if(Request::is('page/about*')) class="active"@endif>
