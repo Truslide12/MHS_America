@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 use App\Models\Role;
 use App\Models\Company;
 use App\Models\CompanyUser;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Session;
 
 trait HasCompanyRole {
@@ -164,7 +165,7 @@ trait HasCompanyRole {
         if(!is_int($role)) return false;
 
         //Verify role exists
-        if(!is_a(Role::find($role), \Illuminate\Database\Eloquent\Model)) {
+        if(!is_a(Role::find($role), Eloquent::class)) {
             return false;
         }
 
@@ -188,7 +189,7 @@ trait HasCompanyRole {
         if(!is_int($role)) return false;
 
         //Verify role exists
-        if(!is_a(Role::find($role), \Illuminate\Database\Eloquent\Model)) {
+        if(!is_a(Role::find($role), Eloquent::class)) {
             return false;
         }
 

@@ -38,7 +38,7 @@
     }
   </style>
   <![endif]-->
-
+  <style type="text/css"> .navbar-collapse {overflow-y:hidden;} </style>
   <!-- Fav and touch icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ URL::route('welcome') }}/img/apple-touch-icon-144-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ URL::route('welcome') }}/img/apple-touch-icon-114-precomposed.png">

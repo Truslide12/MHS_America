@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Profile;
 use App\Models\ProfileUser;
 use App\Models\HomeUser;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Session;
 
 trait HasProfileRole {

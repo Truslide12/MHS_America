@@ -47,6 +47,9 @@ class BusinessAuthenticate {
 		}
 
 		if ($request->user()->business != 1) {
+			if($request->method() == 'get'){
+				$request->session()->put('task', $request->path());
+			}
 			return redirect()->route('account-business-activate');
 		}
 

@@ -35,10 +35,10 @@ class CompanyInviteSent extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invite code for '.$company->title.' on MHS America')
+        return $this->subject('Invite code for '.$this->company->title.' on MHS America')
                     ->view('emails.companyinvite')
-                    ->with('company_title', $company->title)
-                    ->with('company_id', $company->id)
-                    ->with('invite_code', $invite->code);
+                    ->with('company_title', $this->company->title)
+                    ->with('company_id', $this->company->id)
+                    ->with('invite_code', $this->invite->code);
     }
 }

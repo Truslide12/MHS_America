@@ -6,6 +6,7 @@ use Validator;
 use Redirect;
 use Request;
 use Response;
+use Session;
 use Mail;
 use App\User;
 use App\Models\Banner;
@@ -40,11 +41,11 @@ class BusinessController extends Pony {
 	public function getIndex(Company $company)
 	{
 		$me = Auth::user();
-		$companies = $me->companies()->pluck('companies.id')->toArray();
+		/* $companies = $me->companies()->pluck('companies.id')->toArray();
 		if ( count($companies) == 1 ) {
 			return redirect()->route('account-business-company', [ 'id' => $companies[0] ]);
 
-		}
+		} */
 		
 		return view('account.business.dashboard')
 					->with('companies', Auth::user()->companies)
@@ -163,7 +164,7 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(['code' => $invite_code],
 			array(
-				'code' => 'required|size:15|alpha_num'
+				'code' => 'required|between:15,16|alpha_num'
 			)
 		);
 
@@ -192,7 +193,7 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(Input::all(),
 			array(
-				'code' => 'required|size:15|alpha_num'
+				'code' => 'required|between:15,16|alpha_num'
 			)
 		);
 
@@ -309,6 +310,7 @@ class BusinessController extends Pony {
 			$invite->email = Input::get('email');
 			$invite->code = createCode(15);
 			$invite->company_id = $company->id;
+			$invite->role_id = Role::where('name', 'editor')->first()->id;
 			if($invite->save()) {
 
 				$message = (new CompanyInviteSent($invite, $company))->onQueue('emails');
@@ -1384,7 +1386,13 @@ class BusinessController extends Pony {
 
 			$user->save();
 
-			return redirect()->route('account-business');
+			if(Session::has('task')) {
+				$path = session('task');
+				Session::forget('task');
+				return redirect($path);
+			}else{
+				return redirect()->route('account-business');
+			}
 		}
 
 	}

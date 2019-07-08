@@ -1,5 +1,8 @@
+						<li>
+							<a href="{{ URL::route('account-login') }}">Login</a>
+						</li>
 						<li class="dropdown hidden-xs">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Register <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li>
 	                                <div class="navbar-content">
@@ -17,17 +20,13 @@
 	                                            <p>
 	                                            	<a href="{{ URL::route('account-register') }}" class="btn btn-primary btn-sm">Register</a>
 	                                            </p>
-	                                            <p>
-	                                            	<a href="{{ URL::route('account-login') }}" class="btn btn-info">Login</a>
-	                                            </p>
 	                                        </div>
 										</div>
 	                                    <div class="row">
 	                                        <div class="col-md-12 text-right">
 	                                        	<p>
 													<small>
-														<a href="{{ URL::route('account-help') }}">Help</a> - 
-														<a href="{{ URL::route('account-recovery') }}">Lost password?</a>
+														<a href="{{ URL::route('account-recovery') }}">Account Help</a>
 													</small>
 												</p>
 	                                        </div>
@@ -35,9 +34,6 @@
 	                                </div>
 	                            </li>
 							</ul>
-						</li>
-						<li class="visible-xs">
-							<a href="{{ URL::route('account-login') }}">Login</a>
 						</li>
 						<li class="visible-xs">
 							<a href="{{ URL::route('account-register') }}">Register</a>
