@@ -51,9 +51,7 @@ var HomeEditorIO = function (id) {
                                   "home-opts",
                                   "home-adinfo",
                                   "home-photos",
-                                  "home-review",
-                                  "home-payment",
-                                  "home-finish");
+                                  "home-review");
   if ( id != null ) {
     console.log("Starting Editor with Loaded Obj");
     this.LoadHomeProfile(id);
@@ -701,7 +699,7 @@ HomeEditorIO.prototype.BuildReview = function() {
       $("#cfrm_model").html("Not Entered");
     }
 
-    if ( Editor.home.status > 2 ) {
+    if ( Editor.home.status > 0 ) {
       $("#cfrm_payment").html("<strong style='color:green;'>Paid</strong>");
       $("#listing_status").val(Editor.home.status)
     } else {
@@ -718,9 +716,13 @@ HomeEditorIO.prototype.BuildReview = function() {
     }
 
 
-    if ( Editor.home.photos[1] !== null ) {
-     $("#photo-preview").attr('src', Editor.home.photos[1].url);
+    console.log("ph", Editor.home.photos);
+    if ( Editor.home.photos !== null ) {
+      if ( Editor.home.photos.length > 0 ) {
+        $("#photo-preview").attr('src', Editor.home.photos[1].url);
+      }
     } else {
+
     }
 
     
@@ -774,11 +776,12 @@ HomeEditorIO.prototype.SaveChanges = function(input_step) {
             });
             data = this.home;
             that = this;
-
+            console.log("sending:", that);
             var str = document.location.toString();
             //console.log(str);
             str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio";
             $.post(str,data,function(e) {
+                console.log(e);
                 e = JSON.parse(e);
 
                 if( e.status === true ) {
@@ -858,12 +861,12 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                    that.home.dimensions = {length: e.length, width:e.width, offsets: e.offsets, json: JSON.parse(e.dims_json) },
                    that.home.size = e.shape;
                    that.home.description = e.description;
-                   that.home.specs = JSON.parse(e.specs);
+                   that.home.specs = JSON.parse(e.specs) || {};
                    that.home.decal = JSON.parse(e.decal) || {};
                    that.home.serial = JSON.parse(e.serial) || {};
                    that.home.hud = JSON.parse(e.hud) || {};
                    that.home.home_options = { features: JSON.parse(e.features), appliances: JSON.parse(e.appliances) };
-                   that.home.photos = null;
+                   that.home.photos = JSON.parse(e.photos);
                    that.home.year = e.year;
                    that.home.make = e.brand;
                    that.home.model = e.model;

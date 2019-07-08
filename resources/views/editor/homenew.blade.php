@@ -50,6 +50,7 @@
           <div style="padding-left: 10px;" id="status-field"></div>
         </div>
       </li>
+      @if(1==2)
       <li id="home-payment" class="disabled">
         <div>
           <div class="ico_box"><i class="fa fa-tag"></i></div>
@@ -57,6 +58,7 @@
           <div style="padding-left: 10px;" id="count-payment"></div>
         </div>
       </li>
+      @endif
       <li id="home-review" class="disabled">
         <div>
           <div class="ico_box"><i class="fa fa-check"></i></div>
@@ -431,7 +433,7 @@ function newPony(ponyName)
       console.log("exe loaded init");
       init(); 
     } else { console.log("no instr loaded"); }
-    if ( ponyName == "home-finish") { build_review(); }
+    if ( ponyName == "home-finish") { /*build_review();*/ }
   }, function(){
     $('#form-container').hide().html("Error: Failed to load data..").show();//.fadeIn("slow");
   });

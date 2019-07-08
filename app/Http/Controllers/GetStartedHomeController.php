@@ -5,6 +5,7 @@ use Input;
 use Request;
 use Validator;
 use Hash;
+use Carbon\Carbon;
 use App\User;
 use App\Models\Home;
 use App\Models\State;
@@ -809,17 +810,22 @@ class GetStartedHomeController extends Pony {
 			$new_home->city_id 			= $order_data['profile_data']->city_id;
 			$new_home->title 			= "New Home";
 			$new_home->profile_id 		= $order_data['profile_data']->id;	/*of community?*/
-			$new_home->status 			= 0;
+			$new_home->status 			= 1;
 			$new_home->address 			= $order_data['profile_data']->address;
 			$new_home->zipcode 			= $order_data['profile_data']->zipcode;
 			$new_home->state_id 		= $order_data['profile_data']->state_id;
 			$new_home->description 		= "";
 			$new_home->location 		= "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
 			$new_home->space_number 	= $order_data['space'];
-			//$new_home->exp_date 		= ;
+
+			$new_home->specs 		= '{"siding":"0","skirting":"0","roof_angle":"0","roof_mat":"0","windows":"0","wall_thickness":"0","kitchen_floor":"0","floor":"0","setup":"0","strap":"0"}';
+			$new_home->photos 		= "{}";
+			$new_home->features 	= "[]";
+			$new_home->appliances 	= "[]";
 			$new_home->serial 		= "[null,null,null]";
 			$new_home->decal 		= "[null,null,null]";
 			$new_home->hud 			= "[null,null,null]";
+			$new_home->exp_date 	=  Carbon::now()->addDays(180);
 			$new_home->company_id 		= $company->id;
 			$new_home->save();
 

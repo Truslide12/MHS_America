@@ -105,7 +105,7 @@
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<input type="hidden" id="current_step" value="home-review">
 	<!-- <button type="submit" class="btn btn-lg btn-primary cta pull-left" onclick="Editor.SaveToServer();">Save &amp; Exit</button> -->
-	<button type="submit" id="review-step" class="btn btn-lg btn-primary cta pull-right" onclick="Editor.MoveNext();">Payment</button>
+	<button type="submit" id="review-step" class="btn btn-lg btn-primary cta pull-right" onclick="Editor.MoveNext();">Save</button>
 </div>
 
 

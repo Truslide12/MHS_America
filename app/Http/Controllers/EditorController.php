@@ -818,6 +818,17 @@ class EditorController extends Pony {
 		//needs update for shared homes
 		foreach ( Auth::user()->companies as $company ) {
 			if ( $company->id == $home->company_id ) {
+
+				//state_id
+				//city_id
+
+				$p = Profile::where('id', $home->profile_id)->first();
+				$s = State::where('id', $p->state_id)->first();
+				$home->city = $p->city->place_name;
+				$home->state = strtoupper($s->abbr);
+
+				//$home->zipcode = $p->;
+				//$home->address = $p->;
 				return json_encode(array("status"=>true, "data"=>$home));
 			}
 		}
@@ -871,7 +882,7 @@ class EditorController extends Pony {
 		} else if ( (int)$input_data['home_id'] > 0 ) {
 			//save
 	        $home = Home::where('id', $input_data['home_id'])->first();
-
+	        //return $input_data;
 			$home->price 		= (int)$input_data['price'];
 			$home->beds 		= (int)$input_data['bedrooms'];
 			$home->baths 		= (int)$input_data['bathrooms'];
@@ -896,12 +907,19 @@ class EditorController extends Pony {
 			$home->decal 		= (string)json_encode($input_data['decal']); //need to merge all 3 to json obj !!!
 			$home->hud 			= (string)json_encode($input_data['hud']); //need to merge all 3 to json obj !!!
 			
+			/*now is simply kept from time of profile 
+			purchase and based on attached community
 			$home->address 		= (string)$input_data['address'];
 			$home->state_id 	= (string)$input_data['state_id'];
 			$home->zipcode 		= (string)$input_data['zipcode'];
+			*/
 			$home->space_number = (string)$input_data['space'];
 
-			$home->photos 		  = (string)json_encode($input_data['photos']); //need to merge all 3 to json obj !!!
+
+			if( array_key_exists("photos", $input_data) ) {
+			  $home->photos 		  = (string)json_encode($input_data['photos']); //need to merge all 3 to json obj !!!
+			}
+
 			$home->square_footage = (int)$input_data['dimensions']['square_footage'];
 			$home->dims_json 	  = (string)json_encode($input_data['dimensions']['json']);
 			$home->offsets 		  = (int)$input_data['dimensions']['offsets'];

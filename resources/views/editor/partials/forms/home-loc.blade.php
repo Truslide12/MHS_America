@@ -31,23 +31,23 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Street address</label>
 									<div class="col-md-9">
-										<input type="text" name="address" id="address" class="form-control" value="">
+										<input type="text" name="address" id="address" class="form-control" value="" readonly>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">City</label>
 									<div class="col-md-9">
-										<input type="text" name="city" id="city" class="form-control" value="">
+										<input type="text" name="city" id="city" class="form-control" value="" readonly>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">State</label>
 									<div class="col-md-3">
-										<input type="text" name="state" id="state" class="form-control" value="">
+										<input type="text" name="state" id="state" class="form-control" value="" readonly>
 									</div>
 									<label class="control-label col-md-3">Zip code</label>
 									<div class="col-md-3">
-										<input type="text" name="zipcode" id="zipcode" class="form-control" value="">
+										<input type="text" name="zipcode" id="zipcode" class="form-control" value="" readonly>
 									</div>
 								</div>
 								<div class="form-group">
