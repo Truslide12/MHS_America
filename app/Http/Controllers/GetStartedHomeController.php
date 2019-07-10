@@ -731,7 +731,7 @@ class GetStartedHomeController extends Pony {
 	*******************************/
 
 	protected function addCardToCompany($params) {
-		$target_company = \Company::where('id', $params['company_id'])->first();
+		$target_company = Company::where('id', $params['company_id'])->first();
 
 		if( $target_company->stripe_customer_id == null ) {
 			//create new stripe customer (with the source)..
@@ -867,7 +867,7 @@ class GetStartedHomeController extends Pony {
 		$company = $user->companies->where('id', $params['company_id'])->first();
 
 		$params['profile_id'];
-		$check_sub = \Subscription::where('subscription_target', $params['profile_id'])->where('stripe_plan_id', $plan_id)->exists();
+		$check_sub = Subscription::where('subscription_target', $params['profile_id'])->where('stripe_plan_id', $plan_id)->exists();
 		if ( $check_sub ) {
 			return (object)[
 			  "status" => false,
