@@ -302,7 +302,7 @@ class EditorController extends Pony {
 			}
 
 			/*Description*/
-			if($profile->description !== Input::get('description', '')) {
+			if($profile->description != Input::get('description', '')) {
 				$profile_array['description'] = Input::get('description', '');
 			}
 
@@ -392,6 +392,10 @@ class EditorController extends Pony {
 				);
 				$geocoding = $geocode['success'];
 
+			}
+
+			if(array_key_exists('description', $profile_array) && is_null($profile_array['description'])) {
+				$profile_array['description'] = "";
 			}
 
 			/* Save! */
