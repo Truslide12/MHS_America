@@ -318,14 +318,12 @@ class EditorController extends Pony {
 			}
 
 
-			$rent = Input::get('rent', '');
-			if($profile->rent != e($rent)) {
+			$rent = Input::get('rent', 0);
+			if($profile->rent != $rent) {
 				if(is_numeric($rent) && $rent > 0 && $rent < 10000) {
 					$profile_array['rent'] = $rent;
-				}elseif(!is_numeric($rent)){
-					$profile_array['rent'] = e($rent);
 				}else{
-					$profile_array['rent'] = '';
+					$profile_array['rent'] = 0;
 				}
 			}
 
