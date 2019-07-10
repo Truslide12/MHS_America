@@ -302,7 +302,7 @@ class EditorController extends Pony {
 			}
 
 			/*Description*/
-			if($profile->description != Input::get('description')) {
+			if($profile->description != Input::get('description', '')) {
 				$profile_array['description'] = Input::get('description', '');
 			}
 
