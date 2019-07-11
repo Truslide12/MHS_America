@@ -157,7 +157,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script type="text/javascript">
-var stripe = Stripe('{{ env('STRIPE_KEY') }}');
+var stripe = Stripe('{{ env('STRIPE_API_KEY') }}');
 var elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.
