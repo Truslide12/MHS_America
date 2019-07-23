@@ -115,7 +115,7 @@ class Home extends LocatableModel {
 	public function default_photo($i=1)
 	{
 		$t = json_decode($this->photos, true);
-		if ( property_exists ((object)$t, "1") ) {
+		if ( count($t) > 0 ) {
 			return (object)$t["1"];
 		} else {
 			return (object)["id"=>1,"tag"=>"no photo","url"=>"https://mhsamerica.com/img/nophoto.png"];
