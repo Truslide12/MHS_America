@@ -615,7 +615,23 @@ Route::group(array('prefix' => 'luna'), function()
 			/* Mobile Home watch (POST) */
 			Route::post('{home}/watch', array('uses' => 'HomeController@postWatch', 'as' => 'home-cmd-watch-post'));
 		});
+
+		
+		Route::group(array('middleware' => 'auth.home:{home}'), function()
+		{
+			/* Homes editor (GET) */
+			Route::get('{home}/edit', array('uses' => 'EditorController@getEditHome', 'as' => 'editor-edithome'));
+
+			Route::post('{home}/forms/{frm}', array('uses' => 'EditorController@getHomeForm', 'as' => 'editor-addhome'));
+
+			Route::post('{home}/edit/dataio', array('uses' => 'EditorController@postHomeEditorIO', 'as' => 'editor-dataio-post'));
+					/* Profile editor get home (GET) */
+			Route::get('{home}/edit/dataio', array('uses' => 'EditorController@getHomeEditorIO', 'as' => 'editor-dataio-get'));
+
+		});
+
 	});
+
 
 	/* SPACES ROUTES */
 	Route::group(array('prefix' => 'spaces'), function()

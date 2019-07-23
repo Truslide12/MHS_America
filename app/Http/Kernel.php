@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\RoleAuthenticate::class,
         'admin' => \App\Http\Middleware\AdminAuthenticate::class,
         'admin.guest' => \App\Http\Middleware\AdminGuestAuthenticate::class,
+        'auth.home' => \App\Http\Middleware\CheckHomeAccess::class
     ];
 
     /**

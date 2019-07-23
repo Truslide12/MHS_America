@@ -398,6 +398,8 @@ class Profile extends EloquentModel {
 
 	public function fetchTemplate()
 	{
+		if ( ! $this->county ) { return "error"; }
+		
 		$view = View::make($this->rep()->layout())
 					->with('contentclass', 'texture-1')
 					->with('profile', $this)

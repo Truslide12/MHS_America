@@ -5,14 +5,15 @@
 	* I know this needs work just improving a bit
 	* from what we had.
 	********************************************/
-	$da = file_get_contents("http://mhsamerica.com/api/latest/homes");
+	$da = file_get_contents("http://mhsamerica.loc/api/latest/homes");
 	$da = json_decode($da);
-	$img = $title = $place = Array();
+	$img = $title = $place = $ids = Array();
 
 	foreach( $da->data as $d ) {
 
 		$title[] = $d->title;
 		$place[] = $d->zipcode;
+		$ids[] = $d->id;
 
 		if ( $d->photos ) {
 			$p = (array) json_decode(stripslashes($d->photos));
@@ -351,7 +352,7 @@
 					@for ( $h = 0; $h <= 3; $h++ )
 					@if( $img[$h] )
 					<div class="mhs-slide" id="slide-{{$h}}">
-						<div class="card">
+						<a class="card" href="home/{{ $ids[$h] }}">
 			                <div class="card-image">
 			                    <img class="img-responsive" src="{{$img[$h]}}">
 			                    
@@ -362,7 +363,7 @@
 			                    	<small>{{$place[$h]}}</small></span>                    
 			                </div><!-- card content -->
 
-			            </div>
+			            </a>
 					</div>
 					@endif
 					@endfor

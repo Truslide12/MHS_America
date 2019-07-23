@@ -273,18 +273,18 @@
 			cursor: pointer;
 		}
 		</style>
-		<div class="backdrop" xstyle="display: none;" onclick="releaseBackdrop();">
+		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
 			<div class="backdropimg">
-			<img id="backdropimg" src="http://localhost/mhs-america/public/imgstorage/cover_1547400946_7da5d8ab427abd3c15e2f4bb57944a2c_orig.jpg">
+			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
 			</div>
 		</div>
 		<div style="margin: 0px -15px 0px -15px;font-size: 1.2em;background:none;">
-			<img src="http://localhost/mhs-america/public/imgstorage/cover_1547400946_7da5d8ab427abd3c15e2f4bb57944a2c_orig.jpg" class="cotw-img" style="float:left;margin:25px;margin-top: 15px;">
+			<img src="{{ $home->default_photo()->url }}" class="cotw-img" style="float:left;margin:25px;margin-top: 15px;">
 			<div style="padding-top: 0px;">
-			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">Pauls House</h3>
+			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }}</h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
-					<h4 style="width: 40%;display: inline-block;">Wild Wood Canyon Estates | Yucaipa, CA</h4>
+					<h4 style="width: 40%;display: inline-block;">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
 				</div>
 			</div>
 
@@ -331,76 +331,68 @@
 </div><div class="row about texture-1" style="padding-top: 20px;">
 	<div class="col-sm-8" style="padding: 0px 40px;padding-bottom: 1in;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">3 Bedrooms &middot; 2 Baths &middot; Approx 1200sqft</div>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; Approx {{ $home->square_footage }} sqft</div>
 		<p style="font-size: 1.4em;">
-			This timelessly elegant, newly redesigned, 3 bedroom full floor flat, on a prime block Lower Pacific Heights strikes the perfect balance between ornate, pre-war architecture, with a sleek, decidedly modern expression of interior design, melding seamlessly into a perfect combination of old-world and modern opulence. Spread over 1,800 square feet of luxurious living spaces, this fully furnished, executive property exemplifies the best of what San Francisco living has to offer. Rarely do properties of this caliber come to market as rental opportunities, so act quickly.
+			{{ $home->description }}
 		</p>
 		<hr>
+
 		<h3><i class="fa fa-cog"></i> Features</h3>
 		<div class="row" style="font-size: 1.4em;">
 			<div class="col-sm-4">
 				<ul>
-					<li>Dining Room</li>
-					<li>Island</li>
-					<li>Ceiling Fans</li>
+					@foreach( $home->getFeatures() as $feature )
+						<li>{{ $home->getFeature( $feature )->title }}</li>
+						@if( $loop->iteration % floor($home->CountFeatures()/3) == 0 )
 				</ul>
 			</div>
 			<div class="col-sm-4">
 				<ul>
-					<li>Central Air</li>
-					<li>Jacuzzi</li>
-					<li>Glamor Bath</li>
+						@endif
+
+					@endforeach
 				</ul>
 			</div>
-			<div class="col-sm-4">
-				<ul>
-					<li>Carport</li>
-					<li>Shed</li>
-				</ul>
-			</div>
+
 		</div>
 		<hr>
 		<h3><i class="fa fa-plug"></i> Appliances</h3>
 		<div class="row" style="font-size: 1.4em;">
 			<div class="col-sm-4">
 				<ul>
-					<li>Refrigerator</li>
-					<li>Range/Stove</li>
-					<li>Oven</li>
+					@foreach( $home->getAppliances() as $appliance )
+						<li>{{ $home->getAppliance( $appliance )->title }}</li>
+						@if( $loop->iteration % floor($home->CountAppliances()/3) == 0 )
 				</ul>
 			</div>
 			<div class="col-sm-4">
 				<ul>
-					<li>Dishwasher</li>
-					<li>Fireplace</li>
-					<li>Washer</li>
+						@endif
+
+					@endforeach
 				</ul>
 			</div>
-			<div class="col-sm-4">
-				<ul>
-					<li>Dryer</li>
-				</ul>
-			</div>
+
 		</div>
 		<hr>
 		<h3><i class="fa fa-wrench"></i> Build Information</h3>
 		<div class="row build-opts" style="font-size: 1.4em;">
 			<div class="col-md-6">
 				<ul>
-					<li><strong>Siding:</strong> Wood</li>
-					<li><strong>Roof Material:</strong> Metal</li>
-					<li><strong>Windows:</strong> Dual Pane</li>
-					<li><strong>Kitchen Floors:</strong> Tile</li>
-					<li><strong>Setup:</strong> High set</li>
+					<li><strong>Siding:</strong> {{ $home->build_specs("siding")->title }}</li>
+					<li><strong>Roof Material:</strong> {{ $home->build_specs("roof_mat")->title }}</li>
+					<li><strong>Windows:</strong> {{ $home->build_specs("windows")->title }}</li>
+					<li><strong>Kitchen Floors:</strong> {{ $home->build_specs("kitchen_floor")->title }}</li>
+					<li><strong>Setup:</strong> {{ $home->build_specs("setup")->title }}</li>
 				</ul>
 			</div>
 			<div class="col-md-6">
 				<ul>
-					<li><strong>Skirting:</strong> Wood</li>
-					<li><strong>Roof Angle:</strong> Flat</li>
-					<li><strong>Ext. Wall Thickness:</strong> 4"</li>
-					<li><strong>Other Floors:</strong> Carpet</li>
-					<li><strong>Earthquake Strap:</strong> Yes</li>
+					<li><strong>Skirting:</strong> {{ $home->build_specs("skirting")->title }}</li>
+					<li><strong>Roof Angle:</strong> {{ $home->build_specs("roof_angle")->title }}</li>
+					<li><strong>Ext. Wall Thickness:</strong> {{ $home->build_specs("wall_thickness")->title }}</li>
+					<li><strong>Other Floors:</strong> {{ $home->build_specs("floor")->title }}</li>
+					<li><strong>Earthquake Strap:</strong> {{ $home->build_specs("strap")->title }}</li>
 				</ul>
 			</div>
 		</div>
@@ -410,7 +402,7 @@
 
 		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
-			<div style="text-align:center;width:calc(100% - 40px);font-size: 2.5em;background: transparent;border-bottom:1px solid #8e8e8b;border-radius:0px!important;padding: 15px 10px;margin: 0px auto 35px auto;color:#147aba;">$35,000</div>
+			<div style="text-align:center;width:calc(100% - 40px);font-size: 2.5em;background: transparent;border-bottom:1px solid #8e8e8b;border-radius:0px!important;padding: 15px 10px;margin: 0px auto 35px auto;color:#147aba;">${{ $home->price/10 }}</div>
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
 			<div class="" style="margin-bottom: 3px;">
@@ -426,24 +418,29 @@
 				 <textarea placeholder="Message" class="form-control"></textarea>
 			</div>
 			<div class="" style="margin-bottom: 3px;text-align: right;">
-				<button class="btn btn-success">Send Message</button>
+				<button class="btn btn-success" disabled>Send Message</button>
 			</div>
 
 			<hr>
 
 			<strong style="font-size: 1.5em;">Seller Information</strong><br>
+
+			@if($home->company->is_personal)
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Name:</strong> Anthony Avila
+				<strong>Name:</strong> {{ $home->company->title }}
+			</div>
+			@else
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Company:</strong> {{ $home->company->title }}
+			</div>
+			@endif
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Address:</strong> {{ $home->company->street_addr }}
 			</div>
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Address:</strong> 8989 North Ave.
+				<strong>Phone:</strong> {{ $home->company->phone }}
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Phone:</strong> 909.528.2420
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Company:</strong> Comfort Homes
-			</div>
+			
 
 			<hr>
 

@@ -231,12 +231,20 @@ class BusinessController extends Pony {
 		}else{
 			$profiles = $me->profiles($company->id)->get();
 		}
-		$homes = [];
+
+		$filtered_homes = [];
+		foreach ( $company->homes as $home ) {
+			if( Auth::user()->hasHomeAccess($home->id) ) {
+				$filtered_homes[] = $home;
+			}
+		}
+
 		return view('account.business.company')
 					->with('canvas', Canvas::getDefault())
 					->with('profiles', $profiles)
 					->with('profile_count', $profiles->count())
 					->with('company', $company)
+					->with('homes', $filtered_homes)
 					->with('hide_sign_out', true)
 					->with('news', $company->newsitems()->orderBy('id', 'desc')->paginate(5));
 	}

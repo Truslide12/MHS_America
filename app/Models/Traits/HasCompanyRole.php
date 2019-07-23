@@ -125,13 +125,29 @@ trait HasCompanyRole {
             case "global_profile_access":
                 return self::tof($perms[5]);
             break;
+            case "financial_ban":
+                return self::tof($perms[6]);
+            break;
+            case "global_ban":
+                return self::tof($perms[7]);
+            break;
             default:
                 return false;
             break;
         }
+
     }
 
-    private function tof ($i) { ($i==1) ? true : false; }
+    private function tof ($i) { return ($i==1) ? true : false; }
+
+    public function hasHomeAccess($homeid) {
+        foreach($this->shared_homes as $home) {
+            if( $home->home_id == $homeid ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public function isAdminForCompany($companyid)
     {
@@ -143,7 +159,8 @@ trait HasCompanyRole {
 
         if(is_null($company)) return false;
 
-        return ($company->pivot->admin === true);
+        return ($company->pivot->role_id === 2 );
+        return ($company->pivot->admin === true); //does not return admin column so wtf
     }
 
 	public function attachRoleForCompany($role, $companyid)

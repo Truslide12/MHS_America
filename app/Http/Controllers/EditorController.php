@@ -128,6 +128,7 @@ class EditorController extends Pony {
 			'Sunday'
 		];
 
+
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
@@ -159,10 +160,18 @@ class EditorController extends Pony {
 
 	public function getHomes(Profile $profile)
 	{
+		$filtered_homes = [];
+		foreach ( $profile->homes as $home ) {
+			if( Auth::user()->hasHomeAccess($home->id) ) {
+				$filtered_homes[] = $home;
+			}
+		}
+
+
 		return view('editor.homes')
 					->with('profile', $profile)
 					->with('plan', $profile->plan)
-					->with('homes', $profile->homes);
+					->with('homes', $filtered_homes);
 					//->with('canvas', Canvas::getDefault());
 	}
 
@@ -182,7 +191,7 @@ class EditorController extends Pony {
 					//->with('canvas', Canvas::getDefault());
 	}
 
-	public function getHomeForm(Profile $profile, $frm)
+	public function getHomeForm(Profile $profile, $home, $frm)
 	{
 		$x = view('editor.partials.forms.'.$frm)
 					->with('profile', $profile)
@@ -193,15 +202,14 @@ class EditorController extends Pony {
 		return Response::json(array('success' => true, 'error' => false, 'data' => $x), 200);
 	}
 
-	public function getEditHome(Profile $profile, Home $home)
+	public function getEditHome(Home $home)
 	{
-
+		$profile = Profile::find($home->profile_id);
 		//Use same editor now..
 		//return view('editor.homeedit')
 		return view('editor.homenew')
 					->with('profile', $profile)
 					->with('plan', $profile->plan)
-
 					->with('home', $home);
 					//->with('canvas', Canvas::getDefault());
 	}
@@ -839,47 +847,13 @@ class EditorController extends Pony {
 
 	}
 
-	public function postHomeEditorIO(Profile $profile, Home $home) {
-
-		//needs update for shared homes
-		foreach ( Auth::user()->companies as $company ) {
-			if ( $company->id == $home->company_id ) {
-				return json_encode(array("status"=>fail));
-			}
-		}
-
+	public function postHomeEditorIO(Home $home) {
 
 		$input_data = Input::all();
 
-		//for debug
-		//return json_encode($input_data);
-
-		//$home->community_id = ;
-
 		if ( $input_data['home_id'] == null ) {
-			//new
-	        $home = new Home;
-			$home->price 		= (int)$input_data['price'];
-			$home->beds 		= (int)$input_data['bedrooms'];
-			$home->baths 		= (int)$input_data['bathrooms'];
-			$home->title 		= (string)$input_data['title'];
-			$home->width 		= (int)$input_data['dimensions']['width'];
-			$home->length 		= (int)$input_data['dimensions']['length'];
-			$home->shape 		= (int)$input_data['size'];
-			$home->status 		= 1;
-	        $home->location     = "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
-	        $home->profile_id 	= $profile->id;
-			$home->description 	= (string)$input_data['description'];
-	        $home->city_id 		= (int)$input_data['city_id'];
-			$home->serial 		= (string)json_encode($input_data['serial']); //need to merge all 3 to json obj !!!
-			$home->decal 		= (string)json_encode($input_data['decal']); //need to merge all 3 to json obj !!!
-			$home->hud 			= (string)json_encode($input_data['hud']); //need to merge all 3 to json obj !!!
-			
-			if($home->save()) {
-				return json_encode(array("status"=>true, "home_id"=>$home->id));
-			} else {
-				return json_encode(array("status"=>fail));
-			}
+
+			return json_encode(array("status"=>"fail", "reason"=>"no home id used"));
 
 		} else if ( (int)$input_data['home_id'] > 0 ) {
 			//save
@@ -893,9 +867,6 @@ class EditorController extends Pony {
 			$home->length 		= (int)$input_data['dimensions']['length'];
 			$home->shape 		= (int)$input_data['size'];
 			$home->status 		= 1;
-	        $home->city_id 		= (int)150965769;
-	        $home->location     = "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
-	        $home->profile_id = $profile->id;
 			$home->description 	= (string)$input_data['description'];
 			$home->year 		= (int)$input_data['year'];
 			$home->brand 		= (string)$input_data['make'];
@@ -903,18 +874,12 @@ class EditorController extends Pony {
 			$home->serial 		= (string)json_encode($input_data['serial']); //need to merge all 3 to json obj !!!
 			$home->image_floorplan 	= 1;//$input_data['photos']['floorplan'];
 			$home->image_backdrop 	= 1;//$input_data['photos']['backdrop'];
-			//$home->location 	= $input_data['location']; //not sure what this original column was for??
 			$home->specs 		= json_encode($input_data['specs']);
 			$home->type 		= (int)$input_data['sale_type'];
 			$home->decal 		= (string)json_encode($input_data['decal']); //need to merge all 3 to json obj !!!
 			$home->hud 			= (string)json_encode($input_data['hud']); //need to merge all 3 to json obj !!!
 			
-			/*now is simply kept from time of profile 
-			purchase and based on attached community
-			$home->address 		= (string)$input_data['address'];
-			$home->state_id 	= (string)$input_data['state_id'];
-			$home->zipcode 		= (string)$input_data['zipcode'];
-			*/
+
 			$home->space_number = (string)$input_data['space'];
 
 
@@ -941,9 +906,6 @@ class EditorController extends Pony {
 			}
 			
 			$home->status 		= 1;
-	        $home->city_id 		= (int)150965769;
-	        $home->location     = "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
-	        $home->profile_id = $profile->id;
 
 			if($home->save()) {
 				return json_encode(array("status"=>true, "home_id"=>$home->id));

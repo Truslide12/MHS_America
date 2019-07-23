@@ -26,11 +26,11 @@
 			<div class="panel panel-default shadow">
 				<div class="panel-body">
 					<p class="pull-right">
-						<a href="{{ URL::route('editor-addhome', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}" class="btn btn-lg btn-primary">Create a listing</a>
+						<a href="{{ URL::route('getstarted-home') }}" class="btn btn-lg btn-primary">Create a listing</a>
 						<!-- <a href="#" class="btn btn-lg btn-info">Manage campaigns</a> -->
 					</p>
 					<p class="text-muted">
-						Currently {{ $homes->count() }} park-owned {{ $homes->count() == 1 ? 'home' : 'homes' }} in this community.
+						Currently {{ count($homes) }} park-owned {{ count($homes) == 1 ? 'home' : 'homes' }} in this community.
 					</p>
 				</div>
 			</div>

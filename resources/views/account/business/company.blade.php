@@ -250,7 +250,7 @@
 		<!-- PROFILES -->
 		<a href="{{ URL::route('getstarted-home') }}" class="btn btn-sm btn-success pull-right margin-t-10"><i class="fa fa-plus"></i> Create</a>
 		<h3>Home Listings</h3>
-		@if(count($company->homes) > 0)
+		@if(count($homes) > 0)
 		<div class="panel panel-primary profile-panel">
 			@if(1==2)<div class="panel-body">
 				<div class="row">
@@ -260,19 +260,27 @@
 				</div>
 			</div>@endif
 			<ul class="list-group">
-				@foreach($company->homes as $home)
+				@foreach($homes as $home)
 				<li class="list-group-item">
-					<span class="pull-right" style="display: flex;background: none;color: silver;">
-						<div class="home-edit-icons alt-tip" alt="Edit Home"><i class="fa fa-pencil"></i></div>
-						<div class="home-edit-icons alt-tip" alt="View Listing"><i class="fa fa-eye"></i></div>
-						<div class="home-edit-icons alt-tip" alt="Manage Access"><i class="fa fa-user"></i></div>
-						<div class="home-edit-icons alt-tip" alt="Manage Settings"><i class="fa fa-cog"></i></div>
-						<div class="home-edit-icons alt-tip" alt="Manage Analytics"><i class="fa fa-tachometer"></i></div>
-
+					<span class="pull-right" @if(1==2) style="display: flex;background: none;color: silver;" @endif>
+						<a href="{{ URL::route('editor-edithome', array('profile' => $profile->id, 'home' => $home->id)) }}" class="btn btn-info btn-sm btn-align-fix">View</a> 
+						<a href="{{ URL::route('home', array('home' => $home->id)) }}" 										 class="btn btn-warning btn-sm btn-align-fix">Manage</a>
+						@if(1==2)
+						<a href="{{ URL::route('editor-edithome', array('profile' => $profile->id, 'home' => $home->id)) }}" class="home-edit-icons alt-tip" alt="Edit Home"><i class="fa fa-pencil"></i></a>
+						<a href="{{ URL::route('home', array('home' => $home->id)) }}" class="home-edit-icons alt-tip" alt="View Listing"><i class="fa fa-eye"></i></a>
+						<a class="home-edit-icons alt-tip" alt="Manage Access"><i class="fa fa-user"></i></a>
+						<a class="home-edit-icons alt-tip" alt="Manage Settings"><i class="fa fa-cog"></i></a>
+						<a class="home-edit-icons alt-tip" alt="Manage Analytics"><i class="fa fa-tachometer"></i></a>
+						@endif
 					</span>
 						<h4 class="no-margin-t">
-							{{ $home->beds }} Bed {{ $home->baths }} Bath {{ $home->size() }}-wide<br>
+							<!-- 
+							{{ $home->beds }} Bed {{ $home->baths }} Bath {{ $home->size() }}-wide<br> 
 							<small>{{ $home->year }} {{ $home->brand }} {{ $home->model }} | {{ $home->sn() }}</small>
+							-->
+							{{ $home->title }} <br>
+
+							<small>{{ $home->profile->title }} - Space {{ $home->space_number }}</small>
 						</h4>
 				</li>
 				@endforeach

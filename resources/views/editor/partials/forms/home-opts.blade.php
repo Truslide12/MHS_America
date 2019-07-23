@@ -56,7 +56,7 @@
                      </div>
                      <div class="col-xs-6 col-sm-6 text-left">
                         <label class="checkbox-inline">
-                        <input type="checkbox" name="heater" value="5"> Island
+                        <input type="checkbox" name="island" value="5"> Island
                         </label>
                      </div>
                      <div class="col-xs-6 col-sm-6 text-left">
@@ -66,7 +66,7 @@
                      </div>
                      <div class="col-xs-6 col-sm-6 text-left">
                         <label class="checkbox-inline">
-                        <input type="checkbox" name="glamour_bath" value="6"> Glamour Bath
+                        <input type="checkbox" name="glamor_bath" value="6"> Glamor Bath
                         </label>
                      </div>
                      <div class="col-xs-6 col-sm-6 text-left">
@@ -202,10 +202,10 @@
                   <div class="" style="font-weight: bold;background: #ededed;padding: 7px;">Dryer</div>
                   <div class="" style="padding: 0px 10px 10px 10px;">
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="25"> Gas
+                     <input type="checkbox" name="dryer_gas" value="25"> Gas
                      </label><div style="clear: all;"></div>
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="26"> Electric
+                     <input type="checkbox" name="dryer_elec" value="26"> Electric
                      </label>
                   </div>
                </div>
@@ -216,10 +216,10 @@
                   <div class="" style="font-weight: bold;background: #ededed;padding: 7px;">Oven/Range</div>
                   <div class="" style="padding: 0px 10px 10px 10px;">
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="27"> Gas
+                     <input type="checkbox" name="oven_gas" value="27"> Gas
                      </label><div style="clear: all;"></div>
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="28"> Electric
+                     <input type="checkbox" name="oven_elec" value="28"> Electric
                      </label>
                   </div>
                </div>
@@ -230,13 +230,13 @@
                   <div class="" style="font-weight: bold;background: #ededed;padding: 7px;">Furnace/Heating</div>
                   <div class="" style="padding: 0px 10px 10px 10px;">
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="29"> Gas
+                     <input type="checkbox" name="heating_gas" value="29"> Gas
                      </label><div style="clear: all;"></div>
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="30"> Electric
+                     <input type="checkbox" name="heating_elec" value="30"> Electric
                      </label><div style="clear: all;"></div>
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="34"> Heat Pump
+                     <input type="checkbox" name="heating_pump" value="34"> Heat Pump
                      </label>
                   </div>
                </div>
@@ -247,10 +247,10 @@
                   <div class="" style="font-weight: bold;background: #ededed;padding: 7px;">Fireplace</div>
                   <div class="" style="padding: 0px 10px 10px 10px;">
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="31"> Gas
+                     <input type="checkbox" name="fireplace_gas" value="31"> Gas
                      </label><div style="clear: all;"></div>
                      <label class="checkbox-inline">
-                     <input type="checkbox" name="fireplace" value="32"> Wood
+                     <input type="checkbox" name="fireplace_wood" value="32"> Wood
                      </label>
                   </div>
                </div>

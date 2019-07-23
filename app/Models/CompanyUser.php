@@ -11,7 +11,7 @@ class CompanyUser extends EloquentModel {
 	public $timestamps = false;
 
 	protected $table = 'company_user';
-
+	
 	public function scopeFetch($query, $user, $company)
 	{
 		$uid = (is_object($user)) ? $user->id : $user;

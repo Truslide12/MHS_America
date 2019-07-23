@@ -19,7 +19,7 @@
 		<h4>
 			<a href="{{ URL::route('editor', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}">{{ $profile->title }}</a> <small><i class="fa fa-chevron-right"></i></small> 
 			<a href="{{ URL::route('editor-homes', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}">Homes</a> <small><i class="fa fa-chevron-right"></i></small> 
-			<span id="home-name">New Home</span>
+			<span id="home-name">{{ $home->title }}</span>
 		</h4>
 		<hr>
 	</div>

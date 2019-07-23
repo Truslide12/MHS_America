@@ -44,7 +44,7 @@ class Company extends EloquentModel {
 	{
 		return $this->hasMany(CompanyInvite::class);
 	}
-
+	
 	public function companyUsers()
 	{
 		return $this->belongsToMany(User::class)->withPivot('role_id');

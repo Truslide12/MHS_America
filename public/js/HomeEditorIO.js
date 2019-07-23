@@ -779,7 +779,8 @@ HomeEditorIO.prototype.SaveChanges = function(input_step) {
             console.log("sending:", that);
             var str = document.location.toString();
             //console.log(str);
-            str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio";
+            //str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio";
+            str = "edit/dataio";
             $.post(str,data,function(e) {
                 console.log(e);
                 e = JSON.parse(e);
@@ -837,7 +838,8 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
             that = this;
             var str = document.location.pathname;
             //console.log(str);
-            str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio/"+id;
+            //str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio/"+id;
+            str = "edit/dataio";
             //console.log(str);
 
             $.get(str,function(e) {
