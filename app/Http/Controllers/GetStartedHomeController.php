@@ -613,6 +613,7 @@ class GetStartedHomeController extends Pony {
 			if ( $receipt->status ) {
 				session(['active_step' => 5]);
 				$order_data = session("order_data");
+				$order_data['home_data'] = $receipt->home_data;
 				$order_data['transaction_data'] = $receipt->transaction;
 				session(["order_data" => $order_data]);
 				return redirect()->route($this->PRODUCT_ROUTE);
@@ -848,7 +849,8 @@ class GetStartedHomeController extends Pony {
 
 			return (object)[
 				"status" => true,
-				"transaction" => self::createTransaction([$item], $payment)
+				"transaction" => self::createTransaction([$item], $payment),
+				"home_data" => $new_home
 			];
 		}else {
 			return (object)[
