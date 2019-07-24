@@ -4,8 +4,10 @@ namespace App\Models\Traits;
 use App\Models\Role;
 use App\Models\Company;
 use App\Models\CompanyUser;
+use App\Models\Home;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Session;
+use Auth;
 
 trait HasCompanyRole {
 	
@@ -141,6 +143,15 @@ trait HasCompanyRole {
     private function tof ($i) { return ($i==1) ? true : false; }
 
     public function hasHomeAccess($homeid) {
+
+        $comp_id = Home::find($homeid)->company_id;
+
+        //Is it mine?
+        if( Auth::user()->isAdminForCompany($comp_id) || /*am i admin*/
+            Auth::user()->mayI("global_profile_access", $comp_id) /*am i role with global profile access*/
+        ) { return true; }
+
+        //Has it been shared?
         foreach($this->shared_homes as $home) {
             if( $home->home_id == $homeid ) {
                 return true;
