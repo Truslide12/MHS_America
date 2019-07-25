@@ -172,7 +172,7 @@ class BusinessController extends Pony {
 			return redirect()->route('account-business-company-link')
 							->withErrors($validator);
 		}else{
-			$invite = CompanyInvite::byCode($invite_code)->where('email', Auth::user()->email)->first();
+			$invite = CompanyInvite::byCode($invite_code)->where('email', 'LIKE', Auth::user()->email)->first();
 			
 			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
@@ -201,7 +201,7 @@ class BusinessController extends Pony {
 			return redirect()->route('account-business-company-link')
 							->withErrors($validator);
 		}else{
-			$invite = CompanyInvite::byCode(Input::get('code'))->where('email', Auth::user()->email)->first();
+			$invite = CompanyInvite::byCode(Input::get('code'))->where('email', 'LIKE', Auth::user()->email)->first();
 			
 			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
