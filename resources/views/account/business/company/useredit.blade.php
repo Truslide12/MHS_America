@@ -554,11 +554,11 @@ var loaded_profiles = [];
  @php
 		if(in_array($home->id, $sh)) {
  @endphp
-			loaded_homes[loaded_homes.length] = {has_access: true, data: {{trim($home)}} }; 
+			loaded_homes[loaded_homes.length] = {has_access: true, data: {!! trim($home) !!} }; 
  @php
 		}else{
  @endphp
-			loaded_homes[loaded_homes.length] = {has_access: false, data: {{trim($home)}} }; 
+			loaded_homes[loaded_homes.length] = {has_access: false, data: {!! trim($home) !!} }; 
  @php
 		}
  @endphp
@@ -569,11 +569,11 @@ var loaded_profiles = [];
  @php
 		if( in_array($profile->id, $sp) ) {
  @endphp
-			loaded_profiles[loaded_profiles.length] = {has_access: true, data: {{trim($profile)}} }; 
+			loaded_profiles[loaded_profiles.length] = {has_access: true, data: {!! trim($profile) !!} }; 
  @php
 		}else{
  @endphp
-			loaded_profiles[loaded_profiles.length] = {has_access: false, data: {{trim($profile)}} }; 
+			loaded_profiles[loaded_profiles.length] = {has_access: false, data: {!! trim($profile) !!} }; 
  @php
 		}
  @endphp
