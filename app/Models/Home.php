@@ -129,12 +129,16 @@ class Home extends LocatableModel {
 
 	public function city()
 	{
-		return $this->belongsTo(Geoname::class, 'city_id', 'id');
+		return $this->belongsTo(Geoname::class, 'city_id', 'id')->withDefault([
+        	'place_name' => 'Unknown',
+    	]);
 	}
 	
 	public function state()
 	{
-		return $this->belongsTo(State::class);
+		return $this->belongsTo(State::class)->withDefault([
+        	'abbr' => 'Unknown',
+    	]);
 	}
 	
 	public function watchers()
@@ -225,37 +229,51 @@ class Home extends LocatableModel {
 
 		$title = "Unknown";
 
-		switch ( $spec ) {
-			case "siding":
-				$title = self::$materialsList[$homespecs->$spec];
-			break;
-			case "roof_mat":
-				$title = self::$materialsList[$homespecs->$spec];
-			break;
-			case "windows":
-				$title = self::$windowsOpts[$homespecs->$spec];
-			break;
-			case "kitchen_floor":
-				$title = self::$materialsList[$homespecs->$spec];
-			break;
-			case "setup":
-				$title = self::$setupOpts[$homespecs->$spec];
-			break;
-			case "skirting":
-				$title = self::$materialsList[$homespecs->$spec];
-			break;
-			case "roof_angle":
-				$title = self::$roofOpts[$homespecs->$spec];
-			break;
-			case "wall_thickness":
-				$title = self::$thicknessOpts[$homespecs->$spec];
-			break;
-			case "floor":
-				$title = self::$materialsList[$homespecs->$spec];
-			break;
-			case "strap":
-				$title = self::$strapOpts[$homespecs->$spec];
-			break;
+		if (json_last_error() === JSON_ERROR_NONE) {
+
+			if ( ! array_key_exists($spec, $homespecs) ) {
+				$homespecs->$spec = 0;
+			} else {
+
+				switch ( $spec ) {
+					case "siding":
+						$title = self::$materialsList[$homespecs->$spec];
+					break;
+					case "roof_mat":
+						$title = self::$materialsList[$homespecs->$spec];
+					break;
+					case "windows":
+						$title = self::$windowsOpts[$homespecs->$spec];
+					break;
+					case "kitchen_floor":
+						$title = self::$materialsList[$homespecs->$spec];
+					break;
+					case "setup":
+						$title = self::$setupOpts[$homespecs->$spec];
+					break;
+					case "skirting":
+						$title = self::$materialsList[$homespecs->$spec];
+					break;
+					case "roof_angle":
+						$title = self::$roofOpts[$homespecs->$spec];
+					break;
+					case "wall_thickness":
+						$title = self::$thicknessOpts[$homespecs->$spec];
+					break;
+					case "floor":
+						$title = self::$materialsList[$homespecs->$spec];
+					break;
+					case "strap":
+						$title = self::$strapOpts[$homespecs->$spec];
+					break;
+				}
+
+
+			}
+
+		} else {
+			$homespecs = (object)[];
+			$homespecs->$spec = 0;
 		}
 
 		return (object)["id" => $homespecs->$spec, "name" => str_replace(" ", "", strtolower($title)), "title" => $title];
