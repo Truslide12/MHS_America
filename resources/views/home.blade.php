@@ -298,7 +298,12 @@
 				-->
 					@php
 						$ph = json_decode($home->photos, true);
-						$pc = count($ph);
+						if ( is_array($ph) || is_object($ph) ) {
+							$pc = count($ph);
+						} else {
+							$pc = 0;
+						}
+
 						//print_r($ph);
 					@endphp
 					@for ( $h = 1; $h <= $pc; $h++ )
