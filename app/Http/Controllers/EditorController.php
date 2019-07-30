@@ -129,6 +129,13 @@ class EditorController extends Pony {
 		];
 
 
+		if ( $profile->subscription->id > 0 ) {
+			if ( strtotime($profile->subscription->ends_at) > strtotime(now()) ) {
+				$is_paid = true;
+			} else {
+				$is_paid = false;
+			}
+		} else { $is_paid = false; }
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
@@ -136,6 +143,7 @@ class EditorController extends Pony {
 					->with('plan', $profile->plan)
 					->with('business_hours', $final_hours)
 					->with('hour_texts', $hour_texts)
+					->with('is_paid', $is_paid)
 					->with('weekdays', $weekdays);
 					//->with('canvas', Canvas::getDefault());
 	}
@@ -902,7 +910,7 @@ class EditorController extends Pony {
 			}
 
 			$home->square_footage = (int)$input_data['dimensions']['square_footage'];
-			$home->dims_json 	  = (string)json_encode($input_data['dimensions']['json']);
+			$home->dims_json 	  = $input_data['dimensions']['json'];
 			$home->offsets 		  = (int)$input_data['dimensions']['offsets'];
 
 			$home->sold_price 	  = (int)$input_data['sold_price'];

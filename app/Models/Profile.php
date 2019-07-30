@@ -303,7 +303,9 @@ class Profile extends EloquentModel {
 
 	public function subscription()
 	{
-		return $this->hasOne(Subscription::class, 'subscription_target');
+		return $this->hasOne(Subscription::class, 'subscription_target')->withDefault([
+			"id" => 0
+		]);
 	}
 
 	public static function listProperties()

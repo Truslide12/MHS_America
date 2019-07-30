@@ -45,6 +45,7 @@
 					<input type="text" name="title" class="form-control input-lg" value="{{ $profile->title }}" data-toggle="tooltip" data-placement="right" title="What is the name of your community?">
 				</div>
 			</div>
+			@if($is_paid)
 			<div class="form-group">
 				<div class="col-md-9 col-md-offset-3">
 					<div class="panel panel-default text-center">
@@ -76,6 +77,7 @@
 					</div>
 				</div>
 			</div>
+			@endif
 			<div class="form-group">
 				<label class="control-label col-md-3">Community Type</label>
 				<div class="col-xs-4 col-md-3">
@@ -103,6 +105,7 @@
 					</div>
 				</div>
 			</div>
+			@if($is_paid)
 			<div class="form-group">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3">About the Community</label>
@@ -125,9 +128,6 @@
 					<input type="number" step="25" name="rent" class="form-control dollarformat" value="{{ $profile->rent }}" data-toggle="tooltip" data-placement="right" title="How much do spaces cost? If this varies, feel free to leave it empty or enter a range.">
 				</div>
 			</div>
-
-
-
 			<div class="form-group">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3">Office Manager</label>
@@ -139,8 +139,6 @@
 					<input type="text" name="office_email" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="What email should we direct questions to?">
 				</div>
 			</div>
-
-
 			<div class="form-group">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3"></label>
@@ -155,8 +153,9 @@
 				<div class="col-md-3">
 				</div>
 			</div>
-
+			@endif
 		</div>
+		@if($is_paid)
 		<div class="col-sm-8 col-md-offset-1">
 
 			<hr>
@@ -196,6 +195,7 @@
 			<hr>
 
 		</div>
+		@endif
 		<div class="col-md-8 col-md-offset-1">
 
 
@@ -205,10 +205,12 @@
 				<div class="col-md-4">
 					<input type="tel" name="phone" id="phone" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" class="form-control phoneformat" value="{{ $profile->phone }}" data-toggle="tooltip" data-placement="right" title="Please use (###) ###-#### format.">
 				</div>
+				@if($is_paid)
 				<label class="control-label col-md-1">Fax</label>
 				<div class="col-md-4">
 					<input type="tel" name="fax" id="fax" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" class="form-control phoneformat" value="{{ $profile->fax }}" data-toggle="tooltip" data-placement="right" title="Leave blank if not accepting fax.">
 				</div>
+				@endif
 			</div>
 
 
@@ -255,6 +257,7 @@
 					<input type="text" name="zipcode" class="form-control" value="{{ $profile->zipcode }}" autocomplete="off">
 				</div>
 			</div>
+			@if($is_paid)
 			<div class="form-group visible-xs visible-sm">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3 text-left">Site amenities</label>
@@ -291,12 +294,8 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-
+			@endif
+			@if($is_paid)
 			<div class="form-group visible-xs visible-sm">
 				<div class="push-down"></div>
 				<label class="control-label col-md-3 text-left">Parking</label>
@@ -366,6 +365,7 @@
 		  			</select>
 				</div>
 			</div>
+			@endif
 			<div class="form-group">
 				<div class="push-down"></div>
 				<div class="col-md-offset-3 col-md-9">
