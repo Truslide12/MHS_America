@@ -285,7 +285,7 @@
 					$("#photo_slot_text").html("");
 					$("#photo-demo").css({
 						"background": "url("+photodata.photos[active_slot]+")",
-						"background-size": "100% auto",
+						"background-size": "100% 100%",
 						"background-position": "center"
 					});	
 				}

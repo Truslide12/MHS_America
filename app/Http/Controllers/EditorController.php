@@ -649,9 +649,17 @@ class EditorController extends Pony {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
 			$image = Image::make(Input::file('img'));
 
-			// insert watermark at bottom-right corner with 10px offset
-			$image->insert('img/watermark.png', 'bottom-right', 10, 10);
+			//image version
+			//$image->insert('img/watermark_simple.png', 'bottom-right', 10, 10);
 
+			//text version
+			$image->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
 
 			$response = array(
 				'status' => 'success',
