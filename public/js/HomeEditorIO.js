@@ -893,7 +893,7 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                    /*need to write migration to store this info*/
                    that.home.seller_info = { company: "", name: "", phone: "", addr: "", email: "", license: "" };
 
-                   that.company = c;
+                   that.company = e.company;
 
                    that.UnlockMenu();
                    newPony("home-review");

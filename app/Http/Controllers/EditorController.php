@@ -850,9 +850,10 @@ class EditorController extends Pony {
 				$home->city = $p->city->place_name;
 				$home->state = strtoupper($s->abbr);
 
+				$home->company->makeHidden(['sec_hash', 'stripe_customer_id', 'stripe_customer_email']);
 				//$home->zipcode = $p->;
 				//$home->address = $p->;
-				return json_encode(array("status"=>true, "data"=>$home, "comp" => $home->company));
+				return json_encode(array("status"=>true, "data"=>$home));
 			}
 		}
 
