@@ -97,7 +97,12 @@ class Home extends LocatableModel {
 
 	public function company()
 	{
-		return $this->belongsTo(Company::class, 'company_id', 'id');
+		return $this->belongsTo(Company::class, 'company_id', 'id')->withDefault([
+			'is_personal' => 'false',
+			'title' => 'Unknown',
+			'phone' => 'Unknown',
+			'street_addr' => 'Unknown'
+		]);
 	}
 
 	public function sn($i=0)
