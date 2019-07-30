@@ -31,9 +31,54 @@
 
 								  <div class="row" style="margin-bottom: 10px;">
 				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
-				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-pencil"></i> Tell Us What We Missed</h4>
+				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-user"></i> Seller Information</h4>
 				                     </div>
 				                  </div>
+
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Company
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Seller Name
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Seller Phone
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Seller Email
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Seller License
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control"></div>
+										</div>
+
+								  <div class="row" style="margin-bottom: 10px;margin-top:10px;">
+				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
+				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-pencil"></i> Ad Information</h4>
+				                     </div>
+				                  </div>
+
+
+
 				                  <div class="row">
 									<label class="col-sm-2 col-md-2 control-label">
 										Headline
@@ -43,15 +88,17 @@
 										<span class="help-text text-muted"><small>...or leave this blank for a generic headline like "2 bed 1 bath Double-wide"</small></span>
 									</div>
 								</div>
-								<div class="row" style="margin-top: 17px;">
+								<div class="row" style="margin-top: 17px;margin-bottom: 25px;">
 									<label class="col-sm-2 col-md-2 control-label">
 										Description
 									</label>
 									<div class="col-sm-10 col-md-10">
-										<textarea type="text" rows=15 id="description" name="description" class="form-control" placeholder="Tell us about this home.." value="{{ Input::old('title', '') }}"></textarea>
+										<textarea type="text" rows=8 id="description" name="description" class="form-control" placeholder="Tell us about this home.." value="{{ Input::old('title', '') }}"></textarea>
 										<span class="help-text text-muted"><small>Describe this home..</small></span>
 									</div>
-								  </div>
+								</div>
+
+				</div>
 
 
          </div>
