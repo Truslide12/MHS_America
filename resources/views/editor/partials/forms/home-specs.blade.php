@@ -28,7 +28,7 @@
 					<div class="form-group margin-t padding-t"  id="sectional_1">
 						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('beds') ? ' has-error' : '' }}">
 							<label class="control-label">
-								Offsets:
+								Offsets: [<a id="help_offsets">?</a>]
 							</label>
 						</div>
 						<div class="col-sm-10 col-md-8">
@@ -440,6 +440,15 @@
 				}
 				$("#total_sqft").val(tsqft);
 			}
+
+			$("#help_offsets").click(function(e) {
+				console.log("ok");
+				  $('#myModal').modal('show');
+				  $('.modal-title').html("Home Offsets");
+				  $('.modal-body').html("Offsets are a common feature amoung more modern mobile homes. An offset is when one or more sections of your home are different sizes. If this sounds like your home, you can select the appropriate offset option to help produce a more accurate square footage.<br><br>If you are unsure of the dimensions of your home, you can select approximate square footage.");
+				  $('#modal-deny').hide();
+				  $('#modal-confirm').hide();
+			});
 
 			function fuck_your_offset_dims() {
 			  $("#width1, #length1").css({

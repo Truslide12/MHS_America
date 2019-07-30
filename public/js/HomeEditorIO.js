@@ -718,7 +718,7 @@ HomeEditorIO.prototype.BuildReview = function() {
 
     console.log("ph", Editor.home.photos);
     if ( Editor.home.photos !== null ) {
-      if ( Editor.home.photos.length > 0 ) {
+      if ( Editor.home.photos[1] ) {
         $("#photo-preview").attr('src', Editor.home.photos[1].url);
       }
     } else {

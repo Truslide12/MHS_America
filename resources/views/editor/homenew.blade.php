@@ -184,6 +184,9 @@
 		.list-process li small{display:none;}
 	}
 
+    .modal-content { margin-top: 20%; }
+    .modal-header .close { float: right; }
+
 .list-process li {
   display: flex;
   justify-content: space-between;

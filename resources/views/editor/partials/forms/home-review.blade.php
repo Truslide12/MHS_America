@@ -84,7 +84,7 @@
 			<th>Listing Status</th>
 			<td>
 				<select id="listing_status" name="listing_status" class="form-control" onchange="check_sold_status();">
-					<option value="1">Unlisted</option>
+					<option value="1">Private</option>
 					<option value="4">Active</option>
 					<option value="5">Pending</option>
 					<option value="3">Sold</option>
