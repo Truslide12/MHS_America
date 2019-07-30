@@ -39,6 +39,8 @@ var HomeEditorIO = function (id) {
  this.home.status = 1;
  this.home.sold_price = null;
  this.home.exp_date = null;
+ this.home.seller_info = { company: "", name: "", phone: "", addr: "", email: "", license: "" };
+
  this.settings = { steps: {} }
  this.settings.wizard = true;
  this.settings.preValidation = false;
@@ -743,7 +745,7 @@ HomeEditorIO.prototype.updateStatus = function() {
       var s = "New Profile";
     break;
     case 1:
-      var s = "Unlisted";
+      var s = "Private";
     break;
     case 2:
       var s = "Expired";
@@ -850,6 +852,7 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                   $("#save_status").html("<b>Failed to load data.. no access!</b>");
                   return false;
                 } else {
+                  c = e.comp;
                   e = e.data;
                 }
                   //new home was LOADED..
@@ -886,6 +889,11 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
 
                    that.home.sold_price = parseFloat(e.sold_price);
                    that.home.exp_date = that.SetupExpDate(e.exp_date);
+
+                   /*need to write migration to store this info*/
+                   that.home.seller_info = { company: "", name: "", phone: "", addr: "", email: "", license: "" };
+
+                   that.company = c;
 
                    that.UnlockMenu();
                    newPony("home-review");

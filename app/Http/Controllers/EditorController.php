@@ -852,7 +852,7 @@ class EditorController extends Pony {
 
 				//$home->zipcode = $p->;
 				//$home->address = $p->;
-				return json_encode(array("status"=>true, "data"=>$home));
+				return json_encode(array("status"=>true, "data"=>$home, "comp" => $home->company));
 			}
 		}
 

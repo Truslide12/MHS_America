@@ -40,35 +40,35 @@
 											<label class="col-md-2 control-label">
 												Company
 											</label>
-											<div class="col-md-10"><input type="text" class="form-control"></div>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_company"></div>
 										</div>
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
 												Seller Name
 											</label>
-											<div class="col-md-10"><input type="text" class="form-control"></div>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_name"></div>
 										</div>
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
 												Seller Phone
 											</label>
-											<div class="col-md-10"><input type="text" class="form-control"></div>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_phone"></div>
 										</div>
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
 												Seller Email
 											</label>
-											<div class="col-md-10"><input type="text" class="form-control"></div>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_email"></div>
 										</div>
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
 												Seller License
 											</label>
-											<div class="col-md-10"><input type="text" class="form-control"></div>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_license"></div>
 										</div>
 
 								  <div class="row" style="margin-bottom: 10px;margin-top:10px;">
@@ -133,6 +133,17 @@
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
 
+					/*Need to first get from home, fallback to comp info*/
+					if ( Editor.company.is_personal == false ) {
+						$("#seller_company").val(Editor.company.title);
+					} else {
+						$("#seller_name").val(Editor.company.title);
+					}
+
+					$("#seller_phone").val(Editor.company.phone);
+					$("#seller_email").val(Editor.company.street_addr);
+					//$("#seller_license").val(Editor.company.title);
+
 					Editor.settings.preValidation = true;
 					Editor.ValidateAdInfo();
 					Editor.settings.preValidation = false;	
@@ -145,6 +156,17 @@
 					$("#frmcontainer").show();
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
+
+					/*Need to first get from home, fallback to comp info*/
+					if ( Editor.company.is_personal == false ) {
+						$("#seller_company").val(Editor.company.title);
+					} else {
+						$("#seller_name").val(Editor.company.title);
+					}
+
+					$("#seller_phone").val(Editor.company.phone);
+					$("#seller_email").val(Editor.company.street_addr);
+					//$("#seller_license").val(Editor.company.title);
 
 					Editor.settings.preValidation = true;
 					Editor.ValidateAdInfo();
