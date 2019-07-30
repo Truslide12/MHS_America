@@ -648,6 +648,11 @@ class EditorController extends Pony {
 		if(Input::hasFile('img') && in_array(Input::file('img')->getMimeType(), $imageTypes)) {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
 			$image = Image::make(Input::file('img'));
+
+			// insert watermark at bottom-right corner with 10px offset
+			$image->insert('img/watermark.png', 'bottom-right', 10, 10);
+
+
 			$response = array(
 				'status' => 'success',
 				'url' => URL::route('welcome') . '/imgstorage/cover_'.$name.'_orig.jpg',
