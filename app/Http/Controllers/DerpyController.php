@@ -468,7 +468,19 @@ class DerpyController extends Pony {
 
 		if ( $zip === null ) {
 			//latest on site
-			$h = Home::where('status', '>', 0)->paginate(4);
+			$h = Home::orderBy('id', 'DESC')
+					->where('status', '>', 0)
+					->with('city')
+					->with('state')
+					->with('profile')
+					->paginate(4);
+
+				foreach ($h as $i) {
+					$i->type_label = $i->size();
+					$i->dim_label = $i->dim_label();
+					$i->sales_ribbon = $i->sales_ribbon();
+				}
+
 			return $h;
 		} else {
 			if ( strlen($zip) == 2 ) {
@@ -476,7 +488,10 @@ class DerpyController extends Pony {
 				return 3;
 			} else {
 				//by zipcode
-				$h = Home::where('status', '>', 0)->where('zipcode', $zip)->paginate(4);
+				$h = Home::where('status', '>', 0)
+						->where('zipcode', $zip)
+						->with('city')
+						->paginate(4);
 			}
 		}
 

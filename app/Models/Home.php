@@ -81,7 +81,40 @@ class Home extends LocatableModel {
 
 	public function size()
 	{
-		return self::$shapes[$this->shape];
+		if ( $this->shape ) {
+			return self::$shapes[$this->shape];
+		} else {
+			return self::$shapes[0];
+		}
+	}
+
+	public function dim_label()
+	{
+		if ( $this->width > 0 && $this->length > 0 && $this->offsets == 0) {
+			return $this->width."x".$this->length;
+		} else {
+			return $this->square_footage."sqft.";
+		}
+	}
+
+	public function sales_ribbon()
+	{
+
+		switch( $this->status ) {
+			case 3:
+				return (object)["color" => "#f52707", "text" => ' &nbsp; &nbsp; SOLD'];
+			break;
+			case 5:
+				return (object)["color" => "#f5b32f", "text" => 'PENDING'];
+			break;
+			default:
+				if ( $this->type == 1 ) {
+					return (object)["color" => "#03bafc", "text" => 'FOR RENT'];
+				} else {
+					return (object)["color" => " #03bafc", "text" => 'FOR SALE'];
+				}
+			break;
+		}
 	}
 
 	public function profiles()

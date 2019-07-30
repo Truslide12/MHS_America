@@ -7,13 +7,9 @@
 	********************************************/
 	$da = file_get_contents("http://mhsamerica.com/api/latest/homes");
 	$da = json_decode($da);
-	$img = $title = $place = $ids = Array();
+	$img = Array();
 
 	foreach( $da->data as $d ) {
-
-		$title[] = $d->title;
-		$place[] = $d->zipcode;
-		$ids[] = $d->id;
 
 		if ( $d->photos ) {
 			$p = (array) json_decode(stripslashes($d->photos));
@@ -28,15 +24,7 @@
 		}
 	}
 
-	if ( sizeof($title) <= 3 ) {
-		for ( $r = 0; $r <= 3; $r++) {
-			if( ! array_key_exists($r, $title) ){
-				$title[] = "";
-				$place[] = "";
-				$img[] = ""; 
-			}
-		}
-	}
+
 
 	$demo = 1;
 @endphp
@@ -288,6 +276,30 @@
 					margin-bottom: 10px;
 				}
 			}
+
+				.fs-ribbon {
+				  -webkit-transform: rotate(-45deg); 
+				     -moz-transform: rotate(-45deg); 
+				      -ms-transform: rotate(-45deg); 
+				       -o-transform: rotate(-45deg); 
+				          transform: rotate(-45deg); 
+				    border: 25px solid transparent;
+				    border-top: 25px solid #03bafc;
+				    position: absolute;
+				    bottom: 0px;
+				    right: -40px;
+				    padding: 0 10px;
+				    width: 120px;
+				    color: white;
+				    font-family: sans-serif;
+				    size: 11px;
+				    text-align: center;
+				}
+				.fs-ribbon .txt {
+				    position: absolute;
+				    top: -21px;
+				    left: -3px;
+				}​
 		</style>
 	</div>
 
@@ -349,24 +361,46 @@
 					<div class="mhs-slide-left-btn" onclick="changeHomes();"><i class="fa fa-chevron-left"></i></div>
 					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
 					<div class="mhs-slideshow-loader"><small>Loading</small></div>
-					@for ( $h = 0; $h <= 3; $h++ )
-					@if( $img[$h] )
-					<div class="mhs-slide" id="slide-{{$h}}">
-						<a class="card" href="home/{{ $ids[$h] }}">
-			                <div class="card-image">
-			                    <img class="img-responsive" src="{{$img[$h]}}">
-			                    
+					@foreach( $da->data as $home )
+					<div class="mhs-slide" id="slide-{{$loop->index}}">
+						<div class="card clickycard" href="home/{{ $home->id }}">
+			                <div class="card-image" style="position: relative;">
+			                    <img class="img-responsive" src="{{$img[$loop->index]}}" style="min-width: 100%;">
+			                        <div class="fs-ribbon" style="border-top-color: {{$home->sales_ribbon->color}}!important;">
+								        <div class="txt">{!!$home->sales_ribbon->text!!}</div>
+								    </div>
+			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;">${{round($home->price/10)}}</span>
 			                </div><!-- card image -->
-			                
+
 			                <div class="card-content">
-			                    <span class="card-title">{{$title[$h]}}<br>
-			                    	<small>{{$place[$h]}}</small></span>                    
+			                    <span class="card-title">
+			                    	<div class="row">
+			                    	<div class="col-md-12">
+			                    		{{$home->title}}
+			                    	</div>
+			                    	</div>
+			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="col-md-12">
+			                    		<small style="text-align: right;width: 100%;">{{$home->beds}}bd &middot; {{$home->baths}}ba &middot; {{$home->type_label}}[{{$home->dim_label}}]</small><br>
+			                   		</div>
+			                   		</div>
+			                    	<div class="row" style="margin-top: 5px;">
+				                    	<div class="col-md-12">
+				                    		<small style="text-align: right;">{{$home->profile->title}}</small>
+				                   		</div>
+			                   		</div>
+			                   		<div class="row" style="margin-top: 5px;">
+			                   			<div class="col-md-12">
+				                    		<small style="text-align: right;">{{$home->city->place_name}} {{strtoupper($home->state->abbr)}}, {{$home->zipcode}}</small>
+				                   		</div>
+			                   		</div>
+			                    </span>                    
 			                </div><!-- card content -->
 
-			            </a>
+
+			            </div>
 					</div>
-					@endif
-					@endfor
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -523,6 +557,12 @@
 		    node.addEventListener('animationend', handleAnimationEnd)
 		}
 
+
+		$(".clickycard").on('click', function(event){
+		    event.stopPropagation();
+		    event.stopImmediatePropagation();
+		    window.location = $(this).attr("href")
+		});
 
 		/**
 		var noy = false;

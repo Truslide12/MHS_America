@@ -89,6 +89,7 @@
 					<option value="5">Pending</option>
 					<option value="3">Sold</option>
 					<option value="2">Expired</option>
+					<option value="6">Withdrawn</option>
 				</select>
 			</td>
 		</tr>
