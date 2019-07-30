@@ -508,6 +508,7 @@ class GetStartedCommunityController extends Pony {
 		if(!$geocode['success']) {
 			return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors(["Address lookup failed. Try again later or contact support if this persists."]);
 		}
+
 		
 		//check if this address is taken??
 		$addr_available = false;
@@ -520,7 +521,12 @@ class GetStartedCommunityController extends Pony {
 
 			$orderdata = Input::except('_token');
 			$orderdata['community-address1'] = $geocode['data']['address'];
-			$orderdata['community-address2'] = $geocode['data']['addressb'];
+
+			if ( array_key_exists('addressb', $geocode['data']) ) {
+				$orderdata['community-address2'] = $geocode['data']['addressb'];
+			} else {
+				$orderdata['community-address2'] = "";
+			}
 			$orderdata['community-zip'] = $geocode['data']['zipcode'];
 			$orderdata['community-city'] = $geocode['data']['city_id'];
 			$orderdata['community-state'] = $geocode['data']['state_id'];
