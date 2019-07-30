@@ -628,6 +628,10 @@ Route::group(array('prefix' => 'luna'), function()
 					/* Profile editor get home (GET) */
 			Route::get('{home}/edit/dataio', array('uses' => 'EditorController@getHomeEditorIO', 'as' => 'editor-dataio-get'));
 
+			/*new routes*/
+				Route::post('{home}/edit/photos/upload', array('uses' => 'EditorController@postUploadPhoto', 'as' => 'home-editor-photos-upload-post'));
+				/* Profile editor - crop photo (POST) */
+				Route::post('{home}/edit/photos/crop', array('uses' => 'EditorController@postCropPhoto', 'as' => 'home-editor-photos-crop-post'));
 		});
 
 	});
