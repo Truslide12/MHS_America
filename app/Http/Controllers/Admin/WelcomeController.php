@@ -70,7 +70,7 @@ class WelcomeController extends Pony {
 		$loads = sys_getloadavg();
 
 		$myname = gethostname();
-		$hosts = ['lenovo2014' => 8, 'derpyhooves' => 4];
+		$hosts = ['lenovo2014' => 8, 'twilightsparkle' => 4];
 		$serverload = ($loads[0] / $hosts[$myname]) * 100;
 
 		// $total_disk = disk_total_space('/');
@@ -83,7 +83,7 @@ class WelcomeController extends Pony {
 		//$phpmem = 0;
 		//$nginxmem = 0;
 
-		$server = Server::select('DFW', '8e6873ce-fb24-4509-a604-4cf5546d4ae5');
+		$server = Server::select('DFW', 'f66788b1-e31b-4f3b-b675-97b0b669ca9c'); /* 8e6873ce-fb24-4509-a604-4cf5546d4ae5 */
 
 		return view('admin.server-status')
 					->with('title', 'Server Status')
