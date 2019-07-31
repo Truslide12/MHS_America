@@ -82,7 +82,7 @@ class WelcomeController extends Pony {
 
 		$meminfo = `free -m | awk 'NR==2 {print $2, $7}'`;
 		$memparams = explode(' ', $meminfo);
-		$memsize = number_format((float)(  ($memparams[0] - $memparams[1]) / $memparams[0] * 100  ), 2, '.', '');
+		$memsize = ($memparams[0] - $memparams[1]) / $memparams[0] * 100;
 
 		//$phpmem = 0;
 		//$nginxmem = 0;
