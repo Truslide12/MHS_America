@@ -39,7 +39,7 @@ var HomeEditorIO = function (id) {
  this.home.status = 1;
  this.home.sold_price = null;
  this.home.exp_date = null;
- this.home.seller_info = { company: "", name: "", phone: "", addr: "", email: "", license: "" };
+ this.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } };
 
  this.settings = { steps: {} }
  this.settings.wizard = true;
@@ -384,7 +384,7 @@ HomeEditorIO.prototype.ValidateHomeSpecs = function() {
         this.RejectInput("#sqft"+i, "nan");
         rejected++;
       } else {
-        total_sqft += $("#sqft"+i).val();
+        total_sqft += parseInt($("#sqft"+i).val());
         complex_dims[i].square_footage = parseInt($("#sqft"+i).val());
         this.AcceptInput("#sqft"+i);
       }
@@ -459,6 +459,13 @@ HomeEditorIO.prototype.ValidateOverview = function() {
     //rejected++;
   }
 
+  if ( $("#listing_status").val() != null && $("#listing_status").val() != '' ) {
+    this.home.status = parseInt($("#listing_status").val());
+    this.AcceptInput("#listing_status");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
 
   if ( rejected > 0 ) {
     return false;
@@ -486,6 +493,113 @@ HomeEditorIO.prototype.ValidateAdInfo = function() {
     //this.RejectInput("#model", "empty");
     //rejected++;
   }
+
+
+
+  //grab up seller info
+  if ( $("#seller_company").val() != null && $("#seller_company").val() != '' ) {
+    this.home.seller_info.company = $("#seller_company").val();
+    this.AcceptInput("#seller_company");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_name").val() != null && $("#seller_name").val() != '' ) {
+    this.home.seller_info.name = $("#seller_name").val();
+    this.AcceptInput("#seller_name");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_phone").val() != null && $("#seller_phone").val() != '' ) {
+    this.home.seller_info.phone = $("#seller_phone").val();
+    this.AcceptInput("#seller_phone");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_email").val() != null && $("#seller_email").val() != '' ) {
+    this.home.seller_info.email = $("#seller_email").val();
+    this.AcceptInput("#seller_email");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_addr").val() != null && $("#seller_addr").val() != '' ) {
+    this.home.seller_info.addr = $("#seller_addr").val();
+    this.AcceptInput("#seller_addr");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_license").val() != null && $("#seller_license").val() != '' ) {
+    this.home.seller_info.license = $("#seller_license").val();
+    this.AcceptInput("#seller_license");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#promo_type").val() != null && $("#promo_type").val() != '' ) {
+    this.home.seller_info.promo.type = parseInt($("#promo_type").val());
+    switch ( this.home.seller_info.promo.type ) {
+      case 1:
+        //open house
+        ohdRGEX = /^\d{2}\/\d{2}$/;
+        ohsRGEX = /\b((1[0-2]|0?[1-9]):([0-5][0-9])(| )([AaPp][Mm]))$/;
+
+        ohd = $("#ohd").val();
+        ohs = $("#ohs").val();
+        ohe = $("#ohe").val();
+
+        params = [(ohdRGEX.test(ohd))?ohd:null, (ohsRGEX.test(ohs))?ohs:null, (ohsRGEX.test(ohe))?ohe:null];
+
+        //i should just create a var for test so i dont call so much but later
+        if ( ohdRGEX.test(ohd) ) {
+          this.AcceptInput("#ohd");
+        } else {
+          this.RejectInput("#ohd", "nan");
+          rejected++;
+        }
+        if ( ohsRGEX.test(ohs) ) {
+          this.AcceptInput("#ohs");
+        }
+        if ( ohsRGEX.test(ohe) ) {
+          this.AcceptInput("#ohe");
+        }
+
+      break;
+      case 2:
+        //price drops
+        pddRGEX = /^(?<!\S)(|\$|\$ )(?=.)(0|([1-9](\d*|\d{0,2}(,\d{3})*)))?(\.\d*[1-9])?(?!\S)$/;
+        pdpRGEX = /^\b(?<!\.)(?!0+(?:\.0+)?%)(?:\d|[1-9]\d|100)(?:(?<!100)\.\d+)?%$/;
+
+        pdi = $("#pdi").val();
+
+        console.log("pddRGEX", pdi, pddRGEX.test(pdi));
+        console.log("pdpRGEX", pdi, pdpRGEX.test(pdi));
+
+        params = [(pdpRGEX.test(pdi) || pddRGEX.test(pdi))?pdi:null, null, null];
+        if ( pdpRGEX.test(pdi) || pddRGEX.test(pdi) ) {
+          this.AcceptInput("#pdi");
+        }
+
+      break;
+      default:
+        params = [null, null, null];
+      break;
+    }
+    
+    if( params[0] ) { this.home.seller_info.promo.param1 = params[0]; }
+    if( params[1] ) { this.home.seller_info.promo.param2 = params[1]; }
+    if( params[2] ) { this.home.seller_info.promo.param3 = params[2]; }
+
+    this.AcceptInput("#promo_type");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+
+
 
   if ( rejected > 0 ) {
     //console.log("Missing "+rejected+" Fields..");
@@ -627,7 +741,7 @@ HomeEditorIO.prototype.BuildReview = function() {
     //Need to build data obj validator..
 
     if ( Editor.home.headline ) {
-      $("#cfrm_title").html(Editor.home.headline);
+      $("#cfrm_title").html(Editor.home.headline + " Overview");
     } else {
       $("#cfrm_title").html("Not Entered");
     }
@@ -663,12 +777,6 @@ HomeEditorIO.prototype.BuildReview = function() {
       $("#cfrm_size").html("Not Entered");
     }
     
-    if ( Editor.home.dimensions !== null ) {
-     $("#cfrm_dimensions").html(Editor.home.dimensions);
-    } else {
-      $("#cfrm_dimensions").html("Not Entered");
-    }
-
     if ( Editor.home.description !== null ) {
       desc = Editor.home.description;
       desc = desc.substring(0,75);
@@ -701,18 +809,15 @@ HomeEditorIO.prototype.BuildReview = function() {
       $("#cfrm_model").html("Not Entered");
     }
 
-    if ( Editor.home.status > 0 ) {
-      $("#cfrm_payment").html("<strong style='color:green;'>Paid</strong>");
+    if ( Editor.home.status !== null ) {
       $("#listing_status").val(Editor.home.status)
     } else {
-      $("#cfrm_payment").html("<strong style='color:red;'>Unpaid</strong>");
       $("#listing_status").val(Editor.home.status)
     }
 
 
     if ( Editor.home.dimensions.length !== null && Editor.home.dimensions.width !== null ) {
-      //$("#cfrm_size").html(Editor.home.dimensions.length+"x"+Editor.home.dimensions.width+" (approx. "+(Editor.home.dimensions.length*Editor.home.dimensions.width)+"sqft)");
-      $("#cfrm_size").html("approx. "+(Editor.home.dimensions.square_footage)+"sqft");
+      $("#cfrm_size").html((Editor.home.dimensions.square_footage)+" sqft.");
     } else {
       $("#cfrm_size").html("Not Entered");
     }
@@ -740,7 +845,7 @@ HomeEditorIO.prototype.BuildReview = function() {
 
 HomeEditorIO.prototype.updateStatus = function() {
   $("#id-field").html(this.home.home_id);
-  switch(this.home.status){
+  switch(parseInt(this.home.status)){
     case 0:
       var s = "New Profile";
     break;
@@ -750,7 +855,7 @@ HomeEditorIO.prototype.updateStatus = function() {
     case 2:
       var s = "Expired";
     break;
-    case 2:
+    case 3:
       var s = "Sold";
     break;
     case 4:
@@ -758,6 +863,9 @@ HomeEditorIO.prototype.updateStatus = function() {
     break;
     case 5:
       var s = "Pending";
+    break;
+    case 6:
+      var s = "Withdrawn";
     break;
     default:
       var s = "Unknown";
@@ -890,8 +998,28 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                    that.home.sold_price = parseFloat(e.sold_price);
                    that.home.exp_date = that.SetupExpDate(e.exp_date);
 
+                   si = JSON.parse(e.seller_info);
+                   //si = JSON.parse(si.promo);
+                   if ( si ) {
+                     that.home.seller_info = { 
+                      company: si.company,
+                      name: si.name,
+                      phone: si.phone,
+                      addr: si.addr,
+                      email: si.email,
+                      license: si.license,
+                      promo: {
+                        type: si.promo.type,
+                        param1: si.promo.param1,
+                        param2: si.promo.param2,
+                        param3: si.promo.param3
+                      } 
+                     };
+                   } else {
+                    that.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } }
+                   }
                    /*need to write migration to store this info*/
-                   that.home.seller_info = { company: "", name: "", phone: "", addr: "", email: "", license: "" };
+
 
                    that.company = e.company;
 

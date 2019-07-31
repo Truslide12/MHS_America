@@ -52,10 +52,6 @@
 			<th colspan="2">Listing Information:</th>
 		</tr>
 		<tr>
-			<th>Listing Payment</th>
-			<td><div id="cfrm_payment"></div></td>
-		</tr>
-		<tr>
 			<th>Listing Expiration</th>
 			<td>
 			<!--
@@ -160,15 +156,21 @@
 			$("#sold_price").val(Editor.home.sold_price);
 			check_sold_status();
 		}
-		if ( Editor.home.status == 3 ) {
+		if ( Editor.home.status ) {
+			console.log("set load status", Editor.home.status)
+			$("#listing_status").val(Editor.home.status);
 			check_sold_status();
 		}
 		if ( Editor.home.exp_date ) {
 			$("#exp_date").val(Editor.home.exp_date);
 		}
 
+		Editor.BuildReview();
+	Editor.ValidateOverview();
+
 	}
-	Editor.BuildReview();
+
+	
 </script>
 <style>
 	.app-heading {

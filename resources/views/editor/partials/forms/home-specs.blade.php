@@ -48,9 +48,9 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input onchange="update_sqft();" type="text" id="width1" name="width1" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="width1" name="width1" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 							<p class="form-control-static text-center" style="width:24%;display:inline-block">X</p>
-							<input onchange="update_sqft();" type="text" id="length1" name="length1" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="length1" name="length1" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 						</div>
 						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('beds') ? ' has-error' : '' }}">
 							<label class="control-label">
@@ -58,7 +58,7 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input type="text" id="sqft1" name="sqft1" class="form-control" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="sqft1" name="sqft1" class="form-control" placeholder="ft.">
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t" id="sectional_2" style="display: none;">
@@ -68,9 +68,9 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input onchange="update_sqft();" type="text" id="width2" name="width2" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="width2" name="width2" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 							<p class="form-control-static text-center" style="width:24%;display:inline-block">X</p>
-							<input onchange="update_sqft();" type="text" id="length2" name="length2" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="length2" name="length2" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 						</div>
 						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('beds') ? ' has-error' : '' }}">
 							<label class="control-label">
@@ -78,7 +78,7 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input type="text" id="sqft2" name="sqft2" class="form-control" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="sqft2" name="sqft2" class="form-control" placeholder="ft.">
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t" id="sectional_3" style="display: none;">
@@ -88,9 +88,9 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input onchange="update_sqft();" type="text" id="width3" name="width3" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="width3" name="width3" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 							<p class="form-control-static text-center" style="width:24%;display:inline-block">X</p>
-							<input onchange="update_sqft();" type="text" id="length3" name="length3" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="length3" name="length3" class="form-control" style="width:35%;display:inline-block" placeholder="ft.">
 						</div>
 						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('beds') ? ' has-error' : '' }}">
 							<label class="control-label">
@@ -98,7 +98,7 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<input type="text" id="sqft3" name="sqft3" class="form-control" placeholder="ft.">
+							<input onkeyup="update_sqft();" type="text" id="sqft3" name="sqft3" class="form-control" placeholder="ft.">
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t" id="sectional_t" style="display: none;">
@@ -399,31 +399,74 @@
 				w1 = parseInt($("#width1").val());
 				h1 = parseInt($("#length1").val());
 
+
 				switch (n) {
 					case 0:
-						$("#sqft1").val(w1*h1);
-						$("#total_sqft").val( w1*h1 );
+						if ( !isNaN(w1) && !isNaN(h1) ) { 
+							$("#sqft1").val(w1*h1);
+							$("#total_sqft").val( w1*h1 ); 
+						} else {
+							//doit
+						}
 					break;
 					case 1:
 						w2 = parseInt($("#width2").val());
 						h2 = parseInt($("#length2").val());
+
 						$("#sqft1").val(w1*h1);
 						$("#sqft2").val(w2*h2);
-						$("#total_sqft").val( (w1*h1) + (w2*h2) );
+
+						if ( !isNaN(w1) && !isNaN(h1) ) { 
+							$("#sqft1").val(w1*h1); 
+						}
+						if ( !isNaN(w2) && !isNaN(h2) ) { 
+							$("#sqft2").val(w2*h2); 
+						}
+						if ( !isNaN(w2) && !isNaN(h2) && !isNaN(w1) && !isNaN(h1)) { 
+							$("#total_sqft").val( (w1*h1) + (w2*h2) );
+						} else {
+							//doit
+						}
+						
 					break;
 					case 2:
 						w2 = parseInt($("#width2").val());
 						h2 = parseInt($("#length2").val());
 						w3 = parseInt($("#width3").val());
 						h3 = parseInt($("#length3").val());
-						$("#sqft1").val(w1*h1);
-						$("#sqft2").val(w2*h2);
-						$("#sqft3").val(w3*h3);
-						$("#total_sqft").val( (w1*h1) + (w2*h2) + (w3*h3) );
+
+						if ( !isNaN(w1) && !isNaN(h1) ) { 
+							$("#sqft1").val(w1*h1); 
+						}
+						if ( !isNaN(w2) && !isNaN(h2) ) { 
+							$("#sqft2").val(w2*h2); 
+						}
+						if ( !isNaN(w3) && !isNaN(h3) ) { 
+							$("#sqft3").val(w3*h3); 
+						}
+						if ( !isNaN(w2) && !isNaN(h2) && !isNaN(w1) && !isNaN(h1) && !isNaN(w3) && !isNaN(h3) ) { 
+							$("#total_sqft").val( (w1*h1) + (w2*h2) + (w3*h3) );
+						} else {
+							//doit
+							s = Array(4);
+							s[1] = parseInt($("#sqft1").val());
+							s[2] = parseInt($("#sqft2").val());
+							s[3] = parseInt($("#sqft3").val());
+							sum = 0;
+							for(i=1;i<=3;i++){
+								if (!isNaN(s[i])) { sum += s[i]; }
+							}
+							$("#total_sqft").val( sum ); 
+						}
+
 					break;
 					default:
-						$("#sqft1").val(w1*h1);
-						$("#total_sqft").val( w1*h1 );
+						if ( !isNaN(w1) && !isNaN(h1) ) { 
+							$("#sqft1").val(w1*h1);
+							$("#total_sqft").val( w1*h1 ); 
+						} else {
+							//doit
+						}
 					break;
 				}
 

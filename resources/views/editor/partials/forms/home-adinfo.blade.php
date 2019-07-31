@@ -59,6 +59,13 @@
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
+												Seller Address
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_addr"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
 												Seller Email
 											</label>
 											<div class="col-md-10"><input type="text" class="form-control" id="seller_email"></div>
@@ -70,6 +77,49 @@
 											</label>
 											<div class="col-md-10"><input type="text" class="form-control" id="seller_license"></div>
 										</div>
+
+										<!-- expirement -->
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												Promotion [<a id="help_offsets">?</a>]
+											</label>
+											<div class="col-md-10">
+												<select class="form-control" id="promo_type" onchange="show_promo(this.value, false)">
+													<option value="0">--None--</option>
+													<option value="1">Open House Promotion</option>
+													<option value="2">Price Drop Promotion</option>
+													<option value="3">Recently Updated Promotion</option>
+												</select>
+											</div>
+										</div>
+										<div class="row" style="margin-top: 7px;margin-bottom: 2px;display: none;" id="reduction_box">
+											<label class="col-md-2 control-label">
+												
+											</label>
+											<label class="col-md-4 control-label">
+												Price Drop Amount
+											</label>
+											<div class="col-md-6">
+
+												<input type="text" class="form-control" id="pdi">
+												<small><strong>Accepted Formats:</strong><br> Dollar amount ($10000) or percentage (10%).</small>
+											</div>
+										</div>
+										<div class="row" style="margin-top: 7px;margin-bottom: 2px;display: none;" id="openhouse_box">
+											<label class="col-md-2 control-label">
+												
+											</label>
+											<label class="col-md-4 control-label">
+												Open House Time
+											</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="" style="width: 30%;display: inline-block;" placeholder="MM/DD" id="ohd">
+												<input type="text" class="form-control" name="" style="width: 30%;display: inline-block;" placeholder="Start Time" id="ohs">
+												<input type="text" class="form-control" name="" style="width: 30%;display: inline-block;" placeholder="End Time" id="ohe">
+												<small><strong>Accepted Formats:</strong><br> Calendar Date (MM/DD) and 12 Hour Time (eg 10:45AM, 3:00PM)</small>
+											</div>
+										</div>
+										<!-- /expirement -->
 
 								  <div class="row" style="margin-bottom: 10px;margin-top:10px;">
 				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
@@ -133,16 +183,26 @@
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
 
+					co = Editor.company;
+					si = Editor.home.seller_info;
+
 					/*Need to first get from home, fallback to comp info*/
-					if ( Editor.company.is_personal == false ) {
-						$("#seller_company").val(Editor.company.title);
+					if ( co.is_personal == false ) {
+						if ( si.company !== null ) { $("#seller_company").val(si.company); } else { $("#seller_company").val(co.title); }
+						if ( si.name !== null ) { $("#seller_name").val(si.name); } else { $("#seller_name").val(""); }
 					} else {
-						$("#seller_name").val(Editor.company.title);
+						if ( si.name !== null ) { $("#seller_name").val(si.name); } else { $("#seller_name").val(co.title); }
+						if ( si.company !== null ) { $("#seller_company").val(si.company); } else { $("#seller_company").val(""); }
+
 					}
 
-					$("#seller_phone").val(Editor.company.phone);
-					$("#seller_email").val(Editor.company.street_addr);
-					//$("#seller_license").val(Editor.company.title);
+					if ( si.phone !== null ) { $("#seller_phone").val(si.phone); } else { $("#seller_phone").val(co.phone); }
+					if ( si.addr !== null ) { $("#seller_addr").val(si.addr); } else { $("#seller_addr").val(co.street_addr); }
+					if ( si.email !== null ) { $("#seller_email").val(si.email); } else { $("#seller_addr").val(""); }
+					if ( si.license !== null ) { $("#seller_license").val(si.license); } else { $("#seller_addr").val(""); }
+
+					if ( parseInt(si.promo.type) > 0 ) { $("#promo_type").val(parseInt(si.promo.type));show_promo(si.promo.type, true); } else { $("#promo_type").val(0); }
+
 
 					Editor.settings.preValidation = true;
 					Editor.ValidateAdInfo();
@@ -157,16 +217,26 @@
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
 
+					co = Editor.company;
+					si = Editor.home.seller_info;
+
 					/*Need to first get from home, fallback to comp info*/
-					if ( Editor.company.is_personal == false ) {
-						$("#seller_company").val(Editor.company.title);
+					if ( co.is_personal == false ) {
+						if ( si.company ) { $("#seller_company").val(si.company); } else { $("#seller_company").val(co.title); }
+						if ( si.name ) { $("#seller_name").val(si.name); } else { $("#seller_name").val(""); }
 					} else {
-						$("#seller_name").val(Editor.company.title);
+						if ( si.name ) { $("#seller_name").val(si.name); } else { $("#seller_name").val(co.title); }
+						if ( si.company ) { $("#seller_company").val(si.company); } else { $("#seller_company").val(""); }
 					}
 
-					$("#seller_phone").val(Editor.company.phone);
-					$("#seller_email").val(Editor.company.street_addr);
-					//$("#seller_license").val(Editor.company.title);
+					if ( si.phone ) { $("#seller_phone").val(si.phone); } else { $("#seller_phone").val(co.phone); }
+					if ( si.addr ) { $("#seller_addr").val(si.addr); } else { $("#seller_addr").val(co.street_addr); }
+					if ( si.email !== null ) { $("#seller_email").val(si.email); } else { $("#seller_addr").val(""); }
+					if ( si.license !== null ) { $("#seller_license").val(si.license); } else { $("#seller_addr").val(""); }
+
+					if ( parseInt(si.promo.type) > 0 ) { $("#promo_type").val(parseInt(si.promo.type));show_promo(si.promo.type, true); } else { $("#promo_type").val(0); }
+
+
 
 					Editor.settings.preValidation = true;
 					Editor.ValidateAdInfo();
@@ -174,5 +244,43 @@
 				} else {
 					$("#preform").fadeIn(1200);
 				}
+
+				$("#help_offsets").click(function(e) {
+
+
+				console.log("ok");
+				  $('#myModal').modal('show');
+				  $('.modal-title').html("Promotional Highlight");
+				  $('.modal-body').html("You can add promotional highlights to your home which will display in a ribbon across the thumbnail of the home where ever it shows up on MHS America. We currently support three promotional options:<br><br><strong>Open House Promotion</strong><br>If you have an upcoming Open House you can use this ribbon to promote the date anywhere your home is seen on our platform.<br><hr><strong>Price Drop Promotion</strong><br>If your home has recently had a drop in price you can promote the new price with a special price drop ribbon.<hr><strong>Recently Updated Promotion</strong><br>If you have updated your profile to include new informaion or photos you can let users know by using this ribbon.");
+				  $('#modal-deny').hide();
+				  $('#modal-confirm').hide();
+				});
+
 			}
+
+				function show_promo(id, reset) {
+					console.log("showpromo", id);
+					id = parseInt(id);
+					switch ( id ) {
+						case 1:
+							$("#reduction_box").hide();
+							$("#openhouse_box").show();
+							if ( reset ) {
+								$("#ohd").val(Editor.home.seller_info.promo.param1);
+								$("#ohs").val(Editor.home.seller_info.promo.param2);
+								$("#ohe").val(Editor.home.seller_info.promo.param3);
+							}
+						break;
+						case 2:
+							$("#openhouse_box").hide();
+							$("#reduction_box").show();
+							if ( reset ) {
+								$("#pdi").val(Editor.home.seller_info.promo.param1);
+							}
+						break;
+						default:
+							$("#openhouse_box, #reduction_box").hide();
+						break;
+					}
+				}
 		</script>

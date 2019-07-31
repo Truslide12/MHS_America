@@ -888,7 +888,7 @@ class EditorController extends Pony {
 			$home->width 		= (int)$input_data['dimensions']['width'];
 			$home->length 		= (int)$input_data['dimensions']['length'];
 			$home->shape 		= (int)$input_data['size'];
-			$home->status 		= 1;
+			$home->status 		= (int)$input_data['status'];
 			$home->description 	= (string)$input_data['description'];
 			$home->year 		= (int)$input_data['year'];
 			$home->brand 		= (string)$input_data['make'];
@@ -900,7 +900,7 @@ class EditorController extends Pony {
 			$home->type 		= (int)$input_data['sale_type'];
 			$home->decal 		= (string)json_encode($input_data['decal']); //need to merge all 3 to json obj !!!
 			$home->hud 			= (string)json_encode($input_data['hud']); //need to merge all 3 to json obj !!!
-			
+			$home->seller_info 	= json_encode($input_data['seller_info']);
 
 			$home->space_number = (string)$input_data['space'];
 
@@ -910,7 +910,7 @@ class EditorController extends Pony {
 			}
 
 			$home->square_footage = (int)$input_data['dimensions']['square_footage'];
-			$home->dims_json 	  = $input_data['dimensions']['json'];
+			$home->dims_json 	  = json_encode((object)$input_data['dimensions']['json']);
 			$home->offsets 		  = (int)$input_data['dimensions']['offsets'];
 
 			$home->sold_price 	  = (int)$input_data['sold_price'];
@@ -927,7 +927,6 @@ class EditorController extends Pony {
 				}
 			}
 			
-			$home->status 		= 1;
 
 			if($home->save()) {
 				return json_encode(array("status"=>true, "home_id"=>$home->id));
