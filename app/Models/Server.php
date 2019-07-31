@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use OpenCloud\Rackspace;
 
 class Server {
@@ -68,5 +69,14 @@ class Server {
 	public static function status($id)
 	{
 		return self::$statuses[$id];
+	}
+
+	public static function databaseSize()
+	{
+		$results = DB::select(
+			DB::raw('SELECT pg_size_pretty( pg_database_size(\''.config('database.connections.pgsql.database').'\') ) AS database_size')
+		);
+
+		return $results[0]->{'database_size'};
 	}
 }

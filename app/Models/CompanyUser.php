@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompanyUser extends EloquentModel {
+	use SoftDeletes;
 	
-	//theyre not in the db
-	//use SoftDeletes;
 	public $timestamps = false;
 
 	protected $table = 'company_user';

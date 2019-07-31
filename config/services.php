@@ -48,6 +48,10 @@ return [
         'geocode' => 'https://api.geocod.io/v1.3/geocode',
         'reverse' => 'https://api.geocod.io/v1.3/reverse',
         'api_key' => env('GEOCODIO_API_KEY')
+    ],
+
+    'cronserv' => [
+        'key' => '83411758450251a62ae38578ec510c19'
     ]
 
 ];

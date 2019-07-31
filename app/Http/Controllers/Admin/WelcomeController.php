@@ -64,13 +64,13 @@ class WelcomeController extends Pony {
 		//$phpmem = `top -n 1 -p \`cat /run/php5-fpm.pid\` | grep root | awk '{print $8}'`;
 		//$nginxmem = `top -n 1 -p \`cat /run/nginx.pid\` | grep root | awk '{print $8}'`;
 
-		$phpmem = `ps -p \`cat /run/php-fpm/php-fpm.pid\` -o %mem | grep ' '`;
+		$phpmem = `ps -p \`cat /run/php/php7.2-fpm.pid\` -o %mem | grep ' '`;
 		$nginxmem = `ps -p \`cat /run/nginx.pid\` -o %mem | grep ' '`;
 
 		$loads = sys_getloadavg();
 
 		$myname = gethostname();
-		$hosts = ['lenovo2014' => 8, 'derpyhooves' => 4];
+		$hosts = ['lenovo2014' => 8, 'twilightsparkle' => 4];
 		$serverload = ($loads[0] / $hosts[$myname]) * 100;
 
 		// $total_disk = disk_total_space('/');
@@ -80,16 +80,62 @@ class WelcomeController extends Pony {
 
 		$disk = new DiskStatus('/');
 
+		$meminfo = `free -m | awk 'NR==2 {print $2, $7}'`;
+		$memparams = explode(' ', $meminfo);
+		$memsize = number_format((float)(  (trim($memparams[0]) - trim($memparams[1])) / trim($memparams[0]) * 100  ), 2, '.', '');
+
+
+		//SERVICE STATUSES
+		$service_nginx = `/usr/sbin/service nginx status | awk 'NR==3 {print $2, $3}'`;
+		$service_postgres = `/usr/sbin/service postgresql@* status | awk 'NR==3 {print $2, $3}'`;
+		$service_php = `/usr/sbin/service php7.2-fpm status | awk 'NR==3 {print $2, $3}'`;
+
+		$statuses = [];
+		$statuses['nginx'] = ['src' => explode(' ', $service_nginx)];
+		$statuses['postgres'] = ['src' => explode(' ', $service_postgres)];
+		$statuses['php'] = ['src' => explode(' ', $service_php)];
+
+		foreach ($statuses as $key => $value) {
+			if(strtolower(trim($value['src'][0])) == 'active') {
+				$statuses[$key]['text'] = ucfirst(preg_replace('/[^A-Za-z0-9\-]/', '', $value['src'][1]));
+				$statuses[$key]['color'] = 'green';
+			}else{
+				$statuses[$key]['text'] = ucfirst(implode(' ', $value['src']));
+				$statuses[$key]['color'] = 'red';
+			}
+		}
 		//$phpmem = 0;
 		//$nginxmem = 0;
 
-		$server = Server::select('DFW', '8e6873ce-fb24-4509-a604-4cf5546d4ae5');
+		$server = Server::select('DFW', 'f66788b1-e31b-4f3b-b675-97b0b669ca9c'); /* 8e6873ce-fb24-4509-a604-4cf5546d4ae5 */
 
 		return view('admin.server-status')
 					->with('title', 'Server Status')
 					->with('phpmem', trim($phpmem))
 					->with('nginxmem', trim($nginxmem))
+					->with('memsize', $memsize)
 					->with('server', $server)
+					->with('services', [
+						'nginx' => [
+							'title' => 'NGINX',
+							'percent' => trim($nginxmem),
+							'status' => $statuses['nginx']['text'],
+							'status_color' => $statuses['nginx']['color']
+						],
+						'postgres' => [
+							'title' => 'PostgreSQL',
+							'percent' => 0,
+							'status' => $statuses['postgres']['text'],
+							'status_color' => $statuses['postgres']['color'],
+							'status_append' => Server::databaseSize()
+						],
+						'php' => [
+							'title' => 'PHP',
+							'percent' => trim($phpmem),
+							'status' => $statuses['php']['text'],
+							'status_color' => $statuses['php']['color']
+						]
+					])
 					->with('serverload', $serverload)
 					->with('disk', $disk)
 					->with('menutitle', 'Dashboard Menu');

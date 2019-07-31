@@ -25,7 +25,7 @@
 					<div class="sparkline"><i class="fa fa-2x fa-tasks"></i></div>
 					<div class="stat_text">
 						<strong style="margin-bottom:5px">Server State</strong>
-						<span class="percent text-green" style="position:static;float:none;"> {{ Server::status($server->status) }}</span> 
+						<span class="percent text-green" style="position:static;float:none;"> {{ App\Models\Server::status($server->status) }}</span> 
 					</div>
 				</li>
 				<li>
@@ -59,10 +59,10 @@
 		<br>
 		<div class="row">
 			<div class="col-md-6">
-				<h4>Memory <small>20%</small></h4>
+				<h4>Memory <small>{{ $memsize }}%</small></h4>
 				<div class="progress md">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-						<span class="sr-only">20% RAM</span> 
+					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ $memsize }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $memsize }}%">
+						<span class="sr-only">{{ $memsize }}% RAM</span> 
 					</div>
 				</div><!-- /.progress -->
 			</div>
@@ -75,47 +75,22 @@
 				</div><!-- /.progress -->
 			</div>
 		</div>
-		<h5>NGINX <small>{{ $nginxmem }}%</small></h5>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($nginxmem) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $nginxmem }}%">
-						<span class="sr-only">{{ $nginxmem }}% RAM</span> 
-					</div>
-				</div><!-- /.progress -->
-			</div>
-			<div class="col-sm-6">
-				<span class="text-green">Running</span>
-			</div>
-		</div>
 		
-		<h5>MySQL <small>15%</small></h5>
+		@foreach($services as $service)
+		<h5>{{ $service['title'] }} <small>{{ $service['percent'] }}%</small></h5>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
-						<span class="sr-only">15% RAM</span> 
+					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($service['percent']) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $service['percent'] }}%">
+						<span class="sr-only">{{ $service['percent'] }}% RAM</span> 
 					</div>
 				</div><!-- /.progress -->
 			</div>
 			<div class="col-sm-6">
-				<span class="text-green">Running</span> <span class="text-muted">[243MB disk]</span>
+				<span class="text-{{ $service['status_color'] }}">{{ $service['status']. (array_key_exists('status_append', $service) ? ' ['.$service['status_append'].']' : '') }}</span>
 			</div>
 		</div>
-
-		<h5>PHP <small>{{ $phpmem }}%</small></h5>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($phpmem) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $phpmem }}%">
-						<span class="sr-only">{{ $phpmem }}% RAM</span> 
-					</div>
-				</div><!-- /.progress -->
-			</div>
-			<div class="col-sm-6">
-				<span class="text-green">Running</span>
-			</div>
-		</div>
+		@endforeach
 	</div>
 </div>
 @stop
