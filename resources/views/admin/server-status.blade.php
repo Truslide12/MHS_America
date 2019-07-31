@@ -59,10 +59,10 @@
 		<br>
 		<div class="row">
 			<div class="col-md-6">
-				<h4>Memory <small>20%</small></h4>
+				<h4>Memory <small>{{ $memsize }}%</small></h4>
 				<div class="progress md">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-						<span class="sr-only">20% RAM</span> 
+					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ $memsize }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $memsize }}%">
+						<span class="sr-only">{{ $memsize }}% RAM</span> 
 					</div>
 				</div><!-- /.progress -->
 			</div>

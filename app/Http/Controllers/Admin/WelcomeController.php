@@ -80,6 +80,10 @@ class WelcomeController extends Pony {
 
 		$disk = new DiskStatus('/');
 
+		$meminfo = `free -m | awk 'NR==2 {print $2, $7}'`;
+		$memparams = explode(' ', $meminfo);
+		$memsize = number_format((float)(  ($memparams[0] - $memparams[1]) / $memparams[0] * 100  ), 2, '.', '');
+
 		//$phpmem = 0;
 		//$nginxmem = 0;
 
@@ -89,6 +93,7 @@ class WelcomeController extends Pony {
 					->with('title', 'Server Status')
 					->with('phpmem', trim($phpmem))
 					->with('nginxmem', trim($nginxmem))
+					->with('memsize', $memsize)
 					->with('server', $server)
 					->with('serverload', $serverload)
 					->with('disk', $disk)
