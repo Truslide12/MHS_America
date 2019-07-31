@@ -25,7 +25,7 @@
 					<div class="sparkline"><i class="fa fa-2x fa-tasks"></i></div>
 					<div class="stat_text">
 						<strong style="margin-bottom:5px">Server State</strong>
-						<span class="percent text-green" style="position:static;float:none;"> {{ Server::status($server->status) }}</span> 
+						<span class="percent text-green" style="position:static;float:none;"> {{ App\Models\Server::status($server->status) }}</span> 
 					</div>
 				</li>
 				<li>
