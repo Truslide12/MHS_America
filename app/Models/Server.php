@@ -77,6 +77,8 @@ class Server {
 			DB::raw('SELECT pg_size_pretty( pg_database_size(\''.config('database.connections.pgsql.database').'\') ) AS database_size')
 		);
 
-		return $results[0]['database_size'];
+		$test = $results[0];
+
+		return $test['database_size'];
 	}
 }
