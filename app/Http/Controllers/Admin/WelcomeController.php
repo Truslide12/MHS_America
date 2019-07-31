@@ -116,7 +116,7 @@ class WelcomeController extends Pony {
 					->with('memsize', $memsize)
 					->with('server', $server)
 					->with('services', [
-						'php' => [
+						'nginx' => [
 							'title' => 'NGINX',
 							'percent' => trim($nginxmem),
 							'status' => $statuses['nginx']['text'],
