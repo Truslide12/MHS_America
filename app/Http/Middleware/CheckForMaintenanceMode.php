@@ -12,6 +12,10 @@ class CheckForMaintenanceMode extends Middleware
      * @var array
      */
     protected $except = [
-        '/luna'
+        '/luna',
+        '/luna/messages',
+        '/luna/server-status',
+        '/luna/bug-reports',
+        '/luna*'
     ];
 }
