@@ -75,47 +75,22 @@
 				</div><!-- /.progress -->
 			</div>
 		</div>
-		<h5>NGINX <small>{{ $nginxmem }}%</small></h5>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($nginxmem) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $nginxmem }}%">
-						<span class="sr-only">{{ $nginxmem }}% RAM</span> 
-					</div>
-				</div><!-- /.progress -->
-			</div>
-			<div class="col-sm-6">
-				<span class="text-green">Running</span>
-			</div>
-		</div>
 		
-		<h5>MySQL <small>15%</small></h5>
+		@foreach($services as $service)
+		<h5>{{ $service['title'] }} <small>{{ $service['percent'] }}%</small></h5>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
-						<span class="sr-only">15% RAM</span> 
+					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($service['percent']) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $service['percent'] }}%">
+						<span class="sr-only">{{ $service['percent'] }}% RAM</span> 
 					</div>
 				</div><!-- /.progress -->
 			</div>
 			<div class="col-sm-6">
-				<span class="text-green">Running</span> <span class="text-muted">[243MB disk]</span>
+				<span class="text-{{ $service['status_color'] }}">{{ $service['status']. (array_key_exists('status_append', $service) ? ' ['.$service['status_append'].']' : '') }}</span>
 			</div>
 		</div>
-
-		<h5>PHP <small>{{ $phpmem }}%</small></h5>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="progress xs" style="margin:0.5em 0 0">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ round($phpmem) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $phpmem }}%">
-						<span class="sr-only">{{ $phpmem }}% RAM</span> 
-					</div>
-				</div><!-- /.progress -->
-			</div>
-			<div class="col-sm-6">
-				<span class="text-green">Running</span>
-			</div>
-		</div>
+		@endforeach
 	</div>
 </div>
 @stop
