@@ -97,7 +97,7 @@ class WelcomeController extends Pony {
 
 		foreach ($statuses as $key => $value) {
 			if(strtolower($value['src'][0]) == 'active') {
-				$statuses[$key]['text'] = preg_replace('/[^A-Za-z0-9\-]/', '', ucwords($value['src'][1]));
+				$statuses[$key]['text'] = preg_replace('/[^A-Za-z0-9\-]/', '', ucfirst($value['src'][1]));
 				$statuses[$key]['color'] = 'green';
 			}else{
 				$statuses[$key]['text'] = ucwords(implode(' ', $value['src']));
@@ -116,7 +116,7 @@ class WelcomeController extends Pony {
 					->with('memsize', $memsize)
 					->with('server', $server)
 					->with('services', [
-						'php' => [
+						'nginx' => [
 							'title' => 'NGINX',
 							'percent' => trim($nginxmem),
 							'status' => $statuses['nginx']['text'],
