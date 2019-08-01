@@ -334,6 +334,9 @@ Route::group(array('prefix' => 'luna'), function()
 						});
 						/* Account business company settings (GET) */
 						Route::get('{company}/settings', array('uses' => 'BusinessController@getCompanySettings', 'as' => 'account-business-company-settings'));
+						/* Account settings (POST) */
+						Route::post('{company}/settings', array('uses' => 'BusinessController@postCompanySettings', 'as' => 'business-settings-post'));
+
 						/* Account business company campaigns (GET) */
 						Route::get('{company}/campaigns', array('uses' => 'BusinessController@getCompanyCampaigns', 'as' => 'account-business-company-campaigns'));
 						/* Account business company banners (GET) */

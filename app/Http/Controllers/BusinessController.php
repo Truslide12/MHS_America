@@ -1174,6 +1174,57 @@ class BusinessController extends Pony {
 					->with('company', $company);
 	}
 
+	public function postCompanySettings(Company $company)
+	{
+		$me = Auth::user();
+		$companies = $me->companies()->pluck('companies.id')->toArray();
+
+		//Am I trying to edit a company I'm not a part of?
+		if(!in_array($company->id, $companies)) return redirect()->route('account-business');
+
+		//Can I even access settings at this company?
+		if( !( $me->hasRoleForCompany('admin', $company->id) || $me->canForCompany('manage_settings', $company->id) ) ) return redirect()->route('account-business-company', array('company' => $company->id));
+
+		/* PLEASE NOTE:
+		 * ------------------------------
+		 * Not adding email as its tied
+		 * to stripe.. Manage in billing.
+		 * ... for now
+		 ********************************/
+
+		$fields = [
+			'name' => 'required',
+			'phone' => 'required|phone:US',
+			'fax' => 'phone:US',
+			'street_addr' => 'required',
+			'street_addr2' => '',
+			'state' => 'required|exists:states,id',
+			'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 1)),
+			'zip_code' => 'regex:/[0-9]{5}(?:\-[0-9]{4})?/'
+		];
+		
+		$validator = Validator::make(Input::only(array_keys($fields)), $fields);
+
+		if($validator->fails()) {
+			return Redirect::route('business-settings-post', ['company' => $company->id])
+							->withErrors($validator)
+							->withInput(Input::only(array_keys($fields)));
+		}
+
+		$company->name = str_slug(Input::get('name'));
+		$company->title = Input::get("name");
+		$company->phone = Input::get("phone");
+		$company->fax = Input::get("fax");
+		$company->street_addr = Input::get("street_addr");
+		$company->street_addr2 = Input::get("street_addr2");
+		$company->state_id = Input::get("state");
+		$company->city_id = Input::get("city");
+		$company->zip_code = Input::get("zip_code");
+		$company->save();
+
+		return self::getCompanySettings($company);
+	}
+
 	public function getProfile(Company $company, Profile $profile)
 	{
 		$me = Auth::user();

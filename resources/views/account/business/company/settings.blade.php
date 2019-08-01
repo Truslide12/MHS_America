@@ -21,6 +21,7 @@
 <div class="row white" style="min-height:500px">
 			<form role="form" class="form-horizontal" action="" method="POST">
 				<div class="col-md-8 col-md-offset-1 margin-t-wide">
+					@include('layouts.partial.errors')
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="form-group">
@@ -63,7 +64,7 @@
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="address" name="address" value="{{$company->street_addr}}">
+									<input type="text" class="form-control" id="address" name="street_addr" value="{{$company->street_addr}}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -73,7 +74,7 @@
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="address2" name="address2" value="{{$company->street_addr2}}">
+									<input type="text" class="form-control" id="address2" name="street_addr2" value="{{$company->street_addr2}}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -84,7 +85,7 @@
 								</div>
 								<div class="col-md-9">
 									<select id="statebox" class="form-control" name="state" required>
-										<option>State...</option>
+										<option value="0">State...</option>
 										@foreach($states as $state)
 										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($state->id == $company->state_id) selected @endif>{{ $state->title }}</option>
 										@endforeach
@@ -100,7 +101,7 @@
 								<div class="col-md-9">
 
 									<select id="citybox" class="form-control" name="city" required>
-										<option>Select a city...</option>
+										<option value="0">Select a city...</option>
 									</select>
 								</div>
 							</div>
@@ -111,7 +112,7 @@
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="zip" name="zip" value="{{$company->zip_code}}">
+									<input type="text" class="form-control" id="zip" name="zip_code" value="{{$company->zip_code}}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -158,6 +159,7 @@
 					options.append($("<option/>").val(this.name).text(this.title));
 				});
 
+				$("#citybox").val({{$company->city_id}});
 				options.prop('disabled', false);
 			});
 </script>
