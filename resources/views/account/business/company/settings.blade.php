@@ -1,4 +1,5 @@
 @extends('layouts.business')
+
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 @stop
