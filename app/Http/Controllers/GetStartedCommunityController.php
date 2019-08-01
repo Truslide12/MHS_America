@@ -791,6 +791,7 @@ class GetStartedCommunityController extends Pony {
 		session()->forget("order_data");
 		session()->forget("active_step");
 		session()->forget("plan");
+		session()->forget("product");
 		session()->forget("profile_id");
 		session()->forget("is_upgrade");
 
