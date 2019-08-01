@@ -10,6 +10,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 
 @section('businesscontent')
 <div class="row white">
+	@if(1==2)
 	<div class="col-sm-4 hidden-xs">
 		<ul class="list-group">
 			<li class="list-group-item active">
@@ -33,7 +34,8 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 			</li>
 		</ul>
 	</div>
-	<div class="col-sm-8">
+	@endif
+	<div class="col-sm-8 col-sm-offset-2">
 		<div class="row">
 			<div class="col-md-12">
 				@include('layouts.partial.errors')

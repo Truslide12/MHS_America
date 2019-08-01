@@ -148,6 +148,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 			</div>
 		</div>
 	</div>
+	@if(1==2)
 	<div class="col-sm-4">
 		<!--
 		<video style="margin-top: 15px;" width="100%" controls>
@@ -190,5 +191,6 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 		</ul>
 		-->
 	</div>
+	@endif
 </div>
 @stop

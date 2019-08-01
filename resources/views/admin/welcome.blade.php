@@ -13,6 +13,9 @@
 	$latest_user	= \App\Models\User::take(1)->orderBy('id','desc')->first();
 	$latest_company = \App\Models\Company::take(1)->orderBy('id','desc')->first();
 	$latest_profile = \App\Models\Profile::take(1)->orderBy('id','desc')->first();
+
+	//$active_users = \App\Models\User::where('last_active_at', '>', \DB::raw(''))->
+	$active_users = 0;
 ?>
 <div class="row">
 	<div class="col-md-4">
@@ -36,8 +39,8 @@
 				<li>
 					<div class="sparkline"><i class="fa fa-2x fa-laptop"></i></div>
 					<div class="stat_text">
-						<strong>165</strong> Daily Visit
-						<span class="percent up"> <i class="fa fa-caret-up"></i> +23%</span> 
+						<strong>{{ $active_users }}</strong> Active Users
+						<span class="percent up"> <i class="fa fa-caret-up"></i> +??%</span> 
 					</div>
 				</li>
 				<li>
