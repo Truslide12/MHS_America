@@ -998,9 +998,12 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                    that.home.sold_price = parseFloat(e.sold_price);
                    that.home.exp_date = that.SetupExpDate(e.exp_date);
 
-                   si = JSON.parse(e.seller_info);
+                  var checkSellerObj = true; 
+                  try { JSON.parse(e.seller_info) } catch { checkSellerObj = false; }
+
                    //si = JSON.parse(si.promo);
-                   if ( si ) {
+                   if ( checkSellerObj ) {
+                     si = JSON.parse(e.seller_info);
                      that.home.seller_info = { 
                       company: si.company,
                       name: si.name,

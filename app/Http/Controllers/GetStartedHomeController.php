@@ -820,6 +820,7 @@ class GetStartedHomeController extends Pony {
 			$new_home->space_number 	= $order_data['space'];
 
 			$new_home->specs 		= '{"siding":"0","skirting":"0","roof_angle":"0","roof_mat":"0","windows":"0","wall_thickness":"0","kitchen_floor":"0","floor":"0","setup":"0","strap":"0"}';
+			$new_home->seller_info = '{"company":null,"name":null,"phone":null,"addr":null,"email":null,"license":null,"promo":{"type":"0","param1":null,"param2":null,"param3":null}}';
 			$new_home->photos 		= "{}";
 			$new_home->features 	= "[]";
 			$new_home->appliances 	= "[]";
