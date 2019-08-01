@@ -117,11 +117,11 @@
 						</div>
 					</div>
 					<div class="col-md-5" style="border-left: 1px solid #eee;">
-						<div class="sidead" style="margin: 22px 0px 44px 0px;">
-						<h2>Looking to Advertise?</h2>
-						<h4>MHS America is Selling this Ad Space!</h4>
-						<button class="btn btn-info" style="flex:.1;width:60%;margin-top: auto auto;margin-bottom: 20px;">Learn More</button>
-						</div>
+						@if(array_key_exists('transaction_data', Session::get("order_data")))
+						@include('getstarted.community.partial.receipt_ads.thankyoupromo')
+						@else
+						@include('getstarted.community.partial.receipt_ads.upgradepromo')
+						@endif
 					</div>
 				</div>
 
@@ -136,5 +136,7 @@
 		Session::forget("order_data");
 		Session::forget("active_step");
 		Session::forget("plan");
+		Session::forget("profile_id");
+		Session::forget("is_upgrade");
 @endphp
 @stop

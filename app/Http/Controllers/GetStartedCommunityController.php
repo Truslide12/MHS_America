@@ -33,6 +33,11 @@ class GetStartedCommunityController extends Pony {
 
 	public function getIndex(Company $company, State $states)
 	{
+		/* debug lines */
+		//self::clearSession();
+		//dd( session("order_data"), session()->all() );
+		/**************************/
+
 		if( session("product") != $this->PRODUCT_ID && session("product") != 0 ) { self::clearSession(); }
 		//session()->forget("active_step");
 		$title = "Whoa, lets get to know each other first!"; //Pick something, Kage
@@ -786,7 +791,11 @@ class GetStartedCommunityController extends Pony {
 		session()->forget("order_data");
 		session()->forget("active_step");
 		session()->forget("plan");
-		session()->forget("product");
+		session()->forget("profile_id");
+		session()->forget("is_upgrade");
+
+		//session()->flush(); /* this shit logs people out..*/
+
 		if ( $no_redir == true ) { return; } else {
 		  return redirect()->route('page', ['slug' => 'community-plans']);
 		}
