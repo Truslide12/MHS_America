@@ -85,7 +85,7 @@
 								<div class="col-md-9">
 									<select id="statebox" class="form-control" name="state" required>
 										<option>State...</option>
-										@foreach(\App\Models\State::all() as $state)
+										@foreach($states as $state)
 										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($state->id == $company->state_id) selected @endif>{{ $state->title }}</option>
 										@endforeach
 									</select>
@@ -98,11 +98,9 @@
 									</label>
 								</div>
 								<div class="col-md-9">
+
 									<select id="citybox" class="form-control" name="city" required>
 										<option>Select a city...</option>
-										@foreach($company->state->places()->select([DB::raw('DISTINCT ON (place_name) 1'), 'places.*'])->orderBy('place_name')->orderBy('places.id')->get() as $place)
-										<option value="{{ $place->id }}" @if($place->id == $company->city_id) selected @endif>{{ $place->place_name }}</option>
-										@endforeach
 									</select>
 								</div>
 							</div>
@@ -128,4 +126,39 @@
 				</div>
 			</form>
 </div>
+@stop
+
+@section('incls-body')
+<script type="text/javascript">
+	$('#statebox').change(function() {
+		var abbr = $('#statebox option:selected').data('abbr');
+
+		$('#citybox')
+			.prop('disabled', 'disabled')
+			.find('option')
+			.remove()
+			.end()
+			.append('<option>Select a city...</option>');
+
+		if(abbr != '') {
+			$.getJSON("/derpy/cities/" + abbr, function(result) {
+				var options = $("#citybox");
+				$.each(result, function() {
+					options.append($("<option/>").val(this.name).text(this.title));
+				});
+
+				options.prop('disabled', false);
+			});
+		}
+	});
+
+			$.getJSON("/derpy/cities/" + $('#statebox option:selected').data('abbr'), function(result) {
+				var options = $("#citybox");
+				$.each(result, function() {
+					options.append($("<option/>").val(this.name).text(this.title));
+				});
+
+				options.prop('disabled', false);
+			});
+</script>
 @stop

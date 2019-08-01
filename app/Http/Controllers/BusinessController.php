@@ -1170,6 +1170,7 @@ class BusinessController extends Pony {
 
 		return view('account.business.company.settings')
 					->with('canvas', Canvas::getDefault())
+					->with('states', State::all())
 					->with('company', $company);
 	}
 
