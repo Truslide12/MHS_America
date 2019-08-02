@@ -76,13 +76,16 @@
 					<div class="col-md-7">
 						<div class="receipt_box">
 							<h3 class="cool">Success!</h3><hr class="hr-blue">
-							You are now subscribed to our annual community promotion. Your community profile has been created, and you can begin editing your profile.<br><br>
+
+<p>The staff of MHS America would like to thank you for choosing to list your home on our platform. Your new listing is set to Pivate and not yet visible to the public. Once you complete your home listing, set the status from Private to Active.</p><br>
+
 
 							<div style="margin:10px 20px;">
 							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Payment Receipt</div>
 							<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total'] / 100) }}<br>
 							<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code'] }}<br>
 
+							@if(1==2)
 							<br>
 							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Address:</div>
 							{{ Session::get('order_data')['profile_data']['title'] }}
@@ -90,22 +93,19 @@
 							{{ Session::get('order_data')['profile_data']['address'] }} {{ Session::get('order_data')['profile_data']['address2'] }} 
 							<br>
 							{{ Session::get("order_data")['profile_data']['city']['place_name']  }} {{ strtoupper(Session::get("order_data")['profile_data']['state']['abbr'])  }}, {{ Session::get('order_data')['profile_data']['zipcode'] }}
+							@endif
 
-							<br><br>
-							<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>
-							<ul>
-								<li><a target="_blank" href="{{ URL::route('home', array('home' => Session::get('order_data')['home_data']->id)) }}">View Profile Here</a></li>
-								<li><a target="_blank" href="{{ URL::route('editor-edithome', array('profile' =>  Session::get('order_data')['profile_data']->id, 'home' => Session::get('order_data')['home_data']->id)) }}">Edit Profile Here</a></li>
-							</ul>
 							</div>
 						</div>
+						@php
+							$pid = Session::get('order_data')['profile_data']->id;
+							$cid = Session::get('order_data')['company_data']->id;
+							$hid = Session::get('order_data')['home_data']->id;
+						@endphp
+						<a href="{{ URL::route('editor-edithome', array('profile' => $pid, 'home' => $hid)) }}" class="btn btn-success" style="width: 100%;padding: 20px;margin-top: 50px;">Continue to Home Editor</a>
 					</div>
 					<div class="col-md-5" style="border-left: 1px solid #eee;">
-						<div class="sidead" style="margin: 22px 0px 44px 0px;">
-						<h2>Looking to Advertise?</h2>
-						<h4>MHS America is Selling this Ad Space!</h4>
-						<button class="btn btn-info" style="flex:.1;width:60%;margin-top: auto auto;margin-bottom: 20px;">Learn More</button>
-						</div>
+						@include('getstarted.home.partial.receipt_ads.upcomingpromo')
 					</div>
 				</div>
 
@@ -117,8 +117,8 @@
 	</div>
 </div>
 @php
-		Session::forget("order_data");
-		Session::forget("active_step");
-		Session::forget("plan");
+		//Session::forget("order_data");
+		//Session::forget("active_step");
+		//Session::forget("plan");
 @endphp
 @stop

@@ -136,6 +136,7 @@
 		Session::forget("order_data");
 		Session::forget("active_step");
 		Session::forget("plan");
+		Session::forget("product");
 		Session::forget("profile_id");
 		Session::forget("is_upgrade");
 @endphp
