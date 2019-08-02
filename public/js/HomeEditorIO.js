@@ -1026,8 +1026,10 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
 
                    that.company = e.company;
 
-                   that.UnlockMenu();
-                   newPony("home-review");
+                   //that.UnlockMenu();
+
+                   //case logic?
+                   newPony("home-details");
 
                   setTimeout(function(){
                     $("#save_status").html("<b>Data Loaded..</b>").delay(1000).fadeOut();
