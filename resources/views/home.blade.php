@@ -412,7 +412,7 @@
 
 		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
-			<div style="text-align:center;width:calc(100% - 40px);font-size: 2.5em;background: transparent;border-bottom:1px solid #8e8e8b;border-radius:0px!important;padding: 15px 10px;margin: 0px auto 35px auto;color:#147aba;">${{ $home->price/10 }}</div>
+			<div style="text-align:center;width:calc(100% - 40px);font-size: 2.5em;background: transparent;border-bottom:1px solid #8e8e8b;border-radius:0px!important;padding: 15px 10px;margin: 0px auto 35px auto;color:#147aba;">${{ number_format($home->price) }}</div>
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
 			<div class="" style="margin-bottom: 3px;">

@@ -369,7 +369,7 @@
 			                        <div class="fs-ribbon" style="border-top-color: {{$home->sales_ribbon->color}}!important;">
 								        <div class="txt">{!!$home->sales_ribbon->text!!}</div>
 								    </div>
-			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;">${{round($home->price/10)}}</span>
+			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;">${{number_format($home->price)}}</span>
 			                </div><!-- card image -->
 
 			                <div class="card-content">

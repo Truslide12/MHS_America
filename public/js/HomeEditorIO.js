@@ -216,14 +216,28 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
   }
 
   if ( $("#price").val() != null && $("#price").val() != '' ) {
-    if ( isNaN($("#price").val()) )
-    {
+
+    pdi = $("#price").val();
+    if( pdi.endsWith('.00') ) {
+      //does this end in a decimal with .00?
+      pdi = pdi.substring(0, pdi.length - 3);
+    }
+    pddRGEX = /^(?<!\S)(|\$|\$ )(?=.)(0|([1-9](\d*|\d{0,2}(,\d{3})*)))?(\.\d*[1-9])?(?!\S)$/;
+
+    
+
+    console.log("pddRGEX price", pdi, pddRGEX.test(pdi));
+
+    if ( pddRGEX.test(pdi) ) {
+      pdx = pdi.replace(/(,| |\$)/g,"");
+      this.home.price = pdx;
+      this.AcceptInput("#price");
+    } else {
       this.RejectInput("#price", "nan");
       rejected++
-    } else {
-      this.home.price = $("#price").val();
-      this.AcceptInput("#price");
-    }
+    } 
+
+
   } else {
     this.RejectInput("#price", "empty");
     rejected++;
