@@ -22,5 +22,5 @@
 @endif
 <div style="font-family: voltaire;font-size: 18px;margin-bottom:5px;color:#4358d1;"><strong>Coming Soon:</strong> <span style="color:#31708f;">Professional Services</div>
 <p><i class="fas fa-certificate" style="font-size:20px;float:left;margin:10px;"></i>
-	Are you with a <strong>Dealership</strong> or <strong>Sales Agency</strong>? MHS America is developing new ways to serve these and other professionals. Keep an eye on our <a href="">news</a> page for updates!
+	Are you with a <strong>Dealership</strong> or <strong>Sales Agency</strong>? MHS America is developing new ways to serve these and other professionals. Keep an eye on our news page for updates!
 </p><br>

@@ -367,7 +367,7 @@
 				<ul>
 					@foreach( $home->getAppliances() as $appliance )
 						<li>{{ $home->getAppliance( $appliance )->title }}</li>
-						@if( $loop->iteration % floor($home->CountAppliances()/3) == 0 )
+						@if( $loop->iteration % Max(1,floor($home->CountAppliances()/3)) == 0 )
 				</ul>
 			</div>
 			<div class="col-sm-4">
