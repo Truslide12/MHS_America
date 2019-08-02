@@ -857,7 +857,7 @@ class EditorController extends Pony {
 				$s = State::where('id', $p->state_id)->first();
 				$home->city = $p->city->place_name;
 				$home->state = strtoupper($s->abbr);
-
+				$home->community = Profile::find($home->profile_id)->title;
 				$home->company->makeHidden(['sec_hash', 'stripe_customer_id', 'stripe_customer_email']);
 				//$home->zipcode = $p->;
 				//$home->address = $p->;
@@ -910,7 +910,12 @@ class EditorController extends Pony {
 			}
 
 			$home->square_footage = (int)$input_data['dimensions']['square_footage'];
-			$home->dims_json 	  = json_encode((object)$input_data['dimensions']['json']);
+			//dd ( $input_data['dimensions'] );
+
+			if( array_key_exists("json", $input_data['dimensions']) ) {
+				$home->dims_json 	  = json_encode((object)$input_data['dimensions']['json']);
+			}
+
 			$home->offsets 		  = (int)$input_data['dimensions']['offsets'];
 
 			$home->sold_price 	  = (int)$input_data['sold_price'];

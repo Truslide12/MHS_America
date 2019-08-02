@@ -31,6 +31,42 @@
 
 								  <div class="row" style="margin-bottom: 10px;">
 				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
+				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-pencil"></i> Ad Information</h4>
+				                     </div>
+				                  </div>
+
+
+
+				                  <div class="row">
+									<label class="col-sm-2 col-md-2 control-label">
+										Headline
+									</label>
+									<div class="col-sm-10 col-md-10">
+										<input type="text" id="snazzy_title" name="snazzy_title" class="form-control" placeholder="Enter something catchy..." value="{{ Input::old('title', '') }}">
+										<span class="help-text text-muted"><small>...or leave this blank for a generic headline like "2 bed 1 bath Double-wide"</small></span>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 17px;margin-bottom: 25px;">
+									<label class="col-sm-2 col-md-2 control-label">
+										Description
+									</label>
+									<div class="col-sm-10 col-md-10">
+										<textarea onkeypress="checkDescription();" type="text" rows=8 id="description" name="description" class="form-control" placeholder="Tell us about this home.." value="{{ Input::old('title', '') }}"></textarea>
+										<div class="help-text text-muted" >
+											<div class="col-md-6 nopad">
+												<small>Describe this home..</small>
+											</div>
+											<div class="col-md-6 nopad text-right">
+												<div style="background: silver;border-radius: 8px!important;display: inline-flex;padding: 0px 20px;text-align: center;margin-top: 2px;"><span id="desc_count">0</span> &nbsp; Characters</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+
+								  <div class="row" style="margin-bottom: 10px;margin-top:10px;">
+				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
 				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-user"></i> Seller Information</h4>
 				                     </div>
 				                  </div>
@@ -121,32 +157,6 @@
 										</div>
 										<!-- /expirement -->
 
-								  <div class="row" style="margin-bottom: 10px;margin-top:10px;">
-				                     <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
-				                        <h4 style="margin-bottom: -.1em;margin-top: 0em;font-weight: bold;font-size: 1.5em;"><i class="fa fa-pencil"></i> Ad Information</h4>
-				                     </div>
-				                  </div>
-
-
-
-				                  <div class="row">
-									<label class="col-sm-2 col-md-2 control-label">
-										Headline
-									</label>
-									<div class="col-sm-10 col-md-10">
-										<input type="text" id="snazzy_title" name="snazzy_title" class="form-control" placeholder="Enter something catchy..." value="{{ Input::old('title', '') }}">
-										<span class="help-text text-muted"><small>...or leave this blank for a generic headline like "2 bed 1 bath Double-wide"</small></span>
-									</div>
-								</div>
-								<div class="row" style="margin-top: 17px;margin-bottom: 25px;">
-									<label class="col-sm-2 col-md-2 control-label">
-										Description
-									</label>
-									<div class="col-sm-10 col-md-10">
-										<textarea type="text" rows=8 id="description" name="description" class="form-control" placeholder="Tell us about this home.." value="{{ Input::old('title', '') }}"></textarea>
-										<span class="help-text text-muted"><small>Describe this home..</small></span>
-									</div>
-								</div>
 
 				</div>
 
@@ -182,6 +192,7 @@
 					console.log("load old info")
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
+					checkDescription();
 
 					co = Editor.company;
 					si = Editor.home.seller_info;
@@ -216,6 +227,7 @@
 					$("#frmcontainer").show();
 					$("#snazzy_title").val(Editor.home.headline);
 					$("#description").val(Editor.home.description);
+					checkDescription();
 
 					co = Editor.company;
 					si = Editor.home.seller_info;
@@ -282,5 +294,19 @@
 							$("#openhouse_box, #reduction_box").hide();
 						break;
 					}
+				}
+
+				function checkDescription() {
+					maxchar = 750;
+					c = $("#description").val();
+					cc = maxchar - c.length;
+
+					if ( cc <= 0 ) {
+						c = c.substring(0,maxchar);
+						$("#description").val(c);
+						cc = maxchar - c.length;
+					}
+					$("#desc_count").html(cc);
+
 				}
 		</script>

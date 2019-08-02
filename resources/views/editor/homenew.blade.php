@@ -79,11 +79,11 @@
           <div style="padding-left: 10px;" id="count-info"></div>
         </div>
       </li>
-      <li id="home-loc" class="disabled">
+      <li id="home-opts" class="disabled">
         <div>
-          <div class="ico_box"><i class="fa fa-map-marker"></i></div>
-          <div>Location Information</div>
-          <div style="padding-left: 10px;" id="count-loc"></div>
+          <div class="ico_box"><i class="fa fa-gears"></i></div>
+          <div>Home Features</div>
+          <div style="padding-left: 10px;" id="count-opts"></div>
         </div>
       </li>
 			<li id="home-specs" class="disabled">
@@ -93,17 +93,17 @@
           <div style="padding-left: 10px;" id="count-specs"></div>
         </div>
       </li>
-			<li id="home-opts" class="disabled">
+      <li id="home-loc" class="disabled">
         <div>
-          <div class="ico_box"><i class="fa fa-gears"></i></div>
-          <div>Home Features</div>
-          <div style="padding-left: 10px;" id="count-opts"></div>
+          <div class="ico_box"><i class="fa fa-map-marker"></i></div>
+          <div>Location Information</div>
+          <div style="padding-left: 10px;" id="count-loc"></div>
         </div>
       </li>
       <li id="home-adinfo" class="disabled">
         <div>
           <div class="ico_box"><i class="fa fa-info"></i></div>
-          <div>Ad Info</div>
+          <div>Ad Information</div>
           <div style="padding-left: 10px;" id="count-adinfo"></div>
         </div>
       </li>
@@ -131,7 +131,7 @@
 
 
 	</div>
-	<div class="col-md-offset-1 col-md-10" id="form-container">
+	<div class="col-md-offset-1 col-md-10" id="form-container" style="height:100%;overflow: auto;">
 
 	</div>
 </div>
@@ -183,7 +183,7 @@
 		.list-process li.active{margin-right:0;border-bottom:3px solid #0099ff;border-right:none;}
 		.list-process li small{display:none;}
 	}
-
+  .nopad { padding: 0!important; }
     .modal-content { margin-top: 20%; }
     .modal-header .close { float: right; }
 
@@ -364,7 +364,17 @@ var Editor = new HomeEditorIO({{ ( ! empty($home->id) ? $home->id : 'null' ) }})
   shortCutPony("home-intro");
 @endif
 
-
+/*
+wh = $(window).height();
+fh = $("#footer-wrapper").height();
+hh = $("#header-wrapper").outerHeight();
+ah = Math.max(0, $("#app-container").height()+50);
+ph = wh-(fh+hh);
+uh = Math.max(ph, ah);
+if(uh == ph) { uh = wh-hh; }
+$("#app-container").height(uh);
+console.log(wh,fh,hh,(wh-(fh+hh)));
+*/
 function load_app(s) {
 
 
@@ -412,6 +422,7 @@ function hidehelper(id){
 function newPony(ponyName)
 {
   //ui
+    window.scrollTo(0, 0);
   setProgress(getProgress()+25);
   $('#myModal').modal('hide');
 
@@ -446,6 +457,7 @@ function shortCutPony(ponyName)
 {
   //Update Step..
   //ui
+  window.scrollTo(0, 0);
   $('#myModal').modal('hide');
   $( "#list-process > li:not(.menu-head)" ).each(function( index ) {
     $( this ).removeClass("active");

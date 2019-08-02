@@ -337,18 +337,23 @@
 	<div class="col-sm-8" style="padding: 0px 40px;padding-bottom: 1in;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
 		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; Approx {{ $home->square_footage }} sqft</div>
+		
 		<p style="font-size: 1.4em;">
 			{{ $home->description }}
 		</p>
+			
+
+
 		<hr>
 
 		<h3><i class="fa fa-cog"></i> Features</h3>
 		<div class="row" style="font-size: 1.4em;">
+			@if( $home->CountFeatures() > 0 )
 			<div class="col-sm-4">
 				<ul>
 					@foreach( $home->getFeatures() as $feature )
 						<li>{{ $home->getFeature( $feature )->title }}</li>
-						@if( $loop->iteration % floor($home->CountFeatures()/3) == 0 )
+						@if( $loop->iteration % Max(1,floor($home->CountFeatures()/3)) == 0 )
 				</ul>
 			</div>
 			<div class="col-sm-4">
@@ -358,7 +363,7 @@
 					@endforeach
 				</ul>
 			</div>
-
+			@endif
 		</div>
 		<hr>
 		<h3><i class="fa fa-plug"></i> Appliances</h3>
@@ -430,23 +435,41 @@
 
 			<strong style="font-size: 1.5em;">Seller Information</strong><br>
 
-			@if($home->company->is_personal)
+			@php
+				$seller = (object)json_decode( $home->seller_info );
+				//dd($home->seller_info, $seller);
+			@endphp
+
+			@if($seller->company)
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Name:</strong> {{ $home->company->title }}
-			</div>
-			@else
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Company:</strong> {{ $home->company->title }}
+				<strong>Company:</strong> {{ $seller->company }}
 			</div>
 			@endif
+			@if($seller->name)
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Address:</strong> {{ $home->company->street_addr }}
+				<strong>Name:</strong> {{ $seller->name }}
 			</div>
+			@endif
+			@if($seller->phone)
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Phone:</strong> {{ $home->company->phone }}
+				<strong>Phone:</strong> {{ $seller->phone }}
 			</div>
-			
-
+			@endif
+			@if($seller->addr)
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Address:</strong> {{ $seller->addr }}
+			</div>
+			@endif
+			@if($seller->email)
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Email:</strong> {{ $seller->email }}
+			</div>
+			@endif
+			@if($seller->license)
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>License:</strong> {{ $seller->license }}
+			</div>
+			@endif
 			<hr>
 
 			<strong style="font-size: 1.5em;">Home Information</strong><br>

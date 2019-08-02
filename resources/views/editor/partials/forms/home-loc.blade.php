@@ -1,5 +1,5 @@
 		<div class="well" id="preform" style="padding: 0px 100px;text-align: center;display: none;">
-			<h2>Location, Location, Location! Tell us a little more about where this home is.</h2>
+			<h2>Location, Location, Location! We already pulled data from your community. Please confirm we have it right.</h2>
 				<div class="margin-t" style="border:0px solid red;text-align: center;">
 					<button type="submit" class="btn btn-lg btn-primary cta pull-center" onclick="showfrm();">Enter Location</button>
 					<button type="button" id="opts-step" class="btn btn-lg btn-primary cta pull-center" onclick="Editor.MoveNext();">Skip this Step</button>
@@ -18,16 +18,23 @@
 			<div class="col-md-offset-1 col-md-10 hidden">
 				<hr>
 			</div>
+			
 			<div class="panel " style="background:none">
 				<!-- <div class="panel-heading">Current Location</div> -->
 				<div class="panel-body">
 
 	            <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
-	               <h4 style="font-weight: bold;font-size: 1.5em;"> <i class="fa fa-map-marker"></i> Current Location</h4>
+	               <h4 style="font-weight: bold;font-size: 1.5em;"> <i class="fa fa-map-marker"></i> Home Location</h4>
 	            </div>
 
 
 			      			<div class="col-xs-12 col-sm-11" style="padding: 15px;">
+								<div class="form-group">
+									<label class="control-label col-md-3">Community</label>
+									<div class="col-md-9">
+										<input type="text" name="community" id="community" class="form-control" value="" readonly>
+									</div>
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">Street address</label>
 									<div class="col-md-9">
@@ -56,7 +63,20 @@
 										<input type="text" name="space" id="space" class="form-control" value="">
 									</div>
 								</div>
+								<div class="form-group">
+								<label class="control-label col-md-3"></label>
+								<div class="col-md-9">
+								<div class="alert alert-success" role="alert">
+				  					Your address is tied to a community and cannot be changed. If you believe this address is wrong, please <a href="{{ URL::route('page', ['slug'=>'contact']) }}">contact us</a>. 
+								</div>
+								</div>
+
+								</div>
+
 							</div>
+
+
+				@if(1==2)
 	            <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;margin-bottom: 10px;">
 	               <h4 style="margin-bottom: -.1em;margin-top: 1.5em;font-weight: bold;font-size: 1.5em;"> <i class="fa fa-question"></i> Questions</h4>
 	            </div>
@@ -107,11 +127,12 @@
 									</div>
 								</div>
 
-
+						@endif
 							
 
 				</div>
 			</div>
+
 			<div class="form-group margin-y">
 				<div class="col-md-12">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -133,6 +154,7 @@
 					$("#state").val(	Editor.home.state);
 					$("#zipcode").val(		Editor.home.zipcode);
 					$("#space").val(	Editor.home.space);
+					$("#community").val(Editor.home.community);
 
 					
 					Editor.settings.preValidation = true;
@@ -150,7 +172,7 @@
 					$("#state").val(	Editor.home.state);
 					$("#zipcode").val(		Editor.home.zipcode);
 					$("#space").val(	Editor.home.space);
-					
+					$("#community").val(Editor.home.community);
 					Editor.settings.preValidation = true;
 					Editor.ValidateLocation();
 					Editor.settings.preValidation = false;	

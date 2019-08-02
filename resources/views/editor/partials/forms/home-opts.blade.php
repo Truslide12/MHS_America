@@ -154,7 +154,17 @@
             </div>
             <div class="col-xs-6 col-sm-4 text-left">
                <label class="checkbox-inline">
+               <input type="checkbox" name="cook_top" id="cook_top" value="36"> Cook Top
+               </label>
+            </div>
+            <div class="col-xs-6 col-sm-4 text-left">
+               <label class="checkbox-inline">
                <input type="checkbox" name="stove" id="stove" onclick="showUtilities();" value="18"> Range/Stove
+               </label>
+            </div>
+            <div class="col-xs-6 col-sm-4 text-left">
+               <label class="checkbox-inline">
+               <input type="checkbox" name="range_hood" id="range_hood" value="35"> Range Hood
                </label>
             </div>
             <div class="col-xs-6 col-sm-4 text-left">
@@ -189,7 +199,7 @@
             </div>
 
          </div>
-         <div class="row">
+         <div class="row utility_header" style="display: none;">
             <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
                <h4 style="margin-bottom: -.1em;margin-top: 1.5em;font-weight: bold;font-size: 1.5em;"> <i class="fa fa-plug"></i> Utility</h4>
             </div>
@@ -343,29 +353,37 @@
 
          function showUtilities() {
 
+            utcheck = false;
+
             if ( $("#washhookup:checked").length || $("#dryer:checked").length ) {
                $("#util_dryer").fadeIn();
+               utcheck = true;
             } else {
                $("#util_dryer").fadeOut();
             }
 
             if ( $("#furnace:checked").length ) {
                $("#util_furnace").fadeIn();
+               utcheck = true;
             } else {
                $("#util_furnace").fadeOut();
             }
 
             if ( $("#stove:checked").length || $("#oven:checked").length ) {
                $("#util_range").fadeIn();
+               utcheck = true;
             } else {
                $("#util_range").fadeOut();
             }
 
             if ( $("#fireplace:checked").length ) {
                $("#util_fireplace").fadeIn();
+               utcheck = true;
             } else {
                $("#util_fireplace").fadeOut();
             }
+            if( utcheck ) {
+            $(".utility_header").fadeIn(); } else { $(".utility_header").fadeOut(); }
 
          }
 

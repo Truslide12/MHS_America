@@ -40,7 +40,7 @@ var HomeEditorIO = function (id) {
  this.home.sold_price = null;
  this.home.exp_date = null;
  this.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } };
-
+ this.home.community = null;
  this.settings = { steps: {} }
  this.settings.wizard = true;
  this.settings.preValidation = false;
@@ -48,9 +48,9 @@ var HomeEditorIO = function (id) {
  this.settings.steps = new Array( "home-intro",
                                   "home-details",
                                   "home-info",
-                                  "home-loc",
-                                  "home-specs",
                                   "home-opts",
+                                  "home-specs",
+                                  "home-loc",
                                   "home-adinfo",
                                   "home-photos",
                                   "home-review");
@@ -487,8 +487,12 @@ HomeEditorIO.prototype.ValidateAdInfo = function() {
   }
 
   if ( $("#description").val() != null && $("#description").val() != '' ) {
-    this.home.description = $("#description").val();
-    this.AcceptInput("#description");
+    if ( $("#description").length <= 750 ) {
+      this.home.description = $("#description").val();
+      this.AcceptInput("#description");
+    } else {
+      this.RejectInput("#description");   
+    }
   } else {
     //this.RejectInput("#model", "empty");
     //rejected++;
@@ -617,7 +621,7 @@ HomeEditorIO.prototype.ValidateLocation = function() {
 
   if ( $("#address").val() != null && $("#address").val() != '' ) {
     this.home.address = $("#address").val();
-    this.AcceptInput("#address");
+    //this.AcceptInput("#address");
   } else {
     //this.RejectInput("#model", "empty");
     //rejected++;
@@ -630,25 +634,19 @@ HomeEditorIO.prototype.ValidateLocation = function() {
       rejected++;
     } else {
       this.home.zipcode = $("#zipcode").val();
-      this.AcceptInput("#zipcode");
+      //this.AcceptInput("#zipcode");
     }
   }
 
   if ( $("#space").val() != null && $("#space").val() != '' ) {
-    if ( isNaN($("#space").val()) )
-    {
-      this.RejectInput("#space", "nan");
-      rejected++;
-    } else {
       this.home.space = $("#space").val();
       this.AcceptInput("#space");
-    }
   }
 
 
   if ( $("#city").val() != null && $("#city").val() != '' ) {
     this.home.city = $("#city").val();
-    this.AcceptInput("#city");
+    //this.AcceptInput("#city");
   } else {
     //this.RejectInput("#model", "empty");
     //rejected++;
@@ -656,7 +654,7 @@ HomeEditorIO.prototype.ValidateLocation = function() {
 
   if ( $("#state").val() != null && $("#state").val() != '' ) {
     this.home.state = $("#state").val();
-    this.AcceptInput("#state");
+    //this.AcceptInput("#state");
   } else {
     //this.RejectInput("#model", "empty");
     //rejected++;
@@ -997,6 +995,7 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
 
                    that.home.sold_price = parseFloat(e.sold_price);
                    that.home.exp_date = that.SetupExpDate(e.exp_date);
+                   that.home.community = e.community;
 
                   var checkSellerObj = true; 
                   try { JSON.parse(e.seller_info) } catch { checkSellerObj = false; }
