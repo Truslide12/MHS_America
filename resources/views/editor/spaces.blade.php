@@ -26,7 +26,6 @@
 	<div class="col-md-12">
 		<p class="pull-right no-margin-b">
 			<a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#newSpaceBox">Add a space</a>
-			<a class="btn btn-lg btn-info">Manage campaigns</a>
 		</p>
 		<div class="clearfix"></div>
 		<hr>
@@ -167,7 +166,7 @@
 <div class="modal fade" id="editSpaceBox" role="modal" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="{{ URL::route('editor-editspace-post', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}" method="POST">
+			<form action="{{ URL::route('editor-editspace-post', [ 'profile' => $profile->id, 'space' => 0 ]) }}" method="POST">
 			<div class="modal-header">
 				<h4 class="modal-title">Edit vacant space</h4>
 			</div>
@@ -228,7 +227,7 @@
 				<button type="button" id="#sERemove" class="btn btn-danger pull-left" data-action="remove" data-relation="space" data-id="0">Remove</button>
 
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<input type="hidden" id="#sESpace" name="space" value="">
+				<input type="hidden" id="sESpace" name="space" value="">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Save changes</button>
 			</div>

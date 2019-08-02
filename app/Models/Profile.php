@@ -152,7 +152,7 @@ class Profile extends EloquentModel {
 		'9:30pm',
 		'10:30pm',
 		'11:30pm', //47
-		'' //48
+		' ' //48
 	);
 
 	/* Query scopes */
@@ -456,8 +456,8 @@ class Profile extends EloquentModel {
 						$title = self::$longdays[$x];
 						$final_hours[$lastindex] = array(
 							'title' => $title,
-							'start' => self::$hour_texts[$start],
-							'end' => self::$hour_texts[$end],
+							'start' => trim(self::$hour_texts[$start]),
+							'end' => trim(self::$hour_texts[$end]),
 							'open' => $open
 						);
 					}else{
@@ -465,8 +465,8 @@ class Profile extends EloquentModel {
 						$title = self::$longdays[$x];
 						$final_hours[$lastindex] = array(
 							'title' => $title,
-							'start' => self::$hour_texts[$start],
-							'end' => self::$hour_texts[$end],
+							'start' => trim(self::$hour_texts[$start]),
+							'end' => trim(self::$hour_texts[$end]),
 							'open' => $open
 						);
 					}
