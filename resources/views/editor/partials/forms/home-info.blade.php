@@ -146,6 +146,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="serial2" id="serial2" class="form-control">
+							<small class="pull-right" onclick="hidefield('sn2')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 							<span onclick="showfield('sn3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
@@ -157,6 +158,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="serial3" id="serial3" class="form-control">
+							<small class="pull-right" onclick="hidefield('sn3')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 						</div>
@@ -178,6 +180,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="decal2" id="decal2" class="form-control">
+							<small class="pull-right" onclick="hidefield('dc2')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 							<span onclick="showfield('dc3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
@@ -189,6 +192,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="decal3" id="decal3" class="form-control">
+							<small class="pull-right" onclick="hidefield('dc3')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 
@@ -211,6 +215,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="hud2" id="hud2" class="form-control">
+							<small class="pull-right" onclick="hidefield('hd2')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 							<span onclick="showfield('hd3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
@@ -222,6 +227,7 @@
 						</label>
 						<div class="col-sm-9 col-md-7">
 							<input type="text" name="hud3" id="hud3" class="form-control">
+							<small class="pull-right" onclick="hidefield('hd3')"><a>remove</a></small>
 						</div>
 						<div class="col-sm-1 col-md-1">
 
@@ -419,6 +425,9 @@
 			*/
 			function showfield(id){
 				$("#"+id).show();
+			}
+			function hidefield(id){
+				$("#"+id).hide();
 			}
 			
 		</script>
