@@ -45,7 +45,7 @@ var HomeEditorIO = function (id) {
  this.settings.wizard = true;
  this.settings.preValidation = false;
  //Setup some settings..
- this.settings.steps = new Array( "home-intro",
+ this.settings.steps = new Array( "home-finish",
                                   "home-details",
                                   "home-info",
                                   "home-opts",

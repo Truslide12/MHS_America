@@ -81,7 +81,7 @@
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" id="current_step" value="home-photos">
 					<button type="submit" class="btn btn-lg btn-primary cta pull-left" onclick="Editor.MoveBack();"> <i class="fa fa-angle-left"></i> Back</button>
-					<button type="button" id="opts-step" class="btn btn-lg btn-primary cta pull-right" onclick="Editor.MoveNext();">Finish <i class="fa fa-angle-right"></i></button>
+					<button type="button" id="opts-step" class="btn btn-lg btn-primary cta pull-right" onclick="Editor.MoveNext();"> Review <i class="fa fa-angle-right"></i></button>
 				</div>
 			</div>
 		</form>	
