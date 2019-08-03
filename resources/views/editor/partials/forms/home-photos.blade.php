@@ -178,12 +178,13 @@
 			loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
 			onAfterImgUpload: function(){ bindUpload(window.response); },
 			onError: function(){ rejectUpload(window.response); },
-			onAfterImgCrop: function(){ },
 			onBeforeImgUpload: function(){ startUpload(); }
 			/* 
 			onImgDrag: function(){ console.log('onImgDrag') },
 			onImgZoom: function(){ console.log('onImgZoom') },
-			onBeforeImgCrop: function(){ console.log('onBeforeImgCrop') }, */
+			onBeforeImgCrop: function(){ console.log('onBeforeImgCrop') }, 
+			onAfterImgCrop: function(){ },
+			*/
 		}
 
 			var croppic = new Croppic('photoUpload', croppicHeaderOptions);
@@ -276,13 +277,14 @@
 			}
 
 			function bindUpload(r) {
-				$("#save_status").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
 				croppic.reset();
+				$("#save_status").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
 				photodata.photos[active_slot] = r.url
 				update_select( $("#photo-tag").val() );
 				paint_photo_demo(active_slot);
 				$("#photoCropButton").html("Reupload");
 				$("#nextButton").show();
+				console.log(window.response )
 				/*
 				for ( i = 1; i<= 5;i++ ) {
 					Editor.home.photos[i] = {id: i, tag: photo_labels[photodata.slots[i]].name, url: photodata.photos[i] };
@@ -292,10 +294,11 @@
 			}
 
 			function rejectUpload(r) {
-				$("#save_status").html("<b>Photo Rejected..</b>");
 				croppic.reset();
+				$("#save_status").html("<b>Photo Rejected..</b>");
 				$("#photo_slot_text").html(r.message);
 				$("#photoCropButton").html("Reupload");
+				console.log(window.response )
 				//update_select( $("#photo-tag").val() );
 				//paint_photo_demo(active_slot);
 				/*

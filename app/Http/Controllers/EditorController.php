@@ -685,15 +685,13 @@ class EditorController extends Pony {
 				'height' => $image->height()
 			);
 
-			$image->save('imgstorage/cover_'.$name.'_orig.jpg');
+			if ( $image->save('imgstorage/cover_'.$name.'_orig.jpg') ) {
+				return Response::json($response);
+			} else {
+				return Response::json(array('status' => 'error', 'message' => 'An unknown error occured.'));
+			}
 
-
-			//$me = Auth::user();
-			//$me->avatar = 'uploads/avatar_'.$name.'_orig.jpg';
-
-			//$me->save();
-
-			return Response::json($response);
+			
 		}else{
 			return Response::json(array('status' => 'error', 'message' => 'Image invalid or absent. JPEG and PNG accepted.'));
 		}

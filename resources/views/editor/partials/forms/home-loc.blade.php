@@ -1,7 +1,7 @@
 		<div class="well" id="preform" style="padding: 0px 100px;text-align: center;display: none;">
-			<h2>Location, Location, Location! We already pulled data from your community. Please confirm we have it right.</h2>
+			<h2>Location, Location, Location! We already pulled location data from your community. But you can confirm it if you'd like.</h2>
 				<div class="margin-t" style="border:0px solid red;text-align: center;">
-					<button type="submit" class="btn btn-lg btn-primary cta pull-center" onclick="showfrm();">Enter Location</button>
+					<button type="submit" class="btn btn-lg btn-primary cta pull-center" onclick="showfrm();">Confirm Location</button>
 					<button type="button" id="opts-step" class="btn btn-lg btn-primary cta pull-center" onclick="Editor.MoveNext();">Skip this Step</button>
 				</div>
 		</div>
