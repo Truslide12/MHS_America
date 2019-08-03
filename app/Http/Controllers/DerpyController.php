@@ -469,7 +469,7 @@ class DerpyController extends Pony {
 		if ( $zip === null ) {
 			//latest on site
 			$h = Home::orderBy('id', 'DESC')
-					->where('status', '>', 0)
+					->where('status', '>', 1)
 					->with('city')
 					->with('state')
 					->with('profile')
