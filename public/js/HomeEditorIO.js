@@ -41,6 +41,7 @@ var HomeEditorIO = function (id) {
  this.home.exp_date = null;
  this.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } };
  this.home.community = null;
+ this.is_complete = false;
  this.settings = { steps: {} }
  this.settings.wizard = true;
  this.settings.preValidation = false;
@@ -156,16 +157,16 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
     this.home.make = $("#make").val();
     this.AcceptInput("#make");
   } else {
-    //this.RejectInput("#make", "empty");
-    //rejected++;
+    this.RejectInput("#make", "empty");
+    rejected++;
   }
 
   if ( $("#model").val() != null && $("#model").val() != '' ) {
     this.home.model = $("#model").val();
     this.AcceptInput("#model");
   } else {
-    //this.RejectInput("#model", "empty");
-    //rejected++;
+    this.RejectInput("#model", "empty");
+    rejected++;
   }
 
   if ( $("#year").val() != null && $("#year").val() != '' ) {
@@ -174,12 +175,17 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
       this.RejectInput("#year", "nan");
       rejected++
     } else {
-      this.home.year = $("#year").val();
-      this.AcceptInput("#year");
+      if( $("#year").val() > 0) {
+        this.home.year = $("#year").val();
+        this.AcceptInput("#year");
+      } else {
+        this.RejectInput("#year", "empty");
+        rejected++;
+      }
     }
   } else {
-    //this.RejectInput("#year", "empty");
-    //rejected++;
+    this.RejectInput("#year", "empty");
+    rejected++;
   }
 
   //First Decal is required, subsequent decal is not!
@@ -251,24 +257,25 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
     //rejected++;
   }
 
-  if ( $("#beds").val() != null && $("#beds").val() != '' ) {
-    this.home.bedrooms     = $("#beds").val();
+  if ( $("#beds").val() != null && $("#beds").val() > 0 ) {
+    this.home.bedrooms = $("#beds").val();
     this.AcceptInput("#beds");
   } else {
     this.RejectInput("#beds", "empty");
     rejected++;
   }
 
-  if ( $("#baths").val() != null && $("#baths").val() != '' ) {
-    this.home.bathrooms    = $("#baths").val();
+  if ( $("#baths").val() != null && $("#baths").val() > 0 ) {
+    this.home.bathrooms = $("#baths").val();
     this.AcceptInput("#baths");
   } else {
     this.RejectInput("#baths", "empty");
     rejected++;
   }
 
+
   if ( $("#homeSize").val() != null && $("#homeSize").val() != '' ) {
-    this.home.size      = $("#homeSize").val();
+    this.home.size = $("#homeSize").val();
     this.AcceptInput("#homeSize");
   } else {
     this.RejectInput("#homeSize", "empty");
@@ -474,11 +481,28 @@ HomeEditorIO.prototype.ValidateOverview = function() {
   }
 
   if ( $("#listing_status").val() != null && $("#listing_status").val() != '' ) {
-    this.home.status = parseInt($("#listing_status").val());
-    this.AcceptInput("#listing_status");
+
+    if( $("#listing_status").val() == 1 ) { /*set to private*/
+      this.home.status = parseInt($("#listing_status").val());
+      this.AcceptInput("#listing_status");
+    } else {
+      if ( this.is_complete ) {
+      this.home.status = parseInt($("#listing_status").val());
+      this.AcceptInput("#listing_status");
+      } else {
+      this.RejectInput("#listing_status", "empty");
+      rejected++;
+          $('#myModal').modal('show');
+          $('.modal-title').html("Incomplete Listing!");
+          $('.modal-body').html("You are attempting to publish a home listing with incomplete data. Your home can only be set to private until you have complete all required fields. Please complete the <strong>General Information</strong> form.");
+          $('#modal-deny').hide();
+          $('#modal-confirm').hide();
+      }
+    }
+    
   } else {
-    //this.RejectInput("#model", "empty");
-    //rejected++;
+      this.RejectInput("#listing_status", "empty");
+      rejected++;
   }
 
   if ( rejected > 0 ) {
@@ -751,94 +775,114 @@ HomeEditorIO.prototype.GetPrevPage = function(page) {
 
 HomeEditorIO.prototype.BuildReview = function() {
     //Need to build data obj validator..
+    this.is_complete = true;
+    if ( this.home.space ) {
+      $("#cfrm_space").html(this.home.space);
+    } else {
+      $("#cfrm_space").html("Not Entered");
+      this.is_complete = false;
+    }
 
-    if ( Editor.home.headline ) {
-      $("#cfrm_title").html(Editor.home.headline + " Overview");
+    if ( this.home.headline ) {
+      $("#cfrm_title").html(this.home.headline + " Overview");
     } else {
       $("#cfrm_title").html("Not Entered");
+      //this.is_complete = false;
     }
     
-    if ( Editor.home.price !== null ) {
-      $("#cfrm_price").html(Editor.home.price);
+    if ( this.home.price !== null && this.home.price > 0 ) {
+      $("#cfrm_price").html("$"+this.home.price);
     } else {
       $("#cfrm_price").html("Not Entered");
+      this.is_complete = false;
     }
     
-    if ( Editor.home.sale_type !== null ) {
-     $("#cfrm_type").html(trans_type(Editor.home.sale_type));
+    if ( this.home.price !== null && this.home.price > 0 && this.home.sale_type !== null ) {
+     $("#cfrm_type").html(" ("+trans_type(this.home.sale_type)+")");
     } else {
-      $("#cfrm_type").html("Not Entered");
+      $("#cfrm_type").html("");
     }
     
     
-    if ( Editor.home.bedrooms !== null ) {
-     $("#cfrm_beds").html(Editor.home.bedrooms);
+    if ( this.home.bedrooms !== null && this.home.bedrooms > 0) {
+     $("#cfrm_beds").html(this.home.bedrooms);
     } else {
       $("#cfrm_beds").html("Not Entered");
+      this.is_complete = false;
     }
 
-    if ( Editor.home.bathrooms !== null ) {
-     $("#cfrm_baths").html(Editor.home.bathrooms);
+    if ( this.home.bathrooms !== null && this.home.bathrooms > 0) {
+     $("#cfrm_baths").html(this.home.bathrooms);
     } else {
       $("#cfrm_baths").html("Not Entered");
+      this.is_complete = false;
     }
 
-    if ( Editor.home.size !== null ) {
-     $("#cfrm_size").html(trans_scale(Editor.home.size));
+    
+    if ( this.home.size !== null && this.home.size > 0 ) {
+     $("#cfrm_size").html(trans_scale(this.home.size));
     } else {
       $("#cfrm_size").html("Not Entered");
+      this.is_complete = false;
+      alert(this.home.size);
     }
     
-    if ( Editor.home.description !== null ) {
-      desc = Editor.home.description;
+    if ( this.home.description !== null ) {
+      desc = this.home.description;
       desc = desc.substring(0,75);
      $("#cfrm_desc").html(desc);
     } else {
       $("#cfrm_desc").html("Not Entered");
+      //this.is_complete = false;
     } 
     
-    if ( Editor.home.home_options !== null ) {
-     $("#cfrm_opts").html(Editor.home.home_options);
+    if ( this.home.home_options !== null ) {
+     $("#cfrm_opts").html(this.home.home_options);
     } else {
       $("#cfrm_opts").html("Not Entered");
+      //this.is_complete = false;
     } 
 
-    if ( Editor.home.year !== null ) {
-     $("#cfrm_year").html(Editor.home.year);
+    if ( this.home.year !== null && this.home.year > 0 ) {
+     $("#cfrm_year").html(this.home.year);
     } else {
       $("#cfrm_year").html("Not Entered");
+      this.is_complete = false;
     } 
 
-    if ( Editor.home.make !== null ) {
-     $("#cfrm_make").html(Editor.home.make);
+    if ( this.home.make !== null && this.home.make !== '' ) {
+     $("#cfrm_make").html(this.home.make);
     } else {
       $("#cfrm_make").html("Not Entered");
+      this.is_complete = false;
     } 
 
-    if ( Editor.home.model !== null ) {
-     $("#cfrm_model").html(Editor.home.model);
+    if ( this.home.model !== null && this.home.make !== '' ) {
+     $("#cfrm_model").html(this.home.model);
     } else {
       $("#cfrm_model").html("Not Entered");
+      this.is_complete = false;
     }
 
-    if ( Editor.home.status !== null ) {
-      $("#listing_status").val(Editor.home.status)
+    if ( this.home.status !== null ) {
+      $("#listing_status").val(this.home.status)
     } else {
-      $("#listing_status").val(Editor.home.status)
+      $("#listing_status").val(this.home.status)
     }
 
-
-    if ( Editor.home.dimensions.length !== null && Editor.home.dimensions.width !== null ) {
-      $("#cfrm_size").html((Editor.home.dimensions.square_footage)+" sqft.");
+    /*
+    if ( this.home.dimensions.square_footage !== null && this.home.dimensions.square_footage > 0 ) {
+      $("#cfrm_size").html((this.home.dimensions.square_footage)+" sqft.");
     } else {
       $("#cfrm_size").html("Not Entered");
-    }
+      //this.is_complete = false;
+    }*/
 
 
-    console.log("ph", Editor.home.photos);
-    if ( Editor.home.photos !== null ) {
-      if ( Editor.home.photos[1] ) {
-        $("#photo-preview").attr('src', Editor.home.photos[1].url);
+    console.log("ph", this.home.photos);
+    if ( this.home.photos !== null ) {
+      if ( this.home.photos[1] ) {
+        $("#photo-preview").attr('src', this.home.photos[1].url);
       }
     } else {
 
@@ -847,9 +891,9 @@ HomeEditorIO.prototype.BuildReview = function() {
     
 
     var selected_opts = "<strong>Features:</strong><br>";
-    for( f in Editor.home.home_options.features ) { selected_opts += Editor.home.home_options.features[f] + "<br>"; }
+    for( f in this.home.home_options.features ) { selected_opts += this.home.home_options.features[f] + "<br>"; }
     selected_opts += "<strong>Appliances:</strong><br>";
-    for( f in Editor.home.home_options.appliances ) { selected_opts += Editor.home.home_options.appliances[f] + "<br>"; }
+    for( f in this.home.home_options.appliances ) { selected_opts += this.home.home_options.appliances[f] + "<br>"; }
     $("#cfrm_opts").html(selected_opts);
 
 

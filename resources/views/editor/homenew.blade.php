@@ -131,7 +131,7 @@
 
 
 	</div>
-	<div class="col-md-offset-1 col-md-10" id="form-container" style="height:100%;overflow: auto;">
+	<div class="col-md-offset-1 col-md-10" id="form-container" style="overflow: auto;padding-top: 0px;">
 
 	</div>
 </div>
@@ -344,6 +344,9 @@ background: linear-gradient(0deg, rgba(106,134,185,1) 2%, rgba(101,134,186,1) 10
     .activeslot { 
     font-weight: bold;
     background-color: #fff!important;
+  }
+  .panel-body {
+    padding-top: 0px!important;
   }
 </style>
 

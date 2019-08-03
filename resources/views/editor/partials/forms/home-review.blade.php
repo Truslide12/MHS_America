@@ -5,6 +5,10 @@
 			<th colspan="2"><span id="cfrm_title"></span></th>
 		</tr>
 		<tr>
+			<th>Space</th>
+			<td><div id="cfrm_space"></div></td>
+		</tr>
+		<tr>
 			<th>Make</th>
 			<td><div id="cfrm_make"></div></td>
 		</tr>
@@ -31,7 +35,7 @@
 		</tr>
 		<tr>
 			<th>Price:</th>
-			<td class="app-content">$<div id="cfrm_price" style="display: inline;"></div> (<div id="cfrm_type" style="display: inline;"></div>)</td>
+			<td class="app-content"><div id="cfrm_price" style="display: inline;"></div> <div id="cfrm_type" style="display: inline;"></div></td>
 		</tr>
 		<!--
 		<tr>
@@ -166,7 +170,7 @@
 		}
 
 		Editor.BuildReview();
-	Editor.ValidateOverview();
+		Editor.ValidateOverview();
 
 	}
 

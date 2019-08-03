@@ -69,6 +69,7 @@
 						</div>
 						<div class="col-sm-4 col-md-3">
 							<select id="beds" name="beds" class="form-control">
+								<option value="0"@if(Input::old('beds', 0) == 0) selected="selected"@endif>--Select--</option>
 								<option value="1"@if(Input::old('beds', 0) == 1) selected="selected"@endif>1</option>
 								<option value="2"@if(Input::old('beds', 0) == 2) selected="selected"@endif>2</option>
 								<option value="3"@if(Input::old('beds', 0) == 3) selected="selected"@endif>3</option>
@@ -83,6 +84,7 @@
 						</div>
 						<div class="col-sm-4 col-md-3">
 							<select id="baths" name="baths" class="form-control">
+								<option value="0"@if(Input::old('baths', 0) == 0) selected="selected"@endif>--Select--</option>
 								<option value="1"@if(Input::old('baths', 0) == 1) selected="selected"@endif>1</option>
 								<option value="2"@if(Input::old('baths', 0) == 2) selected="selected"@endif>2</option>
 								<option value="3"@if(Input::old('baths', 0) == 3) selected="selected"@endif>3</option>
