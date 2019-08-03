@@ -7,6 +7,13 @@
 	********************************************/
 	$da = file_get_contents("http://mhsamerica.com/api/latest/homes");
 	$da = json_decode($da);
+	if ( empty($da) ) { 
+		$lh = 0; 
+	} else {
+		$lh = count($da);
+	}
+
+	
 	$img = Array();
 
 	foreach( $da->data as $d ) {
@@ -401,6 +408,46 @@
 			            </div>
 					</div>
 					@endforeach
+					@if( $lh < 4 )
+					<div class="mhs-slide" id="slide-1">
+						<div class="card clickycard" href="">
+			                <div class="card-image" style="position: relative;">
+			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png" style="min-width: 100%;">
+			                        <div class="fs-ribbon" style="border-top-color: red!important;">
+								        <div class="txt">List Yours</div>
+								    </div>
+			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:blue;font-family: Voltaire;">$39.99</span>
+			                </div><!-- card image -->
+
+			                <div class="card-content">
+			                    <span class="card-title">
+			                    	<div class="row">
+			                    	<div class="col-md-12">
+			                    		$39.99 for 180 Day Listing
+			                    	</div>
+			                    	</div>
+			                   		<div class="row" style="margin-top: 5px;">
+			                   			<div class="col-md-12">
+				                    		<small style="text-align: right;"> - Promote Online</small>
+				                   		</div>
+			                   		</div>
+			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="col-md-12">
+			                    		<small style="text-align: right;width: 100%;"> - 5 Photos</small><br>
+			                   		</div>
+			                   		</div>
+			                    	<div class="row" style="margin-top: 5px;">
+				                    	<div class="col-md-12">
+				                    		<small style="text-align: right;"> - Detailed Home Information</small>
+				                   		</div>
+			                   		</div>
+			                    </span>                    
+			                </div><!-- card content -->
+
+
+			            </div>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>
