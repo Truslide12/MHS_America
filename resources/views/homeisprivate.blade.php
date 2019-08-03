@@ -149,7 +149,7 @@
 	<div class="col-lg-12"  style="min-height: 500px;padding-top: 45px;">
 
 		<div class="alert alert-danger">
-			<strong>Error:</strong> This home is set to private. <br><small>If this is your home, you can change it's status from Private to Active in the <a href="/{{$homeid}}/edit">Home Editor</a>.</small>
+			<strong>Error:</strong> This home is set to private. <br><small>If this is your home, you can change it's status from Private to Active in the <a href="{{$homeid}}/edit">Home Editor</a>.</small>
 		</div>
 
 	</div>

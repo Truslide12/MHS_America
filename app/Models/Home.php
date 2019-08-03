@@ -64,12 +64,54 @@ class Home extends LocatableModel {
 
 
 
-	private static $materialsList = ["Unknown","Metal","Hardiboard","Wood","Block","Composite","Wood Shake","Tar","Carpet","Hardwood","Tile"];
-	private static $windowsOpts = ["Unknown", "Single Pane", "Double Pane", "Fire Proof"];
-	private static $setupOpts = ["Unknown", "High Set", "Low Set", "Ground Set"];
-	private static $roofOpts = ["Unknown", "3x12", "4x12", "10x12", "Flat"];
-	private static $thicknessOpts = ["Unknown", "4\"", "6\""];
-	private static $strapOpts = ["Unknown", "Yes", "No"];
+	private static $materialsList = [
+		0  => "Unknown",
+		1  => "Metal",
+		2  => "Hardiboard",
+		3  => "Wood",
+		4  => "Block",
+		5  => "Composite",
+		6  => "Wood Shake",
+		7  => "Tar",
+		8  => "Carpet",
+		9  => "Hardwood",
+		10 => "Tile",
+		11 => "Vinyl"
+	];
+
+	private static $windowsOpts = [
+		0 => "Unknown", 
+		1 => "Single Pane", 
+		2 => "Double Pane", 
+		3 => "Fire Proof"
+	];
+
+	private static $setupOpts = [
+		0 => "Unknown",
+		1 => "High Set",
+		2 => "Low Set",
+		3 => "Ground Set"
+	];
+
+	private static $roofOpts = [
+		0 => "Unknown", 
+		1 => "3x12", 
+		2 => "4x12", 
+		3 => "10x12", 
+		4 => "Flat"
+	];
+
+	private static $thicknessOpts = [
+		0 => "Unknown", 
+		1 => "4\"", 
+		2 => "6\""
+	];
+
+	private static $strapOpts = [
+		0 => "Unknown", 
+		1 => "Yes", 
+		2 => "No"
+	];
 
 
 	private static $shapes = array(

@@ -147,9 +147,9 @@
 							<select id="skirting" name="skirting" class="form-control">
 								<option value="0">--Unknown--</option>
 								<option value="1">Metal</option>
-								<option value="2">Wood</option>
-								<option value="3">Hardiboard</option>
-								<option value="5">Vinyl</option>
+								<option value="3">Wood</option>
+								<option value="2">Hardiboard</option>
+								<option value="11">Vinyl</option>
 								
 							</select>
 						</div>
@@ -166,7 +166,7 @@
 							<select id="roof_mat" name="roof_mat" class="form-control">
 								<option value="0">--Unknown--</option>
 								<option value="1">Metal</option>
-								<option value="4">Composite</option>
+								<option value="5">Composite</option>
 								<option value="6">Wood Shake</option>
 								<option value="7">Tar</option>
 							</select>
@@ -229,7 +229,7 @@
 								<option value="8">Carpet</option>
 								<option value="9">Hardwood</option>
 								<option value="10">Tile</option>
-								<option value="5">Vinyl</option>
+								<option value="11">Vinyl</option>
 							</select>
 						</div>
 						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('floor') ? ' has-error' : '' }}">
@@ -243,7 +243,7 @@
 								<option value="8">Carpet</option>
 								<option value="9">Hardwood</option>
 								<option value="10">Tile</option>
-								<option value="5">Vinyl</option>
+								<option value="11">Vinyl</option>
 							</select>
 						</div>
 					</div>
