@@ -38,7 +38,7 @@
 
 	            </div>
 
-	            <div class="col-xs-12 col-sm-4 text-left" style="border-bottom: 2px solid #eee;padding: 10px;padding-top: 0px;margin-bottom: 10px;">
+	            <div class="col-xs-12 col-sm-4 text-left" style="border-bottom: 0px solid #eee;padding: 10px;padding-top: 0px;margin-bottom: 10px;">
 	            <h4 style="font-weight: bold;">Make your photos count!</h4>
 	            You are limited to 5 photos per home. But want to hear some great news? 5 is all you'll ever need! Let us help you find the 
 	            best photos for your profile.
@@ -60,7 +60,9 @@
 		            <option value="12">Back Yard</option>
 		            <option value="100">Other</option> 	
 	            </select>
-	            <button type="button" class="btn btn-primary" id="photoCropButton" style="margin-top: 3px;">Select Image</button>
+	            <button type="button" class="btn btn-primary" id="photoCropButton" style="margin-top: 3px;">Upload</button>
+	            <button type="button" class="btn btn-primary" id="reUpButton" style="margin-top: 3px;display: none;">Reupload</button>
+	            <button type="button" onclick="move_next();" class="btn btn-primary" id="nextButton" style="margin-top: 3px;display: none;">Next</button>
 	            <!-- <a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#coverEditorBox">Add a photo</a> -->
 	            <hr>
 
@@ -174,9 +176,11 @@
 			customUploadButtonId:'photoCropButton',
 			modal:false,
 			loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
-			onAfterImgUpload: function(){ $('#cropNote').show(); bindUpload(window.response); },
-			onAfterImgCrop: function(){ $('#cropNote').hide(); $('#cropSuccessNote').show(); }
-			/* onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
+			onAfterImgUpload: function(){ bindUpload(window.response); },
+			onError: function(){ rejectUpload(window.response); },
+			onAfterImgCrop: function(){ },
+			onBeforeImgUpload: function(){ startUpload(); }
+			/* 
 			onImgDrag: function(){ console.log('onImgDrag') },
 			onImgZoom: function(){ console.log('onImgZoom') },
 			onBeforeImgCrop: function(){ console.log('onBeforeImgCrop') }, */
@@ -211,8 +215,14 @@
 			photodata.photos = new Array(6);
 
 
-			function ready_photo_slot(i) {
+			function move_next() {
+				console.log("from", active_slot);
+				nex = parseInt(active_slot)+1;
+				ready_photo_slot(nex);
+			}
 
+			function ready_photo_slot(i) {
+				console.log("to", i);
 				$("#tab-"+active_slot).parent().removeClass("activeslot");
 				$("#tab-"+i).parent().addClass("activeslot");
 				active_slot = i;
@@ -225,6 +235,8 @@
 					$("#photo-tag").val(photo_labels[photodata.slots[i]].id);
 				}
 
+				$("#photoCropButton").html("Upload");
+				$("#nextButton").hide();
 				update_photo_tabs();
 				paint_photo_demo();
 
@@ -258,26 +270,45 @@
 				ready_photo_slot(active_slot);
 			}
 
+			function startUpload() {
+				$('#save_status').hide().html("<b>Uploading Photo..</b>").show();
+				//$("#save_status").html("<b>Data Loaded..</b>").delay(1000).fadeOut();
+			}
+
 			function bindUpload(r) {
+				$("#save_status").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
 				croppic.reset();
-				if ( r.status == "success" ) {
-					photodata.photos[active_slot] = r.url;
-				}
+				photodata.photos[active_slot] = r.url
 				update_select( $("#photo-tag").val() );
 				paint_photo_demo(active_slot);
-
+				$("#photoCropButton").html("Reupload");
+				$("#nextButton").show();
+				/*
 				for ( i = 1; i<= 5;i++ ) {
 					Editor.home.photos[i] = {id: i, tag: photo_labels[photodata.slots[i]].name, url: photodata.photos[i] };
 				}
-
-				
+				*/
 
 			}
 
+			function rejectUpload(r) {
+				$("#save_status").html("<b>Photo Rejected..</b>");
+				croppic.reset();
+				$("#photo_slot_text").html(r.message);
+				$("#photoCropButton").html("Reupload");
+				//update_select( $("#photo-tag").val() );
+				//paint_photo_demo(active_slot);
+				/*
+				for ( i = 1; i<= 5;i++ ) {
+					Editor.home.photos[i] = {id: i, tag: photo_labels[photodata.slots[i]].name, url: photodata.photos[i] };
+				}
+				*/
+
+			}
+
+
 			function paint_photo_demo() {
-					console.log("emer", typeof photodata.photos[active_slot])
 				if ( typeof photodata.photos[active_slot] == "undefined" ) {
-					console.log("switch2empy")
 					$("#photo-demo").css({
 						"background": "silver",
 					});	
@@ -287,7 +318,10 @@
 						"background": "url("+photodata.photos[active_slot]+")",
 						"background-size": "100% 100%",
 						"background-position": "center"
-					});	
+					});
+					if( active_slot <= 5) {
+						$("#nextButton").show();
+					}
 				}
 			}
 		</script>
