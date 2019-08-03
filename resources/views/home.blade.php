@@ -440,32 +440,32 @@
 				//dd($home->seller_info, $seller);
 			@endphp
 
-			@if($seller->company)
+			@if( property_exists($seller, 'company') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Company:</strong> {{ $seller->company }}
 			</div>
 			@endif
-			@if($seller->name)
+			@if( property_exists($seller, 'name') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Name:</strong> {{ $seller->name }}
 			</div>
 			@endif
-			@if($seller->phone)
+			@if( property_exists($seller, 'phone') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Phone:</strong> {{ $seller->phone }}
 			</div>
 			@endif
-			@if($seller->addr)
+			@if( property_exists($seller, 'addr') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Address:</strong> {{ $seller->addr }}
 			</div>
 			@endif
-			@if($seller->email)
+			@if( property_exists($seller, 'email') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Email:</strong> {{ $seller->email }}
 			</div>
 			@endif
-			@if($seller->license)
+			@if( property_exists($seller, 'license') )
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>License:</strong> {{ $seller->license }}
 			</div>
