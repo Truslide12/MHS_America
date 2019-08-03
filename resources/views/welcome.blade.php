@@ -7,29 +7,32 @@
 	********************************************/
 	$da = file_get_contents("http://mhsamerica.com/api/latest/homes");
 	$da = json_decode($da);
+	$img = Array();
+	$lh = 0;
+
 	if ( empty($da) ) { 
 		$lh = 0; 
 	} else {
-		$lh = count($da);
-	}
-
-	
-	$img = Array();
-
-	foreach( $da->data as $d ) {
-
-		if ( $d->photos ) {
-			$p = (array) json_decode(stripslashes($d->photos));
-			if ( ! empty($p) ) {
-				$p = array_values($p)[0];
-				$img[] = $p->url;
+		foreach( $da->data as $d ) {
+			$lh++;
+			if ( $d->photos ) {
+				$p = (array) json_decode(stripslashes($d->photos));
+				if ( ! empty($p) ) {
+					$p = array_values($p)[0];
+					$img[] = $p->url;
+				} else {
+					$img[] = "/img/nophoto.png"; 
+				}
 			} else {
 				$img[] = "/img/nophoto.png"; 
 			}
-		} else {
-			$img[] = "/img/nophoto.png"; 
 		}
 	}
+
+	
+
+
+
 
 
 
