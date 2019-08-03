@@ -140,7 +140,7 @@
 
 	}
 	function trans_scale(i){
-		t = new Array("Single Wide", "Double Wide", "Triple Wide");
+		t = new Array("Not Entered", "Single Wide", "Double Wide", "Triple Wide");
 		return t[i];
 
 	}

@@ -274,7 +274,7 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
   }
 
 
-  if ( $("#homeSize").val() != null && $("#homeSize").val() != '' ) {
+  if ( $("#homeSize").val() != null && $("#homeSize").val() > 0 ) {
     this.home.size = $("#homeSize").val();
     this.AcceptInput("#homeSize");
   } else {
@@ -824,7 +824,6 @@ HomeEditorIO.prototype.BuildReview = function() {
     } else {
       $("#cfrm_size").html("Not Entered");
       this.is_complete = false;
-      alert(this.home.size);
     }
     
     if ( this.home.description !== null ) {

@@ -55,6 +55,7 @@
 						</div>
 						<div class="col-sm-4 col-md-3">
 							<select name="size" id="homeSize" id="homeSize" class="form-control">
+								<option value="0"@if(Input::old('size', 0) == 0) selected="selected"@endif>--Select--</option>
 								<option value="1"@if(Input::old('size', 0) == 1) selected="selected"@endif>Single-Wide</option>
 								<option value="2"@if(Input::old('size', 0) == 2) selected="selected"@endif>Double-Wide</option>
 								<option value="3"@if(Input::old('size', 0) == 3) selected="selected"@endif>Triple-Wide</option>
