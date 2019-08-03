@@ -81,75 +81,6 @@
 @section('content')
 <div class="row texture-1" style="padding-top: 0;">
 	<div class="col-sm-12">
-		@if(1==2)
-		<div class="panel panel-default" id="infoPanel">
-			<a href="#" id="infoMinimizer" class="btn btn-default pull-right hidden-xs">
-				<i class="fa fa-plus fa-minus"></i>
-			</a>
-			<div class="panel-body">
-				<div id="infoBox">
-					<h3 class="no-margin-t hidden-xs">
-						{{ $home->beds }} Bed {{ $home->baths }} Bath {{ $home->size() }}-wide
-					</h3>
-					<hr class="no-margin-t hidden-xs" style="margin-left:-15px;margin-right:-15px;">
-					<h4>
-						<span class="text-red pull-right hidden-xs">${{ number_format($home->price) }}</span>
-						<span><a href="{{ URL::route('profile', array('profile' => $profile->id)) }}">{{ $profile->title }}</a></span>
-					</h4>
-					<h4></h4>
-					<p>
-						{{ $home->address }} Spc. {{ $home->space_number }}<br>
-						{{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}
-
-					</p>
-					<p>
-						{{ $home->description }}
-					</p>
-				</div>
-			</div>
-		</div>
-		@if($home->image_floorplan != '1')
-		<div class="panel panel-default" id="planPanel">
-			<div class="panel-body">
-				<img src="{{ URL::route('welcome') }}/{{ $home->image_floorplan }}" class="img-responsive">
-			</div>
-		</div>
-		@endif
-		
-		<div class="panel panel-default" id="specsPanel">
-			<div class="panel-body">
-				<h4 class="no-margin-t">Home specifications</h4>
-				<table class="table">
-					<tbody>
-						<tr>
-							<td class="col-sm-6">
-								<strong>Dimensions</strong>
-							</td>
-							<td class="col-sm-6">
-								{{ $home->size() }} &mdash; {{ $home->width }}' &times; {{ $home->length }}'
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>Make / Model</strong>
-							</td>
-							<td>
-								{{ $home->year }} {{ $home->brand }} {{ $home->model }}
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>Serial No.</strong>
-							</td>
-							<td>
-								{{ $home->serial }}
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		@else
 		<style type="text/css">
 		.cotw-under {
 			/*
@@ -290,7 +221,7 @@
 
 			<p style="padding: -50px 100px 20px 100px;overflow:hidden;">
 				
-				<div class="mhs-slideshow" style="max-width: calc(100% - 344px);float:right;position: relative;z-index: 0;">
+				<div class="mhs-slideshow" style="max-width: calc(100% - 344px);float:left;position: relative;z-index: 0;">
 					<!--
 					<div class="mhs-slide-left-btn" onclick="changeHomes();"><i class="fa fa-chevron-left"></i></div>
 					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
@@ -331,84 +262,10 @@
 		</div>
 
 
-		@endif
 	</div>
 </div><div class="row about texture-1" style="padding-top: 20px;">
-	<div class="col-sm-8" style="padding: 0px 40px;padding-bottom: 1in;">
-		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; Approx {{ $home->square_footage }} sqft</div>
-		
-		<p style="font-size: 1.4em;">
-			{{ $home->description }}
-		</p>
-			
 
-
-		<hr>
-
-		<h3><i class="fa fa-cog"></i> Features</h3>
-		<div class="row" style="font-size: 1.4em;">
-			@if( $home->CountFeatures() > 0 )
-			<div class="col-sm-4">
-				<ul>
-					@foreach( $home->getFeatures() as $feature )
-						<li>{{ $home->getFeature( $feature )->title }}</li>
-						@if( $loop->iteration % Max(1,floor($home->CountFeatures()/3)) == 0 )
-				</ul>
-			</div>
-			<div class="col-sm-4">
-				<ul>
-						@endif
-
-					@endforeach
-				</ul>
-			</div>
-			@endif
-		</div>
-		<hr>
-		<h3><i class="fa fa-plug"></i> Appliances</h3>
-		<div class="row" style="font-size: 1.4em;">
-			<div class="col-sm-4">
-				<ul>
-					@foreach( $home->getAppliances() as $appliance )
-						<li>{{ $home->getAppliance( $appliance )->title }}</li>
-						@if( $loop->iteration % Max(1,floor($home->CountAppliances()/3)) == 0 )
-				</ul>
-			</div>
-			<div class="col-sm-4">
-				<ul>
-						@endif
-
-					@endforeach
-				</ul>
-			</div>
-
-		</div>
-		<hr>
-		<h3><i class="fa fa-wrench"></i> Build Information</h3>
-		<div class="row build-opts" style="font-size: 1.4em;">
-			<div class="col-md-6">
-				<ul>
-					<li><strong>Siding:</strong> {{ $home->build_specs("siding")->title }}</li>
-					<li><strong>Roof Material:</strong> {{ $home->build_specs("roof_mat")->title }}</li>
-					<li><strong>Windows:</strong> {{ $home->build_specs("windows")->title }}</li>
-					<li><strong>Kitchen Floors:</strong> {{ $home->build_specs("kitchen_floor")->title }}</li>
-					<li><strong>Setup:</strong> {{ $home->build_specs("setup")->title }}</li>
-				</ul>
-			</div>
-			<div class="col-md-6">
-				<ul>
-					<li><strong>Skirting:</strong> {{ $home->build_specs("skirting")->title }}</li>
-					<li><strong>Roof Angle:</strong> {{ $home->build_specs("roof_angle")->title }}</li>
-					<li><strong>Ext. Wall Thickness:</strong> {{ $home->build_specs("wall_thickness")->title }}</li>
-					<li><strong>Other Floors:</strong> {{ $home->build_specs("floor")->title }}</li>
-					<li><strong>Earthquake Strap:</strong> {{ $home->build_specs("strap")->title }}</li>
-				</ul>
-			</div>
-		</div>
-
-	</div>
-	<div class="col-sm-4"  style="padding-top: 45px;">
+	<div class="col-lg-4 col-lg-push-8"  style="padding-top: 45px;">
 
 		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
@@ -525,7 +382,80 @@
 		</div>
 
 	</div>
+	<div class="col-lg-8 col-lg-pull-4" style="padding: 0px 40px;padding-bottom: 1in;">
+		<h3><i class="fa fa-home"></i> About this home</h3>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; Approx {{ $home->square_footage }} sqft</div>
+		
+		<p style="font-size: 1.4em;">
+			{{ $home->description }}
+		</p>
+			
 
+
+		<hr>
+
+		<h3><i class="fa fa-cog"></i> Features</h3>
+		<div class="row" style="font-size: 1.4em;">
+			@if( $home->CountFeatures() > 0 )
+			<div class="col-sm-4">
+				<ul>
+					@foreach( $home->getFeatures() as $feature )
+						<li>{{ $home->getFeature( $feature )->title }}</li>
+						@if( $loop->iteration % Max(1,floor($home->CountFeatures()/3)) == 0 )
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul>
+						@endif
+
+					@endforeach
+				</ul>
+			</div>
+			@endif
+		</div>
+		<hr>
+		<h3><i class="fa fa-plug"></i> Appliances</h3>
+		<div class="row" style="font-size: 1.4em;">
+			<div class="col-sm-4">
+				<ul>
+					@foreach( $home->getAppliances() as $appliance )
+						<li>{{ $home->getAppliance( $appliance )->title }}</li>
+						@if( $loop->iteration % Max(1,floor($home->CountAppliances()/3)) == 0 )
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul>
+						@endif
+
+					@endforeach
+				</ul>
+			</div>
+
+		</div>
+		<hr>
+		<h3><i class="fa fa-wrench"></i> Build Information</h3>
+		<div class="row build-opts" style="font-size: 1.4em;">
+			<div class="col-md-6">
+				<ul>
+					<li><strong>Siding:</strong> {{ $home->build_specs("siding")->title }}</li>
+					<li><strong>Roof Material:</strong> {{ $home->build_specs("roof_mat")->title }}</li>
+					<li><strong>Windows:</strong> {{ $home->build_specs("windows")->title }}</li>
+					<li><strong>Kitchen Floors:</strong> {{ $home->build_specs("kitchen_floor")->title }}</li>
+					<li><strong>Setup:</strong> {{ $home->build_specs("setup")->title }}</li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<ul>
+					<li><strong>Skirting:</strong> {{ $home->build_specs("skirting")->title }}</li>
+					<li><strong>Roof Angle:</strong> {{ $home->build_specs("roof_angle")->title }}</li>
+					<li><strong>Ext. Wall Thickness:</strong> {{ $home->build_specs("wall_thickness")->title }}</li>
+					<li><strong>Other Floors:</strong> {{ $home->build_specs("floor")->title }}</li>
+					<li><strong>Earthquake Strap:</strong> {{ $home->build_specs("strap")->title }}</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
 
 </div>
 @stop
@@ -559,5 +489,13 @@
 			$(".backdrop").show();
 		}
 
+		function init() {
+			if ( $(window).width() > 800 ) {
+				//
+			} else {
+				$(".mhs-slideshow").css({"max-width": "100%","min-width": "100%"});
+			}
+		}
+		init()
 </script>
 @stop
