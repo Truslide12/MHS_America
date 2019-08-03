@@ -1059,6 +1059,12 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                   try { JSON.parse(e.seller_info) } catch { checkSellerObj = false; }
 
                    //si = JSON.parse(si.promo);
+                   if ( checkSellerObj ) { 
+                     si = JSON.parse(e.seller_info);
+                     if( si == null ) {
+                        checkSellerObj = false;
+                     }
+                   }
                    if ( checkSellerObj ) {
                      si = JSON.parse(e.seller_info);
                      that.home.seller_info = { 
