@@ -11,9 +11,14 @@ class HomeController extends Pony {
 	{
 		//$profile = $home->profiles()->byType('Community')->first();
 
-		return view('home')
-					->with('home', $home)
-					->with('profile', $profile);
+		if ( $home->status > 1 ) {
+			return view('home')
+				->with('home', $home)
+				->with('profile', $profile);
+		} else {
+			return view('homeisprivate')
+					->with('homeid', $home->id);
+		}
 	}
 
 	public function postWatch(Home $home)
