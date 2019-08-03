@@ -27,7 +27,9 @@ class Company extends EloquentModel {
 
 	public function city()
 	{
-		return $this->belongsTo(Geoname::class, 'city_id', 'id');
+		return $this->belongsTo(Geoname::class, 'city_id', 'id')->withDefault([
+        	'place_name' => 'Unknown',
+    	]);;
 	}
 
 	public function state()
