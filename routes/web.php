@@ -488,6 +488,7 @@ Route::group(array('prefix' => 'luna'), function()
 
 				/* Profile editor spaces (GET) */
 				Route::get('spaces', array('uses' => 'EditorController@getSpaces', 'as' => 'editor-spaces'));
+
 				/* Profile editor homes (GET) */
 				Route::get('homes', array('uses' => 'EditorController@getHomes', 'as' => 'editor-homes'));
 				/* Profile editor map (GET) */
@@ -508,7 +509,9 @@ Route::group(array('prefix' => 'luna'), function()
 					/* Profile editor add space (POST) */
 					Route::post('spaces/new', array('uses' => 'EditorController@postAddSpace', 'as' => 'editor-addspace-post'));
 					/* Profile editor edit space (POST) */
-					Route::post('spaces/{space}', array('uses' => 'EditorController@postEditSpace', 'as' => 'editor-editspace-post'));
+					Route::post('spaces/{space}', array('uses' => 'EditorController@postEditSpace', 'as' => 'editor-editspace'));
+					/* Profile editor edit space (POST) */
+					Route::post('spaces/{space}/remove', array('uses' => 'EditorController@postRemoveSpace', 'as' => 'editor-removespace'));
 
 					/* Profile editor add home (POST) */
 					Route::post('homes/new/dataio', array('uses' => 'EditorController@postHomeEditorIO', 'as' => 'editor-dataio-post'));

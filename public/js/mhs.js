@@ -72,10 +72,10 @@ var topContext = this,
                 if (data.success) {
                     callback.call(this, data.data);
                 } else {
-                    (fallback || (function() {})).call(this);
+                    (fallback || (function(data) {})).call(this, data.data);
                 }
             }).fail(function(data) {
-                (failback || (function() {})).call(this);
+                (failback || (function(data) {})).call(this, data.data);
             });
         },
     };

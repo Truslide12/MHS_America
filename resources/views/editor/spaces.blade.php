@@ -30,10 +30,10 @@
 		<div class="clearfix"></div>
 		<hr>
 		@if(Session::has('success'))
-		<div class="alert alert-success">{{ Session::get('success') }}</div>
+		<div class="alert alert-success" id="success-block">{{ Session::get('success') }}</div>
 		@endif
-		@if($spaces->count() == 0)
-		<div class="panel panel-default shadow">
+		
+		<div class="panel panel-default shadow" id="no_spaces_box" @if($spaces->count() > 0) style="display: none;" @endif>
 			<div class="panel-body">
 				<br>
 				<br>
@@ -42,18 +42,18 @@
 				<br>
 			</div>
 		</div>
-		@else
+		@if($spaces->count() > 0)
 		<div class="row">
 			@foreach($spaces as $space)
 			<div class="col-md-6">
-				<div class="space-block">
+				<div class="space-block" id="space-block-{{ $space->id }}">
 					<div class="row">
 						<div class="pull-right">
 							<a href="#" class="btn btn-xs btn-default" data-toggle="modal" data-target="#editSpaceBox" data-profile="{{ $profile->id }}" data-id="{{ $space->id }}">Edit / Remove</a>
 						</div>
 						<div class="pull-left">
 							<h3 title="{{ $space->name }}" class="space-title">{{ $space->name }}</h3>
-							<div class="label label-default">{{ $space->status or 'avail' }}</div>
+							<div class="label label-default space-status">{{ ($space->is_taken ? 'Unavailable' : 'Available') }}</div>
 						</div>
 						<div class="pull-left">
 							<p class="space-size">{{ $space->size() }}</p>
@@ -166,7 +166,7 @@
 <div class="modal fade" id="editSpaceBox" role="modal" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="{{ URL::route('editor-editspace-post', [ 'profile' => $profile->id, 'space' => 0 ]) }}" method="POST">
+			<form id="space_editor" action="{{ URL::route('editor-editspace', [ 'profile' => $profile->id, 'space' => 0 ]) }}" method="POST">
 			<div class="modal-header">
 				<h4 class="modal-title">Edit vacant space</h4>
 			</div>
@@ -220,16 +220,22 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div id="edit-errors" class="alert alert-danger" style="display: none;"></div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="#sERemove" class="btn btn-danger pull-left" data-action="remove" data-relation="space" data-id="0">Remove</button>
+				<button type="button" id="sERemove" class="btn btn-danger pull-left" data-action="remove" data-relation="space" data-id="0">Remove</button>
 
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" id="sESpace" name="space" value="">
+				<input type="hidden" id="sEProfile" name="profile" value="">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save changes</button>
+				<button type="submit" class="btn btn-primary" data-action="edit" data-relation="space" data-id="0">Save changes</button>
 			</div>
 			</form>
 		</div><!-- /.modal-content -->
@@ -239,4 +245,9 @@
 
 @section('incls-body')
 <script type="text/javascript" src="/js/mhs.editor.spaces.js"></script>
+<script type="text/javascript">
+	//
+
+
+</script>
 @stop

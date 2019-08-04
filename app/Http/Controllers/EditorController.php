@@ -494,26 +494,41 @@ class EditorController extends Pony {
 			'taken.in' => 'Invalid input for home taken.'
 		]);
 		if($validator->fails()) {
+			return Response::json(array('success' => false, 'data' => $validator->errors()));
+
 			return Redirect::route('editor-editspace', ['profile' => $profile->id, 'space' => $space->id])
 							->withInput()
 							->withErrors($validator);
 		}else{
-			$space->title = $input_data['title'];
+			$space->name = $input_data['title'];
 			$space->is_taken = (Input::get('taken', 0) == 1);
 			$space->width = $input_data['width'];
 			$space->length = $input_data['length'];
-			$space->size = $input_data['size'];
+			$space->shape = $input_data['size'];
 
 			if($space->save()) {
+				return Response::json(array('success' => true, 'data' => $space));
 				return Redirect::route('editor-spaces', ['profile' => $profile->id])
 								->with('success', 'The space was successfully updated.');
 			}
 
 			$error = new Illuminate\Support\MessageBag(['error' => 'An error occurred. Code: EDSP01']);
+			return Response::json(array('success' => false, 'data' => 'An error occurred. Code: EDSP01'));
 			return Redirect::route('editor-editspace', ['profile' => $profile->id, 'space' => $space->id])
 							->withInput()
 							->withErrors($error);
 		}
+	}
+
+	public function postRemoveSpace(Profile $profile, Space $space)
+	{
+		$id = $space->id;
+		if($space->delete()) {
+			return Response::json(array('success' => true, 'data' => ["id" => $id, "message" => 'This space has been removed.']));
+		}
+
+		return Response::json(array('success' => false, 'data' => 'An unknown error occured.'));
+
 	}
 
 	public function postAddHome(Profile $profile)
