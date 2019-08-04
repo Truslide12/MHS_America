@@ -271,12 +271,21 @@
 				ready_photo_slot(active_slot);
 			}
 
+			var photo_uploading_flag = false;
+
 			function startUpload() {
 				$('#save_status').hide().html("<b>Uploading Photo..</b>").show();
+				photo_uploading_flag = true;
+				setTimeout(function(){
+					if ( photo_uploading_flag ) {
+						$("#photo_slot_text").html("Image seems no not be uploding.. please refresh the page and try again");
+					}
+				}, 5000);
 				//$("#save_status").html("<b>Data Loaded..</b>").delay(1000).fadeOut();
 			}
 
 			function bindUpload(r) {
+				photo_uploading_flag = false;
 				croppic.reset();
 				$("#save_status").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
 				photodata.photos[active_slot] = r.url
@@ -294,6 +303,7 @@
 			}
 
 			function rejectUpload(r) {
+				photo_uploading_flag = false;
 				croppic.reset();
 				$("#save_status").html("<b>Photo Rejected..</b>");
 				$("#photo_slot_text").html(r.message);
