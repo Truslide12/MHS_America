@@ -76,7 +76,7 @@ class BusinessController extends Pony {
 			array(
 				'name' => 'required|between:4,64',
 				'phone' => 'required|phone:US',
-				'fax' => 'sometimes|phone:US',
+				'fax' => 'phone:US|nullable',
 				'address' => 'required|between:5,48',
 				'state' => 'required|exists:states,id',
 				'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 0)),
