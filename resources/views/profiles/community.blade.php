@@ -103,7 +103,7 @@
 							{{ $profile->address }}
 						</p>
 						<p>
-							{{ $city->place_name }}, {{ strtoupper($state->abbr) }} {{ $city->zipcode }}
+							{{ $city->place_name }}, {{ strtoupper($state->abbr) }} {{ $profile->zipcode }}
 						</p>
 					</div>
 					<div class="col-md-12 hidden-md hidden-lg">
@@ -127,6 +127,14 @@
 						<hr class="no-margin-t">
 					</div>
 					<div class="col-md-3">
+						@if($profile->office_tagline)<p>
+							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
+							Managed by
+						</p>@endif
+						@if($profile->office_manager != '')<p>
+							<span class="pull-right"><em>{{$profile->office_manager}}</em></span>
+							Office Manager
+						</p>@endif
 						@if($profile->phone != '')<p>
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->phone,') ',3,0),'-',8,0) }}</em></span>
 							Phone
@@ -134,6 +142,10 @@
 						@if($profile->fax != '')<p>
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 							Fax
+						</p>@endif
+						@if($profile->office_email != '')<p>
+							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
+							Email
 						</p>@endif
 						@if(1==2)<p>
 							<span class="pull-right"><em><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></em></span>
@@ -189,6 +201,33 @@
 				@if($profile->neighborhood == 1)
 				<div class="brick">
 					Neighborhood watch
+				</div>
+				@endif
+				@if($profile->utility("water") == 1)
+				<div class="brick">
+					City Water
+				</div>
+				@else
+				<div class="brick">
+					Well Water
+				</div>
+				@endif
+				@if($profile->utility("sewer") == 1)
+				<div class="brick">
+					Sewer
+				</div>
+				@else
+				<div class="brick">
+					Septic
+				</div>
+				@endif
+				@if($profile->utility("gas") == 1)
+				<div class="brick">
+					Natural Gas
+				</div>
+				@else
+				<div class="brick">
+					Propane Gas
 				</div>
 				@endif
 			</div>

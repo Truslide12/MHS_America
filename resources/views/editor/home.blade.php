@@ -132,11 +132,11 @@
 				<div class="push-down"></div>
 				<label class="control-label col-md-3">Office Manager</label>
 				<div class="col-md-3">
-					<input type="text" name="office_manager" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="Who would you like to be contacted for inqueries?">
+					<input type="text" name="office_manager" class="form-control" value="{{ $profile->office_manager }}" data-toggle="tooltip" data-placement="right" title="Who would you like to be contacted for inqueries?">
 				</div>
 				<label class="control-label col-md-2">Office Email</label>
 				<div class="col-md-4">
-					<input type="text" name="office_email" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="What email should we direct questions to?">
+					<input type="text" name="office_email" class="form-control" value="{{ $profile->office_email }}" data-toggle="tooltip" data-placement="right" title="What email should we direct questions to?">
 				</div>
 			</div>
 			<div class="form-group">
@@ -144,7 +144,7 @@
 				<label class="control-label col-md-3"></label>
 				<div class="col-md-6 form-group">
 					<div class="checkbox">
-						<input type="checkbox" name="show_company" id="show_company" value="1">
+						<input type="checkbox" name="show_company" id="show_company" value="1" @if($profile->office_tagline) checked @endif>
 						<label for="show_company" style="font-size: 14px;font-weight: none;line-height: 1.42857143;">
 							Show <strong>{{ $profile->company->title }}</strong> on my profile.
 						</label>
