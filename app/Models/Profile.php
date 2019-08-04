@@ -410,7 +410,7 @@ class Profile extends EloquentModel {
 					->with('city', $this->geoname)
 					->with('plan', $this->plan);
 
-		if($this->rep()->hasHomes()) $view->with('homes', $this->homes);
+		if($this->rep()->hasHomes()) $view->with('homes', $this->homes()->get());
 		
 		if($this->rep()->hasSpaces()) $view->with('spaces', $this->spaces()->get());
 

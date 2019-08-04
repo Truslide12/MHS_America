@@ -306,7 +306,9 @@ class EditorController extends Pony {
 			return Redirect::route('editor', ['profile' => $profile->id, 'from_company' => $profile->company_id])
 							->withErrors($validator);
 		}else{
+
 			$profile_array = [];
+
 			/* Update title */
 			if($profile->title != Input::get('title')) {
 				$profile_array['title'] = Input::get('title');
@@ -322,18 +324,12 @@ class EditorController extends Pony {
 				$profile_array['description'] = Input::get('description', '');
 			}
 
-			/* Update space count and rent */
+			/* Update space count */
 			if($profile->spaces != Input::get('space_count', 0)) {
 				$profile_array['spaces'] = (Input::get('space_count', 0) < 1000) ? Input::get('space_count') : 0;
 			}
 
-
-			/* Update amenity */
-			if($profile->amenities != Input::get('amenityinp')) {
-				$profile_array['amenities'] = json_encode(["has" => str_getcsv(Input::get('amenityinp'))]);
-			}
-
-
+			/* Update rent */
 			$rent = Input::get('rent', 0);
 			if($profile->rent != $rent) {
 				if(is_numeric($rent) && $rent > 0 && $rent < 10000) {
@@ -342,6 +338,33 @@ class EditorController extends Pony {
 					$profile_array['rent'] = 0;
 				}
 			}
+
+
+
+
+
+			/* office manager */
+			if($profile->office_manager != Input::get('office_manager', '')) {
+				$profile_array['office_manager'] = Input::get('office_manager', '');
+			}
+
+			/* office email */
+			if($profile->office_email != Input::get('office_email', '')) {
+				$profile_array['office_email'] = Input::get('office_email', '');
+			}
+
+			/* office tagline */
+			if($profile->office_tagline != Input::get('show_company', false)) {
+				$profile_array['office_tagline'] = Input::get('show_company', false);
+			}
+
+			/* Update amenity */
+			if($profile->amenities != Input::get('amenityinp')) {
+				$profile_array['amenities'] = json_encode(["has" => str_getcsv(Input::get('amenityinp'))]);
+			}
+
+
+
 
 			/* Validate and update phone and fax */
 			$phone = preg_replace('/[^0-9]/', '', Input::get('phone',''));
@@ -356,6 +379,7 @@ class EditorController extends Pony {
 
 			/* Utilities */
 			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
+
 
 			$hours_array = [];
 			$open_times = Input::get('open_hours');
@@ -383,7 +407,8 @@ class EditorController extends Pony {
 				'tennis','shuffleboard',
 				'picnic','playground','fitness',
 				'fishing','golf','hiking',
-				'horsies','shopping'
+				'horsies','shopping','carport',
+				'garage', 'visitor'
 			];
 
 			foreach($bools as $val) {
