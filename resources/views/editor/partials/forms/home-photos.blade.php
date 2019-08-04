@@ -278,7 +278,7 @@
 				photo_uploading_flag = true;
 				setTimeout(function(){
 					if ( photo_uploading_flag ) {
-						$("#photo_slot_text").html("Image seems no not be uploding.. please refresh the page and try again");
+						$("#photo_slot_text").html("<center>Image seems no not be uploding..<br> please refresh the page and try again</center>");
 					}
 				}, 5000);
 				//$("#save_status").html("<b>Data Loaded..</b>").delay(1000).fadeOut();
