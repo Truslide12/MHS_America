@@ -117,8 +117,9 @@
 	</div>
 </div>
 @php
-		//Session::forget("order_data");
-		//Session::forget("active_step");
-		//Session::forget("plan");
+		Session::forget("order_data");
+		Session::forget("active_step");
+		Session::forget("plan");
+		Session::forget("product");
 @endphp
 @stop

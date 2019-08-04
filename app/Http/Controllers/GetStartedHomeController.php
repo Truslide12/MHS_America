@@ -814,7 +814,7 @@ class GetStartedHomeController extends Pony {
 			$new_home->status 			= 1;
 			$new_home->beds 			= 0;
 			$new_home->baths	 		= 0;
-			$new_home->utilities 		= json_encode([]);
+			//$new_home->utilities 		= json_encode([]);
 			$new_home->dims_json 		= json_encode([]);
 			$new_home->seller_info 		= json_encode([]);
 			$new_home->address 			= $order_data['profile_data']->address;
