@@ -76,7 +76,7 @@ class BusinessController extends Pony {
 			array(
 				'name' => 'required|between:4,64',
 				'phone' => 'required|phone:US',
-				'fax' => 'phone:US',
+				'fax' => 'sometimes|phone:US',
 				'address' => 'required|between:5,48',
 				'state' => 'required|exists:states,id',
 				'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 0)),
@@ -98,6 +98,7 @@ class BusinessController extends Pony {
 
 		if($validator->fails()) {
 			return redirect()->route('account-business-company-create')
+							->withInput(Input::only('name', 'phone', 'fax', 'address', 'state', 'city'))
 							->withErrors($validator);
 		}else{
 			
