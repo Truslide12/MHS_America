@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use View;
+use App\Models\Amenities;
 use App\Models\Plan;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
@@ -330,6 +331,17 @@ class Profile extends EloquentModel {
 	{
 		$amenities = json_decode($this->amenities, true);
 		return ( is_array($amenities) && array_key_exists('has', $amenities) && is_array($amenities['has']) && in_array($id, $amenities['has']) );
+	}
+
+	public function getAmenities()
+	{
+		$amenities = (object)json_decode($this->amenities, true);
+		return $amenities->has;
+	}
+
+	public function getAmenity($id)
+	{
+		return Amenities::where('id', '=', $id)->first();
 	}
 
 	public function hasCarousel()

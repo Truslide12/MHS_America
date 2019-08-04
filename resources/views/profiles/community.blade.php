@@ -248,7 +248,7 @@
 				@endif
 			</div>
 		</div>
-		@if($plan->hasFeature('manage_amenities') || $profile->hasAmenities())
+		@if($plan->hasFeature('manage_amenities') && $profile->hasAmenities() )
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -256,66 +256,11 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				@if($profile->rec == 1)
+				@foreach($profile->getAmenities() as $amen )
 				<div class="brick">
-					Clubhouse
+					{{ $profile->getAmenity($amen)->title }}
 				</div>
-				@endif
-				@if($profile->pool == 1)
-				<div class="brick">
-					Pool
-				</div>
-				@endif
-				@if($profile->fitness == 1)
-				<div class="brick">
-					Fitness center
-				</div>
-				@endif
-				@if($profile->picnic == 1)
-				<div class="brick">
-					Picnic area
-				</div>
-				@endif
-				@if($profile->playground == 1)
-				<div class="brick">
-					Playground
-				</div>
-				@endif
-				@if($profile->storage == 1)
-				<div class="brick">
-					Storage
-				</div>
-				@endif
-				@if($profile->basketball == 1)
-				<div class="brick">
-					Basketball
-				</div>
-				@endif
-				@if($profile->tennis == 1)
-				<div class="brick">
-					Tennis
-				</div>
-				@endif
-				@if($profile->golf == 1)
-				<div class="brick">
-					Golf
-				</div>
-				@endif
-				@if($profile->shuffleboard == 1)
-				<div class="brick">
-					Shuffleboard
-				</div>
-				@endif
-				@if($profile->bingo == 1)
-				<div class="brick">
-					Bingo
-				</div>
-				@endif
-				@if($profile->fishing == 1)
-				<div class="brick">
-					Fishing
-				</div>
-				@endif
+				@endforeach
 			</div>
 		</div>
 		@endif
