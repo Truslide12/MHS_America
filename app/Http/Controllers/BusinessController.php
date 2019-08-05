@@ -117,7 +117,7 @@ class BusinessController extends Pony {
 
 			$company = new Company;
 				
-			$company->title = Input::get('name');
+			$company->title = Input::get('company_name');
 			//$company->name = strtolower(str_replace(' ', '', Input::get('name')));
 			$company->name = str_slug(Input::get('company_name'));
 			$company->street_addr = Input::get('address');
