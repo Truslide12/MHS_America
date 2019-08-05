@@ -457,14 +457,14 @@
 			@endif
 			@endif
 
-			@if( property_exists($seller, 'phone') )
+			@if( property_exists($seller, 'phone2') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone2 }}
 			</div>
 			@endif
 			@endif
-			@if( property_exists($seller, 'phone') )
+			@if( property_exists($seller, 'phone3') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone3 }}
