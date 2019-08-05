@@ -122,7 +122,7 @@ class BusinessController extends Pony {
 			$company->name = str_slug(Input::get('company_name'));
 			$company->street_addr = Input::get('address');
 			$company->phone = Input::get('phone');
-			$company->fax = Input::get('fax');
+			$company->fax = Input::get('fax', '');
 			$company->state_id = Input::get('state');
 			$company->city_id = $city->id;
 			$company->verified = 0;
