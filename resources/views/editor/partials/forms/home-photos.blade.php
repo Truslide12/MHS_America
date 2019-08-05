@@ -61,7 +61,6 @@
 		            <option value="100">Other</option> 	
 	            </select>
 	            <button type="button" class="btn btn-primary" id="photoCropButton" style="margin-top: 3px;">Upload</button>
-	            <button type="button" class="btn btn-primary" id="reUpButton" style="margin-top: 3px;display: none;">Reupload</button>
 	            <button type="button" onclick="move_next();" class="btn btn-primary" id="nextButton" style="margin-top: 3px;display: none;">Next</button>
 	            <!-- <a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#coverEditorBox">Add a photo</a> -->
 	            <hr>
@@ -294,11 +293,11 @@
 				$("#photoCropButton").html("Reupload");
 				$("#nextButton").show();
 				console.log(window.response )
-				/*
+				
 				for ( i = 1; i<= 5;i++ ) {
 					Editor.home.photos[i] = {id: i, tag: photo_labels[photodata.slots[i]].name, url: photodata.photos[i] };
 				}
-				*/
+				
 
 			}
 
