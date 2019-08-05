@@ -74,7 +74,7 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(Input::all(),
 			array(
-				'name' => 'required|between:4,64',
+				'company_name' => 'required|between:4,64',
 				'phone' => 'required|phone:US',
 				'fax' => 'phone:US|nullable',
 				'address' => 'required|between:5,48',
@@ -82,7 +82,7 @@ class BusinessController extends Pony {
 				'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 0)),
 			),
 			array(
-				'name.required' => 'A name is required for the company.',
+				'company_name.required' => 'A name is required for the company.',
 				'phone.required' => 'A phone number is required for the company.',
 				'phone.phone' => 'The phone number doesn\'t appear to be valid.',
 				'fax.phone' => 'The fax number doesn\'t appear to be valid.',
@@ -119,7 +119,7 @@ class BusinessController extends Pony {
 				
 			$company->title = Input::get('name');
 			//$company->name = strtolower(str_replace(' ', '', Input::get('name')));
-			$company->name = str_slug(Input::get('name'));
+			$company->name = str_slug(Input::get('company_name'));
 			$company->street_addr = Input::get('address');
 			$company->phone = Input::get('phone');
 			$company->fax = Input::get('fax');
