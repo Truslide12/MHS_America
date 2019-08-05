@@ -123,9 +123,14 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 								<div class="col-md-9">
 									<select id="citybox" class="form-control" @if(Input::old('state') != '') disabled="disabled"@endif name="city" required>
 										<option>Select a city...</option>
-										@foreach(\App\Models\Geoname::where('state_id', Input::old('state'))->orderBy('id', 'asc')->get() as $city)
+										@if(Input::old('state') != '')
+										@php
+										$cities = \App\Models\Geoname::where('state_id', Input::old('state'))->orderBy('id', 'asc')->get();
+										@endphp
+										@foreach($cities as $city)
 										<option value="{{ $city->id }}" @if(Input::old('city') == $city->id) selected="selected" @endif>{{ $city->place_name }}</option>
 										@endforeach
+										@endif
 									</select>
 								</div>
 							</div>
