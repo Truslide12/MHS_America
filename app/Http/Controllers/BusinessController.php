@@ -104,7 +104,7 @@ class BusinessController extends Pony {
 			
 			$city = Geoname::where('state_id' ,Input::get('state'))->where('id', Input::get('city'))->first();
 
-			if(!is_a($city, 'Eloquent')) {
+			if(!is_a($city, Geoname::class)) {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CityLookupFailed)');
