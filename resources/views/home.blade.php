@@ -14,7 +14,7 @@
 	<div class="row texture-1">
 		<div class="col-md-12">
 			<h2>
-				{{ $home->title }} 
+				{{ $home->title }}
 				<small>
 					<br class="visible-xs">
 					<a href="@{{ URL::route('city', array('state' => $state->abbr, 'county' => $county->name, 'city' => $city->name)) }}">
@@ -208,13 +208,34 @@
 			display: inline-block;
 		}
  
+ 		.mobo_price {
+ 			display: none;
+ 		}
+
+ 		.price_box {
+ 			text-align:center;
+ 			width:calc(100% - 40px);
+ 			font-size: 2.5em;
+ 			background: transparent;
+ 			border-bottom:1px solid #8e8e8b;
+ 			border-radius:0px!important;
+ 			padding: 15px 10px;
+ 			margin: 0px auto 35px auto;
+ 			color:#147aba;
+ 		}
 @media only screen and (max-width: 800px) {
-  .cotw-img {
+  .cotw-img,
+  .price_box,
+  .home_info_box {
     display: none;
   }
 	.location_block {
 			width: 100%;
 			display: inline-block;
+	}
+	.mobo_price {
+		display: block;
+		float: right;
 	}
 }
 
@@ -227,7 +248,7 @@
 		<div style="margin: 0px -15px 0px -15px;font-size: 1.2em;background:none;">
 			<img src="{{ $home->default_photo()->url }}" class="cotw-img" style="float:left;margin:25px;margin-top: 15px;">
 			<div style="padding-top: 0px;">
-			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }}</h3>
+			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }} <span class="mobo_price">${{ number_format($home->price) }}<span></h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
 					<h4 class="location_block" style="">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
@@ -279,127 +300,9 @@
 
 	</div>
 </div><div class="row about texture-1" style="padding-top: 20px;">
-
-	<div class="col-lg-4 col-lg-push-8"  style="padding-top: 45px;">
-
-		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
-
-			<div style="text-align:center;width:calc(100% - 40px);font-size: 2.5em;background: transparent;border-bottom:1px solid #8e8e8b;border-radius:0px!important;padding: 15px 10px;margin: 0px auto 35px auto;color:#147aba;">${{ number_format($home->price) }}</div>
-
-			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
-			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Your Name" class="form-control">
-			</div>
-			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Phone Number" class="form-control">
-			</div>
-			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Email Address" class="form-control">
-			</div>
-			<div class="" style="margin-bottom: 3px;">
-				 <textarea placeholder="Message" class="form-control"></textarea>
-			</div>
-			<div class="" style="margin-bottom: 3px;text-align: right;">
-				<button class="btn btn-success" disabled>Send Message</button>
-			</div>
-
-			<hr>
-
-			<strong style="font-size: 1.5em;">Seller Information</strong><br>
-
-			@php
-				$seller = (object)json_decode( $home->seller_info );
-				//dd($home->seller_info, $seller);
-			@endphp
-
-			@if( property_exists($seller, 'company') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Company:</strong> {{ $seller->company }}
-			</div>
-			@endif
-			@if( property_exists($seller, 'name') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Name:</strong> {{ $seller->name }}
-			</div>
-			@endif
-			@if( property_exists($seller, 'phone') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Phone:</strong> {{ $seller->phone }}
-			</div>
-			@endif
-			@if( property_exists($seller, 'addr') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Address:</strong> {{ $seller->addr }}
-			</div>
-			@endif
-			@if( property_exists($seller, 'email') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Email:</strong> {{ $seller->email }}
-			</div>
-			@endif
-			@if( property_exists($seller, 'license') )
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>License:</strong> {{ $seller->license }}
-			</div>
-			@endif
-			<hr>
-
-			<strong style="font-size: 1.5em;">Home Information</strong><br>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Make:</strong> {{ $home->brand }} 
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Model:</strong> {{ $home->model }}
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Year:</strong> {{ $home->year }}
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Size:</strong> {{ $home->size() }}-Wide
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Bedrooms:</strong> {{ $home->beds }} 
-			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Baths:</strong> {{ $home->baths }} 
-			</div>
-		</div>
- 
-
-		<div class="row texture-1" style="padding-top: 20px;">
-			<div class="col-md-12 padding-b" style="text-align: right;">
-					@if(Auth::check())
-						{{ csrf_field() }}
-						@if($user->watchesHome($home->id))
-						<a href="#" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large" class="watch-home-{{ $home->id }} btn btn-info margin-r">
-							Unwatch<span class="hidden-xs"> Home</span>
-						</a>
-						@else
-						<a href="#" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large" class="watch-home-{{ $home->id }} btn btn-labeled btn-info margin-r">
-							<span class="btn-label">
-								<i class="fa fa-star"></i>
-							</span>
-							Watch<span class="hidden-xs"> Home</span>
-						</a>
-						@endif
-						@if(1==2)
-						<a href="{{ URL::route('home-contact', array('home' => $home->id)) }}" class="btn btn-default">
-							Send Message
-						</a>
-						<p class="watch-home-{{ $home->id }}-count text-muted margin-t-10 no-margin-b">{{ ($home->watchers()->count() == 0) ? 'Nobody' : (($home->watchers()->count() == 1) ? '1 user' : $home->watchers()->count().' users') }} watching</p>
-						@endif
-					@else
-					<p>
-						<a href="{{ URL::route('account-login') }}">Sign in</a> to contact seller or watch home.
-					</p>
-					@endif
-			</div>
-		</div>
-
-	</div>
-	<div class="col-lg-8 col-lg-pull-4" style="padding: 0px 40px;padding-bottom: 1in;">
+	<div class="col-lg-8" style="padding: 0px 40px;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; Approx {{ $home->square_footage }} sqft</div>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->brand }} {{ $home->model }} {{ $home->year }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
 		
 		<p style="font-size: 1.4em;">
 			{{ $home->description }}
@@ -471,6 +374,137 @@
 		</div>
 
 	</div>
+	<div class="col-lg-4"  style="padding-top: 45px;">
+
+		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
+
+			<div class="price_box">${{ number_format($home->price) }}</div>
+
+			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
+			<div class="" style="margin-bottom: 3px;">
+				<input type="text" placeholder="Your Name" class="form-control">
+			</div>
+			<div class="" style="margin-bottom: 3px;">
+				<input type="text" placeholder="Phone Number" class="form-control">
+			</div>
+			<div class="" style="margin-bottom: 3px;">
+				<input type="text" placeholder="Email Address" class="form-control">
+			</div>
+			<div class="" style="margin-bottom: 3px;">
+				 <textarea placeholder="Message" class="form-control"></textarea>
+			</div>
+			<div class="" style="margin-bottom: 3px;text-align: right;">
+				<button class="btn btn-success" disabled>Send Message</button>
+			</div>
+
+			<hr>
+
+			<strong style="font-size: 1.5em;">Seller Information</strong><br>
+
+			@php
+				$seller = (object)json_decode( $home->seller_info );
+				//dd($home->seller_info, $seller);
+			@endphp
+
+			@if( property_exists($seller, 'company') )
+			@if($seller->company != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Company:</strong> {{ $seller->company }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'name') )
+			@if($seller->name != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Name:</strong> {{ $seller->name }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'phone') )
+			@if($seller->phone != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Phone:</strong> {{ $seller->phone }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'addr') )
+			@if($seller->addr != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Address:</strong> {{ $seller->addr }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'email') )
+			@if($seller->email != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Email:</strong> {{ $seller->email }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'license') )
+			@if($seller->license != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>License:</strong> {{ $seller->license }}
+			</div>
+			@endif
+			@endif
+			<hr>
+			<div class="home_info_box">
+			<strong style="font-size: 1.5em;">Home Information</strong><br>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Make:</strong> {{ $home->brand }} 
+			</div>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Model:</strong> {{ $home->model }}
+			</div>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Year:</strong> {{ $home->year }}
+			</div>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Size:</strong> {{ $home->size() }}-Wide
+			</div>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Bedrooms:</strong> {{ $home->beds }} 
+			</div>
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Baths:</strong> {{ $home->baths }} 
+			</div>
+			</div>
+		</div>
+ 
+
+		<div class="row texture-1" style="padding-top: 20px;">
+			<div class="col-md-12 padding-b" style="text-align: right;">
+					@if(Auth::check())
+						{{ csrf_field() }}
+						@if($user->watchesHome($home->id))
+						<a href="#" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large" class="watch-home-{{ $home->id }} btn btn-info margin-r">
+							Unwatch<span class="hidden-xs"> Home</span>
+						</a>
+						@else
+						<a href="#" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large" class="watch-home-{{ $home->id }} btn btn-labeled btn-info margin-r">
+							<span class="btn-label">
+								<i class="fa fa-star"></i>
+							</span>
+							Watch<span class="hidden-xs"> Home</span>
+						</a>
+						@endif
+						@if(1==2)
+						<a href="{{ URL::route('home-contact', array('home' => $home->id)) }}" class="btn btn-default">
+							Send Message
+						</a>
+						<p class="watch-home-{{ $home->id }}-count text-muted margin-t-10 no-margin-b">{{ ($home->watchers()->count() == 0) ? 'Nobody' : (($home->watchers()->count() == 1) ? '1 user' : $home->watchers()->count().' users') }} watching</p>
+						@endif
+					@else
+					<p>
+						<a href="{{ URL::route('account-login') }}">Sign in</a> to contact seller or watch home.
+					</p>
+					@endif
+			</div>
+		</div>
+
+	</div>
+
 
 </div>
 @stop
