@@ -251,20 +251,22 @@
 	.backdropimg::before {
 		width: 50px;
 		height: 50px;
-		top: 50vh;
+		/*top: 50vh;
 		left: initial;
-		right: calc(85vw - 22vw);
+		right: calc(85vw - 22vw);*/
+		left: -55px;	
 	}
 	.backdropimg::after {
 		width: 50px;
 		height: 50px;
-		top: 50vh;
-		right: calc(35vw - 22vw);
+		/*top: 50vh;
+		right: calc(35vw - 22vw);*/
+		right: -55px;
 	}
 }
 
 		</style>
-		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
+		<div class="backdrop" id="backdrop" style="display: none;" xonclick="releaseBackdrop();">
 			<div class="backdropimg">
 			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
 			</div>
@@ -301,7 +303,7 @@
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
-			                    <img class="img-responsive" src="{{$ph[$h]['url']}}" onclick="popBackdrop(this.src);">
+			                    <img id="photo{{$h}}" class="img-responsive" src="{{$ph[$h]['url']}}" onclick="popBackdrop(this.id);">
 			                    
 			                </div><!-- card image -->
 			                
@@ -577,9 +579,34 @@
 			$(".backdrop").hide();
 		}
 
-		function popBackdrop(src){
-			$("#backdropimg").attr("src", src);
+		function popBackdrop(id){
+			if( isNaN(id) ) { id = id.slice(5); }
+			console.log("id", id)
+			active_slide = parseInt(id);
+			console.log("active_slide",active_slide)
+			$("#backdropimg").attr("src", photos[active_slide]);
 			$(".backdrop").show();
+		}
+
+		function moveNextImg() {
+			console.log("movenxt")
+			if ( active_slide >= photos.length-1 ){ 
+				nextid = 1;
+			} else {
+				nextid = active_slide+1;
+			}
+
+			popBackdrop(nextid);
+		}
+
+		function movePrevImg() {
+			console.log("moveprv")
+			if ( active_slide <= 1 ){ 
+				previd = photos.length-1;
+			} else {
+				previd = active_slide-1;
+			}
+			 popBackdrop(previd);
 		}
 
 		function init() {
@@ -588,7 +615,41 @@
 			} else {
 				$(".mhs-slideshow").css({"max-width": "100%","min-width": "100%"});
 			}
+
+			bd = document.getElementById("backdrop");
+			img = document.getElementById("backdropimg");
+
+			bd.addEventListener('click', function (e) {
+				is = bd.getBoundingClientRect();
+			    if (e.offsetX > img.offsetWidth) {
+			        console.log("off");
+			        moveNextImg();
+			    } else {
+				    if (e.offsetX < (img.offsetWidth-img.width) ) {
+				        console.log("off");
+				        movePrevImg();
+				    } else {
+				        console.log("on");
+				        releaseBackdrop();
+				        return;
+				    }
+			    }
+			});
+
 		}
+
+
+
+
+		var photos = Array();
+		var active_slide = 1;
+		@foreach( json_decode($home->photos) as $photo )
+		 @if( property_exists($photo, "url") )
+			photos[{{$loop->iteration}}] = "{{ $photo->url }}";
+		 @endif
+		@endforeach
+
+
 		init()
 </script>
 @stop
