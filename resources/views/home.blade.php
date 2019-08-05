@@ -264,7 +264,7 @@
 }
 
 		</style>
-		<div class="backdrop" xstyle="display: none;" onclick="releaseBackdrop();">
+		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
 			<div class="backdropimg">
 			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
 			</div>
