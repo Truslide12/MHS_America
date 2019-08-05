@@ -302,7 +302,7 @@
 </div><div class="row about texture-1" style="padding-top: 20px;">
 	<div class="col-lg-8" style="padding: 0px 40px;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->brand }} {{ $home->model }} {{ $home->year }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->year }} {{ $home->brand }} {{ $home->model }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
 		
 		<p style="font-size: 1.4em;">
 			{{ $home->description }}
@@ -379,24 +379,27 @@
 		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
 			<div class="price_box">${{ number_format($home->price) }}</div>
+			@include('layouts.partial.errors')
+			<form name="" action="{{  URL::route('home-contact', array('home' => $home->id)) }}" method="post">
+				{!! csrf_field() !!}
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Your Name" class="form-control">
+				<input name="name" type="text" placeholder="Your Name" class="form-control" value="{{Input::old('name')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Phone Number" class="form-control">
+				<input name="phone" type="text" placeholder="Phone Number" class="form-control" value="{{Input::old('phone')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Email Address" class="form-control">
+				<input name="email" type="text" placeholder="Email Address" class="form-control" value="{{Input::old('email')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				 <textarea placeholder="Message" class="form-control"></textarea>
+				 <textarea name="message" placeholder="Message" class="form-control">{{Input::old('message')}}</textarea>
 			</div>
 			<div class="" style="margin-bottom: 3px;text-align: right;">
-				<button class="btn btn-success" disabled>Send Message</button>
+				<button class="btn btn-success">Send Message</button>
 			</div>
-
+			</form>
 			<hr>
 
 			<strong style="font-size: 1.5em;">Seller Information</strong><br>
@@ -427,6 +430,23 @@
 			</div>
 			@endif
 			@endif
+
+			@if( property_exists($seller, 'phone') )
+			@if($seller->phone != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone2 }}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'phone') )
+			@if($seller->phone != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone3 }}
+			</div>
+			@endif
+			@endif
+
+
 			@if( property_exists($seller, 'addr') )
 			@if($seller->addr != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">

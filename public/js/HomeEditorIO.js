@@ -39,7 +39,7 @@ var HomeEditorIO = function (id) {
  this.home.status = 1;
  this.home.sold_price = null;
  this.home.exp_date = null;
- this.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } };
+ this.home.seller_info = { company: null, name: null, phone: null, phone2: null, phone3: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } };
  this.home.community = null;
  this.is_complete = false;
  this.settings = { steps: {} }
@@ -560,6 +560,20 @@ HomeEditorIO.prototype.ValidateAdInfo = function() {
     //this.RejectInput("#model", "empty");
     //rejected++;
   }
+  if ( $("#seller_phone2").val() != null && $("#seller_phone2").val() != '' ) {
+    this.home.seller_info.phone2 = $("#seller_phone2").val();
+    this.AcceptInput("#seller_phone2");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
+  if ( $("#seller_phone3").val() != null && $("#seller_phone3").val() != '' ) {
+    this.home.seller_info.phone3 = $("#seller_phone3").val();
+    this.AcceptInput("#seller_phone3");
+  } else {
+    //this.RejectInput("#model", "empty");
+    //rejected++;
+  }
   if ( $("#seller_email").val() != null && $("#seller_email").val() != '' ) {
     this.home.seller_info.email = $("#seller_email").val();
     this.AcceptInput("#seller_email");
@@ -1070,6 +1084,8 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                       company: si.company,
                       name: si.name,
                       phone: si.phone,
+                      phone2: si.phone2,
+                      phone3: si.phone3,
                       addr: si.addr,
                       email: si.email,
                       license: si.license,
@@ -1081,7 +1097,7 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
                       } 
                      };
                    } else {
-                    that.home.seller_info = { company: null, name: null, phone: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } }
+                    that.home.seller_info = { company: null, name: null, phone: null, phone2: null, phone3: null, addr: null, email: null, license: null, promo: { type: null, param1: null, param2: null, param3: null } }
                    }
                    /*need to write migration to store this info*/
 
