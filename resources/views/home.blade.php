@@ -93,7 +93,6 @@
 			width: 292px;
 			height: 268px;
 			border-radius: 10px!important;
-			
 			-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
 			-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
 			box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
@@ -203,6 +202,22 @@
 			justify-content: center;
 			cursor: pointer;
 		}
+
+		.location_block {
+			width: 40%;
+			display: inline-block;
+		}
+ 
+@media only screen and (max-width: 800px) {
+  .cotw-img {
+    display: none;
+  }
+	.location_block {
+			width: 100%;
+			display: inline-block;
+	}
+}
+
 		</style>
 		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
 			<div class="backdropimg">
@@ -215,7 +230,7 @@
 			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }}</h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
-					<h4 style="width: 40%;display: inline-block;">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
+					<h4 class="location_block" style="">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
 				</div>
 			</div>
 
