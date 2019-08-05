@@ -24,6 +24,8 @@
 					$("#wizard").show();
 				}
 
+				$(window).unbind('beforeunload');
+
 			}
 			
 		</script>
