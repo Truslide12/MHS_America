@@ -36,7 +36,7 @@ class HomeSaleContactSent extends Mailable
     public function build()
     {
         return $this->subject('New Sales Inquiry on MHS America')
-                    ->view('emails.homesalescontact')
+                    ->view('emails.homesalecontact')
                     ->with('address', $this->home->address)
                     ->with('space_number', $this->home->space_number)
                     ->with('city', $this->home->city->place_name)

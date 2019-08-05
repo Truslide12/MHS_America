@@ -76,7 +76,7 @@ class HomeController extends Pony {
 			Mail::to($email)->queue($message);
 			return redirect()->back()
 			->withInput()
-			->withSuccess(['Message Sent!']);
+			->withSuccess('Message Sent!');
 		} else {
 			return redirect()->back()
 			->withInput()
