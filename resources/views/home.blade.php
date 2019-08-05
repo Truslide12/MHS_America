@@ -581,15 +581,12 @@
 
 		function popBackdrop(id){
 			if( isNaN(id) ) { id = id.slice(5); }
-			console.log("id", id)
 			active_slide = parseInt(id);
-			console.log("active_slide",active_slide)
 			$("#backdropimg").attr("src", photos[active_slide]);
 			$(".backdrop").show();
 		}
 
 		function moveNextImg() {
-			console.log("movenxt")
 			if ( active_slide >= photos.length-1 ){ 
 				nextid = 1;
 			} else {
@@ -600,7 +597,6 @@
 		}
 
 		function movePrevImg() {
-			console.log("moveprv")
 			if ( active_slide <= 1 ){ 
 				previd = photos.length-1;
 			} else {
@@ -622,14 +618,11 @@
 			bd.addEventListener('click', function (e) {
 				is = bd.getBoundingClientRect();
 			    if (e.offsetX > img.offsetWidth) {
-			        console.log("off");
 			        moveNextImg();
 			    } else {
 				    if (e.offsetX < (img.offsetWidth-img.width) ) {
-				        console.log("off");
 				        movePrevImg();
 				    } else {
-				        console.log("on");
 				        releaseBackdrop();
 				        return;
 				    }
