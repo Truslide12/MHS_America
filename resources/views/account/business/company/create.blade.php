@@ -63,7 +63,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									</label>
 								</div>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="name" name="name" required>
+									<input type="text" class="form-control" id="companyname" name="company_name" value="{{ Input::old('company_name') }}" required>
 								</div>
 							</div>
 
@@ -75,7 +75,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="phone" name="phone" required>
+									<input type="text" class="form-control" id="phone" name="phone" value="{{ Input::old('phone') }}" required>
 								</div>
 							</div>
 							<div class="form-group">
@@ -85,7 +85,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="fax" name="fax">
+									<input type="text" class="form-control" id="fax" name="fax" value="{{ Input::old('fax') }}">
 								</div>
 							</div>
 
@@ -96,7 +96,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									</label>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="address" name="address">
+									<input type="text" class="form-control" id="address" name="address" value="{{ Input::old('address') }}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -109,7 +109,7 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									<select id="statebox" class="form-control" name="state" required>
 										<option>State...</option>
 										@foreach(\App\Models\State::orderBy('id', 'asc')->get() as $state)
-										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
+										<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}"@if(Input::old('state') == $state->id) selected="selected" @endif>{{ $state->title }}</option>
 										@endforeach
 									</select>
 								</div>
@@ -121,8 +121,16 @@ Business Center&nbsp;&nbsp;&nbsp;<p class="visible-xs"></p><small><img src="{{ $
 									</label>
 								</div>
 								<div class="col-md-9">
-									<select id="citybox" class="form-control" disabled="disabled" name="city" required>
+									<select id="citybox" class="form-control" @if(Input::old('state') != '') disabled="disabled"@endif name="city" required>
 										<option>Select a city...</option>
+										@if(Input::old('state') != '')
+										@php
+										$cities = \App\Models\Geoname::where('state_id', Input::old('state'))->orderBy('id', 'asc')->get();
+										@endphp
+										@foreach($cities as $city)
+										<option value="{{ $city->id }}" @if(Input::old('city') == $city->id) selected="selected" @endif>{{ $city->place_name }}</option>
+										@endforeach
+										@endif
 									</select>
 								</div>
 							</div>

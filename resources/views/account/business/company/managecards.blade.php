@@ -255,7 +255,7 @@
 
 <script type="text/javascript">
 // Create a Stripe client
-var stripe = Stripe('{{ env('STRIPE_API_KEY') }}');
+var stripe = Stripe('{{ config('services.stripe.key') }}');
 
 // Create an instance of Elements
 var elements = stripe.elements();

@@ -74,15 +74,15 @@ class BusinessController extends Pony {
 	{
 		$validator = Validator::make(Input::all(),
 			array(
-				'name' => 'required|between:4,64',
+				'company_name' => 'required|between:4,64',
 				'phone' => 'required|phone:US',
-				'fax' => 'phone:US',
+				'fax' => 'phone:US|nullable',
 				'address' => 'required|between:5,48',
 				'state' => 'required|exists:states,id',
 				'city' => 'required|exists:places,id,state_id,'.intval(Input::get('state', 0)),
 			),
 			array(
-				'name.required' => 'A name is required for the company.',
+				'company_name.required' => 'A name is required for the company.',
 				'phone.required' => 'A phone number is required for the company.',
 				'phone.phone' => 'The phone number doesn\'t appear to be valid.',
 				'fax.phone' => 'The fax number doesn\'t appear to be valid.',
@@ -98,12 +98,13 @@ class BusinessController extends Pony {
 
 		if($validator->fails()) {
 			return redirect()->route('account-business-company-create')
+							->withInput(Input::only('name', 'phone', 'fax', 'address', 'state', 'city'))
 							->withErrors($validator);
 		}else{
 			
 			$city = Geoname::where('state_id' ,Input::get('state'))->where('id', Input::get('city'))->first();
 
-			if(!is_a($city, 'Eloquent')) {
+			if(!is_a($city, Geoname::class)) {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CityLookupFailed)');
@@ -116,12 +117,12 @@ class BusinessController extends Pony {
 
 			$company = new Company;
 				
-			$company->title = Input::get('name');
+			$company->title = Input::get('company_name');
 			//$company->name = strtolower(str_replace(' ', '', Input::get('name')));
-			$company->name = str_slug(Input::get('name'));
+			$company->name = str_slug(Input::get('company_name'));
 			$company->street_addr = Input::get('address');
 			$company->phone = Input::get('phone');
-			$company->fax = Input::get('fax');
+			$company->fax = Input::get('fax') ?? '';
 			$company->state_id = Input::get('state');
 			$company->city_id = $city->id;
 			$company->verified = 0;

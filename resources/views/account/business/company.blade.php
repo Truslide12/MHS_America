@@ -264,7 +264,7 @@
 				<li class="list-group-item">
 					<span class="pull-right" @if(1==2) style="display: flex;background: none;color: silver;" @endif>
 						<a href="{{ URL::route('home', array('home' => $home->id)) }}" class="btn btn-info btn-sm btn-align-fix">View</a> 
-						<a href="{{ URL::route('editor-edithome', array('profile' => $profile->id, 'home' => $home->id)) }}" class="btn btn-warning btn-sm btn-align-fix">Manage</a>
+						<a href="{{ URL::route('editor-edithome', array('home' => $home->id)) }}" class="btn btn-warning btn-sm btn-align-fix">Manage</a>
 						@if(1==2)
 						<a href="{{ URL::route('editor-edithome', array('profile' => $profile->id, 'home' => $home->id)) }}" class="home-edit-icons alt-tip" alt="Edit Home"><i class="fa fa-pencil"></i></a>
 						<a href="{{ URL::route('home', array('home' => $home->id)) }}" class="home-edit-icons alt-tip" alt="View Listing"><i class="fa fa-eye"></i></a>
