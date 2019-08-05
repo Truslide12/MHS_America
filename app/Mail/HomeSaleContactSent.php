@@ -37,11 +37,11 @@ class HomeSaleContactSent extends Mailable
     {
         return $this->subject('New Sales Inquiry on MHS America')
                     ->view('emails.homesalescontact')
-                    ->with('address', $home->address)
-                    ->with('space_number', $home->space_number)
-                    ->with('city', $home->city->place_name)
-                    ->with('state', strtoupper($home->state->abbr))
-                    ->with('zipcode', $home->zipcode)
+                    ->with('address', $this->home->address)
+                    ->with('space_number', $this->home->space_number)
+                    ->with('city', $this->home->city->place_name)
+                    ->with('state', strtoupper($this->home->state->abbr))
+                    ->with('zipcode', $this->home->zipcode)
                     ->with('contact', $this->contact);
     }
 }
