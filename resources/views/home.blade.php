@@ -165,6 +165,10 @@
 			width: calc(100% - 10px);
 		}
 		.card { box-shadow: none!important; }
+		#backdropimg {
+			max-height: 90vh;
+			max-width: 90vw;
+		}
 		.backdropimg {
 			position: relative;
 		}
@@ -237,10 +241,30 @@
 		display: block;
 		float: right;
 	}
+	.backdrop {
+
+	}
+	#backdropimg {
+		height: auto;
+		width: 90vw;
+	}
+	.backdropimg::before {
+		width: 50px;
+		height: 50px;
+		top: 50vh;
+		left: initial;
+		right: calc(85vw - 22vw);
+	}
+	.backdropimg::after {
+		width: 50px;
+		height: 50px;
+		top: 50vh;
+		right: calc(35vw - 22vw);
+	}
 }
 
 		</style>
-		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
+		<div class="backdrop" xstyle="display: none;" onclick="releaseBackdrop();">
 			<div class="backdropimg">
 			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
 			</div>
