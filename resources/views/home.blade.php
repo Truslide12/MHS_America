@@ -627,7 +627,7 @@
 			
 <div class="mobile-cta-menu">
 	<div id="message_btn" class="message_btn"><i class="fa fa-envelope"></i> Message</div>
-	<a href="tel:@if( property_exists($seller, 'phone') )@if($seller->phone != ''){{ $seller->phone }}@endif@endif"><div class="call_btn"><i class="fa fa-phone-square"></i> Call</div></a>
+	<a href="tel:@if( property_exists($seller, 'phone') )@if($seller->phone != ''){{ $seller->phone }}@endif @endif"><div class="call_btn"><i class="fa fa-phone-square"></i> Call</div></a>
 	<form name="" action="{{  URL::route('home-cmd-watch-post', array('home' => $home->id)) }}" method="post">{!! csrf_field() !!}
 	<div class="watch_btn" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large"><i class="fa fa-star"></i></div>
 	</form>
