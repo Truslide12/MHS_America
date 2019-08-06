@@ -503,6 +503,20 @@
 			@php
 				$seller = (object)json_decode( $home->seller_info );
 				//dd($home->seller_info, $seller);
+
+				function fuzzy_phone($phone) {
+
+					$fuzzy = "<span>";
+					$c = 1;
+					foreach( str_split($phone) as $char ) {
+					  if ( $c % 3 == 0 ) { $fuzzy .= "</span><span>"; }
+					  	$fuzzy.= $char;
+					  	$c++;
+					}
+					$fuzzy .= "</span>";
+					return $fuzzy;
+				}
+
 			@endphp
 
 			@if( property_exists($seller, 'company') )
@@ -522,7 +536,7 @@
 			@if( property_exists($seller, 'phone') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Phone:</strong> {{ $seller->phone }}
+				<strong>Phone:</strong> {!! fuzzy_phone($seller->phone) !!}
 			</div>
 			@endif
 			@endif
@@ -530,14 +544,14 @@
 			@if( property_exists($seller, 'phone2') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone2 }}
+				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone2) !!}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'phone3') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong style="visibility: hidden;">Phone:</strong> {{ $seller->phone3 }}
+				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone3) !!}
 			</div>
 			@endif
 			@endif
