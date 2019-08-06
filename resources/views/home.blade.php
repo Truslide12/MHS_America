@@ -227,6 +227,13 @@
  			margin: 0px auto 35px auto;
  			color:#147aba;
  		}
+.mobile-cta-menu,
+.message_btn,
+.call_btn,
+.watch_btn {
+	display: none;
+}
+
 @media only screen and (max-width: 800px) {
   .cotw-img,
   .price_box,
@@ -263,6 +270,66 @@
 		right: calc(35vw - 22vw);*/
 		right: -55px;
 	}
+	.mobile-cta-menu {
+		display: block;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		height: 10vh;
+		background: #005499;
+		color: snow;
+		padding: 0;
+		margin: 0;
+	}
+	.message_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 45vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		border-right: 1px solid snow;
+
+	}
+	.call_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 35vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		border-right: 1px solid snow;
+
+	}
+	.watch_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 20vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+	}
+	.mobile-cta-menu > a {
+		color: snow
+	}
+	.message_btn > i,
+	.call_btn > i {
+		margin-right: 10px;
+	}
+
 }
 
 		</style>
@@ -402,16 +469,16 @@
 	</div>
 	<div class="col-lg-4"  style="padding-top: 45px;">
 
-		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
+		<div class="" id="rightbox" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
 			<div class="price_box">${{ number_format($home->price) }}</div>
 			@include('layouts.partial.errors')
-			<form name="" action="{{  URL::route('home-contact', array('home' => $home->id)) }}" method="post">
+			<form name="" id="contact-form" action="{{  URL::route('home-contact', array('home' => $home->id)) }}" method="post">
 				{!! csrf_field() !!}
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
 			<div class="" style="margin-bottom: 3px;">
-				<input name="name" type="text" placeholder="Your Name" class="form-control" value="{{Input::old('name')}}">
+				<input name="name" id="name" type="text" placeholder="Your Name" class="form-control" value="{{Input::old('name')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
 				<input name="phone" type="text" placeholder="Phone Number" class="form-control" value="{{Input::old('phone')}}">
@@ -553,9 +620,21 @@
 
 
 </div>
+
+
+<div class="mobile-cta-menu">
+	<div id="message_btn" class="message_btn"><i class="fa fa-envelope"></i> Message</div>
+	<a href="tel:9095282420"><div class="call_btn"><i class="fa fa-phone-square"></i> Call</div></a>
+	<form name="" action="{{  URL::route('home-cmd-watch-post', array('home' => $home->id)) }}" method="post">{!! csrf_field() !!}
+	<div class="watch_btn" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large"><i class="fa fa-star"></i></div>
+	</form>
+</div>
+
+</form>
 @stop
 
 @section('incls-body')
+
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.homes.js"></script>
 <script type="text/javascript">
@@ -629,6 +708,12 @@
 			    }
 			});
 
+			msg = document.getElementById("message_btn");
+			msg.addEventListener('click', function (e) {
+				document.getElementById("name").focus()
+				document.getElementById("rightbox").scrollIntoView();
+			});
+
 		}
 
 
@@ -641,6 +726,7 @@
 			photos[{{$loop->iteration}}] = "{{ $photo->url }}";
 		 @endif
 		@endforeach
+
 
 
 		init()
