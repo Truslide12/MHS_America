@@ -564,10 +564,10 @@
 			</div>
 			@endif
 			@endif
-			@if( property_exists($seller, 'email') )
+			@if( property_exists($seller, 'email') && 1==2 )
 			@if($seller->email != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Email:</strong> {{ $seller->email }}
+				<strong>Email:</strong> {!! str_replace("@", "<code>@</code>", $seller->email) !!}
 			</div>
 			@endif
 			@endif
@@ -638,7 +638,7 @@
 
 </div>
 
-			
+@if(1==2)		
 <div class="mobile-cta-menu">
 	<div id="message_btn" class="message_btn"><i class="fa fa-envelope"></i> Message</div>
 	<a href="tel:@if( property_exists($seller, 'phone') )@if($seller->phone != ''){{ $seller->phone }}@endif @endif"><div class="call_btn"><i class="fa fa-phone-square"></i> Call</div></a>
@@ -646,6 +646,7 @@
 	<div class="watch_btn" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large"><i class="fa fa-star"></i></div>
 	</form>
 </div>
+@endif
 
 </form>
 @stop
@@ -725,11 +726,13 @@
 			    }
 			});
 
+			/*
 			msg = document.getElementById("message_btn");
 			msg.addEventListener('click', function (e) {
 				document.getElementById("name").focus()
 				document.getElementById("rightbox").scrollIntoView();
 			});
+			*/
 
 		}
 
