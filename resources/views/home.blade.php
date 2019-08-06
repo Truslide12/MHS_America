@@ -208,7 +208,7 @@
 		}
 
 		.location_block {
-			width: 40%;
+			width: 45%;
 			display: inline-block;
 		}
  
@@ -277,7 +277,7 @@
 			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }} <span class="mobo_price">${{ number_format($home->price) }}<span></h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
-					<h4 class="location_block" style="">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
+					<h4 class="location_block" style="">{{ $home->profile->title }} SPC {{$home->space_number}} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
 				</div>
 			</div>
 
