@@ -64,7 +64,7 @@ class HomeController extends Pony {
 			$email = $company->stripe_customer_email;
 		}
 
-        $contact = [
+        $contact = (object)[
         	"name"=>Input::get('name'),
         	"phone"=>Input::get('phone'),
         	"email"=>Input::get('email'),
@@ -89,7 +89,9 @@ class HomeController extends Pony {
 		//Watch home
 		if(Auth::check()) Auth::user()->toggleWatchHome($home->id);
 
-		return redirect()->route('home', array('home' => $home->id));
+		return redirect()
+				->withSuccess('You are now watching this home.')
+				->route('home', array('home' => $home->id));
 	}
 
 	public function getMessage(Home $home)
