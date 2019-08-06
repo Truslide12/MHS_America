@@ -370,6 +370,7 @@
 						//print_r($ph);
 					@endphp
 					@for ( $h = 1; $h <= $pc; $h++ )
+					@if( $h > 1 )
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
@@ -384,6 +385,7 @@
 
 			            </div>
 					</div>
+					@endif
 					@endfor
 				</div>
 
