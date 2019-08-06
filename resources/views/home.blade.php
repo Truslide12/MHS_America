@@ -329,6 +329,9 @@
 	.call_btn > i {
 		margin-right: 10px;
 	}
+	#footer-wrapper {
+		margin-bottom: 10vh;
+	}
 
 }
 
