@@ -161,7 +161,7 @@ class EditorController extends Pony {
 	{
 		return view('editor.photos')
 					->with('profile', $profile)
-					->with('photos', $profile->photos()->get())
+					->with('photos', $profile->photos()->orderBy('created_at', 'desc')->get())
 					->with('plan', $profile->plan);
 					//->with('canvas', Canvas::getDefault());
 	}
