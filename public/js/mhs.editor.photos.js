@@ -14,5 +14,5 @@ pony.add(function() {
 		}
 	});
 
-	$(document).on('click', '[data-action="remove"]', pony.lesson('photoRemove'));
+	pony.add('click', '[data-action="remove"]', pony.lesson('photoRemove'));
 });
