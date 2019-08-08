@@ -6,7 +6,9 @@ pony.add(function() {
 			var element = $(this);
 
 			pony.fetch('/profile/'+element.data('profile')+'/edit/photos/remove', {"photo_id": element.data('id')}, function(data) {
-				$('#coverPhotoItem'+data.id).slideUp().remove();
+				$('#coverPhotoItem'+data.id).slideUp('fast', function() {
+					$(this).remove();
+				});
 			}, function() {
 				//Failed.
 			});
