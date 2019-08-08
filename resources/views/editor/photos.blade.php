@@ -166,7 +166,7 @@
 			modal:false,
 			loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
 			onAfterImgUpload: function(){ $('#cropNote').show(); },
-			onAfterImgCrop: function(){ $('#cropNote').hide(); $('#coverEditorBox').modal('hide'); $('#cropSuccessNote').show(); }
+			onAfterImgCrop: function(){ $('#coverEditorBox').modal('hide'); $('#cropSuccessNote').show(); }
 			/* onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
 			onImgDrag: function(){ console.log('onImgDrag') },
 			onImgZoom: function(){ console.log('onImgZoom') },
@@ -181,6 +181,7 @@
 		});
 
 		$('#coverEditorBox').on('hidden.bs.modal', function() {
+			$('#cropNote').hide();
 			croppic.reset();
 		});
 	});
