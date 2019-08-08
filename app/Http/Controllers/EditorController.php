@@ -802,15 +802,20 @@ class EditorController extends Pony {
 		$photo_id = Input::get('photo_id');
 
 		$photo = ProfilePhoto::find($photo_id);
-		$photo_name = 'imgstorage/cover_'.$photo->cover.'_crop.jpg';
-		$photo_name_sm = 'imgstorage/cover_'.$photo->cover.'_sm.jpg';
-		$photo_original = 'imgstorage/cover_'.$photo->original.'_orig.jpg';
+		$photo_name = public_path('imgstorage/cover_'.$photo->cover.'_crop.jpg');
+		$photo_name_sm = public_path('imgstorage/cover_'.$photo->cover.'_sm.jpg');
 
 		if(is_object($photo) && $photo->delete())
 		{
-			if(file_exists($photo_name)) unlink($photo_name);
-			if(file_exists($photo_name_sm)) unlink($photo_name_sm);
-			if(file_exists($photo_original)) unlink($photo_original);
+
+			if(file_exists($photo_name)) {
+				unlink($photo_name);
+			}
+
+			if(file_exists($photo_name_sm)) {
+				unlink($photo_name_sm);
+			}
+
 			return Response::json(['success' => true, 'data' => ['id' => $photo_id] ]);
 		}
 
@@ -848,11 +853,11 @@ class EditorController extends Pony {
 	{
 		ini_set('memory_limit', '-1');
 		$imgPath = Input::get('imgUrl');
-		$newPath = 'imgstorage/home_'.md5($imgPath).'_crop.jpg';
-		$smPath = 'imgstorage/home_'.md5($imgPath).'_sm.jpg';
+		$newPath = 'imgstorage/home_'.$imgPath.'_crop.jpg';
+		$smPath = 'imgstorage/home_'.$imgPath.'_sm.jpg';
 		$g = Image::make(substr($imgPath,1));
 
-		$multiple = 2.5;
+		$multiple = (Input::get('imgW') == 0) ? 1 : (1080 / Input::get('imgW'));
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
 		$calc_height = intval(floor(Input::get('imgH')*$multiple));
 
@@ -877,12 +882,18 @@ class EditorController extends Pony {
 
 		$g->save($newPath);
 
-		$g->resize(48, 48);
+		$g->heighten(210);
 
 		$g->save($smPath);
 
+		try {
+			unlink(substr($imgPath,1));
+		} catch (\Exception $e) {
+			
+		}
+
 		$coverPhoto = new HomePhoto;
-		$coverPhoto->cover = md5($imgPath);
+		$coverPhoto->cover = $imgPath;
 		$coverPhoto->home_id = $home->id;
 		//$coverPhoto->user_id = 0;
 		//$coverPhoto->is_avatar = false;
