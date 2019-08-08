@@ -1,4 +1,4 @@
-var topContext = this,
+var topContext = document,
     pony = {
         _offset: 0,
         _queue: [],
