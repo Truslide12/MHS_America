@@ -33,6 +33,7 @@
 		@if(Session::has('success'))
 		<div class="alert alert-success">{{ Session::get('success') }}</div>
 		@endif
+		<div class="alert alert-success" id="cropSuccessNote" style="display:none;">The cover photo was successfully saved.</div>
 		@if($photos->count() == 0)
 		<div class="panel panel-default shadow">
 			<div class="panel-body">
@@ -106,8 +107,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-12 margin-b">
 						<button type="button" class="btn btn-primary" id="photoCropButton">Choose file...</button>
+						<div class="alert alert-info" id="cropNote" style="display:none;">File uploaded. Please crop the photo to finish saving it.</div>
 					</div>
 					<div class="col-sm-12">
 						<div id="photoUpload"></div>
@@ -163,8 +165,8 @@
 			customUploadButtonId:'photoCropButton',
 			modal:false,
 			loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
-			onAfterImgUpload: function(){ $('#cropNote').show() },
-			onAfterImgCrop: function(){ $('#cropNote').hide(); $('#cropSuccessNote').show(); }
+			onAfterImgUpload: function(){ $('#cropNote').show(); },
+			onAfterImgCrop: function(){ $('#cropNote').hide(); $('#coverEditorBox').modal('hide'); $('#cropSuccessNote').show(); }
 			/* onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
 			onImgDrag: function(){ console.log('onImgDrag') },
 			onImgZoom: function(){ console.log('onImgZoom') },
@@ -173,8 +175,16 @@
 		var croppic = new Croppic('photoUpload', croppicHeaderOptions);
 
 		$('#coverEditorBox').on('shown.bs.modal', function() {
-			$('#photoUpload').width(Math.floor($('#photoUpload').parent().width() - 6));
-			$('#photoUpload').height(Math.ceil( $('#photoUpload').width() * 0.35 ));
+			$.when( function() {
+				$('#photoUpload').width(Math.floor($('#photoUpload').parent().width() - 6));
+				$('#photoUpload').height(Math.ceil( $('#photoUpload').width() * 0.35 ));
+				croppic.reset();
+			}).done(function() {
+				$('#coverEditorBox').modal('handleUpdate');
+			});
+		});
+
+		$('#coverEditorBox').on('hidden.bs.modal', function() {
 			croppic.reset();
 		});
 	});
