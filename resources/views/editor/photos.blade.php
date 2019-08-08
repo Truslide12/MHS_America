@@ -175,13 +175,9 @@
 		var croppic = new Croppic('photoUpload', croppicHeaderOptions);
 
 		$('#coverEditorBox').on('shown.bs.modal', function() {
-			$.when( function() {
-				$('#photoUpload').width(Math.floor($('#photoUpload').parent().width() - 6));
-				$('#photoUpload').height(Math.ceil( $('#photoUpload').width() * 0.35 ));
-				croppic.reset();
-			}).done(function() {
-				$('#coverEditorBox').modal('handleUpdate');
-			});
+			$('#photoUpload').width(Math.floor($('#photoUpload').parent().width() - 6));
+			$('#photoUpload').height(Math.ceil( $('#photoUpload').width() * 0.35 ));
+			croppic.reset();
 		});
 
 		$('#coverEditorBox').on('hidden.bs.modal', function() {
