@@ -730,9 +730,11 @@ class EditorController extends Pony {
 		ini_set('memory_limit', '-1');
 		$imgPath = Input::get('imgUrl');
 		$imgPath = explode("imgstorage/", $imgPath)[1];
+		$fragments = explode("_", $imgPath);
+		$imgName = $fragments[1].'_'.$fragments[2];
 
-		$newPath = 'imgstorage/cover_'.$imgPath.'_crop.jpg';
-		$smPath = 'imgstorage/cover_'.$imgPath.'_sm.jpg';
+		$newPath = 'imgstorage/cover_'.$imgName.'_crop.jpg';
+		$smPath = 'imgstorage/cover_'.$imgName.'_sm.jpg';
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
@@ -780,7 +782,7 @@ class EditorController extends Pony {
 
 
 		$coverPhoto = new ProfilePhoto;
-		$coverPhoto->cover = $imgPath;
+		$coverPhoto->cover = $imgName;
 
 		$coverPhoto->profile_id = $profile->id;
 		$coverPhoto->user_id = 0;
