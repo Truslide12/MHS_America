@@ -743,8 +743,8 @@ class EditorController extends Pony {
 		$imgPath = Input::get('imgUrl');
 		$imgPath = explode("imgstorage/", $imgPath)[1];
 
-		$newPath = 'imgstorage/cover_'.md5($imgPath).'_crop.jpg';
-		$smPath = 'imgstorage/cover_'.md5($imgPath).'_sm.jpg';
+		$newPath = 'imgstorage/cover_'.$imgPath.'_crop.jpg';
+		$smPath = 'imgstorage/cover_'.$imgPath.'_sm.jpg';
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
@@ -774,15 +774,16 @@ class EditorController extends Pony {
 
 		$g->save($newPath);
 
-		$g->resize(48, 48);
+		$g->heighten(75);
 
 		$g->save($smPath);
 
+		unlink(public_path("imgstorage/".$imgPath));
+
+
 		$coverPhoto = new ProfilePhoto;
-		$coverPhoto->cover = md5($imgPath);
-		/*why is this breaking it
-		$coverPhoto->original = substr($imgPath, 18, 43);
-		*/
+		$coverPhoto->cover = $imgPath;
+
 		$coverPhoto->profile_id = $profile->id;
 		$coverPhoto->user_id = 0;
 		$coverPhoto->is_avatar = false;
