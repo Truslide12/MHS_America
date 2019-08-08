@@ -748,7 +748,8 @@ class EditorController extends Pony {
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
-		$multiple = 2.5;
+		//$multiple = 2.5;
+		$multiple = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
 		$calc_height = intval(floor(Input::get('imgH')*$multiple));
 
