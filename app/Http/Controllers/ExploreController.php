@@ -125,7 +125,7 @@ class ExploreController extends Pony {
 			switch($mode) {
 				case 'h':
 					$results = Home::whereIn('city_id', $countyobj->cities()->pluck('places.id'))
-					->whereIn('status', [1, 3])
+					->whereIn('status', [4, 5])
 					->paginate(25);
 					break;
 				case 's':
@@ -217,7 +217,7 @@ class ExploreController extends Pony {
 						->join('places', function($qry) use ($cityobj, $radius) {
 							$qry->where('places.id', '=', $cityobj->id)
 								->where(DB::raw('ST_DWithin(places.center_point, homes.location, '.$radius.' * 1609.34)'), '=', '1');
-						})->orderBy(DB::raw('distance'), 'asc')
+						})->whereIn('status', [4, 5])->orderBy(DB::raw('distance'), 'asc')
 						->paginate(25);
 				break;
 			case 's':

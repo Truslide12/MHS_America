@@ -522,7 +522,7 @@ class EditorController extends Pony {
 			return Response::json(array('success' => false, 'data' => $validator->errors()));
 
 			return Redirect::route('editor-editspace', ['profile' => $profile->id, 'space' => $space->id])
-							->withInput()
+							->withInput(Input::all())
 							->withErrors($validator);
 		}else{
 			$space->name = $input_data['title'];

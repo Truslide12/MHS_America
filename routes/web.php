@@ -614,7 +614,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/* Mobile Home (GET) */
 		Route::get('{home}', array('uses' => 'HomeController@getIndex', 'as' => 'home'));
 		/* Mobile Home contact seller (GET) */
-		Route::get('{home}/contact', array('uses' => 'HomeController@getMessage', 'as' => 'home-contact'));
+		Route::post('{home}/contact', array('uses' => 'HomeController@ContactHomeSeller', 'as' => 'home-contact'));
 
 		Route::group(array('middleware' => ['csrf', 'auth']), function()
 		{

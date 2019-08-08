@@ -88,10 +88,25 @@
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
-												Seller Phone
+												Seller Phone(s)
 											</label>
 											<div class="col-md-10"><input type="text" class="form-control" id="seller_phone"></div>
 										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												&nbsp;
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_phone2"></div>
+										</div>
+
+										<div class="row" style="margin-bottom: 2px;">
+											<label class="col-md-2 control-label">
+												&nbsp;
+											</label>
+											<div class="col-md-10"><input type="text" class="form-control" id="seller_phone3"></div>
+										</div>
+
 
 										<div class="row" style="margin-bottom: 2px;">
 											<label class="col-md-2 control-label">
@@ -208,6 +223,9 @@
 					}
 
 					if ( si.phone !== null ) { $("#seller_phone").val(si.phone); } else { $("#seller_phone").val(co.phone); }
+					if ( si.phone2 !== null ) { $("#seller_phone2").val(si.phone2); } else { $("#seller_phone2").val(co.phone2); }
+					if ( si.phone3 !== null ) { $("#seller_phone3").val(si.phone3); } else { $("#seller_phone3").val(co.phone3); }
+
 					if ( si.addr !== null ) { $("#seller_addr").val(si.addr); } else { $("#seller_addr").val(co.street_addr); }
 					if ( si.email !== null ) { $("#seller_email").val(si.email); } else { $("#seller_addr").val(""); }
 					if ( si.license !== null ) { $("#seller_license").val(si.license); } else { $("#seller_addr").val(""); }
@@ -242,6 +260,9 @@
 					}
 
 					if ( si.phone ) { $("#seller_phone").val(si.phone); } else { $("#seller_phone").val(co.phone); }
+					if ( si.phone2 !== null ) { $("#seller_phone2").val(si.phone2); } else { $("#seller_phone2").val(co.phone2); }
+					if ( si.phone3 !== null ) { $("#seller_phone3").val(si.phone3); } else { $("#seller_phone3").val(co.phone3); }
+					
 					if ( si.addr ) { $("#seller_addr").val(si.addr); } else { $("#seller_addr").val(co.street_addr); }
 					if ( si.email !== null ) { $("#seller_email").val(si.email); } else { $("#seller_addr").val(""); }
 					if ( si.license !== null ) { $("#seller_license").val(si.license); } else { $("#seller_addr").val(""); }

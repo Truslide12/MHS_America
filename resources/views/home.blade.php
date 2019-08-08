@@ -165,6 +165,10 @@
 			width: calc(100% - 10px);
 		}
 		.card { box-shadow: none!important; }
+		#backdropimg {
+			max-height: 90vh;
+			max-width: 90vw;
+		}
 		.backdropimg {
 			position: relative;
 		}
@@ -204,7 +208,7 @@
 		}
 
 		.location_block {
-			width: 40%;
+			width: 45%;
 			display: inline-block;
 		}
  
@@ -223,6 +227,13 @@
  			margin: 0px auto 35px auto;
  			color:#147aba;
  		}
+.mobile-cta-menu,
+.message_btn,
+.call_btn,
+.watch_btn {
+	display: none;
+}
+
 @media only screen and (max-width: 800px) {
   .cotw-img,
   .price_box,
@@ -237,10 +248,95 @@
 		display: block;
 		float: right;
 	}
+	.backdrop {
+
+	}
+	#backdropimg {
+		height: auto;
+		width: 90vw;
+	}
+	.backdropimg::before {
+		width: 50px;
+		height: 50px;
+		/*top: 50vh;
+		left: initial;
+		right: calc(85vw - 22vw);*/
+		left: -55px;	
+	}
+	.backdropimg::after {
+		width: 50px;
+		height: 50px;
+		/*top: 50vh;
+		right: calc(35vw - 22vw);*/
+		right: -55px;
+	}
+	.mobile-cta-menu {
+		display: block;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		height: 10vh;
+		background: #005499;
+		color: snow;
+		padding: 0;
+		margin: 0;
+	}
+	.message_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 45vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		border-right: 1px solid snow;
+
+	}
+	.call_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 35vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		border-right: 1px solid snow;
+
+	}
+	.watch_btn {
+		display: inline-block;
+		float: left;
+		margin: 0px 0px;
+		width: 20vw;
+		height: 10vh;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+	}
+	.mobile-cta-menu > a {
+		color: snow
+	}
+	.message_btn > i,
+	.call_btn > i {
+		margin-right: 10px;
+	}
+	#footer-wrapper {
+		margin-bottom: 10vh;
+	}
+
 }
 
 		</style>
-		<div class="backdrop" style="display: none;" onclick="releaseBackdrop();">
+		<div class="backdrop" id="backdrop" style="display: none;" xonclick="releaseBackdrop();">
 			<div class="backdropimg">
 			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
 			</div>
@@ -251,7 +347,7 @@
 			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }} <span class="mobo_price">${{ number_format($home->price) }}<span></h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
-					<h4 class="location_block" style="">{{ $home->profile->title }} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
+					<h4 class="location_block" style="">{{ $home->profile->title }} SPC {{$home->space_number}} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
 				</div>
 			</div>
 
@@ -274,10 +370,11 @@
 						//print_r($ph);
 					@endphp
 					@for ( $h = 1; $h <= $pc; $h++ )
+					@if( $h > 1 )
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
-			                    <img class="img-responsive" src="{{$ph[$h]['url']}}" onclick="popBackdrop(this.src);">
+			                    <img id="photo{{$h}}" class="img-responsive" src="{{$ph[$h]['url']}}" onclick="popBackdrop(this.id);">
 			                    
 			                </div><!-- card image -->
 			                
@@ -288,6 +385,7 @@
 
 			            </div>
 					</div>
+					@endif
 					@endfor
 				</div>
 
@@ -302,7 +400,7 @@
 </div><div class="row about texture-1" style="padding-top: 20px;">
 	<div class="col-lg-8" style="padding: 0px 40px;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->brand }} {{ $home->model }} {{ $home->year }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->year }} {{ $home->brand }} {{ $home->model }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
 		
 		<p style="font-size: 1.4em;">
 			{{ $home->description }}
@@ -376,27 +474,30 @@
 	</div>
 	<div class="col-lg-4"  style="padding-top: 45px;">
 
-		<div class="" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
+		<div class="" id="rightbox" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
 			<div class="price_box">${{ number_format($home->price) }}</div>
+			@include('layouts.partial.errors')
+			<form name="" id="contact-form" action="{{  URL::route('home-contact', array('home' => $home->id)) }}" method="post">
+				{!! csrf_field() !!}
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Your Name" class="form-control">
+				<input name="name" id="name" type="text" placeholder="Your Name" class="form-control" value="{{Input::old('name')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Phone Number" class="form-control">
+				<input name="phone" type="text" placeholder="Phone Number" class="form-control" value="{{Input::old('phone')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				<input type="text" placeholder="Email Address" class="form-control">
+				<input name="email" type="text" placeholder="Email Address" class="form-control" value="{{Input::old('email')}}">
 			</div>
 			<div class="" style="margin-bottom: 3px;">
-				 <textarea placeholder="Message" class="form-control"></textarea>
+				 <textarea name="message" placeholder="Message" class="form-control">{{Input::old('message')}}</textarea>
 			</div>
 			<div class="" style="margin-bottom: 3px;text-align: right;">
-				<button class="btn btn-success" disabled>Send Message</button>
+				<button class="btn btn-success">Send Message</button>
 			</div>
-
+			</form>
 			<hr>
 
 			<strong style="font-size: 1.5em;">Seller Information</strong><br>
@@ -404,6 +505,20 @@
 			@php
 				$seller = (object)json_decode( $home->seller_info );
 				//dd($home->seller_info, $seller);
+
+				function fuzzy_phone($phone) {
+
+					$fuzzy = "<span>";
+					$c = 1;
+					foreach( str_split($phone) as $char ) {
+					  if ( $c % 3 == 0 ) { $fuzzy .= "</span><span>"; }
+					  	$fuzzy.= $char;
+					  	$c++;
+					}
+					$fuzzy .= "</span>";
+					return $fuzzy;
+				}
+
 			@endphp
 
 			@if( property_exists($seller, 'company') )
@@ -423,10 +538,27 @@
 			@if( property_exists($seller, 'phone') )
 			@if($seller->phone != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Phone:</strong> {{ $seller->phone }}
+				<strong>Phone:</strong> {!! fuzzy_phone($seller->phone) !!}
 			</div>
 			@endif
 			@endif
+
+			@if( property_exists($seller, 'phone2') )
+			@if($seller->phone != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone2) !!}
+			</div>
+			@endif
+			@endif
+			@if( property_exists($seller, 'phone3') )
+			@if($seller->phone != '')
+			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone3) !!}
+			</div>
+			@endif
+			@endif
+
+
 			@if( property_exists($seller, 'addr') )
 			@if($seller->addr != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
@@ -434,10 +566,10 @@
 			</div>
 			@endif
 			@endif
-			@if( property_exists($seller, 'email') )
+			@if( property_exists($seller, 'email') && 1==2 )
 			@if($seller->email != '')
 			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
-				<strong>Email:</strong> {{ $seller->email }}
+				<strong>Email:</strong> {!! str_replace("@", "<code>@</code>", $seller->email) !!}
 			</div>
 			@endif
 			@endif
@@ -507,9 +639,22 @@
 
 
 </div>
+
+@if(1==2)		
+<div class="mobile-cta-menu">
+	<div id="message_btn" class="message_btn"><i class="fa fa-envelope"></i> Message</div>
+	<a href="tel:@if( property_exists($seller, 'phone') )@if($seller->phone != ''){{ $seller->phone }}@endif @endif"><div class="call_btn"><i class="fa fa-phone-square"></i> Call</div></a>
+	<form name="" action="{{  URL::route('home-cmd-watch-post', array('home' => $home->id)) }}" method="post">{!! csrf_field() !!}
+	<div class="watch_btn" data-action="watch" data-relation="home" data-id="{{ $home->id }}" data-size="large"><i class="fa fa-star"></i></div>
+	</form>
+</div>
+@endif
+
+</form>
 @stop
 
 @section('incls-body')
+
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.homes.js"></script>
 <script type="text/javascript">
@@ -533,9 +678,30 @@
 			$(".backdrop").hide();
 		}
 
-		function popBackdrop(src){
-			$("#backdropimg").attr("src", src);
+		function popBackdrop(id){
+			if( isNaN(id) ) { id = id.slice(5); }
+			active_slide = parseInt(id);
+			$("#backdropimg").attr("src", photos[active_slide]);
 			$(".backdrop").show();
+		}
+
+		function moveNextImg() {
+			if ( active_slide >= photos.length-1 ){ 
+				nextid = 1;
+			} else {
+				nextid = active_slide+1;
+			}
+
+			popBackdrop(nextid);
+		}
+
+		function movePrevImg() {
+			if ( active_slide <= 1 ){ 
+				previd = photos.length-1;
+			} else {
+				previd = active_slide-1;
+			}
+			 popBackdrop(previd);
 		}
 
 		function init() {
@@ -544,7 +710,47 @@
 			} else {
 				$(".mhs-slideshow").css({"max-width": "100%","min-width": "100%"});
 			}
+
+			bd = document.getElementById("backdrop");
+			img = document.getElementById("backdropimg");
+
+			bd.addEventListener('click', function (e) {
+				is = bd.getBoundingClientRect();
+			    if (e.offsetX > img.offsetWidth) {
+			        moveNextImg();
+			    } else {
+				    if (e.offsetX < (img.offsetWidth-img.width) ) {
+				        movePrevImg();
+				    } else {
+				        releaseBackdrop();
+				        return;
+				    }
+			    }
+			});
+
+			/*
+			msg = document.getElementById("message_btn");
+			msg.addEventListener('click', function (e) {
+				document.getElementById("name").focus()
+				document.getElementById("rightbox").scrollIntoView();
+			});
+			*/
+
 		}
+
+
+
+
+		var photos = Array();
+		var active_slide = 1;
+		@foreach( json_decode($home->photos) as $photo )
+		 @if( property_exists($photo, "url") )
+			photos[{{$loop->iteration}}] = "{{ $photo->url }}";
+		 @endif
+		@endforeach
+
+
+
 		init()
 </script>
 @stop
