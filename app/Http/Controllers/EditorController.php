@@ -736,7 +736,7 @@ class EditorController extends Pony {
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
-		$g->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
+		$g->text('mhsamerica.com', ($g->width()-160), ($g->height()-25), function($font) {
     			$font->file("fonts/Voltaire-Regular.ttf");
     			$font->size(25);
     			$font->color(array(255, 255, 255, .5));
