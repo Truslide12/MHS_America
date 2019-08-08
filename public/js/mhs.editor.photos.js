@@ -8,6 +8,10 @@ pony.add(function() {
 			pony.fetch('/profile/'+element.data('profile')+'/edit/photos/remove', {"photo_id": element.data('id')}, function(data) {
 				$('#coverPhotoItem'+data.id).slideUp(400, function() {
 					$(this).remove();
+
+					if($('#photoList > div').length == 0) {
+						$('#photoNone').show();
+					}
 				});
 			}, function() {
 				//Failed.

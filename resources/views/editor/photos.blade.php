@@ -34,8 +34,7 @@
 		<div class="alert alert-success">{{ Session::get('success') }}</div>
 		@endif
 		<div class="alert alert-success" id="cropSuccessNote" style="display:none;">The cover photo was successfully saved. Refreshing...</div>
-		@if($photos->count() == 0)
-		<div class="panel panel-default shadow">
+		<div class="panel panel-default shadow" id="photoNone" @if($photos->count() > 0) style="display:none;" @endif>
 			<div class="panel-body">
 				<br>
 				<br>
@@ -44,8 +43,8 @@
 				<br>
 			</div>
 		</div>
-		@else
-		<div class="row">
+		<div class="row" id="photoList">
+			@if($photos->count() > 0)
 			@foreach($photos as $photo)
 			<div class="col-md-12" id="coverPhotoItem{{ $photo->id }}">
 				<div class="photo-block">
@@ -68,8 +67,8 @@
 				</div>
 			</div>
 			@endforeach
+			@endif
 		</div>
-		@endif
 	</div>
 </div>
 @else
