@@ -26,6 +26,7 @@
 <div class="row white">
 	<div class="col-md-12">
 		<p class="pull-right no-margin-b">
+			<a href="{{ URL::route('profile', ['profile' => $profile->id]) }}" class="btn btn-lg btn-default" target="_blank">View profile</a> 
 			<a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#coverEditorBox">Add a photo</a>
 		</p>
 		<div class="clearfix"></div>
