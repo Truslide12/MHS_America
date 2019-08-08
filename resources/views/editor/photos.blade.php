@@ -33,7 +33,7 @@
 		@if(Session::has('success'))
 		<div class="alert alert-success">{{ Session::get('success') }}</div>
 		@endif
-		<div class="alert alert-success" id="cropSuccessNote" style="display:none;">The cover photo was successfully saved.</div>
+		<div class="alert alert-success" id="cropSuccessNote" style="display:none;">The cover photo was successfully saved. Refreshing...</div>
 		@if($photos->count() == 0)
 		<div class="panel panel-default shadow">
 			<div class="panel-body">
@@ -166,7 +166,7 @@
 			modal:false,
 			loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
 			onAfterImgUpload: function(){ $('#cropNote').show(); },
-			onAfterImgCrop: function(){ $('#coverEditorBox').modal('hide'); $('#cropSuccessNote').show(); }
+			onAfterImgCrop: function(){ $('#coverEditorBox').modal('hide'); $('#cropSuccessNote').show(); setTimeout(function() { location.reload(true); }, 3000); }
 			/* onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
 			onImgDrag: function(){ console.log('onImgDrag') },
 			onImgZoom: function(){ console.log('onImgZoom') },
