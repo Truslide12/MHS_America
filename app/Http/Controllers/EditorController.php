@@ -706,18 +706,6 @@ class EditorController extends Pony {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
 			$image = Image::make(Input::file('img'));
 
-			//image version
-			//$image->insert('img/watermark_simple.png', 'bottom-right', 10, 10);
-
-			//text version
-			$image->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
-    			$font->file("fonts/Voltaire-Regular.ttf");
-    			$font->size(25);
-    			$font->color(array(255, 255, 255, .5));
-    			$font->align('left');
-    			$font->valign('top');
-			});
-
 			$response = array(
 				'status' => 'success',
 				'url' => URL::route('welcome') . '/imgstorage/cover_'.$name.'_orig.jpg',
@@ -748,13 +736,21 @@ class EditorController extends Pony {
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
+		$g->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
+
 		//$multiple = 2.5;
-		$multiple = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
+		/* $multiple = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
-		$calc_height = intval(floor(Input::get('imgH')*$multiple));
+		$calc_height = intval(floor(Input::get('imgH')*$multiple));*/
 
 		//Resize image to size
-		$g->resize($calc_width, $calc_height);
+		$g->resize(1200, 420);
 
 		//Rotate image
 		$angle = Input::get('rotation');
