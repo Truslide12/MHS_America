@@ -1,16 +1,17 @@
 pony.add(function() {
 	pony.lesson('photoRemove' ,function(event) {
-  		if(!confirm('Delete photo #'+$(this).data('id')+'?')) return false;
+		event.preventDefault();
 
-  		var element = $(this);
+		if(confirm('Delete photo #'+$(this).data('id')+'?')) {
+			var element = $(this);
 
-  		pony.fetch('/profile/'+element.data('profile')+'/edit/photos/remove', {"photo_id": element.data('id')}, function(data) {
-			$('#coverPhotoItem'+data.id).slideUp().remove();
-		}, function() {
-			//Failed.
-		});
+			pony.fetch('/profile/'+element.data('profile')+'/edit/photos/remove', {"photo_id": element.data('id')}, function(data) {
+				$('#coverPhotoItem'+data.id).slideUp().remove();
+			}, function() {
+				//Failed.
+			});
 
-		return false;
+		}
 	});
 
 	$(document).on('click', '[data-action="remove"]', pony.lesson('photoRemove'));
