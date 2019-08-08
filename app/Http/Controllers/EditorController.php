@@ -745,12 +745,14 @@ class EditorController extends Pony {
 			});
 
 		//$multiple = 2.5;
-		/* $multiple = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
+		$multiple_width = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
+		$multiple_height = (Input::get('imgH') == 0) ? 1 : (420 / Input::get('imgH'));
+		$multiple = max($multiple_width, $multiple_height);
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
-		$calc_height = intval(floor(Input::get('imgH')*$multiple));*/
+		$calc_height = intval(floor(Input::get('imgH')*$multiple));
 
 		//Resize image to size
-		$g->resize(1200, 420);
+		$g->resize($calc_width, $calc_height);
 
 		//Rotate image
 		$angle = Input::get('rotation');
