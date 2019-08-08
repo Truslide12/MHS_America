@@ -28,7 +28,7 @@ var topContext = this,
             }
         },
         init: function() {
-            (topContext.addEventListener) ? topContext.addEventListener('load', function() { pony.process(); }) : topContext.attachEvent('onload', function() { pony.process(); });
+            (typeof topContext.addEventListener === "function") ? topContext.addEventListener('load', function() { pony.process(); }) : topContext.attachEvent('onload', function() { pony.process(); });
         },
         tame: function(fn, delay, ctxt) {
             var timer = null;
