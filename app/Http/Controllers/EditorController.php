@@ -694,11 +694,11 @@ class EditorController extends Pony {
 
 		$validator = Validator::make(Input::all(),
 		[
-			'img' => 'max:2500',
+			'img' => 'max:5000',
 		]);
 
 		if($validator->fails()) {
-			return Response::json(array('status' => 'error', 'message' => 'Image is too large. Max File Size: 2.5MB'));
+			return Response::json(array('status' => 'error', 'message' => 'Image is too large. Max File Size: 5MB'));
 		}
 
 		$imageTypes = array('image/jpeg', 'image/png');
