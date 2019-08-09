@@ -77,6 +77,18 @@
 	}
 
 }
+
+.thick-hr {
+    border: 0;
+    height: 3px;
+    background: #333;
+    background: -webkit-gradient(linear, 0 0, 100% 0, 
+    	from( 			rgba(40, 107, 255,.1) ), 
+    	to(   			rgba(40, 107, 255,.1) ), 
+    	color-stop(50%, rgba(40, 107, 255,.25) ) );
+
+    width: 100%;
+}
 </style>
 	<div class="row clearfix nudge white">
 		<div class="col-md-12" style="padding: 0;">
@@ -156,6 +168,28 @@
 	</div>
 
 
+
+<div class="row clearfix nudge white" style="text-align: center;font-size: 1.5em;padding-bottom: 50px;padding-top: 0px;">
+		<div class="col-md-12" style="text-align: center;">
+			<h3 style="color:navy;font-family:Lato;padding-bottom: 20px;">Built for Everyone</h3>
+			<center><div class="thick-hr" style="width: 80%;margin-bottom: 10px;"></div></center>
+		</div>
+		<div class="col-md-3">
+			<a style="color:rgba(40, 107, 255,1) ;font-weight: bold;" href="/HomeOwner">Home Owners</a>
+		</div>
+		<div class="col-md-3">
+			<a style="color:rgba(40, 107, 255,1) ;font-weight: bold;" href="/HomeBuyer">Home Buyers</a>
+		</div>
+		<div class="col-md-3">
+			<a style="color:rgba(40, 107, 255,1) ;font-weight: bold;" href="/SalesAgent">Sales Agents</a>
+		</div>
+		<div class="col-md-3">
+			<a style="color:rgba(40, 107, 255,1) ;font-weight: bold;" href="/ParkOwner">Park Owners</a>
+		</div>
+		<div class="col-md-12" style="text-align: center;">
+			<center><div class="thick-hr" style="width: 80%;margin-top: 10px;"></div></center>
+		</div>
+</div>
 
 
 	<div class="row clearfix nudge white" style="text-align: center;font-size: 1.5em;padding-bottom: 1in;">

@@ -54,7 +54,22 @@ class AccountController extends Pony {
 
 	public function getIndex()
 	{
+		$me = Auth::user();
+					
 		return view('account.dashboard')
+					->with('active', 'dashboard')
+					->with('companies', Auth::user()->companies)
+					->with('canvas', Canvas::getDefault())
+					->with('news', News::take(5)->get());
+	}
+
+	public function getMyCompanies()
+	{
+		$me = Auth::user();
+					
+		return view('account.mycompanies')
+					->with('active', 'mycompanies')
+					->with('companies', Auth::user()->companies)
 					->with('canvas', Canvas::getDefault())
 					->with('news', News::take(5)->get());
 	}
@@ -262,9 +277,11 @@ class AccountController extends Pony {
 		}
 	}
 
+
 	public function getCommunities()
 	{
 		return view('account.watched.communities')
+					->with('active', 'communities')
 					->with('communities',
 						Auth::user()->followed_profiles()
 							->where('type', 'Community')
@@ -276,6 +293,7 @@ class AccountController extends Pony {
 	public function getHomes()
 	{
 		return view('account.watched.homes')
+					->with('active', 'homes')
 					->with('homes',
 						Auth::user()->followed_homes()
 							->wherePivot('watched', 1)
@@ -286,6 +304,7 @@ class AccountController extends Pony {
 	public function getSpaces()
 	{
 		return view('account.watched.spaces')
+					->with('active', 'spaces')
 					->with('spaces',
 						Auth::user()->followed_spaces()
 							->wherePivot('watched', 1)
@@ -296,6 +315,7 @@ class AccountController extends Pony {
 	public function getProfessionals()
 	{
 		return view('account.watched.professionals')
+					->with('active', 'professionals')
 					->with('professionals',
 						Auth::user()->profiles()
 							->where('type', '<>', 'Community')
@@ -307,6 +327,7 @@ class AccountController extends Pony {
 	public function getCompanies()
 	{
 		return view('account.watched.companies')
+					->with('active', 'companies')
 					->with('companies',
 						Auth::user()->followed_companies()
 							->wherePivot('watched', 1)
