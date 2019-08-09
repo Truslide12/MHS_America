@@ -533,7 +533,7 @@ class GetStartedHomeController extends Pony {
 				'phone' 	=> null,
 				'fax' 		=> null,
 				'address' 	=> Input::get('community-address1'),
-				'zipcode' 	=> Input::get('community-zipcode'),
+				'zipcode' 	=> Input::get('community-zip'),
 				'state_id' 	=> Input::get('community-state'),
 				'county_id' => 0, /*need to find how to retrieve this..*/
 				'city_id' 	=> Input::get('community-city')
