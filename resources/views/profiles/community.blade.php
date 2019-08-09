@@ -108,9 +108,9 @@
 			$extent_width = 12;
 	}
 @endphp
-<div class="row">
-	<div class="col-md-{{ $extent_width }}" id="infobox">
-		<div class="panel panel-default panel-flat">
+<div class="row" id="inforow">
+	<div class="col-md-{{ $extent_width }}">
+		<div class="panel panel-default panel-flat" id="infobox">
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-{{ $extent_address }} hidden-xs hidden-sm">
@@ -400,7 +400,10 @@
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
 <script type="text/javascript">
 	pony.add(function() {
-		$('#infobox').detach().prependTo('#gridlock');
+		if($('#infobox').parent().hasClass('col-md-6')) {
+			$('#infobox').detach().prependTo('#gridlock .col-md-6:nth-child(1)');
+			$('#inforow').remove();
+		}
 	});
 
 </script>
