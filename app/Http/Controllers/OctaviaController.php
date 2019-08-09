@@ -138,7 +138,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => ($community->hasCarousel() ? [$community->photos()->first()] : []),
+					'photos' => $community->hasCarousel() ? [$community->photos()->first()] : [],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
