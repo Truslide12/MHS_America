@@ -85,10 +85,26 @@
 
 	switch($extent) {
 		case 1:
-		case 2:
+			$extent_address = 12;
+			
 			$extent_width = 6;
 			break;
+		case 2:
+			$extent_address = 6;
+			$extent_contact = 6;
+
+			$extent_width = 6;
+			break;
+		case 3:
+			$extent_address = 3;
+			
+			$extent_width = 12;
+			break;
+		case 4:
 		default:
+			$extent_address = 3;
+			$extent_contact = 3;
+
 			$extent_width = 12;
 	}
 @endphp
@@ -99,7 +115,7 @@
 		<div class="panel panel-default panel-flat">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-3 hidden-xs hidden-sm">
+					<div class="col-md-{{ $extent_address }} hidden-xs hidden-sm">
 						<strong>Address</strong>
 						<hr>
 					</div>
@@ -110,7 +126,7 @@
 					</div>
 					@endif
 					@if($show_contact_details)
-					<div class="col-md-3 hidden-xs hidden-sm">
+					<div class="col-md-{{ $extent_contact }} hidden-xs hidden-sm">
 						<strong>Contact Details</strong>
 						<hr>
 					</div>
@@ -121,7 +137,7 @@
 						<strong>Address</strong>
 						<hr class="no-margin-t">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-{{ $extent_address }}">
 						<p>
 							{{ $profile->address }}
 						</p>
@@ -152,7 +168,7 @@
 						<strong>Contact Details</strong>
 						<hr class="no-margin-t">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-{{ $extent_contact }}">
 						@if($profile->office_tagline)<p>
 							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
 							Managed by
