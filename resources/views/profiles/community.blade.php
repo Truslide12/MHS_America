@@ -231,11 +231,7 @@
 				</div>
 				@endif
 				<p>&nbsp;</p>
-				@if(trim($profile->description) == '')
-				<h4 class="text-center text-muted">
-					No description
-				</h4>
-				@else
+				@if(trim($profile->description) != '')
 				{{ $profile->description }}
 				@endif
 			</div>
