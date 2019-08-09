@@ -113,11 +113,11 @@ class OctaviaController extends Pony {
 				$homes = $community->homes()->where('price', 	"<=", 	(int)Input::get('filters.max', 0) )
 										    ->where('beds', 	">=", 	(int)Input::get('filters.beds', 0) )
 										    ->where('baths', 	">=", 	(int)Input::get('filters.baths', 0) )
-										    ->where('status', 	">", 	0 )
+										    ->whereIn('status', [4, 5])
 										    ->get();
 				
 			} else {
-				$homes = $community->homes()->where('status', ">", 	0 )->get();
+				$homes = $community->homes()->whereIn('status', [4, 5])->get();
 			}
 
 
@@ -140,7 +140,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => $community->hasCarousel() ? [$community->photos()->first()] : [],
+					'photos' => $community->plan->hasFeature('manage_photos') ? [$community->photos()->first()] : [],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
