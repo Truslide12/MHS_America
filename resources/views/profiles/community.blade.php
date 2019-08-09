@@ -75,8 +75,27 @@
 @stop
 
 @section('content')
+@php
+	$extent = 1; /* Always one section for address */
+	$show_business_hours = (count($business_hours) > 0);
+	$show_contact_details = ($profile->office_tagline || $profile->office_manager != '' || $profile->phone != '' || $profile->fax != '');
+
+	if($show_business_hours) { $extent += 2; }
+	if($show_contact_details){ $extent += 1; }
+
+	switch($extent) {
+		case 1:
+		case 2:
+			$extent_width = 6;
+			break;
+		default:
+			$extent_width = 12;
+	}
+@endphp
 <div class="row">
-	<div class="col-md-12">
+	
+</div>
+<div class="row" data-columns id="gridlock">
 		<div class="panel panel-default panel-flat">
 			<div class="panel-body">
 				<div class="row">
@@ -84,14 +103,18 @@
 						<strong>Address</strong>
 						<hr>
 					</div>
+					@if($show_business_hours)
 					<div class="col-md-6 hidden-xs hidden-sm">
 						<strong>Office Hours</strong>
 						<hr>
 					</div>
+					@endif
+					@if($show_contact_details)
 					<div class="col-md-3 hidden-xs hidden-sm">
 						<strong>Contact Details</strong>
 						<hr>
 					</div>
+					@endif
 				</div>
 				<div class="row">
 					<div class="col-md-12 hidden-md hidden-lg">
@@ -106,6 +129,7 @@
 							{{ $city->place_name }}, {{ strtoupper($state->abbr) }} {{ $profile->zipcode }}
 						</p>
 					</div>
+					@if($show_business_hours)
 					<div class="col-md-12 hidden-md hidden-lg">
 						<strong>Office Hours</strong>
 						<hr class="no-margin-t">
@@ -122,6 +146,8 @@
 							{{ $business_hours[$x]['title'] }}
 						</p>@endfor
 					</div>
+					@endif
+					@if($show_contact_details)
 					<div class="col-md-12 hidden-md hidden-lg">
 						<strong>Contact Details</strong>
 						<hr class="no-margin-t">
@@ -130,8 +156,7 @@
 						@if($profile->office_tagline)<p>
 							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
 							Managed by
-						</p>@endif
-						@if($profile->office_manager != '')<p>
+						</p>@elseif($profile->office_manager != '')<p>
 							<span class="pull-right"><em>{{$profile->office_manager}}</em></span>
 							Office Manager
 						</p>@endif
@@ -143,21 +168,21 @@
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 							Fax
 						</p>@endif
+						@if(1==2)
 						@if($profile->office_email != '')<p>
 							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
 							Email
 						</p>@endif
-						@if(1==2)<p>
+						<p>
 							<span class="pull-right"><em><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></em></span>
 							Email
 						</p>@endif
 					</div>
+					@endif
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="row" data-columns id="gridlock">
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
