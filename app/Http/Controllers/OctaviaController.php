@@ -144,7 +144,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => $community->plan->hasFeature('manage_photos') ? [$community->photos()->first()] : [null],
+					'photos' => $community->plan_id == 6 ? [$community->photos()->first()] : [null],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
