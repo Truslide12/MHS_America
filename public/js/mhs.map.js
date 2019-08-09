@@ -19,7 +19,7 @@ var Lyra = {
     renderHomeResult: function(item) {
       var t = $('#homeResultItem').html();
       Mustache.parse(t);
-      item.properties.price_formatted = "$"+(item.properties.price/100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      item.properties.price_formatted = "$" + item.properties.price.replace(/\d(?=(\d{3})+\.)/g, '$&,');
       return Mustache.render(t, item.properties);
     },
     appendHomeResult: function(item) {
