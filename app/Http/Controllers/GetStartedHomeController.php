@@ -542,7 +542,7 @@ class GetStartedHomeController extends Pony {
 				$test = self::createBaseProfile(Input::get('company-id'), $pd);
 				if ( $test->status ) {
 					$order_data = session("order_data");
-					$order_data['space'] = Input::get('community-space');
+					$order_data['space'] = Input::get('community-address2');
 			 		$order_data['company_data'] = Company::where('id', Input::get('company-id'))->first();
 					$order_data['profile_data'] = $test->profile;
 					session(["order_data" => $order_data, 'active_step' => 3]);
