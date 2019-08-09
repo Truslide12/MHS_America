@@ -76,7 +76,7 @@ class OctaviaController extends Pony {
 							}, 'plan' => function($query) {
 								$query->select('id');
 							}])
-						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.plan_id, profiles.pets, profiles.description, profiles.phone, profiles.address, profiles.zipcode, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'))->orderBy('profiles.plan_id', 'DESC');
+						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.plan_id, profiles.pets, profiles.description, profiles.phone, profiles.address, profiles.zipcode, profiles.subscription_id, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'))->orderBy('profiles.plan_id', 'DESC');
 
 
 
@@ -135,8 +135,6 @@ class OctaviaController extends Pony {
 				$phone_formatted = $community->phone;
 			}
 
-			$planObject = Plan::find($community->plan_id);
-
 			$feature = [
 				'type' => 'Feature',
 				'properties' => [
@@ -144,7 +142,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => $community->plan_id == 6 ? [$community->photos()->first()] : [null],
+					'photos' => $community->plan->hasFeature('manage_photos') ? [$community->photos()->first()] : [null],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
