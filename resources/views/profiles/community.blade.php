@@ -109,9 +109,7 @@
 	}
 @endphp
 <div class="row">
-	
-</div>
-<div class="row" data-columns id="gridlock">
+	<div class="col-md-{{ $extent_width }}" id="infobox">
 		<div class="panel panel-default panel-flat">
 			<div class="panel-body">
 				<div class="row">
@@ -198,6 +196,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="row" data-columns id="gridlock">
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -397,4 +398,10 @@
 @section('incls-body')
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/salvattore.min.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
+<script type="text/javascript">
+	pony.add(function() {
+		$('#infobox').detach().prependTo('#gridlock');
+	});
+
+</script>
 @stop
