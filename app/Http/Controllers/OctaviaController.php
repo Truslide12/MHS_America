@@ -9,6 +9,7 @@ use Validator;
 use User;
 use App\Models\Geoname;
 use App\Models\Profile;
+use App\Models\Plan;
 use Input;
 use Mail;
 use Phaza\LaravelPostgis\Geometries\Point;
@@ -133,6 +134,9 @@ class OctaviaController extends Pony {
 			} else {
 				$phone_formatted = $community->phone;
 			}
+
+			$planObject = Plan::find($community->plan_id);
+
 			$feature = [
 				'type' => 'Feature',
 				'properties' => [
@@ -140,7 +144,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => $community->plan->hasFeature('manage_photos') ? [$community->photos()->first()] : [],
+					'photos' => $planObject->hasFeature('manage_photos') ? [$community->photos()->first()] : [],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
@@ -148,7 +152,7 @@ class OctaviaController extends Pony {
 					'phone' => $phone_formatted,
 					'description' => $community->description,
 					'service_area' => self::pointformat($community->service_area),
-					'highlight' => $community->plan->hasFeature('highlight')
+					'highlight' => $planObject->plan->hasFeature('highlight')
 				],
 				'geometry' => [
 					'type' => 'Point',
