@@ -13,7 +13,7 @@ use Input;
 use Mail;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Propaganistas\LaravelPhone\PhoneNumber;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class OctaviaController extends Pony {
 	
@@ -87,7 +87,9 @@ class OctaviaController extends Pony {
 			$query = $query->has('spaces');
 		}
 		if(Input::get('filters.homes', 0) == 1) {
-			$query = $query->has('homes');
+			$query = $query->whereHas('homes', function(Builder $query) {
+				$query->whereIn('status', [4, 5]);
+			});
 		}
 		if(Input::get('filters.age', 0) > 0 ) {
 			$query = $query->where('profiles.age_type', Input::get('filters.age'));
