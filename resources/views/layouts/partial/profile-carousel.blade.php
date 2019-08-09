@@ -1,4 +1,4 @@
-<?php $photos = $profile->photos; ?>
+<?php $photos = $profile->photos()->orderBy('created_at', 'desc')->take(5)->get(); ?>
 <div class="container texture-2" style="border-bottom:4px solid #999;">
 	<div class="row">
 		<div class="col-md-12 no-padding-x">

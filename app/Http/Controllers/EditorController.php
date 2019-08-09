@@ -161,7 +161,7 @@ class EditorController extends Pony {
 	{
 		return view('editor.photos')
 					->with('profile', $profile)
-					->with('photos', $profile->photos()->get())
+					->with('photos', $profile->photos()->orderBy('created_at', 'desc')->get())
 					->with('plan', $profile->plan);
 					//->with('canvas', Canvas::getDefault());
 	}
@@ -694,29 +694,17 @@ class EditorController extends Pony {
 
 		$validator = Validator::make(Input::all(),
 		[
-			'img' => 'max:2500',
+			'img' => 'max:5000',
 		]);
 
 		if($validator->fails()) {
-			return Response::json(array('status' => 'error', 'message' => 'Image is too large. Max File Size: 2.5MB'));
+			return Response::json(array('status' => 'error', 'message' => 'Image is too large. Max File Size: 5MB'));
 		}
 
 		$imageTypes = array('image/jpeg', 'image/png');
 		if(Input::hasFile('img') && in_array(Input::file('img')->getMimeType(), $imageTypes)) {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
 			$image = Image::make(Input::file('img'));
-
-			//image version
-			//$image->insert('img/watermark_simple.png', 'bottom-right', 10, 10);
-
-			//text version
-			$image->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
-    			$font->file("fonts/Voltaire-Regular.ttf");
-    			$font->size(25);
-    			$font->color(array(255, 255, 255, .5));
-    			$font->align('left');
-    			$font->valign('top');
-			});
 
 			$response = array(
 				'status' => 'success',
@@ -742,13 +730,26 @@ class EditorController extends Pony {
 		ini_set('memory_limit', '-1');
 		$imgPath = Input::get('imgUrl');
 		$imgPath = explode("imgstorage/", $imgPath)[1];
+		$fragments = explode("_", $imgPath);
+		$imgName = $fragments[1].'_'.$fragments[2];
 
-		$newPath = 'imgstorage/cover_'.md5($imgPath).'_crop.jpg';
-		$smPath = 'imgstorage/cover_'.md5($imgPath).'_sm.jpg';
+		$newPath = 'imgstorage/cover_'.$imgName.'_crop.jpg';
+		$smPath = 'imgstorage/cover_'.$imgName.'_sm.jpg';
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
-		$multiple = 2.5;
+		$g->text('mhsamerica.com', ($g->width()-160), ($g->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
+
+		//$multiple = 2.5;
+		$multiple_width = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
+		$multiple_height = (Input::get('imgH') == 0) ? 1 : (420 / Input::get('imgH'));
+		$multiple = max($multiple_width, $multiple_height);
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
 		$calc_height = intval(floor(Input::get('imgH')*$multiple));
 
@@ -773,15 +774,16 @@ class EditorController extends Pony {
 
 		$g->save($newPath);
 
-		$g->resize(48, 48);
+		$g->heighten(75);
 
 		$g->save($smPath);
 
+		unlink(public_path("imgstorage/".$imgPath));
+
+
 		$coverPhoto = new ProfilePhoto;
-		$coverPhoto->cover = md5($imgPath);
-		/*why is this breaking it
-		$coverPhoto->original = substr($imgPath, 18, 43);
-		*/
+		$coverPhoto->cover = $imgName;
+
 		$coverPhoto->profile_id = $profile->id;
 		$coverPhoto->user_id = 0;
 		$coverPhoto->is_avatar = false;
@@ -800,15 +802,20 @@ class EditorController extends Pony {
 		$photo_id = Input::get('photo_id');
 
 		$photo = ProfilePhoto::find($photo_id);
-		$photo_name = 'imgstorage/cover_'.$photo->cover.'_crop.jpg';
-		$photo_name_sm = 'imgstorage/cover_'.$photo->cover.'_sm.jpg';
-		$photo_original = 'imgstorage/cover_'.$photo->original.'_orig.jpg';
+		$photo_name = public_path('imgstorage/cover_'.$photo->cover.'_crop.jpg');
+		$photo_name_sm = public_path('imgstorage/cover_'.$photo->cover.'_sm.jpg');
 
 		if(is_object($photo) && $photo->delete())
 		{
-			if(file_exists($photo_name)) unlink($photo_name);
-			if(file_exists($photo_name_sm)) unlink($photo_name_sm);
-			if(file_exists($photo_original)) unlink($photo_original);
+
+			if(file_exists($photo_name)) {
+				unlink($photo_name);
+			}
+
+			if(file_exists($photo_name_sm)) {
+				unlink($photo_name_sm);
+			}
+
 			return Response::json(['success' => true, 'data' => ['id' => $photo_id] ]);
 		}
 
@@ -846,11 +853,11 @@ class EditorController extends Pony {
 	{
 		ini_set('memory_limit', '-1');
 		$imgPath = Input::get('imgUrl');
-		$newPath = 'imgstorage/home_'.md5($imgPath).'_crop.jpg';
-		$smPath = 'imgstorage/home_'.md5($imgPath).'_sm.jpg';
+		$newPath = 'imgstorage/home_'.$imgPath.'_crop.jpg';
+		$smPath = 'imgstorage/home_'.$imgPath.'_sm.jpg';
 		$g = Image::make(substr($imgPath,1));
 
-		$multiple = 2.5;
+		$multiple = (Input::get('imgW') == 0) ? 1 : (1080 / Input::get('imgW'));
 		$calc_width = intval(floor(Input::get('imgW')*$multiple));
 		$calc_height = intval(floor(Input::get('imgH')*$multiple));
 
@@ -875,12 +882,18 @@ class EditorController extends Pony {
 
 		$g->save($newPath);
 
-		$g->resize(48, 48);
+		$g->heighten(210);
 
 		$g->save($smPath);
 
+		try {
+			unlink(substr($imgPath,1));
+		} catch (\Exception $e) {
+			
+		}
+
 		$coverPhoto = new HomePhoto;
-		$coverPhoto->cover = md5($imgPath);
+		$coverPhoto->cover = $imgPath;
 		$coverPhoto->home_id = $home->id;
 		//$coverPhoto->user_id = 0;
 		//$coverPhoto->is_avatar = false;
