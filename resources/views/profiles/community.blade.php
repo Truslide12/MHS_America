@@ -230,15 +230,7 @@
 					Propane Gas
 				</div>
 				@endif
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">
-					About Our Community
-				</div>
-			</div>
-			<div class="panel-body">
+				<p>&nbsp;</p>
 				@if(trim($profile->description) == '')
 				<h4 class="text-center text-muted">
 					No description
