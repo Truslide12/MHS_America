@@ -230,9 +230,8 @@
 					Propane Gas
 				</div>
 				@endif
-				<p>&nbsp;</p>
 				@if(trim($profile->description) != '')
-				{{ $profile->description }}
+				<p>{{ $profile->description }}</p>
 				@endif
 			</div>
 		</div>
