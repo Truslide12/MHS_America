@@ -216,11 +216,11 @@ class OctaviaController extends Pony {
 				$homes = $community->homes()->where('price', 	"<=", 	(int)Input::get('filters.max', 0) )
 										    ->where('beds', 	">=", 	(int)Input::get('filters.beds', 0) )
 										    ->where('baths', 	">=", 	(int)Input::get('filters.baths', 0) )
-										    ->where('status', 	">", 	0 )
+										    ->whereIn('status', [4, 5])
 										    ->get();
 				
 			} else {
-				$homes = $community->homes()->where('status', ">", 	0 )->get();
+				$homes = $community->homes()->whereIn('status', [4, 5])->get();
 			}
 			foreach ($homes as $home) {
 				$feature = [

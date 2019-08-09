@@ -257,14 +257,14 @@ class GetStartedHomeController extends Pony {
 		if($user->id) {
 			//User was created..
 			Auth::loginUsingId($user->id);
-			return Array("status" => true, "user" => $user);
+			return array("status" => true, "user" => $user);
 
 		}else{
 			//User not created..
 			// Get validation errors (see Ardent package)
 			$error = $user->errors()->all(':message');
 
-			return Array("status" => false, "errors" => $error);
+			return array("status" => false, "errors" => $error);
 		}
 	}
 
@@ -285,7 +285,7 @@ class GetStartedHomeController extends Pony {
 
 		if($validator->fails()) {
 
-			return Array("status" => false, "errors" => $validator);
+			return ["status" => false, "errors" => $validator];
 
 		}else{
 
@@ -300,9 +300,9 @@ class GetStartedHomeController extends Pony {
 			$user->business = 1;
 
 			if( $user->save() ) {
-				return Array("status" => true, "user" => $user);
+				return ["status" => true, "user" => $user];
 			} else {
-				return Array("status" => false, "errors" => $validator);
+				return ["status" => false, "errors" => $validator];
 			}
 
 		}
@@ -369,21 +369,21 @@ class GetStartedHomeController extends Pony {
 		);
 
 		if($validator->fails()) {
-			return Array("status" => false, "errors" => $validator);
+			return ["status" => false, "errors" => $validator];
 
 		}else{
 			$invite = CompanyInvite::byCode(Input::get('invite-code'))->where('email', Auth::user()->email)->first();
 			
 			if(!is_a($invite, 'Eloquent')) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
-				return Array("status" => false, "errors" => $messageBag );
+				return [ "status" => false, "errors" => $messageBag ];
 			}
 
 			$me = Auth::user();
 
 			$me->attachToCompany($invite->company_id, $invite->role_id);
 
-			return Array("status" => true, "company_id" => $invite->company_id);
+			return ["status" => true, "company_id" => $invite->company_id];
 		}
 	}
 
@@ -407,7 +407,7 @@ class GetStartedHomeController extends Pony {
 		);
 
 		if($validator->fails()) {
-			return Array("status" => false, "errors" => $validator);
+			return ["status" => false, "errors" => $validator];
 
 		}else{
 			
@@ -417,7 +417,7 @@ class GetStartedHomeController extends Pony {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CityLookupFailed)');
-				return Array("status" => false, "errors" => $messageBag );
+				return ["status" => false, "errors" => $messageBag ];
 			}
 
 			$sec_key = str_random(32);
@@ -446,7 +446,7 @@ class GetStartedHomeController extends Pony {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CompanyCreationError)');
-				return Array("status" => false, "errors" => $messageBag);
+				return ["status" => false, "errors" => $messageBag];
 			}else{
 				/* SUCCESS! :3 */
 				
@@ -456,11 +456,11 @@ class GetStartedHomeController extends Pony {
 					//And return a fail if fail
 					$messageBag = new \Illuminate\Support\MessageBag();
 					$messageBag->add('error', 'uh-oh. Something happened in transit. Please mark down this information, and contact technical support. (ERROR: CompanyRoleError, Company ID: '.$company->id.', User ID: '.Auth::user()->id.')');
-					return Array("status" => false, "errors" => $messageBag);
+					return ["status" => false, "errors" => $messageBag];
 				  }
 				}
 
-				return Array("status" => true, "company" => $company);
+				return ["status" => true, "company" => $company];
 			}
 		}
 	}
@@ -478,11 +478,11 @@ class GetStartedHomeController extends Pony {
 		if ( Input::get("community-id") > 0 ) { 
 			//Check if we know about this space in this park..
 			$validator = Validator::make(Request::all(),
-					array(
+					[
 						'company-id' => 'required|exists:companies,id',
 						'community-id' => 'required|exists:profiles,id',
 						'community-space' => 'between:1,23',
-					)
+					]
 				);
 
 				if($validator->fails()) {
