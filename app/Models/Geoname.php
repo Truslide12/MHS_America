@@ -129,7 +129,7 @@ class Geoname extends EloquentModel {
 			}
 		}
 
-		$result = $token->orderBy('population', 'DESC')->orderBy('place_name', 'ASC')->take(50)->get();
+		$result = $token->orderBy('aland', 'DESC')->orderBy('place_name', 'ASC')->take(50)->get();
 		if(is_object($result)) {
 			$final_array = [];
 			$ret = $result->toArray();
