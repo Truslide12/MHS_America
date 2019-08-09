@@ -368,9 +368,11 @@
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
 				<div class="mhs-slideshow">
+					@if(1==2)
 					<div class="mhs-slide-left-btn" onclick="changeHomes();"><i class="fa fa-chevron-left"></i></div>
 					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
 					<div class="mhs-slideshow-loader"><small>Loading</small></div>
+					@endif
 					@foreach( $da->data as $home )
 					<div class="mhs-slide" id="slide-{{$loop->index}}">
 						<div class="card clickycard" href="home/{{ $home->id }}">

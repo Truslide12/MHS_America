@@ -9,7 +9,7 @@
 			@if(Route::currentRouteNamed('account-business'))
 			<a href="{{ URL::route('account') }}" class="btn btn-default">Personal Dashboard</a>
 			@else
-			<a href="{{ URL::route('account-business') }}" class="btn btn-default">Back to Business Center</a>
+			<a href="{{ URL::route('account-mycompanies') }}" class="btn btn-default">Back to Dashboard</a>
 			@endif
 			 @if(!isset($hide_sign_out))
 			 <a href="{{ URL::route('account-logout') }}" class="btn btn-default">Sign out</a>

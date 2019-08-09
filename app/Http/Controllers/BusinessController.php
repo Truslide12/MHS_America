@@ -47,6 +47,11 @@ class BusinessController extends Pony {
 
 		} */
 		
+		if( $me->companies->count() == 1 ) {
+			$comp = $me->companies()->first();
+			return redirect()->route('account-business-company', array('company' =>  $comp->id ));
+		}
+
 		return view('account.business.dashboard')
 					->with('companies', Auth::user()->companies)
 					->with('canvas', Canvas::getDefault());

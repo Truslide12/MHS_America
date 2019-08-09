@@ -219,7 +219,9 @@ Route::group(array('prefix' => 'luna'), function()
 			Route::get('/', array('uses' => 'AccountController@getIndex', 'as' => 'account'));
 			/* Account settings (GET) */
 			Route::get('settings', array('uses' => 'AccountController@getSettings', 'as' => 'account-settings'));
-			
+			/* My Companies (GET) */
+			Route::get('mycompanies', array('uses' => 'AccountController@getMyCompanies', 'as' => 'account-mycompanies'));
+
 			/* Account communities watched (GET) */
 			Route::get('watched/communities', array('uses' => 'AccountController@getCommunities', 'as' => 'account-communities'));
 			/* Account homes watched (GET) */
@@ -775,6 +777,21 @@ Route::group(array('prefix' => 'luna'), function()
 	/* Static page (GET) */
 	Route::get('page/{slug}', array('uses' => 'PageController@getSlug', 'as' => 'page'));
 
+	/* Static page (GET) */
+	Route::get('help/{slug}', array('uses' => 'PageController@getHelp', 'as' => 'help'));
+
+	/* Static page (GET) */
+	Route::get('HomeOwner', array('uses' => 'PageController@getHomeOwnerPromo', 'as' => 'homeowner-promo'));
+
+	/* Static page (GET) */
+	Route::get('ParkOwner', array('uses' => 'PageController@getParkOwnerPromo', 'as' => 'parkowner-promo'));
+
+	/* Static page (GET) */
+	Route::get('SalesAgent', array('uses' => 'PageController@getSalesAgentPromo', 'as' => 'salesagent-promo'));
+
+	/* Static page (GET) */
+	Route::get('HomeBuyer', array('uses' => 'PageController@getHomeBuyerPromo', 'as' => 'homebuyer-promo'));
+
 	/* Homepage (GET) */
 	Route::get('/', array('uses' => 'WelcomeController@getIndex', 'as' => 'welcome'));
 
@@ -855,7 +872,7 @@ Route::group(array('prefix' => 'luna'), function()
 		/*-----------------*/
 
 		/* Create Ticket (GET) */
-		Route::get('createticket', array('uses' => 'TicketSystemController@getIndex', 'as' => 'company'));
+		Route::get('createticket', array('uses' => 'TicketSystemController@getIndex', 'as' => 'tickets'));
 
 		Route::group([], function()
 		{
