@@ -9,11 +9,12 @@
 @section('search')
 	<div class="row white">
 		<div class="col-md-8 col-md-offset-2">
-			<form class="form-horizontal push-down search-form" id="primary-search" role="form" action="{{ URL::route('homes-query') }}" method="GET">
+			<form class="form-horizontal push-down search-form" id="primary-search" role="form" action="{{ URL::route('search-post') }}" method="post">
 				{{ csrf_field() }}
+				<input type="hidden" name="mode" value="1">
 				<div class="form-group">
 					<div class="input-group">
-						<input type="text" name="search" class="form-control input-lg search-box" id="normalSearchBox" placeholder="Enter a city and state or zip code...">
+						<input type="text" name="input" class="form-control input-lg search-box" id="normalSearchBox" placeholder="Enter a city and state or zip code...">
 						<div class="input-group-addon">
 							<button type="submit" class="btn btn-primary">Search</button>
 						</div>
@@ -29,11 +30,11 @@
 					</p>
 				</div>
 			</form>
-			<form class="form-horizontal push-down search-form" id="advanced-search" style="display:none" role="form" action="{{ URL::route('homes-query') }}" method="GET">
+			<form class="form-horizontal push-down search-form" id="advanced-search" style="display:none" role="form" action="{{ URL::route('search-post') }}" method="post">
 				{{ csrf_field() }}
 				<div class="form-group">
 					<div class="input-group">
-						<input type="text" name="search" class="form-control input-lg search-box" id="advancedSearchBox" placeholder="Enter a city and state or zip code...">
+						<input type="text" name="input" class="form-control input-lg search-box" id="advancedSearchBox" placeholder="Enter a city and state or zip code...">
 						<div class="input-group-addon">
 							<button type="submit" class="btn btn-primary">Search</button>
 						</div>
@@ -65,7 +66,7 @@
 					<div class="col-sm-2">
 						<div class="">
 							<label for="bedroom" class="control-label">Bedrooms</label>
-							<select class="form-control" name="bedroom" id="bedroom">
+							<select class="form-control" name="bed" id="bedroom">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -108,27 +109,24 @@
 						<div class="">
 							<label for="age" class="control-label">Age restrictions</label>
 							<select class="form-control" name="age" id="age">
-								<option>Senior or Family</option>
-								<option value="family">Family</option>
-								<option value="senior">Senior</option>
+								<option value="-1">No preference</option>
+								<option value="0">All Ages</option>
+								<option value="1">Senior / 55+</option>
+								<option value="1">Strictly Senior</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-md-8">
 						<label class="control-label">Options</label>
 						<div>
-							<div class="checkbox checkbox-inline">
-								<input type="checkbox" name="gated" id="gated" value="1">
-								<label for="gated">
-									Gated
-								</label>
-							</div>
-							<div class="checkbox checkbox-inline">
-								<input type="checkbox" name="pets" id="pets" value="1">
-								<label for="pets">
-									Pets allowed
-								</label>
-							</div>
+							<label for="optGated" class="checkbox-inline">
+								<input type="checkbox" name="gated" id="optGated" value="1">
+								Gated
+							</label>
+							<label for="optPets" class="checkbox-inline">
+								<input type="checkbox" name="pets" id="optPets" value="1">
+								Pets allowed
+							</label>
 						</div>
 					</div>
 				</div>
