@@ -314,7 +314,7 @@
 		</div>
 		@endif
 		<!-- Homes available -->
-		@if($profile->plan->hasFeature('manage_homes') && count($homes) > 0)
+		@if(count($homes) > 0)
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
