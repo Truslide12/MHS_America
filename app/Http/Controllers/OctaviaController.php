@@ -152,7 +152,7 @@ class OctaviaController extends Pony {
 					'phone' => $phone_formatted,
 					'description' => $community->description,
 					'service_area' => self::pointformat($community->service_area),
-					'highlight' => $planObject->plan->hasFeature('highlight')
+					'highlight' => $planObject->hasFeature('highlight')
 				],
 				'geometry' => [
 					'type' => 'Point',
