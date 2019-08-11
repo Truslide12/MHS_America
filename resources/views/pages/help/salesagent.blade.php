@@ -15,7 +15,7 @@ MHS For Sales Agent
 
 			<h3>Make the Most of MHS: Sales Agent</h3>
 			<p style="font-size: 1.2em;">
-				As an Agent MHS America offers you exciting tools to assist you and your colleages in maintaining a professional online presence. Our platform has been thoughfuly designed to promote easy business use. By having your company register on MHS America, the home listings of all employees can be managed from one place.
+				As an Agent MHS America offers you exciting tools to assist you and your colleagues in maintaining a professional online presence. Our platform has been thoughtfully designed to promote easy business use. By having your company register on MHS America, the home listings of all employees can be managed from one place.
 			</p>
 
 			<h3>If You Don't Work Alone, Bring the Whole Office</h3>
@@ -28,7 +28,7 @@ MHS For Sales Agent
 					Company Billing: Your company can register company debit/credit cards and assign access to any user(s) on the system. This allows you limit who can purchase new listing and prevent employees from seeing card numbers. Having all your billing tied to the company allows you to access full spending reports each month to see the cost of your companies online presence.
 				</li>
 				<li>
-					User Management: Assign Employees to different functions. By managing your employees roles you can limit each persons functional access to only what they need. Whether its ability to manage payment information, create home listings, update home listings, or invite new users. Home listings access can be assigned globally or individualy.
+					User Management: Assign Employees to different functions. By managing your employees roles you can limit each persons functional access to only what they need. Whether its ability to manage payment information, create home listings, update home listings, or invite new users. Home listings access can be assigned globally or individually.
 				</li>
 				<li>
 					Company Profile: You can create a profile for your company showing all your listings and agents. Make it easy for user to see why your offerings are better than the rest.

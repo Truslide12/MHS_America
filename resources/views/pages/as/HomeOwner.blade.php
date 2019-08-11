@@ -148,6 +148,9 @@ h4 {
 	background: rgb(237,213,119);
 	background: radial-gradient(circle, rgba(237,213,119,1) 0%, rgba(205,129,80,1) 100%);
 }
+h3, h1 {
+	font-family: Voltaire;
+}
 </style>
 
 <div style="padding: 25px;">
@@ -155,7 +158,7 @@ h4 {
 		<div class="col-md-6">
 			<h3>Make the Most of MHS: Home Owners</h3>
 			<p style="font-size: 1.2em;">
-			As a Home Owner selling your home can be difficult. MHS America is here to help you through the process. We have built a platform that not only provides an audience for your Home Listing, but we also provide easy to use tools designed to assits you in creating a professional Home Listings that sets your Home apart from the average news paper ads of the past.
+			As a Home Owner selling your home can be difficult. MHS America is here to help you through the process. We have built a platform that not only provides an audience for your Home Listing, but we also provide easy to use tools designed to assist you in creating a professional Home Listings that sets your Home apart from the average news paper ads of the past.
 			</p>
 
 			<h3>You are your Business:</h3>
@@ -170,7 +173,7 @@ h4 {
 
 			<h3>Your Home's Status is Important:</h3>
 			<p>
-			Buying and Selling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your Home Status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celibrate everytime we help a client sell thier home, so please let us now.
+			Buying and Selling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your Home Status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celebrate every time we help a client sell their home, so please let us now.
 			</p>
 		</div>
 		<div class="col-md-6 col-sm-12">

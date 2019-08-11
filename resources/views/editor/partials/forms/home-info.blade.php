@@ -23,6 +23,14 @@
 
 					<div class="form-group margin-t">
 						<div class="col-sm-2 col-md-2 text-right">
+							<label class="control-label" for="homeSize">
+								Year
+							</label>
+						</div>
+						<div class="col-sm-4 col-md-3">
+							<input type="text" name="year" id="year" class="form-control">
+						</div>
+						<div class="col-sm-2 col-md-2 text-right">
 							<label class="control-label">
 								Make
 							</label>
@@ -30,6 +38,8 @@
 						<div class="col-sm-4 col-md-3">
 							<input type="text" name="make" id="make" class="form-control">
 						</div>
+					</div>
+					<div class="form-group margin-t padding-t">
 						<div class="col-sm-2 col-md-2 text-right">
 							<label class="control-label">
 								Model
@@ -38,17 +48,7 @@
 						<div class="col-sm-4 col-md-3">
 							<input type="text" name="model" id="model" class="form-control">
 						</div>
-					</div>
-					<div class="form-group margin-t padding-t">
-						<div class="col-sm-2 col-md-2 text-right">
-							<label class="control-label" for="homeSize">
-								Year
-							</label>
-						</div>
-						<div class="col-sm-4 col-md-3">
-							<input type="text" name="year" id="year" class="form-control">
-						</div>
-												<div class="col-sm-2 col-md-2 text-right{{ $errors->has('size') ? ' has-error' : '' }}">
+						<div class="col-sm-2 col-md-2 text-right{{ $errors->has('size') ? ' has-error' : '' }}">
 							<label class="control-label" for="homeSize">
 								Size
 							</label>

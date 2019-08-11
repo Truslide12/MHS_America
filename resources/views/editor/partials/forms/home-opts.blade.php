@@ -134,6 +134,11 @@
                         <input type="checkbox" name="garage" value="16"> Garage
                         </label>
                      </div>
+                     <div class="col-xs-6 col-sm-12 text-left">
+                        <label class="checkbox-inline">
+                        <input type="checkbox" name="steps" value="37"> Steps
+                        </label>
+                     </div>
                   </div>
                </div>
 

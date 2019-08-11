@@ -148,6 +148,9 @@ h4 {
 	background: rgb(237,213,119);
 	background: radial-gradient(circle, rgba(237,213,119,1) 0%, rgba(205,129,80,1) 100%);
 }
+h3, h1 {
+	font-family: Voltaire;
+}
 </style>
 
 <div style="padding: 25px;">
@@ -163,7 +166,7 @@ h4 {
 		<div class="col-md-6 col-sm-12">
 			<h3>Register an Account, it's Worth It</h3>
 			<p>
-				While our platform can be used without an account, registering will make your experience far easier. As a registered user you will be able to more easily narrow your search of homes,  currate a list of watched homes you want to keep an eye on, and see contact information that may be hidden from non users at the sellers request.
+				While our platform can be used without an account, registering will make your experience far easier. As a registered user you will be able to more easily narrow your search of homes,  curate a list of watched homes you want to keep an eye on, and see contact information that may be hidden from non users at the sellers request.
 			</p>
 
 			<h3>Save that Money for the House</h3>

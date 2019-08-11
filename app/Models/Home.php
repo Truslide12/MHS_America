@@ -59,7 +59,8 @@ class Home extends LocatableModel {
 			["id" => 33, "name" => "fans",				"title" => "Ceiling Fan(s)"],
 			["id" => 34, "name" => "heating_pump",		"title" => "Heating (Heat Pump)"],
 			["id" => 35, "name" => "range_hood",		"title" => "Range Hood"],
-			["id" => 36, "name" => "cook_top",			"title" => "Cook Top"]
+			["id" => 36, "name" => "cook_top",			"title" => "Cook Top"],
+			["id" => 37, "name" => "steps",				"title" => "Steps"]
 		);
 
 

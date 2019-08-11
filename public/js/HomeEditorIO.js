@@ -165,8 +165,8 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
     this.home.model = $("#model").val();
     this.AcceptInput("#model");
   } else {
-    this.RejectInput("#model", "empty");
-    rejected++;
+    //this.RejectInput("#model", "empty");
+    //rejected++;
   }
 
   if ( $("#year").val() != null && $("#year").val() != '' ) {
@@ -874,7 +874,7 @@ HomeEditorIO.prototype.BuildReview = function() {
      $("#cfrm_model").html(this.home.model);
     } else {
       $("#cfrm_model").html("Not Entered");
-      this.is_complete = false;
+      //this.is_complete = false;
     }
 
     if ( this.home.status !== null ) {

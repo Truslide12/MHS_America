@@ -20,7 +20,7 @@ MHS For Home Buyers
 
 			<h3>Register an Account, it's Worth It</h3>
 			<p>
-				While our platform can be used without an account, registering will make your experience far easier. As a registered user you will be able to more easily narrow your search of homes,  currate a list of watched homes you want to keep an eye on, and see contact information that may be hidden from non users at the sellers request.
+				While our platform can be used without an account, registering will make your experience far easier. As a registered user you will be able to more easily narrow your search of homes,  curate a list of watched homes you want to keep an eye on, and see contact information that may be hidden from non users at the sellers request.
 			</p>
 
 			<h3>Save that Money for the House</h3>

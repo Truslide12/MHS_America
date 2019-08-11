@@ -89,10 +89,10 @@
 
 					<nav>
 					<ul class="nav nav-tabs">
-					  <li class="col-md-4 active" role="presentation" id="incomm">
+					  <li class="col-md-6 active" role="presentation" id="incomm">
 	               		<a class="commtab" onclick="setMode(1)"> <i class="fa fa-users"></i> In a Community</a>
 					  </li>
-					  <li class="col-md-4" role="presentation" id="notincomm">
+					  <li class="col-md-6" role="presentation" id="notincomm">
 	               		<a class="commtab" onclick="setMode(2)"> <i class="fa fa-user"></i> Not in a Community.</a>
 					  </li>
 					</ul>
@@ -105,11 +105,19 @@
 
 			      			<div class="col-xs-12 col-sm-11" id="commform" style="padding: 15px;">
 
+
 		  <div class="form-group" style="margin-top: 48px;">
-		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Name</label>
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Hint:</label>
+		    <div class="col-sm-9" style="font-size: .9em;">
+		      Please select the community this home belongs to. If you cannot find your home's community, you can select the option to add your community to MHS.
+		    </div>
+		  </div>
+
+		  <div class="form-group" style="margin-top: 48px;">
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Community</label>
 		    <div class="col-sm-9 companyname">
 		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="community-name" name="community-name" placeholder="Community Name">
-		    <a class="btn btn-default companybtn" onclick="fff();">Create</a>
+		    <a class="btn btn-default companybtn" style="display: none;" onclick="fff();">Create</a>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -123,7 +131,7 @@
 									<label class="control-label col-md-3"></label>
 									<div class="col-md-9">
 										<div class="col-md-4">
-											<img src="/img/stockphotos/ww.png" style="width: 100%;">
+											<img src="/img/nophoto.png" id="cimage" style="width: 100%;">
 										</div>
 										<div class="col-md-8" style="font-size: .8em;">
 											<div class="form-group">
@@ -170,8 +178,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">City</label>
 									<div class="col-md-9">
-								      <select class="form-control" id="community-city" name="community-city">
-								      	<option value="0" data-abbr="xx">Select a City</option>
+								      <select class="form-control" id="community-city" name="community-city" disabled>
+								      	<option value="0" data-abbr="xx" >First Select State</option>
 								      </select>
 									</div>
 								</div>
@@ -182,7 +190,7 @@
 										<select class="form-control" id="community-state" name="community-state">
 		      							<option value="0" data-abbr="xx">Select State</option>
 							      		@foreach($states as $state)
-							      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if($user && $state->id == $user->state) selected @endif>{{ $state->title }}</option>
+							      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
 										@endforeach
 		     							</select>
 
@@ -196,7 +204,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3"></label>
 									<div class="col-md-9">
-										<button name="" id="" class="btn btn-success hardstop" style="width: 100%;" value="" >Verify</button>
+										<button name="" id="verify_btn" class="btn btn-success hardstop" style="width: 100%;" value="" disabled>Verify</button>
 									</div>
 								</div>
 							</div>
@@ -237,14 +245,14 @@
 			.append('<option>Select a city...</option>');
 
 		$('#submitbtn').prop('disabled', 'disabled');
-
+		console.log("free", abbr)
 		if(abbr != '') {
 			$.getJSON("/derpy/cities/" + abbr, function(result) {
 				var options = $("#community-city");
 				$.each(result, function() {
 					options.append($("<option/>").val(this.name).text(this.title));
 				});
-
+				options.prop('readonly', false);
 				options.prop('disabled', false);
 			});
 		}
@@ -301,18 +309,42 @@ function setMode(mode){
 
 			$('#community-name').typeahead(null, {
 				displayKey: 'result',
-				display: function(item){ return '<b>'+item.title+'</b> – <span>'+item.city+', '+item.state+' ('+item.zipcode+')</span>'},
+				display: function(item){ 
+					if (item.id == -1) {
+						wh = $("#community-name").val();
+						return "Enter New Community: \"<strong>"+wh+"</strong>\"";
+					}
+					return '<b>'+item.title+'</b> – <span>'+item.city+', '+item.state+' ('+item.zipcode+')</span>'
+				},
 				source: pony.bloodhound.ttAdapter(),
 			});
 
 			$('#community-name').on('typeahead:selected', function(evt, item) {
-				$(this).typeahead("val", item.title);
+				if (item.id == -1) {
+					$("#community-name").val( wh );
+				} else{
+					$(this).typeahead("val", item.title);
+				}
+				
 				$(this).attr('readonly', true);
 			    getCompanyData(item.zipcode, item.id);
 			});
 
+			$('#community-name').on('blur', function(evt, item) {
+				$("#community-name").val( wh );
+				return false;
+			});
+
+
 	function getCompanyData(name, id) {
 
+		$("#verify_btn").prop('disabled', false);
+		if( id == -1 ) {
+			var_core_action = null;
+			fff();
+			$("#community-name").attr('readonly', true);
+			return;
+		}
 
 		$.getJSON("/derpy/communities/" + name + "/" + id, function(result) {
 
@@ -323,8 +355,9 @@ function setMode(mode){
 			$("#czip").html(result.zipcode);
 			$("#ccity").html(result.city);
 			$("#cstate").html(result.state);
-			
-
+			if( result.cover ) {
+			$("#cimage").attr('src', "/imgstorage/cover_"+result.cover+"_crop.jpg");
+			}
 			$("#community-city").prop('disabled', false).prop('readonly', 'readonly')
 			.find('option')
 			.remove()
@@ -337,7 +370,7 @@ function setMode(mode){
 			var_core_action = 0;
 			$("#community-id").val(result.id);
 			$(".thoughtform").show();
-			$(".companybtn").html("Not Here");
+			$(".companybtn").html("Not Here").show();
 			$("#community-space").attr('disabled', false);
 		});
 	}
@@ -349,7 +382,9 @@ function fff(){
   		$("#community-space").attr('disabled', true);
   		$("#community-name").attr('readonly', false).val("");
   		$(".thoughtform").hide();
-  		$(".companybtn").html("Create");
+  		//added .hide() here now for simplicity of ux
+  		//whole thing needs refactored
+  		$(".companybtn").html("Create").hide();
   		var_core_action = null;
   		$("#company-id").val(0);
   	break;
@@ -357,7 +392,9 @@ function fff(){
   		$("#community-space").attr('disabled', true);
   		$("#community-name").attr('readonly', false).val("");
   		$(".truform").hide();
-  		$(".companybtn").html("Create");
+  		//added .hide() here now for simplicity of ux
+  		//whole thing needs refactored
+  		$(".companybtn").html("Create").hide();
   		var_core_action = null;
   		$("#company-id").val(0);
   	break;
@@ -367,7 +404,7 @@ function fff(){
   		}
   		$("#community-name").attr('readonly', true);
   		$(".truform").show();
-  		$(".companybtn").html("Reset");
+  		$(".companybtn").html("Reset").show();
   		var_core_action = 1;
   		$("#company-id").val(0);
   	break;

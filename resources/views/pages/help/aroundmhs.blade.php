@@ -29,7 +29,7 @@ Around MHS America
 
 			<h3>The Business Center</h3>
 			<p>
-				The Business Center is the hub for all your company and personal business accounts. From the business center you will be able to connect to companies you work with, or create and manage your own companies. After selecting one of your business accounts, you will be given access to that companies resources. From each companies Business Center you wil be able to manage users, community profiles, home listings, payment information, and general settings (please note depending on your company role you may only have access to some of these features). For more detailed help with Business Center features, please see our <a href="">Business Center Help</a> page.
+				The Business Center is the hub for all your company and personal business accounts. From the business center you will be able to connect to companies you work with, or create and manage your own companies. After selecting one of your business accounts, you will be given access to that companies resources. From each companies Business Center you will be able to manage users, community profiles, home listings, payment information, and general settings (please note depending on your company role you may only have access to some of these features). For more detailed help with Business Center features, please see our <a href="">Business Center Help</a> page.
 			</p>
 		</div>
 	</div>

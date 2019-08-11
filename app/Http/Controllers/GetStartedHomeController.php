@@ -809,7 +809,7 @@ class GetStartedHomeController extends Pony {
 			$new_home = new Home;
 			//$new_home->community_id 	= $order_data['profile_data']->id;
 			$new_home->city_id 			= $order_data['profile_data']->city_id;
-			$new_home->title 			= "New Home";
+			$new_home->title 			= '';
 			$new_home->profile_id 		= $order_data['profile_data']->id;	/*of community?*/
 			$new_home->status 			= 1;
 			$new_home->beds 			= 0;

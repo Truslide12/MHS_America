@@ -14,7 +14,7 @@ MHS For Who?
 		<div class="col-md-8">
 			<h3>MHS Can be used by anyone</h3>
 			<p style="margin-bottom: 25px;">
-					MHS is a tool designed to be used by anyone with an intrest in the mobile and manufactured home industry. 
+					MHS is a tool designed to be used by anyone with an interest in the mobile and manufactured home industry. 
 			</p>
 			<div class="row">
 				<div class="col-md-12 ">

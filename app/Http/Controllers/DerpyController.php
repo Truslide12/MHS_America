@@ -88,6 +88,8 @@ class DerpyController extends Pony {
 							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.id', 'profiles.title',  'profiles.zipcode', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
+
+			$data[] = [ "id"=>-1,"title"=>"test", "city"=>"yucaipa", "state"=> "ca", "zipcode"=>00000];
 			return Response::json($data, 200);
 		}
 
@@ -96,6 +98,8 @@ class DerpyController extends Pony {
 							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'profiles.city_id')
 							->select('profiles.*', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
+
+		$data[0]['cover'] = Profile::where('id', $company_id)->first()->photos->first()->cover ?? null;
 
 		return Response::json($data, 200);
 
