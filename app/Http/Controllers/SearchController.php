@@ -516,9 +516,9 @@ class SearchController extends Pony {
 
 			//Using a state or not?
 			if($state == 0) {
-				$selector = Geoname::where('place_name', 'like', $city)->where('state_id', '>', 0)->where('enabled', 1)->orderBy('population', 'desc')->orderBy('place_name', 'asc')->first();
+				$selector = Geoname::where('place_name', 'like', $city)->where('state_id', '>', 0)->orderBy('aland', 'desc')->orderBy('place_name', 'asc')->first();
 			}else{
-				$selector = Geoname::where('place_name', 'like', $city)->where('state_id', $state)->where('enabled', 1)->orderBy('population', 'desc')->orderBy('place_name', 'asc')->first();
+				$selector = Geoname::where('place_name', 'like', $city)->where('state_id', $state)->orderBy('aland', 'desc')->orderBy('place_name', 'asc')->first();
 			}
 
 			if(is_object($selector)) {

@@ -75,30 +75,67 @@
 @stop
 
 @section('content')
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default panel-flat">
+@php
+	$extent = 1; /* Always one section for address */
+	$show_business_hours = (count($business_hours) > 0);
+	$show_contact_details = ($profile->office_tagline || $profile->office_manager != '' || $profile->phone != '' || $profile->fax != '');
+
+	if($show_business_hours) { $extent += 2; }
+	if($show_contact_details){ $extent += 1; }
+
+	switch($extent) {
+		case 1:
+			$extent_address = 12;
+			
+			$extent_width = 6;
+			break;
+		case 2:
+			$extent_address = 6;
+			$extent_contact = 6;
+
+			$extent_width = 6;
+			break;
+		case 3:
+			$extent_address = 3;
+			
+			$extent_width = 12;
+			break;
+		case 4:
+		default:
+			$extent_address = 3;
+			$extent_contact = 3;
+
+			$extent_width = 12;
+	}
+@endphp
+<div class="row" id="inforow">
+	<div class="col-md-{{ $extent_width }}">
+		<div class="panel panel-default panel-flat" id="infobox">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-3 hidden-xs hidden-sm">
+					<div class="col-md-{{ $extent_address }} hidden-xs hidden-sm">
 						<strong>Address</strong>
 						<hr>
 					</div>
+					@if($show_business_hours)
 					<div class="col-md-6 hidden-xs hidden-sm">
 						<strong>Office Hours</strong>
 						<hr>
 					</div>
-					<div class="col-md-3 hidden-xs hidden-sm">
+					@endif
+					@if($show_contact_details)
+					<div class="col-md-{{ $extent_contact }} hidden-xs hidden-sm">
 						<strong>Contact Details</strong>
 						<hr>
 					</div>
+					@endif
 				</div>
 				<div class="row">
 					<div class="col-md-12 hidden-md hidden-lg">
 						<strong>Address</strong>
 						<hr class="no-margin-t">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-{{ $extent_address }}">
 						<p>
 							{{ $profile->address }}
 						</p>
@@ -106,6 +143,7 @@
 							{{ $city->place_name }}, {{ strtoupper($state->abbr) }} {{ $profile->zipcode }}
 						</p>
 					</div>
+					@if($show_business_hours)
 					<div class="col-md-12 hidden-md hidden-lg">
 						<strong>Office Hours</strong>
 						<hr class="no-margin-t">
@@ -122,16 +160,17 @@
 							{{ $business_hours[$x]['title'] }}
 						</p>@endfor
 					</div>
+					@endif
+					@if($show_contact_details)
 					<div class="col-md-12 hidden-md hidden-lg">
 						<strong>Contact Details</strong>
 						<hr class="no-margin-t">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-{{ $extent_contact }}">
 						@if($profile->office_tagline)<p>
 							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
 							Managed by
-						</p>@endif
-						@if($profile->office_manager != '')<p>
+						</p>@elseif($profile->office_manager != '')<p>
 							<span class="pull-right"><em>{{$profile->office_manager}}</em></span>
 							Office Manager
 						</p>@endif
@@ -143,21 +182,24 @@
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 							Fax
 						</p>@endif
+						@if(1==2)
 						@if($profile->office_email != '')<p>
 							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
 							Email
 						</p>@endif
-						@if(1==2)<p>
+						<p>
 							<span class="pull-right"><em><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></em></span>
 							Email
 						</p>@endif
 					</div>
+					@endif
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="row" data-columns id="gridlock">
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -230,21 +272,8 @@
 					Propane Gas
 				</div>
 				@endif
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">
-					About Our Community
-				</div>
-			</div>
-			<div class="panel-body">
-				@if(trim($profile->description) == '')
-				<h4 class="text-center text-muted">
-					No description
-				</h4>
-				@else
-				{{ $profile->description }}
+				@if(trim($profile->description) != '')
+				<p>{{ $profile->description }}</p>
 				@endif
 			</div>
 		</div>
@@ -314,7 +343,7 @@
 		</div>
 		@endif
 		<!-- Homes available -->
-		@if($profile->plan->hasFeature('manage_homes') && count($homes) > 0)
+		@if(count($homes) > 0)
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -369,4 +398,16 @@
 @section('incls-body')
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/salvattore.min.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
+<script type="text/javascript">
+	pony.add(function() {
+		if($('#infobox').parent().hasClass('col-md-6')) {
+			$('#infobox').detach().prependTo('#gridlock > .col-md-6:nth-child(1)');
+			$('#inforow').remove();
+
+			var grid = document.getElementById('gridlock');
+			salvattore.recreateColumns(grid);
+		}
+	});
+
+</script>
 @stop

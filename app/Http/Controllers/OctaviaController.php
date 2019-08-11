@@ -9,11 +9,12 @@ use Validator;
 use User;
 use App\Models\Geoname;
 use App\Models\Profile;
+use App\Models\Plan;
 use Input;
 use Mail;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Propaganistas\LaravelPhone\PhoneNumber;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class OctaviaController extends Pony {
 	
@@ -75,7 +76,7 @@ class OctaviaController extends Pony {
 							}, 'plan' => function($query) {
 								$query->select('id');
 							}])
-						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.plan_id, profiles.pets, profiles.description, profiles.phone, profiles.address, profiles.zipcode, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'))->orderBy('profiles.plan_id');
+						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.plan_id, profiles.pets, profiles.description, profiles.phone, profiles.address, profiles.zipcode, profiles.subscription_id, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'))->orderBy('profiles.plan_id', 'DESC');
 
 
 
@@ -87,7 +88,9 @@ class OctaviaController extends Pony {
 			$query = $query->has('spaces');
 		}
 		if(Input::get('filters.homes', 0) == 1) {
-			$query = $query->has('homes');
+			$query = $query->whereHas('homes', function(Builder $query) {
+				$query->whereIn('status', [4, 5]);
+			});
 		}
 		if(Input::get('filters.age', 0) > 0 ) {
 			$query = $query->where('profiles.age_type', Input::get('filters.age'));
@@ -111,11 +114,11 @@ class OctaviaController extends Pony {
 				$homes = $community->homes()->where('price', 	"<=", 	(int)Input::get('filters.max', 0) )
 										    ->where('beds', 	">=", 	(int)Input::get('filters.beds', 0) )
 										    ->where('baths', 	">=", 	(int)Input::get('filters.baths', 0) )
-										    ->where('status', 	">", 	0 )
+										    ->whereIn('status', [4, 5])
 										    ->get();
 				
 			} else {
-				$homes = $community->homes()->where('status', ">", 	0 )->get();
+				$homes = $community->homes()->whereIn('status', [4, 5])->get();
 			}
 
 
@@ -131,6 +134,7 @@ class OctaviaController extends Pony {
 			} else {
 				$phone_formatted = $community->phone;
 			}
+
 			$feature = [
 				'type' => 'Feature',
 				'properties' => [
@@ -138,7 +142,7 @@ class OctaviaController extends Pony {
 					'title' => $community->title,
 					'city' => $community->city->place_name,
 					'state' => $community->state->abbr,
-					'photos' => [$community->photos()->first()],
+					'photos' => $community->plan->hasFeature('manage_photos') ? [$community->photos()->first()] : [null],
 					'spaces' => $spaces,
 					'homes' => $homes,
 					'address' => $community->address,
@@ -216,11 +220,11 @@ class OctaviaController extends Pony {
 				$homes = $community->homes()->where('price', 	"<=", 	(int)Input::get('filters.max', 0) )
 										    ->where('beds', 	">=", 	(int)Input::get('filters.beds', 0) )
 										    ->where('baths', 	">=", 	(int)Input::get('filters.baths', 0) )
-										    ->where('status', 	">", 	0 )
+										    ->whereIn('status', [4, 5])
 										    ->get();
 				
 			} else {
-				$homes = $community->homes()->where('status', ">", 	0 )->get();
+				$homes = $community->homes()->whereIn('status', [4, 5])->get();
 			}
 			foreach ($homes as $home) {
 				$feature = [

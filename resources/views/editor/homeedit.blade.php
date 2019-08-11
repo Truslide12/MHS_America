@@ -18,7 +18,7 @@
 			<a href="{{ URL::route('editor-homes', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}">Homes</a> <small><i class="fa fa-chevron-right"></i></small> 
 			Edit Home
 			<br>
-			<small>{{ $home->title or 'Untitled Listing' }}</small>
+			<small>{{ $home->title ?? 'Untitled Listing' }}</small>
 		</h4>
 		<hr>
 	</div>

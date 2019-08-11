@@ -828,15 +828,22 @@ class EditorController extends Pony {
 		if(Input::hasFile('img') && in_array(Input::file('img')->getMimeType(), $imageTypes)) {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
 			$image = Image::make(Input::file('img'));
+
+			//Resize image to size
+			$image->fit(1080, 810);
+
+			$image->save('imgstorage/home_'.$name.'_crop.jpg');
+
+			$image->resize(280, 210);
+
+			$image->save('imgstorage/home_'.$name.'_sm.jpg');
+
 			$response = array(
 				'status' => 'success',
-				'url' => '/imgstorage/home_'.$name.'_orig.jpg',
-				'width' => $image->width(),
-				'height' => $image->height()
+				'url' => '/imgstorage/home_'.$name.'_crop.jpg',
+				'width' => 1080,
+				'height' => 810
 			);
-
-			$image->save('imgstorage/home_'.$name.'_orig.jpg');
-
 
 			//$me = Auth::user();
 			//$me->avatar = 'uploads/avatar_'.$name.'_orig.jpg';

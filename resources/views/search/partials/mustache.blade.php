@@ -32,7 +32,7 @@
 <script id="communityResultItem" type="x-tmpl-mustache">
 <a data-action="preview" data-type="community" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
                         @{{#photos.0.cover}}
-                        <img src="/imgstorage/cover_@{{ photos.0.cover }}_crop.jpg@{{^photos.0.cover}}/../../img/stockphotos/stolen2.jpg@{{/photos.0.cover}}" class="img-responsive">
+                        <img src="/imgstorage/cover_@{{ photos.0.cover }}_sm.jpg@{{^photos.0.cover}}/../../img/stockphotos/stolen2.jpg@{{/photos.0.cover}}" class="img-responsive">
                         @{{/photos.0.cover}}
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">@{{ title }}<br><small>@{{ city }}, @{{ state }}</small></h4>
