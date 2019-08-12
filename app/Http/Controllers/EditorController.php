@@ -824,6 +824,15 @@ class EditorController extends Pony {
 
 	public function postUploadHomePhoto()
 	{
+		$validator = Validator::make(Input::all(),
+		[
+			'img' => 'max:5000',
+		]);
+
+		if($validator->fails()) {
+			return Response::json(array('status' => 'error', 'message' => 'Image is too large. Max File Size: 5MB'));
+		}
+
 		$imageTypes = array('image/jpeg', 'image/png');
 		if(Input::hasFile('img') && in_array(Input::file('img')->getMimeType(), $imageTypes)) {
 			$name = time().'_'.md5(file_get_contents(Input::file('img')->getRealPath()));
