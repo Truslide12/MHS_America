@@ -1,7 +1,7 @@
 <div class="home-block">
 					<div class="row">
 						<div class="pull-right">
-							<img src="{{ $home->image_backdrop }}" class="img-responsive" width="120">
+							<img src="/imgstorage/{{ $home->default_photo()->url }}_sm.jpg" class="img-responsive" width="120">
 						</div>
 						<div class="pull-left">
 							<h4 class="home-title"><a href="{{ URL::route('home', array('home' => $home->id)) }}">{{ $home->beds }} Bed {{ $home->baths }} Bath {{ $home->size() }}-wide</a></h4>

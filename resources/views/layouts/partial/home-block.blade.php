@@ -3,7 +3,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							@if(!isset($hide_home_images))
-							<img src="{{ $home->default_photo()->url }}" class="img-thumbnail pull-right" style="max-width: 180px;max-height: 180px">
+							<img src="/imgstorage/{{ $home->default_photo()->url }}_sm.jpg" class="img-thumbnail pull-right" style="max-width: 180px;max-height: 180px">
 							@endif
 							<h3 class="profile-title no-margin-t">
 								<a href="{{ URL::route('home', array('id' => $home->id)) }}">{{ $home->beds }} bed {{ $home->baths }} bath home</a><br>
