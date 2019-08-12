@@ -153,7 +153,7 @@
 				for ( i=0; i<=5; i++ ) {
 					if ( typeof Editor.home.photos[i] === 'object' && Editor.home.photos[i] !== null ) {
 						if ( Editor.home.photos[i].hasOwnProperty("id") ) {
-							photodata.photos[i] = Editor.home.photos[i].url;
+							photodata.photos[i] = "/imgstorage/" + Editor.home.photos[i].url + "_crop.jpg";
 							photodata.slots[i] = parseFloat(Editor.home.photos[i].id);
 						}
 					}
@@ -287,7 +287,7 @@
 				photo_uploading_flag = false;
 				croppic.reset();
 				$("#save_status, #photo_slot_text").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
-				photodata.photos[active_slot] = r.url
+				photodata.photos[active_slot] = r.slug
 				update_select( $("#photo-tag").val() );
 				paint_photo_demo(active_slot);
 				$("#photoCropButton").html("Reupload");
@@ -327,7 +327,7 @@
 				} else {
 					$("#photo_slot_text").html("");
 					$("#photo-demo").css({
-						"background": "url("+photodata.photos[active_slot]+")",
+						"background": "url(/imgstorage/"+photodata.photos[active_slot]+"_crop.jpg)",
 						"background-size": "100% 100%",
 						"background-position": "center"
 					});
