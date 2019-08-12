@@ -5,6 +5,7 @@ use Input;
 use Request;
 use Validator;
 use Hash;
+use Geocoder;
 use Carbon\Carbon;
 use App\User;
 use App\Models\Home;
@@ -538,8 +539,9 @@ class GetStartedHomeController extends Pony {
 				'county_id' => 0, /*need to find how to retrieve this..*/
 				'city_id' 	=> Input::get('community-city')
 				];
-
-				$test = self::createBaseProfile(Input::get('company-id'), $pd);
+				
+				//Input::get('company-id')
+				$test = self::createBaseProfile(0, $pd);
 				if ( $test->status ) {
 					$order_data = session("order_data");
 					$order_data['space'] = Input::get('community-address2');
@@ -821,7 +823,7 @@ class GetStartedHomeController extends Pony {
 			$new_home->zipcode 			= $order_data['profile_data']->zipcode;
 			$new_home->state_id 		= $order_data['profile_data']->state_id;
 			$new_home->description 		= "";
-			$new_home->location 		= "0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
+			$new_home->location 		= $order_data['profile_data']->location; //"0101000020E61000003605323B8B3E5DC0D4F59F90F8F64040";
 			$new_home->space_number 	= $order_data['space'];
 
 			$new_home->specs 		= '{"siding":"0","skirting":"0","roof_angle":"0","roof_mat":"0","windows":"0","wall_thickness":"0","kitchen_floor":"0","floor":"0","setup":"0","strap":"0"}';
@@ -1050,8 +1052,22 @@ class GetStartedHomeController extends Pony {
 			return Redirect::route($this->PRODUCT_ROUTE)->withErrors(["Failed to create profile.."]);
 		}
 
+		$geocode = Geocoder::address(
+			$data->address,
+			'',
+			$data->city_id,
+			$data->state_id,
+			$data->zipcode,
+			$profile
+		);
+		$geocoding = $geocode['success'];
+
+		if($geocoding) {
+			$profile->update($geocode['data']);
+		}
+
 		return (object)[
-			"status" => true,
+			"status" => $geocoding,
 			"profile" => $profile
 		];
 	}
