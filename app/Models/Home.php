@@ -164,7 +164,7 @@ class Home extends LocatableModel {
 
 	public function getTitle()
 	{
-		return (is_null($this->title) || $this->title == '') ? $this->beds.'bed '.$this->baths.'bath '.$this->size() : $this->title;
+		return (is_null($this->title) || $this->title == '') ? $this->beds.'bed '.$this->baths.'bath '.$this->size().'-wide' : $this->title;
 	}
 
 	public function profiles()
