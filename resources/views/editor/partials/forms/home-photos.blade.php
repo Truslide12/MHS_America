@@ -61,6 +61,7 @@
 		            <option value="100">Other</option> 	
 	            </select>
 	            <button type="button" class="btn btn-primary" id="photoCropButton" style="margin-top: 3px;">Upload</button>
+	            <button type="button" class="btn btn-primary" id="photoRemoveButton" style="margin-top: 3px;">Remove</button>
 	            <button type="button" onclick="move_next();" class="btn btn-primary" id="nextButton" style="margin-top: 3px;display: none;">Next</button>
 	            <!-- <a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#coverEditorBox">Add a photo</a> -->
 	            <hr>
@@ -228,15 +229,16 @@
 				active_slot = i;
 
 				if ( photodata.slots[i] === null ) { 
-
+					$("#photoCropButton").html("Upload");
 				} else {
 					$("#tab-"+i).html(photo_labels[photodata.slots[i]].id);
 					$("#photo_slot_text").html("Photo "+i+" of 5: "+photo_labels[photodata.slots[i]].name);
 					$("#photo-tag").val(photo_labels[photodata.slots[i]].id);
+					$("#photoCropButton").html("Reupload");
 				}
 
-				$("#photoCropButton").html("Upload");
-				$("#nextButton").hide();
+				
+				$("#nextButton, #photoRemoveButton").hide();
 				update_photo_tabs();
 				paint_photo_demo();
 
@@ -291,7 +293,7 @@
 				update_select( $("#photo-tag").val() );
 				paint_photo_demo(active_slot);
 				$("#photoCropButton").html("Reupload");
-				$("#nextButton").show();
+				$("#nextButton, #photoRemoveButton").show();
 				console.log(window.response )
 				
 				for ( i = 1; i<= 5;i++ ) {
@@ -332,8 +334,24 @@
 						"background-position": "center"
 					});
 					if( active_slot <= 5) {
-						$("#nextButton").show();
+						$("#nextButton, #photoRemoveButton").show();
 					}
 				}
 			}
+
+			function removePhoto(id) {
+				console.log("remove photo");
+				//delete Editor.home.photos[id];
+				delete photodata.photos[active_slot];
+				photodata.slots[active_slot] = null;
+				delete Editor.home.photos[id];
+				
+				paint_photo_demo();
+				update_photo_tabs();
+
+			}
+
+			$('#photoRemoveButton').on('click', function(evt, item) {
+				removePhoto(active_slot);
+			});
 		</script>
