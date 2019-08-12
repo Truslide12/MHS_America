@@ -224,7 +224,7 @@ h3, h1 {
 			<div class="" style="background: silver; padding:5px;border:1px solid black">
 			<img class="img" style="max-width: 100%;" src="/img/promo_images/CommunityProfile.png">
 			</div>
-			<a href="" style="width: 100%;padding: 20px;margin-top: 5px;" class="btn btn-success">Start Now</a>
+			<a href="page/community-plans" style="width: 100%;padding: 20px;margin-top: 5px;" class="btn btn-success">Start Now</a>
 		</div>
 	</div>
 </div>

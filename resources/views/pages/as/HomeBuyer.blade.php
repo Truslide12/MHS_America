@@ -161,7 +161,7 @@ h3, h1 {
 				MHS America is here to help you find the right home for you. It is our goal to provide the best home buying experience for our customers. On our platform you will find the most accurate information available to aid you in your home buying process. Here is how to make the best of your MHS America experience.
 			</p>
 
-			<a href="" style="width: 100%;padding: 20px;" class="btn btn-success">Register Now</a>
+			<a href="{{ URL::route('account-register') }}" style="width: 100%;padding: 20px;" class="btn btn-success">Register Now</a>
 		</div>
 		<div class="col-md-6 col-sm-12">
 			<h3>Register an Account, it's Worth It</h3>

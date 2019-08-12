@@ -504,4 +504,38 @@ class DerpyController extends Pony {
 	}
 
 
+	public function getLatestCommunities($zip = null)
+	{
+
+		if ( $zip === null ) {
+			//latest on site
+			$p = Profile::orderBy('id', 'DESC')
+					->where('plan_id', '>', 0)
+					->with('city')
+					->with('state')
+					->with('photos')
+					->paginate(4);
+
+				foreach ($p as $z) {
+					$z->photos = $z->photos();
+				}
+
+			return $p;
+		} else {
+			if ( strlen($zip) == 2 ) {
+				//by state
+				return 3;
+			} else {
+				//by zipcode
+				$p = Profile::where('plan_id', '>', 0)
+						->where('zipcode', $zip)
+						->with('city')
+						->paginate(4);
+			}
+		}
+
+
+
+	}
+
 }
