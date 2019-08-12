@@ -162,6 +162,11 @@ class Home extends LocatableModel {
 		}
 	}
 
+	public function getTitle()
+	{
+		return (is_null($this->title) || $this->title == '') ? $this->beds.'bed '.$this->baths.'bath '.$this->size() : $this->title;
+	}
+
 	public function profiles()
 	{
 		/* why(how) belongsToMany? */
