@@ -242,10 +242,9 @@
 			.find('option')
 			.remove()
 			.end()
-			.append('<option>Select a city...</option>');
+			.append('<option value="0">Select a city...</option>');
 
 		$('#submitbtn').prop('disabled', 'disabled');
-		console.log("free", abbr)
 		if(abbr != '') {
 			$.getJSON("/derpy/cities/" + abbr, function(result) {
 				var options = $("#community-city");
@@ -270,12 +269,10 @@
 	
 
 
-$('#orderform').one('submit', function() {
-    $(this).find('.hardstop').attr('disabled','disabled');
-});
 
 
 function setMode(mode){
+	mode = mode;
 	if ( mode == 1) {
 		$("#notincomm").removeClass("active");
 		$("#incomm").addClass("active");
@@ -310,7 +307,7 @@ function setMode(mode){
 			$('#community-name').typeahead(null, {
 				displayKey: 'result',
 				display: function(item){ 
-					if (item.id == -1) {
+					if (item.id == -1 && $("#community-name").val().length > 3 ) {
 						wh = $("#community-name").val();
 						return "Enter New Community: \"<strong>"+wh+"</strong>\"";
 					}
@@ -331,10 +328,16 @@ function setMode(mode){
 			});
 
 			$('#community-name').on('blur', function(evt, item) {
-				$("#community-name").val( wh );
+				if ( typeof wh !== undefined ) {
+					$("#community-name").val( wh );
+				}
 				return false;
 			});
-
+			$('#orderform').on('submit', function(evt, item) {
+				if ( checkVerify(evt) == false ) {
+					evt.preventDefault();
+				}
+			});
 
 	function getCompanyData(name, id) {
 
@@ -349,7 +352,6 @@ function setMode(mode){
 		$.getJSON("/derpy/communities/" + name + "/" + id, function(result) {
 
 			result = result[0];
-			console.log(result);
 			$("#cname").html(result.title);
 			$("#caddr").html(result.address);
 			$("#czip").html(result.zipcode);
@@ -371,6 +373,7 @@ function setMode(mode){
 			$("#community-id").val(result.id);
 			$(".thoughtform").show();
 			$(".companybtn").html("Not Here").show();
+
 			$("#community-space").attr('disabled', false);
 		});
 	}
@@ -386,7 +389,7 @@ function fff(){
   		//whole thing needs refactored
   		$(".companybtn").html("Create").hide();
   		var_core_action = null;
-  		$("#company-id").val(0);
+  		//$("#company-id").val(0);
   	break;
   	case 1:
   		$("#community-space").attr('disabled', true);
@@ -396,7 +399,7 @@ function fff(){
   		//whole thing needs refactored
   		$(".companybtn").html("Create").hide();
   		var_core_action = null;
-  		$("#company-id").val(0);
+  		//$("#company-id").val(0);
   	break;
   	default:
   		if ( $("#community-name").val().length < 3 ) {
@@ -406,10 +409,81 @@ function fff(){
   		$(".truform").show();
   		$(".companybtn").html("Reset").show();
   		var_core_action = 1;
-  		$("#company-id").val(0);
+  		//$("#company-id").val(0);
   	break;
   }
 }
 
+function checkVerify(e) {
+
+		if ( var_core_action == 0 ) {
+			var validation = [	["string", "community-space"],
+								["int", "company-id"],
+								["int", "community-id"]
+								];
+		} else {
+			var validation = [	["string", "community-zip"],
+								["string", "community-address2"],
+								["string", "community-address1"],
+								["int", "community-state"],
+								["int", "community-city"],
+								["int", "company-id"]
+								];
+		}
+
+
+	is_valid = true;
+	for( v in validation ) {
+		elem = $( "#"+validation[v][1] );
+		switch( validation[v][0] ) {
+			case "string":
+				if(elem.val() == null || elem.val() == '' ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+			case "int":
+				
+				if(elem.val() == null || elem.val() == '' || elem.val() == '0' || elem.val() == 0 ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+		}
+
+
+	}
+
+	if ( is_valid ) {
+		return true;
+	} else {
+		return false;
+	}
+
+}
 </script>
 @stop

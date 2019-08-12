@@ -28,6 +28,12 @@ Route::group(array('prefix' => 'latest'), function()
 
 });
 
+Route::group(array('prefix' => 'latest'), function()
+{
+	Route::get('communities', array('uses' => 'DerpyController@getLatestCommunities', 'as' => 'communities-all'));
+	Route::get('communities/{zip}', array('uses' => 'DerpyController@getLatestCommunities', 'as' => 'communities-zip'));
+
+});
 /*************************************
 	Everything below I was using
 	when I started implementing

@@ -412,7 +412,7 @@ class Profile extends EloquentModel {
 
 	public function fetchTemplate()
 	{
-		if ( ! $this->county ) { return "error"; }
+		//if ( ! $this->county ) { return "error: this profile was saved with incomplete data. Missing County ID"; }
 		
 		$view = View::make($this->rep()->layout())
 					->with('contentclass', 'texture-1')
