@@ -850,6 +850,7 @@ class EditorController extends Pony {
 			$response = array(
 				'status' => 'success',
 				'url' => '/imgstorage/home_'.$name.'_crop.jpg',
+				'slug' => 'home_'.$name,
 				'width' => 1080,
 				'height' => 810
 			);
