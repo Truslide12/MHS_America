@@ -458,42 +458,7 @@
 		</div>
 	</div>
 	@else
-	<div class="row clearfix nudge white">
-		<div class="col-md-6">
-			<div class="page-header no-push">
-				<h3>Latest communities</h3>
-			</div>
-			<div class="profile-container">
-				@foreach($latest_communities as $community)
-				@include('layouts.partial.community-block')
-				@endforeach
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="page-header no-push">
-				<h3>Latest homes</h3>
-			</div>
-			@foreach($latest_homes as $home)
-			@include('layouts.partial.home-block-mini')
-			@endforeach
-			<div class="page-header no-push no-border no-margin-b">
-				<h5 class="text-muted">Advertisement</h5>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-body">
-					<div class="media">
-						<div class="pull-left">
-							<img src="//placehold.it/100x100">
-						</div>
-						<div class="media-body">
-							<h4>Profile title here</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adeliscing elit...</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	@endif
 
 	@if ( $demo == 1 )
