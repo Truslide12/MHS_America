@@ -277,7 +277,7 @@
                 display: none;
             }
             .footmodes {
-                display: initial;
+                display: block;
             }
             .footmodes > .mode0.active {
                 background: rgb(66, 134, 244);
@@ -1296,7 +1296,7 @@ function calculateHomes(clusterSource) {
 }
 
 
-is_mobile_mode = false;
+is_mobile_mode = true;
 mobile_free_space = 400;
 function checkMobile(){
 
@@ -1363,5 +1363,6 @@ function toggleMobileFilters() {
 }
 
 checkMobile();
+
 </script>
 @stop
