@@ -153,7 +153,7 @@
 				for ( i=0; i<=5; i++ ) {
 					if ( typeof Editor.home.photos[i] === 'object' && Editor.home.photos[i] !== null ) {
 						if ( Editor.home.photos[i].hasOwnProperty("id") ) {
-							photodata.photos[i] = "/imgstorage/" + Editor.home.photos[i].url + "_crop.jpg";
+							photodata.photos[i] = Editor.home.photos[i].url;
 							photodata.slots[i] = parseFloat(Editor.home.photos[i].id);
 						}
 					}
