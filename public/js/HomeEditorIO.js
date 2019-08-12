@@ -56,10 +56,10 @@ var HomeEditorIO = function (id) {
                                   "home-photos",
                                   "home-review");
   if ( id != null ) {
-    console.log("Starting Editor with Loaded Obj");
+    //console.log("Starting Editor with Loaded Obj");
     this.LoadHomeProfile(id);
   } else {
-    console.log("Starting Editor with New Obj");
+    //console.log("Starting Editor with New Obj");
   }
 };
 
@@ -146,8 +146,6 @@ HomeEditorIO.prototype.CollectValues = function() {
 
 HomeEditorIO.prototype.SaveToServer = function() {
   this.SaveChanges();
-  alert("Saved to Server..");
-  console.log("not really tho.. AJAX->REST_API (soon)");
 }
 
 HomeEditorIO.prototype.ValidateHomeInfo = function() {
@@ -232,7 +230,6 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
 
     
 
-    console.log("pddRGEX price", pdi, pddRGEX.test(pdi));
 
     if ( pddRGEX.test(pdi) ) {
       pdx = pdi.replace(/(,| |\$)/g,"");
@@ -631,8 +628,6 @@ HomeEditorIO.prototype.ValidateAdInfo = function() {
 
         pdi = $("#pdi").val();
 
-        console.log("pddRGEX", pdi, pddRGEX.test(pdi));
-        console.log("pdpRGEX", pdi, pdpRGEX.test(pdi));
 
         params = [(pdpRGEX.test(pdi) || pddRGEX.test(pdi))?pdi:null, null, null];
         if ( pdpRGEX.test(pdi) || pddRGEX.test(pdi) ) {
@@ -740,7 +735,7 @@ HomeEditorIO.prototype.ValidateHomeOptions = function() {
   this.home.home_options.appliances = appliances;
 
   if ( rejected > 0 ) {
-    console.log("Missing "+rejected+" Fields..");
+    //console.log("Missing "+rejected+" Fields..");
     //$("#count-opts").html((2-rejected)+"/2");
     return false;
   } else {
@@ -892,7 +887,7 @@ HomeEditorIO.prototype.BuildReview = function() {
     }*/
 
 
-    console.log("ph", this.home.photos);
+    //console.log("ph", this.home.photos);
     if ( this.home.photos !== null ) {
       if ( this.home.photos[1] ) {
         $("#photo-preview").attr('src', this.home.photos[1].url);
@@ -955,13 +950,12 @@ HomeEditorIO.prototype.SaveChanges = function(input_step) {
             });
             data = this.home;
             that = this;
-            console.log("sending:", that);
+            //console.log("sending:", that);
             var str = document.location.toString();
             //console.log(str);
             //str = str.split("/").slice(0, -1).join("/").toString() + "/new/dataio";
             str = "edit/dataio";
             $.post(str,data,function(e) {
-                console.log(e);
                 e = JSON.parse(e);
 
                 if( e.status === true ) {
@@ -1022,10 +1016,9 @@ HomeEditorIO.prototype.LoadHomeProfile = function(id) {
             //console.log(str);
 
             $.get(str,function(e) {
-              console.log(e);
               e = JSON.parse(e);
                 if( e.status == false) {
-                  console.log("Failed to load data.. no access!");
+                  //console.log("Failed to load data.. no access!");
                   $("#save_status").html("<b>Failed to load data.. no access!</b>");
                   return false;
                 } else {

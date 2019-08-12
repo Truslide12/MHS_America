@@ -217,13 +217,11 @@
 
 
 			function move_next() {
-				console.log("from", active_slot);
 				nex = parseInt(active_slot)+1;
 				ready_photo_slot(nex);
 			}
 
 			function ready_photo_slot(i) {
-				console.log("to", i);
 				$("#tab-"+active_slot).parent().removeClass("activeslot");
 				$("#tab-"+i).parent().addClass("activeslot");
 				active_slot = i;
@@ -247,7 +245,6 @@
 			function update_photo_tabs() {
 
 				for ( i=1; i<= 5; i++) {
-					//console.log(photo_labels[photodata.slots[i]].name)
 					if ( photodata.slots[i] === null ) { 
 						$("#tab-"+i).html("Add Photo");
 						if ( i == 1 ) {
@@ -294,7 +291,6 @@
 				paint_photo_demo(active_slot);
 				$("#photoCropButton").html("Reupload");
 				$("#nextButton, #photoRemoveButton").show();
-				console.log(window.response )
 				
 				for ( i = 1; i<= 5;i++ ) {
 					Editor.home.photos[i] = {id: i, tag: photo_labels[photodata.slots[i]].name, url: photodata.photos[i] };
@@ -309,7 +305,6 @@
 				$("#save_status").html("<b>Photo Rejected..</b>");
 				$("#photo_slot_text").html(r.message);
 				$("#photoCropButton").html("Reupload");
-				console.log(window.response )
 				//update_select( $("#photo-tag").val() );
 				//paint_photo_demo(active_slot);
 				/*
@@ -340,7 +335,6 @@
 			}
 
 			function removePhoto(id) {
-				console.log("remove photo");
 				//delete Editor.home.photos[id];
 				delete photodata.photos[active_slot];
 				photodata.slots[active_slot] = null;
