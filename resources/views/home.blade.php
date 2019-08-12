@@ -342,7 +342,7 @@
 			</div>
 		</div>
 		<div style="margin: 0px -15px 0px -15px;font-size: 1.2em;background:none;">
-			<img src="{{ $home->default_photo()->url }}" class="cotw-img" style="float:left;margin:25px;margin-top: 15px;">
+			<img src="/imgstorage/{{ $home->default_photo()->url }}_sm.jpg" class="cotw-img" style="float:left;margin:25px;margin-top: 15px;">
 			<div style="padding-top: 0px;">
 			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }} <span class="mobo_price">${{ number_format($home->price) }}<span></h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
