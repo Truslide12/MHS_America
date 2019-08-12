@@ -32,7 +32,7 @@
 								@endphp"> 
 			@foreach( json_decode($home->photos) as $photo )
 			 @if( property_exists($photo, "url") )
-				<img style="max-height: 30vh;" src="{{ $photo->url }}">
+				<img style="max-height: 30vh;" src="/imgstorage/{{ $photo->url }}_sm.jpg">
 			 @endif
 			@endforeach
 			</div>
@@ -55,7 +55,7 @@
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
-			                    <img class="img-responsive" src="{{$ph[$h]->url}}">
+			                    <img class="img-responsive" src="/imgstorage/{{$ph[$h]->url}}_sm.jpg">
 			                    
 			                </div><!-- card image -->
 			                
@@ -338,7 +338,7 @@
 		</style>
 		<div class="backdrop" id="backdrop" style="display: none;" xonclick="releaseBackdrop();">
 			<div class="backdropimg">
-			<img id="backdropimg" src="{{ $home->default_photo()->url }}">
+			<img id="backdropimg" src="/imgstorage/{{ $home->default_photo()->url }}_crop.jpg">
 			</div>
 		</div>
 		<div style="margin: 0px -15px 0px -15px;font-size: 1.2em;background:none;">
@@ -374,7 +374,7 @@
 					<div class="mhs-slide" id="slide-{{$h}}">
 						<div class="card">
 			                <div class="card-image">
-			                    <img id="photo{{$h}}" class="img-responsive" src="{{$ph[$h]['url']}}" onclick="popBackdrop(this.id);">
+			                    <img id="photo{{$h}}" class="img-responsive" src="/imgstorage/{{$ph[$h]['url']}}_sm.jpg" onclick="popBackdrop(this.id);">
 			                    
 			                </div><!-- card image -->
 			                
@@ -681,7 +681,7 @@
 		function popBackdrop(id){
 			if( isNaN(id) ) { id = id.slice(5); }
 			active_slide = parseInt(id);
-			$("#backdropimg").attr("src", photos[active_slide]);
+			$("#backdropimg").attr("src", "/imgstorage/" + photos[active_slide] + "_crop.jpg");
 			$(".backdrop").show();
 		}
 
