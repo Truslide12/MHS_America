@@ -278,7 +278,7 @@
 							{{ $home->beds }} Bed {{ $home->baths }} Bath {{ $home->size() }}-wide<br> 
 							<small>{{ $home->year }} {{ $home->brand }} {{ $home->model }} | {{ $home->sn() }}</small>
 							-->
-							{{ $home->title }}  @if($home->status == 1) <small style="color:red;"><em>(private)</em></small> @endif<br>
+							{{ $home->getTitle() }}  @if($home->status == 1) <small style="color:red;"><em>(private)</em></small> @endif<br>
 
 							<small>{{ $home->profile->title }} - Space {{ $home->space_number }}</small>
 						</h4>
