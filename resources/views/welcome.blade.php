@@ -377,7 +377,7 @@
 					<div class="mhs-slide" id="slide-{{$loop->index}}">
 						<div class="card clickycard" href="home/{{ $home->id }}">
 			                <div class="card-image" style="position: relative;">
-			                    <img class="img-responsive" src="{{$img[$loop->index]}}" style="min-width: 100%;">
+			                    <img class="img-responsive" src="/imgstorage/{{$img[$loop->index]}}_sm.jpg" style="min-width: 100%;">
 			                        <div class="fs-ribbon" style="border-top-color: {{$home->sales_ribbon->color}}!important;">
 								        <div class="txt">{!!$home->sales_ribbon->text!!}</div>
 								    </div>
