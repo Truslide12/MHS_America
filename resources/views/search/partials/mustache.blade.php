@@ -17,7 +17,7 @@
 <script id="homeResultItem" type="x-tmpl-mustache">
 <a data-action="preview" data-type="home" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="pricey" price="@{{price_formatted}}" hasphoto="@{{^photos.1}}No Photo@{{/photos.1}}"><img 
-                        src="@{{ photos.1.url }}@{{^photos.1.url}}img/stockphotos/stolen2.jpg@{{/photos.1.url}}" 
+                        src="/imgstorage/@{{ photos.1.url }}_sm.jpg@{{^photos.1.url}}/img/stockphotos/stolen2.jpg@{{/photos.1.url}}" 
                         class="img-responsive" style="width:100%;min-height: 150px;max-height: 150px;"></div>
 
                         <div class="d-flex w-100 justify-content-between">
