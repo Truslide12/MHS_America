@@ -413,7 +413,8 @@
 		$('.owl-carousel').owlCarousel({
 			items:1,
 			lazyLoad:true,
-			loop:true
+			loop:true,
+			nav:true
 		});
 
 		if($('#infobox').parent().hasClass('col-md-6')) {
