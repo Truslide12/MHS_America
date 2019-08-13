@@ -15,7 +15,7 @@
 	    	bottom: 0;
 	    	padding: 10px !important;
 	    	margin: 0 !important;
-	    	font-size: 2.14rem !important;
+	    	font-size: 4.28rem !important;
 	    	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	    	background:rgba(0, 0, 0, 0.25);
 	    	color:#333;
@@ -41,7 +41,8 @@
 			color:#545454;
 		}
 		.owl-theme .owl-nav{margin:0;}
-		.owl-theme .owl-dots{height:24px;position:relative;margin-top:-24px;z-index:1;}
+		.owl-theme .owl-dots{height:24px;position:relative;margin-top:-24px;z-index:1;pointer-events:none;}
+		.owl-theme .owl-dots .owl-dot{pointer-events:all;}
 		.owl-theme .owl-dots .owl-dot span{margin:7px;}
 	</style>
 @stop
