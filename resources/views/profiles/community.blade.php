@@ -27,7 +27,6 @@
 					</a>
 				</small>
 			</h2>
-			<p class="lead">{{ $profile->tagline }}</p>
 		</div>
 	</div>
 	<div class="row texture-1">
