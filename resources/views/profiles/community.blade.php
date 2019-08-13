@@ -20,7 +20,11 @@
 	    	background:none;
 	    	color:#333;
 	    	width:50px;
+	    	outline:0;
 		}
+		.owl-carousel .owl-nav button.owl-prev,
+		.owl-carousel .owl-nav button.owl-next,
+		.owl-theme .owl-dots .owl-dot{outline:0;}
 		.owl-carousel .owl-nav button.owl-prev{
 			left:0;
 			border-right:1px solid #333;
