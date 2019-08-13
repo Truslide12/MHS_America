@@ -7,6 +7,22 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/owl/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
+	<style type="text/css">
+		.owl-theme .owl-nav .owl-prev,
+		.owl-theme .owl-nav .owl-next{
+			position: absolute;
+			top: 0;
+	    	bottom: 0;
+	    	padding: 10px !important;
+	    	font-size: 2.14rem !important;
+		}
+		.owl-theme .owl-nav .owl-prev {
+			left:0;
+	    }
+	    .owl-theme .owl-nav .owl-next {
+			right:0;
+	    }
+	</style>
 @stop
 
 @section('content-above')
