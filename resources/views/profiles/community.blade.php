@@ -34,6 +34,7 @@
 			background:rgba(0, 0, 0, 0.65);
 			color:#fff;
 		}
+		.owl-theme .owl-nav{margin:0;}
 	</style>
 @stop
 
