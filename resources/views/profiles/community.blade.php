@@ -33,6 +33,14 @@
 	<div class="row texture-1">
 		<div class="col-md-12 padding-b">
 		@if(Auth::check())
+			@if($can_edit)
+			<a href="#" class="btn btn-labeled btn-default margin-r">
+				<span class="btn-label">
+					<i class="fa fa-pencil"></i>
+				</span>
+				Edit profile</span>
+			</a>
+			@endif
 			@if($user->watchesProfile($profile->id))
 			<a href="#" data-action="watch" data-relation="profile" data-id="{{ $profile->id }}" class="watch-profile-{{ $profile->id }} btn btn-info margin-r">
 				Unwatch<span class="hidden-xs"> community</span>
