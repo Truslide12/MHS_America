@@ -259,6 +259,7 @@
                             pets: $('#optPets').prop('checked') ? 1 : 0,
                             age: $('#optAge').val()
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('communities');
                         break;
                     case 1:
                         filter_set = {
@@ -268,6 +269,7 @@
                             baths: $('#optBaths').val(),
                             pets: $('#optPets').prop('checked') ? 1 : 0
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('homes');
                         break;
                     case 2:
                         filter_set = {
@@ -275,6 +277,7 @@
                             width: $('#optWidth').val(),
                             pets: $('#optPets').prop('checked') ? 1 : 0
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('spaces');
                         break;
                 }
 
