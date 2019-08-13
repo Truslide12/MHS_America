@@ -410,7 +410,11 @@
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/owl/owl.carousel.min.js"></script>
 <script type="text/javascript">
 	pony.add(function() {
-		$('.owl-carousel').owlCarousel();
+		$('.owl-carousel').owlCarousel({
+			items:1,
+			lazyLoad:true,
+			loop:true
+		});
 
 		if($('#infobox').parent().hasClass('col-md-6')) {
 			$('#infobox').detach().prependTo('#gridlock > .col-md-6:nth-child(1)');
