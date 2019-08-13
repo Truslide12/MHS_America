@@ -3,6 +3,8 @@
 
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/owl/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/owl/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 @stop
@@ -405,8 +407,11 @@
 @section('incls-body')
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/salvattore.min.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
+<script type="text/javascript" src="{{ URL::route('welcome') }}/js/owl/owl.carousel.min.js"></script>
 <script type="text/javascript">
 	pony.add(function() {
+		$('.owl-carousel').owlCarousel();
+
 		if($('#infobox').parent().hasClass('col-md-6')) {
 			$('#infobox').detach().prependTo('#gridlock > .col-md-6:nth-child(1)');
 			$('#inforow').remove();

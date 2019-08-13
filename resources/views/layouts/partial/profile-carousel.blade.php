@@ -32,3 +32,14 @@
 		</div>
 	</div>
 </div>
+<div class="container texture-2">
+	<div class="row">
+		<div class="col-md-12 no-padding-x">
+			<div class="owl-carousel owl-theme">
+				@foreach($photos as $photo)
+				<div><img src="/imgstorage/cover_{{ $photo->cover }}_crop.jpg" alt="{{ ($photo->title == '') ? '' : $photo->title }}"></div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+</div>
