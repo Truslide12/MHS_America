@@ -1045,7 +1045,7 @@ class GetStartedHomeController extends Pony {
 		$profile->state_id 		= $data->state_id;
 		$profile->county_id 	= $data->county_id;
 		$profile->city_id 		= $data->city_id;
-		$profile->company_id 	= $company_id;
+		$profile->company_id 	= 0;//$company_id;
 
 		if (!$profile->save()) {
 
