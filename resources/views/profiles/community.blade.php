@@ -12,12 +12,13 @@
 		.owl-carousel .owl-nav button.owl-next{
 			position: absolute;
 			top: 0;
-	    	bottom: 24px;
+	    	bottom: 25px;
 	    	padding: 10px !important;
 	    	margin: 0 !important;
 	    	font-size: 2.14rem !important;
 	    	background:none;
 	    	color:#333;
+	    	width:50px;
 		}
 		.owl-carousel .owl-nav button.owl-prev{
 			left:0;
@@ -35,6 +36,7 @@
 			color:#fff;
 		}
 		.owl-theme .owl-nav{margin:0;}
+		.owl-theme .owl-dots{height:24px;border-top:1px solid #333;}
 	</style>
 @stop
 
