@@ -12,10 +12,11 @@
 		.owl-carousel .owl-nav button.owl-next{
 			position: absolute;
 			top: 0;
-	    	bottom: 25px;
+	    	bottom: 24px;
 	    	padding: 10px !important;
 	    	margin: 0 !important;
 	    	font-size: 2.14rem !important;
+	    	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	    	background:none;
 	    	color:#333;
 	    	width:50px;
@@ -37,6 +38,7 @@
 		}
 		.owl-theme .owl-nav{margin:0;}
 		.owl-theme .owl-dots{height:24px;border-top:1px solid #333;}
+		.owl-theme .owl-dots .owl-dot span{margin:7px;}
 	</style>
 @stop
 
