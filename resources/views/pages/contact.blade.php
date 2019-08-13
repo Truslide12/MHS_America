@@ -14,13 +14,16 @@ Contact Us
 <div id="backdrop">
 	<div id="backdrop-inner"></div>
 </div>
+@php
+	$contentclass = 'no-pointer-events';
+@endphp
 @stop
 
 @section('content')
 <div class="row">
         <div class="col-mid-4">
             <form id="formobj" class="form">
-            <div class="panel panel-default get-in-touch">
+            <div class="panel panel-default get-in-touch" style="pointer-events:all;">
                 <div class="tab-content">
 					<div class="tab-pane active" id="noteform">
 						<h3 class="text-center">
@@ -94,7 +97,7 @@ $(document).ready(function(){
 			'background-position':parseInt(event.pageX/8) + "px "+parseInt(event.pageY/12)+"px, "+parseInt(event.pageX/15)+"px "+parseInt(event.pageY/15)+"px, "+parseInt(event.pageX/30)+"px "+parseInt(event.pageY/30)+"px"
 		}});
 	});*/
-	const tilt = $('#backdrop-inner').tilt({axis:'x'});
+	const tilt = $('#backdrop-inner').tilt({disableAxis:'y'});
 
 	$('#morelink').click(function(event){
 		event.preventDefault();
