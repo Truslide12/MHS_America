@@ -64,7 +64,7 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
     .row.white{color:#dedede;background-color:#333;}
 
     #resultlist{overflow-y:auto;}
-	#resultlist .list-group{grid-template-columns:repeat(auto-fit, minmax(49%, 1fr));column-gap:10px 2%;grid-auto-rows:120px;}
+	#resultlist .list-group{grid-template-columns:repeat(auto-fit, minmax(49%, 1fr));grid-gap:10px 2%;grid-auto-rows:120px;}
 	#resultlist .list-group:after{content:" ";font-size:0;clear:both;}
 	#resultlist .list-group-item div{padding:5px 15px 15px;}
     #resultlist .list-group-item.with-pic{grid-row-end:span 2;}
