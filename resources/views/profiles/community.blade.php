@@ -12,12 +12,12 @@
 		.owl-carousel .owl-nav button.owl-next{
 			position: absolute;
 			top: 0;
-	    	bottom: 24px;
+	    	bottom: 0;
 	    	padding: 10px !important;
 	    	margin: 0 !important;
 	    	font-size: 2.14rem !important;
 	    	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-	    	background:none;
+	    	background:rgba(0, 0, 0, 0.25);
 	    	color:#333;
 	    	width:50px;
 	    	outline:0;
@@ -38,10 +38,10 @@
 		.owl-carousel .owl-nav button.owl-next:hover,
 		.owl-carousel .owl-nav button.owl-next:focus{
 			background:rgba(0, 0, 0, 0.65);
-			color:#fff;
+			color:#545454;
 		}
 		.owl-theme .owl-nav{margin:0;}
-		.owl-theme .owl-dots{height:24px;border-top:1px solid #333;}
+		.owl-theme .owl-dots{height:24px;position:relative;margin-top:-24px;z-index:1;}
 		.owl-theme .owl-dots .owl-dot span{margin:7px;}
 	</style>
 @stop
