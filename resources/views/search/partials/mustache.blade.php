@@ -15,7 +15,7 @@
 
 </script>
 <script id="homeResultItem" type="x-tmpl-mustache">
-<a data-action="preview" data-type="home" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start @{{#photos.1}} with-pic @{{/photos.1}}">
+<a data-action="preview" data-type="home" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="pricey" price="@{{price_formatted}}" hasphoto="@{{^photos.1}}No Photo@{{/photos.1}}"><img 
                         src="/imgstorage/@{{ photos.1.url }}_sm.jpg@{{^photos.1.url}}/img/stockphotos/stolen2.jpg@{{/photos.1.url}}" 
                         class="img-responsive" style="width:100%;min-height: 150px;max-height: 150px;"></div>
@@ -30,7 +30,7 @@
                     </a>
 </script>
 <script id="communityResultItem" type="x-tmpl-mustache">
-<a data-action="preview" data-type="community" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
+<a data-action="preview" data-type="community" data-id="@{{ id }}" style="cursor:pointer;" class="list-group-item list-group-item-action flex-column align-items-start@{{#photos.0.cover}} with-pic@{{/photos.0.cover}}">
                         @{{#photos.0.cover}}
                         <img src="/imgstorage/cover_@{{ photos.0.cover }}_sm.jpg@{{^photos.0.cover}}/../../img/stockphotos/stolen2.jpg@{{/photos.0.cover}}" class="img-responsive">
                         @{{/photos.0.cover}}
