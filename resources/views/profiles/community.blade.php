@@ -12,18 +12,28 @@
 		.owl-carousel .owl-nav button.owl-next{
 			position: absolute;
 			top: 0;
-	    	bottom: 0;
+	    	bottom: 24px;
 	    	padding: 10px !important;
 	    	margin: 0 !important;
 	    	font-size: 2.14rem !important;
-	    	
+	    	background:none;
+	    	color:#333;
 		}
-		.owl-theme .owl-nav .owl-prev {
+		.owl-carousel .owl-nav button.owl-prev{
 			left:0;
-	    }
-	    .owl-theme .owl-nav .owl-next {
+			border-right:1px solid #333;
+		}
+		.owl-carousel .owl-nav button.owl-next{
 			right:0;
-	    }
+			border-left:1px solid #333;
+		}
+		.owl-carousel .owl-nav button.owl-prev:hover,
+		.owl-carousel .owl-nav button.owl-prev:focus,
+		.owl-carousel .owl-nav button.owl-next:hover,
+		.owl-carousel .owl-nav button.owl-next:focus{
+			background:rgba(0, 0, 0, 0.65);
+			color:#fff;
+		}
 	</style>
 @stop
 
