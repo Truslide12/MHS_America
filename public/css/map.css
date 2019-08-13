@@ -58,20 +58,21 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
 	#resultlist .list-group-item{grid-column:1 / span 2;}
 }
 
-@media (min-width: 992px) and (min-height:700px) {
+@media (min-width: 992px) and (min-height:600px) {
 	body{overflow:hidden;}
 	#map-container{background-color:#efefef;position:absolute;top:131px;left:0;right:0;bottom:30px;padding:0;margin:0;min-height:569px;border-width:1px 0 1px;border-color:#777;border-style:solid;}
 	#footer-wrapper .container{padding:5px;}
 	#footer-wrapper p{margin:0;text-align:left;}
 	#footer-wrapper{position:absolute;height:30px;left:0;right:0;bottom:0;}
 	.row.white{color:#dedede;background-color:#333;}
-	#resultlist{overflow-y:auto;}
 }
 
-@media (min-width: 1200px) {
-	#resultlist .list-group{grid-template-columns:49% 49%;column-gap:2%;}
+@media (min-width: 992px) {
+    #resultlist{overflow-y:auto;}
+	#resultlist .list-group{grid-template-columns:repeat(auto-fit, minmax(49%, 1fr));column-gap:10px 2%;grid-auto-rows:120px;}
 	#resultlist .list-group:after{content:" ";font-size:0;clear:both;}
 	#resultlist .list-group-item div{padding:5px 15px 15px;}
+    #resultlist .list-group-item.with-pic{grid-row-end:span 2;}
 }
 
 @media screen and (min-width: 1px) and (max-width: 767px){
