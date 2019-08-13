@@ -34,7 +34,7 @@
 		<div class="col-md-12 padding-b">
 		@if(Auth::check())
 			@if($can_edit)
-			<a href="#" class="btn btn-labeled btn-default margin-r">
+			<a href="{{ URL::route('editor', ['profile' => $profile->id]) }}" class="btn btn-labeled btn-default margin-r">
 				<span class="btn-label">
 					<i class="fa fa-pencil"></i>
 				</span>
