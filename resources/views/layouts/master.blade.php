@@ -2,6 +2,7 @@
 
 @section('body')
 <a name="top" id="top-anchor"></a>
+@yield('content-canvas')
 @if(isset($canvas) && is_object($canvas) && 1==2)
 <div id="canvas-wrapper">
 <div class="container-fluid">

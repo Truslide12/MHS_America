@@ -1,6 +1,9 @@
 body{background:rgb(36, 39, 41);}
 #header-wrapper{border-bottom:10px solid #005499;}
 #footer-wrapper{bottom:0;}
+#backdrop{overflow:hidden;position:absolute;left:0;top:50px;bottom:20px;right:0;background-repeat:no-repeat;}
+#backdrop-inner{background:#002 url(../img/parallax/american-night.jpg);background-size:cover;background-repeat:no-repeat;margin:auto;width:1620px;height:1080px;transform-style:preserve-3d;}
+.no-pointer-events{pointer-events:none;}
 .get-in-touch {position:relative;margin:0 auto;padding:30px;max-width:370px;border-radius:2px;border:none;
 background:rgb(255, 255, 255) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAGCAYAAACFIR03AAAAV0lEQVR42tXOMRWAQAwE0RWFDRTg5d47Jeg4Q9gI06RbqlwKil/P6LpXbDCf85AxEBtMGjKG/jyPUHUerfP4nEeoOo/Wedj5pOo8Wudh55Oq82idh51PLxpvled7kLAXAAAAAElFTkSuQmCC) repeat-x;
 box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);-webkit-box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);}
@@ -15,6 +18,5 @@ box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 10px 20px rgba(0, 0,
 	/* .navbar-nav,.navbar-toggle{display:none} */
 }
 
-body{background:url('../img/parallax/american-night.jpg');background-color:#002;background-repeat:no-repeat;
-}
+body{background-color:#002;}
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{overflow:hidden;}
