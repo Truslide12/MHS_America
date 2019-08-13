@@ -11,7 +11,9 @@ Contact Us
 @stop
 
 @section('content-canvas')
-<div id="backdrop" data-tilt></div>
+<div id="backdrop">
+	<div id="backdrop-inner" data-tilt></div>
+</div>
 @stop
 
 @section('content')
