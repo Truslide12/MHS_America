@@ -122,7 +122,7 @@ var focusResults = function() {
     }, renderHomePreview = function(data) {
         var t = $('#homePreview').html();
         Mustache.parse(t);
-        data.price_formatted = "$"+(data.price/100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data.price_formatted = "$"+( data.price.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,') );
         return Mustache.render(t, data);
     }, renderPreview = function(data) {
         var t = $('#communityPreview').html();
