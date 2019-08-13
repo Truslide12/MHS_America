@@ -12,7 +12,7 @@ Contact Us
 
 @section('content-canvas')
 <div id="backdrop">
-	<div id="backdrop-inner" data-tilt></div>
+	<div id="backdrop-inner"></div>
 </div>
 @stop
 
@@ -94,6 +94,8 @@ $(document).ready(function(){
 			'background-position':parseInt(event.pageX/8) + "px "+parseInt(event.pageY/12)+"px, "+parseInt(event.pageX/15)+"px "+parseInt(event.pageY/15)+"px, "+parseInt(event.pageX/30)+"px "+parseInt(event.pageY/30)+"px"
 		}});
 	});*/
+	const tilt = $('#backdrop-inner').tilt({axis:x});
+
 	$('#morelink').click(function(event){
 		event.preventDefault();
 		if($('#details').hasClass('active')){
