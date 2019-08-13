@@ -447,7 +447,9 @@
 			items:1,
 			lazyLoad:true,
 			loop:true,
-			nav:true
+			nav:true,
+			autoplay:true,
+			autoplayHoverPause:true
 		});
 
 		if($('#infobox').parent().hasClass('col-md-6')) {
