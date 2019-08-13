@@ -8,13 +8,15 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 	<style type="text/css">
-		.owl-theme .owl-nav .owl-prev,
-		.owl-theme .owl-nav .owl-next{
+		.owl-carousel .owl-nav button.owl-prev,
+		.owl-carousel .owl-nav button.owl-next{
 			position: absolute;
 			top: 0;
 	    	bottom: 0;
 	    	padding: 10px !important;
+	    	margin: 0 !important;
 	    	font-size: 2.14rem !important;
+	    	
 		}
 		.owl-theme .owl-nav .owl-prev {
 			left:0;
