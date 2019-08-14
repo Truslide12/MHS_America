@@ -174,7 +174,7 @@ h3, h1 {
 
 			<h3>Your Home's Status is Important:</h3>
 			<p>
-			Buying and belling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your home status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celebrate every time we help a client sell their home, so please let us now.
+			Buying and selling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your home status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celebrate every time we help a client sell their home, so please let us now.
 			</p>
 		</div>
 		<div class="col-md-6 col-sm-12">
