@@ -38,6 +38,13 @@ var Lyra = {
     clearList: function() {
       $('#resultlist').find('.list-group').html('');
     },
+    shuffle: function() {
+      var theul = $('#resultlist').find('.list-group');
+      var items = theul.children();
+      while (items.length) {
+          theul.append(items.splice(Math.floor(Math.random() * items.length), 1)[0]);
+      }
+    },
     fetchHomes: function(f, flood) {
       $('#resultlist').find('.list-group').html('');
        pony.fetch('/octavia/homes', f, function(data) {

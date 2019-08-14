@@ -330,6 +330,7 @@
                             data.features[i].properties['home_count'] = data.features[i].properties.homes.length;
                         }
                     }
+                    Lyra.shuffle();
                     map.getSource('results').setData(data);
                     console.log("caching communities");
                     t_cache.communities = data;
