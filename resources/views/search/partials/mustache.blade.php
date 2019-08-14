@@ -60,7 +60,7 @@
 
 
 <script id="homePreview" type="x-tmpl-mustache">
-    <img src="@{{#photos.1.url}}/imgstorage/@{{ photos.1.url }}_sm.jpg@{{/photos.1.url}}@{{ photos.1.url }}@{{^photos.1.url}}img/stockphotos/grass-meadow-gray-forest.jpg@{{/photos.1.url}}" class="img-responsive" style="width:calc(100% - 10px);min-height: 150px;margin:5px;">
+    <img src="@{{#photos.1.url}}/imgstorage/@{{ photos.1.url }}_sm.jpg@{{/photos.1.url}}@{{^photos.1.url}}img/stockphotos/grass-meadow-gray-forest.jpg@{{/photos.1.url}}" class="img-responsive" style="width:calc(100% - 10px);min-height: 150px;margin:5px;">
     <div id="capper" style="margin:5px;background: #f9f9f9;border:1px solid #e0e0e0;padding: 20px;overflow-y:auto;">
             <h2 style="margin-top:0;">
                 <div style="padding:20px 10px;">
