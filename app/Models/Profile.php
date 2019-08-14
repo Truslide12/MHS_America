@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Auth;
 use View;
 use App\Models\Amenities;
 use App\Models\Plan;
@@ -499,6 +500,13 @@ class Profile extends EloquentModel {
 			}
 		}
 		$view->with('business_hours', $final_hours);
+
+		$canEdit = false;
+		if(Auth::check()) {
+			$me = Auth::user();
+			$canEdit = ( ($this->company_id > 0 && $me->hasRoleForCompany('admin', $this->company_id))  || $me->canForProfile($perm, $this->id) );
+		}
+		$view->with('can_edit', $canEdit);
 
 		return $view;
 	}

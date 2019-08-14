@@ -3,8 +3,52 @@
 
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/owl/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/owl/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
+	<style type="text/css">
+		.no-js .owl-carousel, .owl-carousel.owl-loaded{border-bottom:4px solid #999;}
+		.owl-carousel .owl-nav button.owl-prev,
+		.owl-carousel .owl-nav button.owl-next{
+			position: absolute;
+			top: 0;
+	    	bottom: 0;
+	    	padding: 10px !important;
+	    	margin: 0 !important;
+	    	font-size: 4.28rem !important;
+	    	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	    	font-weight:bold;
+	    	background:rgba(0, 0, 0, 0.25);
+	    	color:#333;
+	    	width:50px;
+		}
+		.owl-carousel .owl-nav button.owl-prev,
+		.owl-carousel .owl-nav button.owl-next,
+		.owl-theme .owl-dots .owl-dot{outline:0;}
+		.owl-carousel .owl-nav button.owl-prev{
+			left:0;
+			border-right:1px solid #333;
+		}
+		.owl-carousel .owl-nav button.owl-next{
+			right:0;
+			border-left:1px solid #333;
+		}
+		.owl-carousel .owl-nav button.owl-prev:hover,
+		.owl-carousel .owl-nav button.owl-prev:focus,
+		.owl-carousel .owl-nav button.owl-next:hover,
+		.owl-carousel .owl-nav button.owl-next:focus{
+			background:rgba(0, 0, 0, 0.65);
+			color:#545454;
+		}
+		.owl-theme .owl-nav{margin:0;}
+		.owl-theme .owl-dots{height:24px;position:relative;margin-top:-24px;z-index:1;pointer-events:none;}
+		.owl-theme .owl-dots .owl-dot{pointer-events:all;}
+		.owl-theme .owl-dots .owl-dot span{margin:7px;background:#dedede;}
+		.owl-theme .owl-dots .owl-dot.active span,
+		.owl-theme .owl-dots .owl-dot:hover span{background:#999;}
+
+	</style>
 @stop
 
 @section('content-above')
@@ -27,12 +71,19 @@
 					</a>
 				</small>
 			</h2>
-			<p class="lead">{{ $profile->tagline }}</p>
 		</div>
 	</div>
 	<div class="row texture-1">
 		<div class="col-md-12 padding-b">
 		@if(Auth::check())
+			@if($can_edit)
+			<a href="{{ URL::route('editor', ['profile' => $profile->id]) }}" class="btn btn-labeled btn-default margin-r">
+				<span class="btn-label">
+					<i class="fa fa-pencil"></i>
+				</span>
+				Edit profile</span>
+			</a>
+			@endif
 			@if($user->watchesProfile($profile->id))
 			<a href="#" data-action="watch" data-relation="profile" data-id="{{ $profile->id }}" class="watch-profile-{{ $profile->id }} btn btn-info margin-r">
 				Unwatch<span class="hidden-xs"> community</span>
@@ -402,8 +453,18 @@
 @section('incls-body')
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/salvattore.min.js"></script>
 <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
+<script type="text/javascript" src="{{ URL::route('welcome') }}/js/owl/owl.carousel.min.js"></script>
 <script type="text/javascript">
 	pony.add(function() {
+		$('.owl-carousel').owlCarousel({
+			items:1,
+			lazyLoad:true,
+			loop:true,
+			nav:true,
+			autoplay:true,
+			autoplayHoverPause:true
+		});
+
 		if($('#infobox').parent().hasClass('col-md-6')) {
 			$('#infobox').detach().prependTo('#gridlock > .col-md-6:nth-child(1)');
 			$('#inforow').remove();

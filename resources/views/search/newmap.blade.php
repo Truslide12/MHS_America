@@ -26,279 +26,6 @@
             font-weight: bold;
         }
     </style>
-    <style type="text/css">
-        .maplegend {
-           display: none;
-           opacity: .25;
-           position: absolute;
-           bottom: .25vw;
-           left: .25vw;
-           width: 10vw;
-           height: 14vh;
-           background: #c6c5be; 
-           padding: 5px;
-           clear: both;
-           border: 1px solid #000;
-           border-top-left-radius: 5px !important;
-           border-top-right-radius: 5px !important;
-           transition: all .5s;
-        }
-        .maplegend:hover {
-            opacity: 1;
-            transition: all .5s;
-        }
-        .legendbox {
-            background: #edece8;
-            padding: 4px;
-            position: relative;
-            margin-bottom: 2px;
-            overflow: hidden;
-            border: 1px solid black;
-            border-radius: 5px !important;
-            cursor: pointer;
-        }
-        .legendcolor {
-        }
-        .legendtitle {
-
-        }
-        .activemode {
-            border: 1px solid gold;
-        }
-        #capper {
-            margin:5px;
-            background:#f9f9f9;
-            border:1px solid #e0e0e0;
-            padding: 20px;
-        }
-
-        #capper h2 {
-            margin:10px 0 20px;
-        }
-
-        #capper .preview-title {
-            color:#141414;
-        }
-
-        #capper .preview-photo {
-            margin:0 -20px 20px;
-        }
-
-        #capper .panel-body .btn {
-            margin:5px;
-        }
-
-        .pricebox {
-            text-align: center;
-            padding: 24px;
-        }
-        .pricey {
-            position: relative;
-            padding: 0!important;
-            margin: 0!important;
-        }
-        .pricey::after {
-            content: attr(price);
-            position: absolute;
-            bottom: 0px;
-            left: 0px;
-            font-size: 2.3em;
-            z-index: 500;
-            background: rgb(0,0,0);
-            background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 61%, rgba(0,0,0,0.4) 89%, rgba(0,0,0,0) 100%);
-            color: snow;
-            font-family: Voltaire;
-            width: 100%;
-            padding: 3px 5px;
-        }
-
-        .pricey::before {
-            content: attr(hasphoto);
-            position: absolute;
-            bottom: 0px;
-            left: 0px;
-            top: 0px;
-            right: 0px;
-            font-size: 1.3em;
-            font-weight: bold;
-            z-index: 10;
-            color: rgba(255,255,255,1);
-            font-family: Lato;
-            padding: auto auto;
-            display: flex;
-            align-items: center;
-            align-content: center;
-            justify-content: center;
-        }
-
-        .attrbadge {
-            background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;
-        }
-
-        .backbtn {
-            background: #333;
-            width: 8vh;
-            height: 8vh;
-            border-radius: 4vh!important;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            padding-left: 2vh;
-            color: snow;
-            opacity: 0.6;
-            transition: all .5s;
-        }
-        .backbtn:hover {
-            background: #333;
-            color: #fff;
-            cursor: pointer;
-            text-decoration: none;
-            opacity: 1;
-            transition: all .5s;
-        }
-        .togglebtn {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #333;
-            width: 7vh;
-            height: 7vh;
-            border-radius: 4vh!important;
-        }
-            #search-toggle {
-                display: none;
-            }
-            .mapfilters, .mapfilters-expanded, .footmodes {
-                display: none;
-            }
-            @media (max-width: 768px) { 
-            #filterbox {
-                display: none;
-                background: red;
-            }
-
-            #map {
-                width: 100vw;
-                height: calc(100vh - 117px);
-                max-height: 100vh;
-                border: 0px solid red;
-                margin: 0;
-            }
-            #sideview {
-                display: none;
-            }
-            .maplegend {
-                display: none;
-            }
-            .mapfilters {
-                position: absolute;
-                top: 5px;
-                left: 5px;
-                display: flex;
-                align-items: center;
-                align-content: center;
-                justify-content: center;
-                z-index: 505;
-                background: #6097f2;
-                width: 8vw;
-                height: 8vw;
-                border: 1px solid rgb(169, 200, 252);
-                border-radius: 3px!important;
-                color:snow;
-                z-index: 20;
-            }
-            .mapfilters-expanded {
-                position: absolute;
-                top: 3px;
-                left: 3px;
-                z-index: 505;
-                background: rgba(96, 151, 242, .88);
-                width: calc(100vw - 6px);
-                border: 1px solid rgb(126, 159, 214);
-                border-radius: 3px!important;
-                color:snow;
-                z-index: 10;
-            }
-            .mapfilters-expanded > .form-group {
-                margin-bottom: 2px;
-                width: 100%;
-                float: none;
-                display: inline-flex;
-                border-bottom: 1px solid snow;
-            }
-            .mapfilters-expanded > .form-group > .btn-group > button {
-                display: block;
-                width: calc(100vw - 40px);
-            }
-            .mapfilters-expanded > .form-group > .checkbox {
-                display: block;
-                width: calc(100vw - 40px);
-                margin-left: 20px;
-            }
-            .mapfilters-expanded > .form-group > .form-control-static {
-                display: block;
-                width: calc(100vw - 40px);
-                padding-left: 12vw;
-                color: snow;
-                font-size: 1em;
-                font-weight: bold;
-            }
-            
-            #firstrow { margin-top: 0;padding-top: 0; }
-            #firstrow > .blue {
-                padding: 0;
-                margin: 0;
-            }
-            #search-toggle {
-                display: flex;
-                width: 30vw;
-                float: right;
-                padding: 10px 5px 10px 5px;
-                background: none;
-                overflow: hidden;
-            }
-            #searchBox {
-                padding: 10px 5px 10px 5px;
-                width: 70vw;
-                float: left;
-                background: none;
-                margin: 0;
-                background: none;
-            }
-            .active-toggle {
-                background: rgb(66, 134, 244)!important;
-            }
-            .btn {
-                margin: 2px;
-            }
-            .searchcopy {
-                display: none;
-            }
-            .footmodes {
-                display: block;
-            }
-            .footmodes > .mode0.active {
-                background: rgb(66, 134, 244);
-                color: snow;
-                border: 1px solid rgb(30, 58, 104);
-            }
-
-            .footmodes > .mode1.active {
-                background: rgb(252, 175, 88);
-                color: snow;
-                border: 1px solid rgb(216, 139, 52);
-            }
-
-            .footmodes > .mode2.active {
-                background: rgb(120, 204, 148);
-                color: snow;
-                border: 1px solid rgb(89, 130, 103);
-            }
-
-        }
-    </style>
 @stop
 
 @section('content')
@@ -532,6 +259,7 @@
                             pets: $('#optPets').prop('checked') ? 1 : 0,
                             age: $('#optAge').val()
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('communities');
                         break;
                     case 1:
                         filter_set = {
@@ -541,6 +269,7 @@
                             baths: $('#optBaths').val(),
                             pets: $('#optPets').prop('checked') ? 1 : 0
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('homes');
                         break;
                     case 2:
                         filter_set = {
@@ -548,6 +277,7 @@
                             width: $('#optWidth').val(),
                             pets: $('#optPets').prop('checked') ? 1 : 0
                         };
+                        $('#resultlist .list-group').removeClass('communities spaces homes').addClass('spaces');
                         break;
                 }
 
