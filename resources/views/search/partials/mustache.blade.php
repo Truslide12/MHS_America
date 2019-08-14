@@ -25,9 +25,9 @@
                                 @{{ title }}
                                 <br><small>@{{ community }}</small>
                             </h4>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{size}}</small>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{beds}} Bedrooms</small>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{baths}} Baths</small>
+                            <small class="attrbadge">@{{size}}</small>
+                            <small class="attrbadge">@{{beds}} Bedrooms</small>
+                            <small class="attrbadge">@{{baths}} Baths</small>
                         </div>
                     </a>
 </script>
