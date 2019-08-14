@@ -568,7 +568,7 @@ class GetStartedCommunityController extends Pony {
 	**************************************/
 	public function postOrderConfirmation()
 	{
-		if ( Session::get('plan') == "free" ) {
+		if ( session('plan') == "free" ) {
 			$validator = Validator::make(Request::all(),
 				array(
 					'auth-to-promote' => 'required',
