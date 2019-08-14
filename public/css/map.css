@@ -48,6 +48,9 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
 #gridlock>.col-sm-6:last-child .panel-default>.panel-heading,
 #gridlock>.col-md-6:last-child .panel-default>.panel-heading {background: #cd5454;color: #fff;border-color: #999;}
 
+#resultlist .list-group-item.with-pic{border-color:#f09;}
+#resultlist .list-group-item.with-pic .flag{vertical-align:top;height:0;width:0;font-size:6px;border:6px solid #f90;border-bottom-color:transparent;margin-right:10px;}
+
 @media (max-width: 991px) {
 	#map-container{margin:0 -15px;}
 	#resultlist .list-group-item{grid-column:1 / span 2;}
@@ -193,7 +196,9 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
 }
 
 .attrbadge {
-    background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;
+    border:1px solid #999;
+    padding:0.375ch 0.75ch;
+    white-space:nowrap;
 }
 
 .backbtn {
