@@ -16,4 +16,4 @@
 </ul>
 
 
-<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => Session::get('order_data')['profile_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="width:100%;padding: 10px;">Upgrade Now for $149.99</a>
+<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => Session::get('order_data')['profile_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="width:100%;padding: 10px;font-size: 1.5em;">Upgrade Now for $149.99</a>

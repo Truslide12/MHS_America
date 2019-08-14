@@ -102,7 +102,7 @@
 							$cid = Session::get('order_data')['company_data']->id;
 							$hid = Session::get('order_data')['home_data']->id;
 						@endphp
-						<a href="{{ URL::route('editor-edithome', array('profile' => $pid, 'home' => $hid)) }}" class="btn btn-success" style="width: 100%;padding: 20px;margin-top: 50px;">Continue to Home Editor</a>
+						<a href="{{ URL::route('editor-edithome', array('profile' => $pid, 'home' => $hid)) }}" class="btn btn-success" style="width: 100%;font-size:1.5em;padding: 10px;margin-top: 50px;">Continue to Home Editor</a>
 					</div>
 					<div class="col-md-5" style="border-left: 1px solid #eee;">
 						@include('getstarted.home.partial.receipt_ads.upcomingpromo')

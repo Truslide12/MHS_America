@@ -107,7 +107,7 @@
 
 								<br><br>
 
-								<a href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="width:100%;padding: 10px;">Continue to Park Details</a>
+								<a href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="font-size: 1.5em;width:100%;padding: 10px;">Continue to Park Details</a>
 
 								@if(1==2)
 								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>
