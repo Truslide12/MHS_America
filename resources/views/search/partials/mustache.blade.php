@@ -25,9 +25,7 @@
                                 @{{ title }}
                                 <br><small>@{{ community }}</small>
                             </h4>
-                            <small class="attrbadge">@{{size}}</small>
-                            <small class="attrbadge">@{{beds}} Bedrooms</small>
-                            <small class="attrbadge">@{{baths}} Baths</small>
+                            <small class="attrbadge">@{{size}}</small><small class="attrbadge">@{{beds}} Bedrooms</small><small class="attrbadge">@{{baths}} Baths</small>
                         </div>
                     </a>
 </script>
