@@ -534,6 +534,8 @@ class Profile extends EloquentModel {
 
 	public function has_active_subscription()
 	{
+		//force ghosts to free
+		if( $this->company_id == 0 ) { return false; }
 		if ( $this->subscription->id > 0 ) {
 			if ( strtotime($this->subscription->ends_at) > strtotime(now()) ) {
 				return true;

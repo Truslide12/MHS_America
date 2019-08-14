@@ -53,14 +53,14 @@
 
 @section('content-above')
 @if($profile->hasCarousel())
-<div id="profile-header" class="container {{ $plan->hasFeature('highlight') ? 'texture-2' : 'texture-1' }}">
+<div id="profile-header" class="container {{ ($is_paid_profile && $plan->hasFeature('highlight')) ? 'texture-2' : 'texture-1' }}">
 @else
 <div id="profile-header" class="container">
 @endif
 	<div class="row texture-1">
 		<div class="col-md-12">
 			<h2>
-				@if($plan->hasFeature('highlight'))
+				@if( $is_paid_profile && $plan->hasFeature('highlight'))
 				<span class="premium"><i class="glyphicon glyphicon-star"></i></span>
 				@endif
 				<span style="color: black;">{{ $profile->title }}</span> 
@@ -120,7 +120,7 @@
 		</div>
 	</div>
 </div>
-@if($profile->hasCarousel())
+@if( $is_paid_profile && $profile->hasCarousel())
 	@include('layouts.partial.profile-carousel')
 @endif
 @stop
@@ -128,7 +128,7 @@
 @section('content')
 @php
 	$extent = 1; /* Always one section for address */
-	$show_business_hours = (count($business_hours) > 0);
+	$show_business_hours = (count($business_hours) > 0)  && $is_paid_profile;
 	$show_contact_details = ($profile->office_tagline || $profile->office_manager != '' || $profile->phone != '' || $profile->fax != '');
 
 	if($show_business_hours) { $extent += 2; }
@@ -229,12 +229,12 @@
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->phone,') ',3,0),'-',8,0) }}</em></span>
 							Phone
 						</p>@endif
-						@if($profile->fax != '')<p>
+						@if( $is_paid_profile && $profile->fax != '')<p>
 							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 							Fax
 						</p>@endif
 						@if(1==2)
-						@if($profile->office_email != '')<p>
+						@if( $is_paid_profile && $profile->office_email != '')<p>
 							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
 							Email
 						</p>@endif
@@ -267,6 +267,7 @@
 					<strong>All Ages</strong>
 				</div>
 				@endif
+				@if($is_paid_profile)
 				@if($profile->rent > 0)
 				<div class="brick">
 					${{ $profile->rent }} /mo
@@ -295,6 +296,8 @@
 				<div class="brick">
 					Neighborhood watch
 				</div>
+				@endif
+
 				@endif
 
 				@if( $is_paid_profile )
@@ -327,12 +330,12 @@
 				@endif
 				@endif
 
-				@if(trim($profile->description) != '')
+				@if( $is_paid_profile && trim($profile->description) != '')
 				<p>{{ $profile->description }}</p>
 				@endif
 			</div>
 		</div>
-		@if($plan->hasFeature('manage_amenities') && $profile->hasAmenities() )
+		@if( $is_paid_profile && $plan->hasFeature('manage_amenities') && $profile->hasAmenities() )
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -349,7 +352,7 @@
 		</div>
 		@endif
 		<!-- Spaces available -->
-		@if($plan->hasFeature('manage_spaces'))
+		@if( $is_paid_profile && $plan->hasFeature('manage_spaces'))
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
