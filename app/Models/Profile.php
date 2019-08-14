@@ -504,7 +504,7 @@ class Profile extends EloquentModel {
 		$canEdit = false;
 		if(Auth::check()) {
 			$me = Auth::user();
-			$canEdit = ( ($this->company_id > 0 && $me->hasRoleForCompany('admin', $this->company_id))  || $me->canForProfile($perm, $this->id) );
+			$canEdit = ( ($this->company_id > 0 && $me->hasRoleForCompany('admin', $this->company_id))  || $me->canForProfile('edit', $this->id) );
 		}
 		$view->with('can_edit', $canEdit);
 
