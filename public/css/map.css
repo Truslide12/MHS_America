@@ -9,6 +9,7 @@
 #resultlist .list-group{display:grid;grid-template-columns:100%;grid-gap:10px 0;}
 #resultlist .list-group-item{display:block;padding:0;border-color:#dedede;outline:3px solid #efefef;overflow:hidden;}
 #resultlist .list-group-item div{padding:5px;}
+#resultlist .list-group-item h4 small{font-size:1.2rem;}
 #map-container.closed{grid-template-columns:auto;}
 #map-container.closed #resultlist{display:none;}
 
