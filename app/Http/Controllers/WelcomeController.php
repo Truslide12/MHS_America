@@ -10,8 +10,9 @@ class WelcomeController extends Pony {
 
 	public function getIndex()
 	{
-		//need to build admin panel option tochange this..
-		$community_of_week = Profile::find(8);
+		//need to build admin panel option to change this..
+		//invalid park id results in default
+		$community_of_week = Profile::find(1000);
 		if ( ! $community_of_week ) {
 			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', ];
 		} else {
