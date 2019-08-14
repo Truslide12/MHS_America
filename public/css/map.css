@@ -1,4 +1,4 @@
-#map-container{display:grid;grid-template-columns:70% 30%;grid-template-rows:100%;}
+#map-container{display:grid;grid-template-columns:70% 30%;grid-template-rows:100%;overflow:hidden;}
 #map-container:before,#map-container:after{display:none;}
 #map{margin:1px;grid-column:1 / span 1;}
 .map-icon-label{width:32px;height:32px;font-size:12px;font-weight:bold;color:#FFFFFF;line-height:32px;text-align:center;white-space:nowrap;}
