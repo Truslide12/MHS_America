@@ -75,23 +75,23 @@
                 </small>
             </h2>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <table class="table">
                         <tr>
                             <td><i class="fas fa-bed"></i></td>
-                            <td>@{{ beds }} Bedroom(s)</td>
+                            <td>@{{ beds }} Bed</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-toilet"></i></td>
-                            <td>@{{ baths }} Bathroom(s)</td>
+                            <td>@{{ baths }} Bath</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-ruler-combined"></i></td>
-                            <td>@{{ square_footage }} sqft.</td>
+                            <td>Approx. @{{ square_footage }} sqft.</td>
                         </tr>
                     </table>         
                 </div>
-                <div class="col-md-8"><h3>@{{price_formatted}}</h3></div>
+                <div class="col-md-6"><h3>@{{price_formatted}}</h3></div>
                 <div class="col-md-12" style="">
                     <a  target="_blank" href="/home/@{{id}}" class="btn btn-primary" style="width: 48%;">View Home Profile</a>
                     <a  target="_blank" href="" class="btn btn-primary" style="width: 48%;">Watch Home</a>
