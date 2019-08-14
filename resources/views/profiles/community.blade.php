@@ -208,7 +208,7 @@
 	</div>
 </div>
 <div class="row" data-columns id="gridlock">
-
+		@if($profile->company_id > 0)
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -293,6 +293,7 @@
 				@endif
 			</div>
 		</div>
+		@endif
 		@if( $is_paid_profile && $plan->hasFeature('manage_amenities') && $profile->hasAmenities() )
 		<div class="panel panel-default">
 			<div class="panel-heading">
