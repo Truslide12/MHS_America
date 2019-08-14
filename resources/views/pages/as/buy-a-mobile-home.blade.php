@@ -171,10 +171,11 @@ h3, h1 {
 				MHS America doesn't charge Home Buyers for any of our services. Whether you are using our platform as a guest or as a registered users there are no fee's.
 			</p>
 
+
 		</div>
 		<div class="col-md-6 col-sm-12">
-			<div class="" style="background: silver; padding:5px;border:1px solid black">
-			<img class="img" style="max-width: 100%;" src="/img/promo_images/HomeProfile.png">
+			<div class="centertext" style="background: silver; padding:5px;border:1px solid black">
+			<img class="img" style="width: 100%;" src="/img/promo_images/search_mobile.png">
 			</div>
 			<a href="{{ URL::route('account-register') }}" style="font-size: 1.5em;width: 100%;padding: 10px;margin-top: 5px;" class="btn btn-success">Register Now</a>
 
