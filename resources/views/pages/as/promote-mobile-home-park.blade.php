@@ -163,20 +163,20 @@ h3, h1 {
 		<div class="col-md-6">
 			<h3>Make the Most of MHS: Park Owners</h3>
 			<p style="font-size: 1.2em;">
-				As a park owner it is important to not only you but all your tenets that your community is perceived as a great place to live. In a world ran on digital platforms it is important to have an online presence to let people know just how great your community is. MHS America has built the tools needed for you to represent your park online with helpful information and a modern design.
+				As a park owner it is important to not only you but all your customers that your community is perceived as a great place to live. In a world ran on digital platforms it is important to have an online presence to let people know just how great your community is. MHS America has built the tools needed for you to represent your park online with helpful information and a modern design.
 			</p>
 			<p style="font-size: 1.2em;">
 				We offer two plans for Park Owners to get their park online and into our search results in minutes. With our free profile you can register your park on our platform and show up to users searching for communities in your area. If you want to stand out among the competition we offer a paid profile for $149.99/year. With a paid profile you are able to advertise key selling points about your community to all the users of MHS America.
 			</p>
 			<div class="thick-hr"></div>
 
-			<h3>Vaccant Spaces are Costly</h3>
+			<h3>Vacant Spaces are Costly</h3>
 			<p>
 				MHS America realizes that every vacant space in your community equates to missing profits. That's why we don't make a bad situation worse by charging you to advertise your vacancies. With your paid Community Profile you can list all vacant spaces in the community free of cost. Your spaces will show up both on your community profile and in our search results.
 			</p>
 			<h3>Pictures are Louder than Words</h3>
 			<p>
-				Not everyone knows how to spin colorful language into a paragraph that sells. That's why we allow you to upload photos of your park in addition to your 750 character 'About Us' section.
+				Not everyone knows how to spin colorful language into a paragraph that sells. That's why we allow you to upload photos of your park in addition to your 'About Us' section.
 			</p>
 			<h3>Sell Everything</h3>
 			<p>
