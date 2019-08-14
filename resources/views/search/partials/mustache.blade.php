@@ -21,8 +21,10 @@
                         class="img-responsive" style="width:100%;min-height: 150px;max-height: 150px;"></div>
 
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-0">@{{ community }}
-                            <br>@{{ title }}</h4>
+                            <h4 class="mb-0">
+                                @{{ title }}
+                                <br><small>@{{ community }}</small>
+                            </h4>
                             <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{size}}</small>
                             <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{beds}} Bedrooms</small>
                             <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{baths}} Baths</small>
