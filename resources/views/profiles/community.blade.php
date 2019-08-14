@@ -245,11 +245,13 @@
 					Neighborhood watch
 				</div>
 				@endif
+
+				@if( $is_paid_profile )
 				@if($profile->utility("water") == 1)
 				<div class="brick">
 					City Water
 				</div>
-				@else
+				@elseif($profile->utility("water") == 2)
 				<div class="brick">
 					Well Water
 				</div>
@@ -258,7 +260,7 @@
 				<div class="brick">
 					Sewer
 				</div>
-				@else
+				@elseif($profile->utility("sewer") == 2)
 				<div class="brick">
 					Septic
 				</div>
@@ -267,11 +269,13 @@
 				<div class="brick">
 					Natural Gas
 				</div>
-				@else
+				@elseif($profile->utility("gas") == 2)
 				<div class="brick">
 					Propane Gas
 				</div>
 				@endif
+				@endif
+
 				@if(trim($profile->description) != '')
 				<p>{{ $profile->description }}</p>
 				@endif

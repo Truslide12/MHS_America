@@ -413,13 +413,14 @@ class Profile extends EloquentModel {
 	public function fetchTemplate()
 	{
 		//if ( ! $this->county ) { return "error: this profile was saved with incomplete data. Missing County ID"; }
-		
+
 		$view = View::make($this->rep()->layout())
 					->with('contentclass', 'texture-1')
 					->with('profile', $this)
 					->with('state', $this->state)
 					->with('county', $this->county)
 					->with('city', $this->geoname)
+					->with('is_paid_profile', $this->has_active_subscription())
 					->with('plan', $this->plan);
 
 		if($this->rep()->hasHomes()) $view->with('homes', $this->homes()->whereIn('status', [4, 5])->get());
@@ -521,6 +522,18 @@ class Profile extends EloquentModel {
 				return null;
 				break;
 		}
+	}
+
+	public function has_active_subscription()
+	{
+		if ( $this->subscription->id > 0 ) {
+			if ( strtotime($this->subscription->ends_at) > strtotime(now()) ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { return false; }
+
 	}
 
 }

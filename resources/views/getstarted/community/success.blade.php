@@ -85,7 +85,7 @@
 				<div class="row">
 					<div class="col-md-7">
 						<div class="receipt_box">
-							<h3 class="cool">Success!</h3><hr class="hr-blue">
+							<h3 class="cool">Payment Success!</h3><hr class="hr-blue">
 							Welcome to MHS America! Your community profile has been created, and you can now begin expanding on your profile.<br><br>
 
 							<div style="margin:10px 20px;">
@@ -106,6 +106,10 @@
 								{{ Session::get("order_data")['city_data']['place_name']  }} {{ strtoupper(Session::get("order_data")['state_data']['abbr'])  }}, {{ Session::get("order_data")['community-zip']  }}
 
 								<br><br>
+
+								<a href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="width:100%;padding: 10px;">Continue to Park Details</a>
+
+								@if(1==2)
 								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>
 								<ul>
 									<li><a target="_blank" href="{{ URL::route('profile', array('profile' => Session::get('order_data')['profile_data']->id)) }}">View Profile Here</a></li>
@@ -113,6 +117,8 @@
 									<li><a target="_blank" href="{{ URL::route('editor-spaces', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Manage Vacant Spaces</a></li>
 									<li><a target="_blank" href="{{ URL::route('editor-homes', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}">Purchase Home Listings</a></li>
 								</ul>
+								@endif
+
 							</div>
 						</div>
 					</div>

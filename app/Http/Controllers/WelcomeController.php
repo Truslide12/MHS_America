@@ -10,11 +10,25 @@ class WelcomeController extends Pony {
 
 	public function getIndex()
 	{
+		//need to build admin panel option tochange this..
+		$community_of_week = Profile::find(8);
+		if ( ! $community_of_week ) {
+			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', ];
+		} else {
+			if ( $community_of_week->photos() ) {
+				$community_of_week->cover = $community_of_week->photos()->first()->cover;
+			} else {
+				$community_of_week->cover = "nocover";
+			}
+		}
+		$community_of_week->week = date("m/d/y", strtotime('last monday', strtotime('tomorrow')));
+
 		$response = view('welcome')
 					->with('latest_communities', Profile::byType('Community')->latest(5))
 					->with('latest_homes', Home::latest(5))
 					->with('hide_community_images', true)
 					->with('hide_home_images', true)
+					->with('community_of_week', $community_of_week)
 					->with('canvas', Canvas::getDefault());
 
 		$welcomebox = true;

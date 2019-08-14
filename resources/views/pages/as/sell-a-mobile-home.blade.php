@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('page-title')
-MHS For Home Owners
+MHS For Home Sellers
 @stop
 
 @section('page-content')
@@ -156,11 +156,12 @@ h3, h1 {
 <div style="padding: 25px;">
 	<div class="row">
 		<div class="col-md-6">
-			<h3>Make the Most of MHS: Home Owners</h3>
+			<h3>Make the Most of MHS: Home Sellers</h3>
 			<p style="font-size: 1.2em;">
-			As a Home Owner selling your home can be difficult. MHS America is here to help you through the process. We have built a platform that not only provides an audience for your Home Listing, but we also provide easy to use tools designed to assist you in creating a professional Home Listings that sets your Home apart from the average news paper ads of the past.
+			As a home owner selling your home can be difficult. MHS America is here to help you through the process. We have built a platform that not only provides an audience for your Home Listing, but we also provide easy to use tools designed to assist you in creating a professional Home Listing that sets your home apart from the average news paper ads of the past.
 			</p>
-
+			<div class="thick-hr"></div>
+			
 			<h3>You are your Business:</h3>
 			<p>
 			To list your home on our platform you will need to activate business features on your account. As a for sale by owner you will not need to setup a company, but you will need to put in some personal information. 
@@ -168,49 +169,20 @@ h3, h1 {
 
 			<h3>So Much for So Little:</h3>
 			<p>
-			At MHS America we believe Home Listings shouldn't be as costly as they are. That's why we offer the best deal we can find. For only $39.99 you can list your home on our platform for up to 180 days. If your home is still active after 90 days, you will need to reactivate the home to list for the remaining 90 days. This is to ensure that the information on our platform does not become out dated.
+			At MHS America we believe home listings shouldn't be as costly as they are. That's why we offer the best deal we can find. For only $39.99 you can list your home on our platform for up to 180 days. If your home is still active after 90 days, you will need to reactivate the home to list for the remaining 90 days. This is to ensure that the information on our platform does not become out dated.
 			</p>
 
 			<h3>Your Home's Status is Important:</h3>
 			<p>
-			Buying and Selling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your Home Status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celebrate every time we help a client sell their home, so please let us now.
+			Buying and belling a home is a busy and stressful time. And even once it's over you have to move which is just as stressful. The last thing you need while packing up your closet is a dozen calls from anxious home buyers about the home you sold three days ago. That's why it is important to update your home status as soon as possible. The home status effects how and when we display your home on our platform. It is important to let the world now that your home is off the market, and we at MHS like to celebrate every time we help a client sell their home, so please let us now.
 			</p>
 		</div>
 		<div class="col-md-6 col-sm-12">
-			@if( 1==2 )
-			<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
 
-			<div class="card" style="position: relative;">
-				<div class="stickerprice">$39<sup><small>99</small></sup></div>
-			  <div class="card-holder">
-			    <h4><b>Home Listing Features</b></h4> 
-			    <p class="card-col-1" style="font-weight: bold;">Features</p>
-			    <p class="card-col-4" style="font-weight: bold;">&nbsp;</p>
-			    <hr>
-			    <p class="card-col-1">Home Photos</p>
-			    <p class="card-col-4">5</p>
-			    <hr>
-			    <p class="card-col-1">Full Home Details</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">Appear in MHS Search</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">Appear on your city and state pages</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">180 Day Listing <small>(free re-activation required at 90 days)</small></p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <div style="clear: all;margin-bottom: 10px;">&nbsp;</div>
-			  </div>
-			</div>
-			<a href="/getstarted/home/premium" class="btn btn-success" style="width: 100%;margin-top: 25px;">Start Now</a>
-			</div>
-			@endif
 			<div class="" style="background: silver; padding:5px;border:1px solid black">
 			<img class="img" style="max-width: 100%;" src="/img/promo_images/HomeProfile.png">
 			</div>
-			<a href="{{ URL::route('getstarted-home') }}" style="width: 100%;padding: 20px;margin-top: 5px;" class="btn btn-success">Start Now</a>
+			<a href="{{ URL::route('getstarted-home') }}" style="font-size:1.5em;width: 100%;padding: 10px;margin-top: 5px;" class="btn btn-success">Start Selling Now</a>
 
 		</div>
 	</div>

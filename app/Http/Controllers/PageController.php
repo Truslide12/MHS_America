@@ -26,8 +26,8 @@ class PageController extends Pony {
 
 	public function getHomeOwnerPromo()
 	{
-		if(View::exists('pages.as.HomeOwner')) {
-			return view('pages.as.HomeOwner');
+		if(View::exists('pages.as.sell-a-mobile-home')) {
+			return view('pages.as.sell-a-mobile-home');
 		}
 
 		//App::abort(404);
@@ -35,8 +35,8 @@ class PageController extends Pony {
 
 	public function getParkOwnerPromo()
 	{
-		if(View::exists('pages.as.ParkOwner')) {
-			return view('pages.as.ParkOwner');
+		if(View::exists('pages.as.promote-mobile-home-park')) {
+			return view('pages.as.promote-mobile-home-park');
 		}
 
 		//App::abort(404);
@@ -44,8 +44,8 @@ class PageController extends Pony {
 
 	public function getSalesAgentPromo()
 	{
-		if(View::exists('pages.as.SalesAgent')) {
-			return view('pages.as.SalesAgent');
+		if(View::exists('pages.as.mobile-home-sales-agent')) {
+			return view('pages.as.mobile-home-sales-agent');
 		}
 
 		//App::abort(404);
@@ -53,8 +53,8 @@ class PageController extends Pony {
 
 	public function getHomeBuyerPromo()
 	{
-		if(View::exists('pages.as.HomeBuyer')) {
-			return view('pages.as.HomeBuyer');
+		if(View::exists('pages.as.buy-a-mobile-home')) {
+			return view('pages.as.buy-a-mobile-home');
 		}
 
 		//App::abort(404);

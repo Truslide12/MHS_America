@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('page-title')
-MHS For Sales Agents
+MHS For Mobile Home Sales Agents
 @stop
 
 @section('page-content')
@@ -160,6 +160,7 @@ h3, h1 {
 			<p style="font-size: 1.2em;">
 				As an Agent MHS America offers you exciting tools to assist you and your colleagues in maintaining a professional online presence. Our platform has been thoughtfully designed to promote easy business use. By having your company register on MHS America, the home listings of all employees can be managed from one place.
 			</p>
+			<div class="thick-hr"></div>
 
 			<h3>If You Don't Work Alone, Bring the Whole Office</h3>
 			<p>
@@ -167,14 +168,14 @@ h3, h1 {
 			</p>
 
 			<ul>
-				<li>
-					Company Billing: Your company can register company debit/credit cards and assign access to any user(s) on the system. This allows you limit who can purchase new listing and prevent employees from seeing card numbers. Having all your billing tied to the company allows you to access full spending reports each month to see the cost of your companies online presence.
+				<li style="margin-bottom: 10px;">
+					<strong>Company Billing:</strong> Your company can register company debit/credit cards and assign access to any user(s) on the system. This allows you limit who can purchase new listing and prevent employees from seeing card numbers. Having all your billing tied to the company allows you to access full spending reports each month to see the cost of your companies online presence.
 				</li>
-				<li>
-					User Management: Assign Employees to different functions. By managing your employees roles you can limit each persons functional access to only what they need. Whether its ability to manage payment information, create home listings, update home listings, or invite new users. Home listings access can be assigned globally or individually.
+				<li style="margin-bottom: 10px;">
+					<strong>User Management:</strong> Assign Employees to different functions. By managing your employees roles you can limit each persons functional access to only what they need. Whether its ability to manage payment information, create home listings, update home listings, or invite new users. Home listings access can be assigned globally or individually.
 				</li>
-				<li>
-					Company Profile: You can create a profile for your company showing all your listings and agents. Make it easy for user to see why your offerings are better than the rest.
+				<li style="margin-bottom: 10px;">
+					<strong>Company Profile:</strong> You can create a profile for your company showing all your listings and agents. Make it easy for user to see why your offerings are better than the rest.
 				</li>
 			</ul>
 
@@ -189,40 +190,11 @@ h3, h1 {
 
 		</div>
 		<div class="col-md-6 col-sm-12">
-			@if( 1==2 )
-			<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
 
-			<div class="card" style="position: relative;">
-				<div class="stickerprice">$39<sup><small>99</small></sup></div>
-			  <div class="card-holder">
-			    <h4><b>Home Listing Features</b></h4> 
-			    <p class="card-col-1" style="font-weight: bold;">Features</p>
-			    <p class="card-col-4" style="font-weight: bold;">&nbsp;</p>
-			    <hr>
-			    <p class="card-col-1">Home Photos</p>
-			    <p class="card-col-4">5</p>
-			    <hr>
-			    <p class="card-col-1">Full Home Details</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">Appear in MHS Search</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">Appear on your city and state pages</p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">180 Day Listing <small>(free re-activation required at 90 days)</small></p>
-			    <p class="card-col-4"><i class="fa fa-check"></i></p>
-			    <div style="clear: all;margin-bottom: 10px;">&nbsp;</div>
-			  </div>
-			</div>
-			<a href="/getstarted/home/premium" class="btn btn-success" style="width: 100%;margin-top: 25px;">Start Now</a>
-			</div>
-			@endif
 			<div class="" style="background: silver; padding:5px;border:1px solid black">
 			<img class="img" style="max-width: 100%;" src="/img/promo_images/HomeProfile.png">
 			</div>
-			<a href="{{ URL::route('getstarted-home') }}" style="width: 100%;padding: 20px;margin-top: 5px;" class="btn btn-success">Start Now</a>
+			<a href="{{ URL::route('getstarted-home') }}" style="font-size: 1.5em;width: 100%;padding: 10px;margin-top: 5px;" class="btn btn-success">Sign Up Now</a>
 		</div>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <strong>Thank you!</strong><br>
-<p>The staff of MHS America would like to thank you for including your community on our website. We hope you find our tools and resources useful. With this free profile you can now be represented on the fastest growing mobile home advertising platform today.</p>
+<p>The staff of MHS America would like to thank you for including your community on our platform. We hope you find our tools and resources useful. With this free profile you can now be represented on the fastest growing mobile home advertising platform today.</p>
 
 <strong>Now that the world is watching, why not upgrade?</strong>
 <p>
@@ -16,4 +16,4 @@
 </ul>
 
 
-<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => Session::get('order_data')['profile_data']->id)) }}" class="btn btn-success btn-sm btn-align-fix" style="width:100%;padding: 10px;">Upgrade Now for $149.99</a>
+<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => Session::get('order_data')['profile_data']->id)) }}" class="btn btn-primary btn-sm btn-align-fix" style="width:100%;padding: 10px;">Upgrade Now for $149.99</a>

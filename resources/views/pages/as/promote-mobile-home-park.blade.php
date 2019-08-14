@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('page-title')
-MHS For Park Owners
+MHS For Mobile Home Park Owners
 @stop
 
 @section('page-content')
@@ -168,6 +168,7 @@ h3, h1 {
 			<p style="font-size: 1.2em;">
 				We offer two plans for Park Owners to get their park online and into our search results in minutes. With our free profile you can register your park on our platform and show up to users searching for communities in your area. If you want to stand out among the competition we offer a paid profile for $149.99/year. With a paid profile you are able to advertise key selling points about your community to all the users of MHS America.
 			</p>
+			<div class="thick-hr"></div>
 
 			<h3>Vaccant Spaces are Costly</h3>
 			<p>
@@ -189,42 +190,11 @@ h3, h1 {
 
 		</div>
 		<div class="col-md-6 col-sm-12">
-			@if(1==2)
-			<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
-			<div class="card" style="position: relative;">
-			  <div class="card-holder">
-			    <h4><b>Some of what we offer</b></h4> 
-			    <p class="card-col-1" style="font-weight: bold;">Features</p>
-			    <p class="card-col-4" style="font-weight: bold;">Free</p>
-			    <p class="card-col-4" style="font-weight: bold;">149.99</p>
-			    <hr>
-			    <p class="card-col-1">Community Photos</p>
-			    <p class="card-col-2">1</p>
-			    <p class="card-col-2">5</p>
-			    <hr>
-			    <p class="card-col-1">Show in Search Results</p>
-			    <p class="card-col-2"><i class="fa fa-check"></i></p>
-			    <p class="card-col-2"><i class="fa fa-check"></i></p>
-			    <hr>
-			    <p class="card-col-1">Advertise Spaces</p>
-			    <p class="card-col-2"><i class="fa fa-check"></i></p>
-			    <p class="card-col-2"><i class="fa fa-mark"></i></p>
-			    <hr>
-			    <p class="card-col-1">Full Profile Detail</p>
-			    <p class="card-col-2"><i class="fa fa-check"></i></p>
-			    <p class="card-col-2"><i class="fa fa-mark"></i></p>
-			    <hr>
 
-			    <div style="clear: all;margin-bottom: 10px;">&nbsp;</div>
-			  </div>
-			</div>
-			<a href="/getstarted/home/premium" class="btn btn-success" style="width: 100%;margin-top: 25px;">Start Now</a>
-			</div>
-			@endif
 			<div class="" style="background: silver; padding:5px;border:1px solid black">
 			<img class="img" style="max-width: 100%;" src="/img/promo_images/CommunityProfile.png">
 			</div>
-			<a href="page/community-plans" style="width: 100%;padding: 20px;margin-top: 5px;" class="btn btn-success">Start Now</a>
+			<a href="page/community-plans" style="font-size: 1.5em;width: 100%;padding: 10px;margin-top: 5px;" class="btn btn-success">Promote my Park Now</a>
 		</div>
 	</div>
 </div>

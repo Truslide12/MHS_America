@@ -164,36 +164,80 @@ background-repeat: no-repeat !important;
 	text-decoration: none;
 	text-transform: capitalize;
 }
+.comm_week_box {
+	padding: 22px;
+	margin-bottom: 100px;
+}
+
+.comm_week_banner {
+	background-color: silver;
+	border: 0px solid #dedede;
+	border-bottom: 0px;
+	position: relative;
+}
+
+.comm_week_text {
+	color: #000;
+	padding: 22px;
+	font-size: 1.2em;
+	z-index: 2;
+	border: 1px solid #dedede;
+	background-color: #f5f5f5;
+  	-webkit-box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+	-moz-box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+	box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+
+
+}
+.comm_week_label {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 4em;
+	font-family: Voltaire;
+	z-index: 2;
+	width: 100%;
+	padding: 10px;
+	color: snow;
+}
+
+.comm_week_label::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: -1;
+	background-color: #000;
+	opacity: 0.4;
+}
+
+
+
 </style>
 
 
 	<div class="row clearfix nudge white" style="padding:25px 0;padding-bottom: 1in;">
-		<div style="margin: 0px 0px 0px 0px;font-size: 1.2em;background:none;">
-			<img src="{{ URL::route('welcome') }}/img/stockphotos/ww.png" class="cotw-img" style="float:left;margin:25px;margin-top: 50px;">
-			<div style="padding-top: 10px;">
-			<h3 style="width: 100%;background:#007bdf;color:snow;padding: 7px;margin-bottom: 0px;">Community of the Month</h3>
-			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
-				<div style="width: 100%;">
-					<h4 style="width: 40%;display: inline-block;">Wild Wood Canyon Estates | Yucaipa, CA</h4>
-				</div>
-			</div>
 
-			<p class="cotw_text">
-			Wildwood Mobile Home Estates is a community found in the hills of Yucaipa California. This park is surrounded by beautiful 
-			greenery with an open backdrop of blue skies and the surrounding mountains. Located in a smaller city on the outskirts of 
-			the Inland Empire, this community boasts the small town feel, with quick access to all the major cities in the exciting 
-			Southern California region. This park sits just 1 mile from major freeway access, and a few streets over from the Yucaipa 
-			Boulevard in uptown Yucaipa.
-			<br><br>
-			Wildwood Canyon Estates is home to 120 Spaces, with currently no vacant spaces available. The park has 2 full pools with
-			gated access requiring a key. Adjacent to the lower pool is a community playground including a small field and basketball court
-			perfect for the neighborhood kids. Near the upper level pool is a large clubhouse available for the community to host social 
-			gatherings. All in all, Wildwood Canyon Estates is one of the nicest communities in the area, and no doubt deserving of being
-			Mobile Home Spaces Across America's Community of the Week.
-			</p>
-			<div style="clear: all;padding-bottom: 1in;"></div>
+
+
+		<div class="comm_week_box">
+			<div class="comm_week_banner">
+				<img src="/imgstorage/cover_{{$community_of_week->cover}}_crop.jpg" style="width: 100%">
+				<div class="comm_week_label">Community of the Week</div>
+			</div>
+			<div class="comm_week_text">
+				<div class="clearfix" style="padding-bottom: 10px;">
+				<strong style="float: left;font-size: 1.25em;font-family: Voltaire;">{{ $community_of_week->title }}</strong>
+				<strong style="float: right;font-size: 1.25em;font-family: Voltaire;">Community of the Week - {{ $community_of_week->week }}</strong>
+				</div>
+				{!! $community_of_week->description !!}
 			</div>
 		</div>
+
+
 		<div class="col-md-12 dude" id="promobanner" style="height:33rem;">
 			<div class="btnbox">
 				<div style="width: 30%;float:left;padding: 12px;background:rgba(1,200,1,0);">
@@ -244,21 +288,21 @@ background-repeat: no-repeat !important;
 				<div class="col-md-4" style="padding: 10px 30px">
 					<img src="{{ URL::route('welcome') }}/img/stockphotos/couple-home-house-1288482.jpg" class="goal-imgs">
 					<h3 class="goals-title">To our Customers</h3>
-					<p>Our goal is to bring a more efficient and positive experience to the customer while at the same
-						time bringing mobile home parks and services direct to the buyers fingerprints.
+					<p>Our goal is to bring a more efficient and positive experience to the mobile home buyers and sellers while at the same
+						time bringing mobile home parks and services direct to consumers.
 					</p>
 				</div>
 				<div class="col-md-4" style="padding: 10px 30px">
 					<img src="{{ URL::route('welcome') }}/img/stockphotos/accomplishment-agreement-business-1249158.jpg" class="goal-imgs">
 					<h3 class="goals-title">To our Sponsors</h3>
 					<p>The staff and management at Mobile Home Spaces Across America is dedicated to
-						promoting mobile home park communities and services via the internet throughout the country.
+						promoting mobile home parks and mobile home services throughout the country.
 					</p>
 				</div>
 				<div class="col-md-4" style="padding: 10px 30px">
 					<img src="{{ URL::route('welcome') }}/img/stockphotos/achievement-agreement-arms-1068523.jpg" class="goal-imgs">
 					<h3 class="goals-title">To our Industry</h3>
-					<p>Our mission is to provide an innovative platform for buyers and sellers in the manufactured home market.
+					<p>Our mission is to provide an innovative platform for buyers and sellers in the mobile home market.
 						Our platform strives to revolutionize the way our industry operates online.
 					</p>
 				</div>

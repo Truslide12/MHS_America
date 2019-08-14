@@ -568,12 +568,23 @@ class GetStartedCommunityController extends Pony {
 	**************************************/
 	public function postOrderConfirmation()
 	{
-		$validator = Validator::make(Request::all(),
-			array(
-				'auth-to-promote' => 'required',
-				'agree-to-terms' => 'required',
-			)
-		);
+		if ( Session::get('plan') == "free" ) {
+			$validator = Validator::make(Request::all(),
+				array(
+					'auth-to-promote' => 'required',
+					'agree-to-terms' => 'required',
+				)
+			);	
+		} else {
+			$validator = Validator::make(Request::all(),
+				array(
+					'auth-to-promote' => 'required',
+					'agree-to-terms' => 'required',
+					'agree-to-autorenew' => 'required',
+				)
+			);	
+		}
+
 
 		if($validator->fails()) {
 			return redirect()->route($this->PRODUCT_ROUTE)->withInput()->withErrors($validator);

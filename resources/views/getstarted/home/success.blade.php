@@ -75,7 +75,7 @@
 				<div class="row">
 					<div class="col-md-7">
 						<div class="receipt_box">
-							<h3 class="cool">Success!</h3><hr class="hr-blue">
+							<h3 class="cool">Payment Success!</h3><hr class="hr-blue">
 
 <p>The staff of MHS America would like to thank you for choosing to list your home on our platform. Your new listing is set to Pivate and not yet visible to the public. Once you complete your home listing, set the status from Private to Active.</p><br>
 

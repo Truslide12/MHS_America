@@ -8,7 +8,15 @@
 
 <strong>Ready to dive right in?</strong>
 <p>
-	You now have access to a full range of features designed to help promote your community. Here are some good places to get started:
+	You now have access to a full range of features designed to help promote your community. Here are just some of what you've unlocked:
+	<ul>
+		<li>5 Free Photos for public viewing</li>
+		<li>Unlimited promotion of your vacant spaces</li>
+		<li>List all of your provided amenities</li>
+		<li>Write your own About Us section for your community.</li>
+		<li>Add your communities website to your profile</li>
+		<li>Full community details including: total spaces, space rent, office hours and contact information.</li>
+	</ul>
 </p>
 
 @if(1==2)
@@ -18,7 +26,7 @@
 
 <a class="btn btn-success btn-sm btn-align-fix" style="margin-bottom: 10px;width:100%;padding: 10px;"><i class="fa fa-home"></i> Spaces Manager</a>
 
-@endif
+
 
 <style type="text/css">
 	.newtoolblock {
@@ -137,3 +145,4 @@ $cid = Session::get('order_data')['company_data']->id;
 	home_editor_loc 	= "{{ URL::route('editor-homes', 	array('profile' => $pid, 'from_company' => $cid)) }}";
 	tutorials_loc 		= "{{ URL::route('page', array('slug'=>'contact')) }}";
 </script>
+@endif

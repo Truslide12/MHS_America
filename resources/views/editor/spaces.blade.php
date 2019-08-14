@@ -80,7 +80,7 @@
 						To add vacant spaces, please upgrade your profile.<br>It's quick, easy, and affordable.
 					</p>
 					<div class="text-center">
-						<a href="#" class="btn btn-lg btn-success">
+						<a href="{{ URL::route('getstarted-community-upgrade', array('profile' => $profile->id)) }}" class="btn btn-lg btn-success">
 							<strong>Get started today</strong>
 						</a>
 					</div>

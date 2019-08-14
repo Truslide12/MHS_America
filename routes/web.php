@@ -488,9 +488,10 @@ Route::group(array('prefix' => 'luna'), function()
 				Route::model('home', \App\Models\Home::class);
 				/******************/
 
+				/* Profile editor remove (GET) */
+				Route::get('remove', array('uses' => 'EditorController@getRemove', 'as' => 'editor-remove'));
 				/* Profile editor spaces (GET) */
 				Route::get('spaces', array('uses' => 'EditorController@getSpaces', 'as' => 'editor-spaces'));
-
 				/* Profile editor homes (GET) */
 				Route::get('homes', array('uses' => 'EditorController@getHomes', 'as' => 'editor-homes'));
 				/* Profile editor map (GET) */
@@ -508,6 +509,8 @@ Route::group(array('prefix' => 'luna'), function()
 				Route::get('homes/{home}/ads', array('uses' => 'EditorController@getEditHomeAds', 'as' => 'editor-edithome-ads'));
 
 				Route::group([], function() {
+					/* Profile editor remove (GET) */
+					Route::post('remove', array('uses' => 'EditorController@postRemove', 'as' => 'editor-remove-post'));
 					/* Profile editor add space (POST) */
 					Route::post('spaces/new', array('uses' => 'EditorController@postAddSpace', 'as' => 'editor-addspace-post'));
 					/* Profile editor edit space (POST) */
@@ -780,17 +783,17 @@ Route::group(array('prefix' => 'luna'), function()
 	/* Static page (GET) */
 	Route::get('help/{slug}', array('uses' => 'PageController@getHelp', 'as' => 'help'));
 
-	/* Static page (GET) */
-	Route::get('HomeOwner', array('uses' => 'PageController@getHomeOwnerPromo', 'as' => 'homeowner-promo'));
 
-	/* Static page (GET) */
-	Route::get('ParkOwner', array('uses' => 'PageController@getParkOwnerPromo', 'as' => 'parkowner-promo'));
+	/* Promotional Links */
+	Route::get('sell-a-mobile-home', array('uses' => 'PageController@getHomeOwnerPromo', 'as' => 'sell-promo'));
+	Route::get('buy-a-mobile-home', array('uses' => 'PageController@getHomeBuyerPromo', 'as' => 'buy-promo'));
+	Route::get('promote-mobile-home-park', array('uses' => 'PageController@getParkOwnerPromo', 'as' => 'community-promo'));
+	Route::get('mobile-home-sales-agent', array('uses' => 'PageController@getSalesAgentPromo', 'as' => 'salesagent-promo'));
 
-	/* Static page (GET) */
-	Route::get('SalesAgent', array('uses' => 'PageController@getSalesAgentPromo', 'as' => 'salesagent-promo'));
-
-	/* Static page (GET) */
-	Route::get('HomeBuyer', array('uses' => 'PageController@getHomeBuyerPromo', 'as' => 'homebuyer-promo'));
+	Route::get('sell', function() { return redirect()->route('sell-promo'); });
+	Route::get('buy', function() { return redirect()->route('buy-promo'); });
+	Route::get('salesagent', function() { return redirect()->route('salesagent-promo'); });
+	Route::get('parkowner', function() { return redirect()->route('community-promo'); });
 
 	/* Homepage (GET) */
 	Route::get('/', array('uses' => 'WelcomeController@getIndex', 'as' => 'welcome'));

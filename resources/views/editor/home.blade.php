@@ -10,8 +10,13 @@
 @section('content')
 <div class="row white">
 	<div class="col-md-12">
+
+		<a href="{{ URL::route('editor-remove', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}" class="btn btn-default pull-right visible-xs visible-sm" style="margin-left: 2px;">Remove Profile</a>
+		<a href="{{ URL::route('editor-remove', array('profile' => $profile->id, 'from_company' => Input::get('from_company'))) }}" class="btn btn-default pull-right push-down hidden-xs hidden-sm" style="margin-left: 2px;">Remove Profile</a>
+
 		<a href="{{ Input::has('from_company') ? URL::route('account-business-company', array('company' => Input::get('from_company'))) : URL::route('profile', array('profile' => $profile->id)) }}" class="btn btn-default pull-right visible-xs visible-sm">Go back</a>
 		<a href="{{ Input::has('from_company') ? URL::route('account-business-company', array('company' => Input::get('from_company'))) : URL::route('profile', array('profile' => $profile->id)) }}" class="btn btn-default pull-right push-down hidden-xs hidden-sm">Go back</a>
+
 		<h3>Profile Manager</h3>
 		<h4>{{ $profile->title }}</h4>
 		<hr>

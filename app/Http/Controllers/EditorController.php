@@ -25,6 +25,9 @@ use App\Models\Amenities;
 use App\Models\ProfilePhoto;
 use Geocoder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\MessageBag;
+use App\Models\Subscription;
+use App\Models\ProfileUser;
 
 class EditorController extends Pony {
 
@@ -129,13 +132,7 @@ class EditorController extends Pony {
 		];
 
 
-		if ( $profile->subscription->id > 0 ) {
-			if ( strtotime($profile->subscription->ends_at) > strtotime(now()) ) {
-				$is_paid = true;
-			} else {
-				$is_paid = false;
-			}
-		} else { $is_paid = false; }
+
 		return view('editor.home')
 					->with('profile', $profile)
 					->with('amenities', $amenities)
@@ -143,9 +140,139 @@ class EditorController extends Pony {
 					->with('plan', $profile->plan)
 					->with('business_hours', $final_hours)
 					->with('hour_texts', $hour_texts)
-					->with('is_paid', $is_paid)
+					->with('is_paid', $profile->has_active_subscription())
 					->with('weekdays', $weekdays);
 					//->with('canvas', Canvas::getDefault());
+	}
+
+	public function getRemove(Profile $profile)
+	{
+		return view('editor.remove')
+					->with('profile', $profile)
+					->with('plan', $profile->plan);
+					//->with('canvas', Canvas::getDefault());
+	}
+
+	public function postRemove(Profile $profile)
+	{
+		$input_data = Input::only('profile_id', 'data_action');
+
+		$validator = Validator::make($input_data,
+		[
+			'profile_id' => 'required',
+		],
+		[
+			'profile_id.required' => 'The profile id is required.',
+		]);
+		if($validator->fails()) {
+
+			return Redirect::route('editor-remove', ['profile' => $profile->id])
+							->withInput(Input::all())
+							->withErrors($validator);
+		}else{
+
+			$user = Auth::user();
+			$target_company = null;
+			foreach ( $user->companies as $company ) {
+				if ( $company->id == $profile->company->id ) {
+					if( $user->isAdminForCompany($company->id) ) {
+						$target_company = $company;
+					}
+				}
+			}
+			if ( $target_company ) {
+				//First Change Park to a Ghost Park
+				$profile->company_id = 0;
+				if($profile->save()) {
+
+					//Second cancel subscription
+					$sub = $target_company->subscriptions->where('id', (int)$profile->subscription_id)->first();
+
+					$customer 	= \Stripe\Customer::retrieve($target_company->stripe_customer_id);
+					
+					if ( ! is_object($customer->subscription) ) { 
+						//no subscription, skip step 2 and do 3
+							//Third we remove all the people given access to this profile
+							$relationship_fail_flag = false;
+							$relationships = ProfileUser::where('profile_id', $profile->id)->get();
+							foreach ($relationships as $relationship) {
+								if ( ! $relationship->delete() ) {
+									$relationship_fail_flag = true;
+								}
+							}
+
+							if( $relationship_fail_flag == false) {
+								return Redirect::route('account-business', ['profile' => $profile->id])
+									->with('success', 'The profile was successfully removed.');
+							} else {
+								$error = new \Illuminate\Support\MessageBag(['error' => 'Unable to update subscription.']);
+								return Redirect::route('editor-remove', ['profile' => $profile->id])
+										->withInput()
+										->withErrors($error);
+							}
+					}
+					$t = $customer->subscriptions->retrieve($sub->stripe_subscription_id)->cancel(array("at_period_end" => true ));
+					if( $t->cancel_at_period_end ) {
+						$store_subscription = Subscription::where('stripe_subscription_id', $t->id)->first();
+						$store_subscription->auto_renew = false;
+
+						if($store_subscription->save()) {
+
+							//Third we remove all the people given access to this profile
+							$relationship_fail_flag = false;
+							$relationships = ProfileUser::where('profile_id', $profile->id)->get();
+							foreach ($relationships as $relationship) {
+								if ( ! $relationship->delete() ) {
+									$relationship_fail_flag = true;
+								}
+							}
+
+							if( $relationship_fail_flag == false) {
+								return Redirect::route('account-business', ['profile' => $profile->id])
+									->with('success', 'The profile was successfully removed.');
+							} else {
+								$error = new \Illuminate\Support\MessageBag(['error' => 'Unable to update subscription.']);
+								return Redirect::route('editor-remove', ['profile' => $profile->id])
+										->withInput()
+										->withErrors($error);
+							}
+
+						} else {
+							$error = new \Illuminate\Support\MessageBag(['error' => 'Unable to update subscription.']);
+							return Redirect::route('editor-remove', ['profile' => $profile->id])
+									->withInput()
+									->withErrors($error);
+						}
+
+					} else {
+						$error = new \Illuminate\Support\MessageBag(['error' => 'Unable to cancel subscription.']);
+						return Redirect::route('editor-remove', ['profile' => $profile->id])
+								->withInput()
+								->withErrors($error);
+					}
+
+				} else {
+					$error = new \Illuminate\Support\MessageBag(['error' => 'Unable to unlink profile.']);
+					return Redirect::route('editor-remove', ['profile' => $profile->id])
+							->withInput()
+							->withErrors($error);
+				}
+
+			} else {
+
+				$error = new \Illuminate\Support\MessageBag(['error' => 'You do not have access to remove this profile.']);
+				return Redirect::route('editor-remove', ['profile' => $profile->id])
+							->withInput()
+							->withErrors($error);
+			}
+
+
+
+			$error = new \Illuminate\Support\MessageBag(['error' => 'An error occurred.']);
+			return Redirect::route('editor-remove', ['profile' => $profile->id])
+							->withInput()
+							->withErrors($error);
+		}
 	}
 
 	public function getSpaces(Profile $profile)

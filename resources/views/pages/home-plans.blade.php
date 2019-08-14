@@ -6,13 +6,13 @@
 @stop
 
 @section('page-title')
-List Your Home With MHS America
+Sell Your Home On MHS America
 @stop
 
 @section('page-content')
 
 <div class="row blu">
-	<div class="col-md-8 col-md-offset-2  col-sm-12">
+	<div class="col-md-6 col-md-offset-3  col-sm-12">
 		<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
 		<div class="price">Home Listing</div>
 		<p class="action-call">
@@ -45,6 +45,7 @@ List Your Home With MHS America
 		<a href="/getstarted/home/premium" class="btn btn-success" style="width: 100%;margin-top: 25px;">Start Now</a>
 		</div>
 	</div>
+
 </div>
 
 
@@ -77,7 +78,7 @@ List Your Home With MHS America
 	</div>
 	<div class="col-md-6">
 		<h4>What types of payment do you accept?</h4>
-		<p>Credit card (including MasterCard, Visa or American Express) via our secure online order form provide through stripe.</p>
+		<p>We accept credit or debit card payments (including MasterCard, Visa or American Express) via our secure online order form.</p>
 		<hr>
 		<h4>What is your refund policy?</h4>
 		<p>Refunds are available withing 48 hours of purchase of any of the above detailed plans.</p>

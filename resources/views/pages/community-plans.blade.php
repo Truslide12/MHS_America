@@ -25,7 +25,7 @@ Choose the plan that works for you..
 		    <p class="card-col-4" style="font-weight: bold;">&nbsp;</p>
 		    <hr>
 		    <p class="card-col-1">Photos</p>
-		    <p class="card-col-4">1</p>
+		    <p class="card-col-4"><i class="fa fa-times"></i></p>
 		    <hr>
 		    <p class="card-col-1">Basic Information</p>
 		    <p class="card-col-4"><i class="fa fa-check"></i></p>
@@ -103,7 +103,7 @@ Choose the plan that works for you..
 	</div>
 	<div class="col-md-6">
 		<h4>What types of payment do you accept?</h4>
-		<p>We accept credit or debit card payments.</p>
+		<p>We accept credit or debit card payments (including MasterCard, Visa or American Express) via our secure online order form.</p>
 		<hr>
 		<h4>What is your refund policy?</h4>
 		<p>Refunds are available within 48 hours of purchase of any of the above detailed plans.</p>
