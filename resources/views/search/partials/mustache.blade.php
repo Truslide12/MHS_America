@@ -63,10 +63,9 @@
     <img src="@{{#photos.1.url}}/imgstorage/@{{ photos.1.url }}_sm.jpg@{{/photos.1.url}}@{{^photos.1.url}}img/stockphotos/grass-meadow-gray-forest.jpg@{{/photos.1.url}}" class="img-responsive" style="width:calc(100% - 10px);min-height: 150px;margin:5px;">
     <div id="capper" style="margin:5px;background: #f9f9f9;border:1px solid #e0e0e0;padding: 20px;overflow-y:auto;">
             <h2 style="margin-top:0;">
-                <div style="padding:20px 10px;">
                 <span style="color: black;">@{{ title }}</span> 
+                <br>
                 <small>
-                    <br>
                     <a href="@{{ citylink }}">
                         @{{ city }}, @{{ state }}
                     </a> &middot;
@@ -74,10 +73,8 @@
                         @{{ community }}
                     </a>
                 </small>
-                </div>
-
             </h2>
-                <div class="col-md-8 pricebox"><span style="font-size:3em;">@{{price_formatted}}</span></div>
+            <div class="row">
                 <div class="col-md-4">
                     <table class="table">
                         <tr>
@@ -94,6 +91,7 @@
                         </tr>
                     </table>         
                 </div>
+                <div class="col-md-8"><h3>@{{price_formatted}}</h3></div>
                 <div class="col-md-12" style="">
                     <a  target="_blank" href="/home/@{{id}}" class="btn btn-primary" style="width: 48%;">View Home Profile</a>
                     <a  target="_blank" href="" class="btn btn-primary" style="width: 48%;">Watch Home</a>
@@ -105,6 +103,7 @@
                     <a  target="_blank" href="" class="btn btn-primary" style="width: calc(16% - 3px);margin-top: 2px;"><i class="fa fa-print"></i></a>
                     
                 </div>
+            </div>
     </div>
 </script>
 <script id="communityPreview" type="x-tmpl-mustache">
