@@ -214,6 +214,12 @@ background-repeat: no-repeat !important;
 	opacity: 0.4;
 }
 
+@media (max-width:767px) {
+	.comm_week_label {
+		font-size: 2em;
+	}
+
+}
 
 
 </style>
