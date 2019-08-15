@@ -372,7 +372,7 @@
 			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/promote-mobile-home-park">Mobile Home Park Owners</a>
 		</div>
 		<div class="col-md-12" style="text-align: center;">
-			<div class="thick-hr" style="width: 80%;margin: 0 auto 10px;"></div>
+			<div class="thick-hr" style="width: 80%;margin: 10px auto 0;"></div>
 		</div>
 </div>
 
