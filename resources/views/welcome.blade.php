@@ -606,7 +606,7 @@
 		function resizeBackdrop() {
 			//var offset = $('#header-wrapper').height() + $('#logo-wrapper').height() + 45;
 			var offset = 209;
-			$('#great-welcome').height($(window).height() - offset + 'px');
+			$('#great-welcome').outerHeight($(window).height() - offset + 'px');
 		}
 
 		$(window).on('resize', function(event) {
