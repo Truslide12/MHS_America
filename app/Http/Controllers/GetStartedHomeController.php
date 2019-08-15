@@ -513,6 +513,7 @@ class GetStartedHomeController extends Pony {
 					'community-state' => 'required|exists:states,id',
 					'community-city' => 'required|exists:places,id,state_id,'.intval(Input::get('community-state', 0)),
 					'community-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
+					'community-type' => 'required|between:0,2',
 				)
 			);
 
@@ -537,7 +538,8 @@ class GetStartedHomeController extends Pony {
 				'zipcode' 	=> Input::get('community-zip'),
 				'state_id' 	=> Input::get('community-state'),
 				'county_id' => 0, /*need to find how to retrieve this..*/
-				'city_id' 	=> Input::get('community-city')
+				'city_id' 	=> Input::get('community-city'),
+				'age_type' 	=> Input::get('community-type')
 				];
 				
 				//Input::get('company-id')
@@ -1046,6 +1048,7 @@ class GetStartedHomeController extends Pony {
 		$profile->county_id 	= $data->county_id;
 		$profile->city_id 		= $data->city_id;
 		$profile->company_id 	= 0;//$company_id;
+		$profile->age_type 		= $data->age_type;
 
 		if (!$profile->save()) {
 

@@ -491,6 +491,7 @@ class GetStartedCommunityController extends Pony {
 				'community-state' => 'required|exists:states,id',
 				'community-city' => 'required|exists:places,id,state_id,'.intval(Input::get('community-state', 0)),
 				'community-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
+				'community-type' => 'required|between:0,2',
 			)
 		);
 
@@ -540,6 +541,7 @@ class GetStartedCommunityController extends Pony {
 			$orderdata['city_data'] = $geocode['city_data'];
 			$orderdata['state_data'] = $geocode['state_data'];
 			$orderdata['company_data'] = null;
+			$orderdata['community-type'] 	= Input::get('community-type');
 
 			foreach ( Auth::user()->companies as $company ) {
 				if ( $company->id == Input::get('company-id') ) {
@@ -616,7 +618,8 @@ class GetStartedCommunityController extends Pony {
 			'state_id' 	=> $d['state_data']['id'],
 			'county_id' => $d['community-county'],
 			'city_id' 	=> $d['city_data']['id'],
-			'location'	=> $d['community-location'] 
+			'location'	=> $d['community-location'],
+			'age_type' => $d['community-type'] 
 			];
 
 			$test = self::createBaseProfile($d['company_data']['id'], $pd);
@@ -637,7 +640,7 @@ class GetStartedCommunityController extends Pony {
 			session(['active_step' => 5]);
 		} else {
 			//go to payment screen
-			session(['active_step', 4]);
+			session(['active_step' => 4]);
 		}
 
 		return redirect()->route($this->PRODUCT_ROUTE);
@@ -1069,7 +1072,7 @@ class GetStartedCommunityController extends Pony {
 		$profile->county_id 	= $data->county_id;
 		$profile->city_id 		= $data->city_id;
 		$profile->company_id 	= $company_id;
-
+		$profile->age_type 		= $data->age_type;
 		if (!$profile->save()) {
 
 			return Redirect::route($this->PRODUCT_ROUTE)->withErrors(["Failed to create profile.."]);

@@ -80,6 +80,35 @@
 	            </div>
 
 			      			<div class="col-xs-12 col-sm-11" style="padding: 15px;">
+			      				<div class="form-group">
+									<label class="control-label col-md-3">Age Restriction</label>
+									<div class="col-md-9 " >	
+													<div class="row-fluid">
+														<input type="radio" name="community-type" id="t_default" value="-1" style="display: none;" selected>
+														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+															<input type="radio" name="community-type" id="t_family" value="0">
+															<label for="t_family">
+																Family
+															</label>
+														</div>
+													
+														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+															<input type="radio" name="community-type" id="t_ffp" value="1">
+															<label for="t_ffp">
+																55+
+															</label>
+														</div>
+
+														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+															<input type="radio" name="community-type" id="t_senior" value="2">
+															<label for="t_senior">
+																Senior
+															</label>
+														</div>
+
+													</div>
+									</div>
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">Street address</label>
 									<div class="col-md-9">
@@ -186,9 +215,101 @@
 			});
 		}
 
-$('#orderform').one('submit', function() {
-    $(this).find('.hardstop').attr('disabled','disabled');
-});
+
+function checkVerify(e) {
+
+
+			var validation = [	["string", "community-zip"],
+								["string", "community-name"],
+								["string", "community-address1"],
+								["int", "community-state"],
+								["int", "community-city"],
+								["int", "company-id"],
+								["age", "community-type"]
+							];
+
+
+	is_valid = true;
+	for( v in validation ) {
+		elem = $( "#"+validation[v][1] );
+		switch( validation[v][0] ) {
+			case "string":
+				if(elem.val() == null || elem.val() == '' ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+			case "int":
+				
+				if(elem.val() == null || elem.val() == '' || elem.val() == '0' || elem.val() == 0 ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+			case "age":
+				at = $("input[name=community-type]:checked").val();
+				elem = $(".ageblock");
+				console.log(at);
+				if(at  == null || at == '' || at == -1) {
+					is_valid = false;
+					
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+		}
+
+
+	}
+
+	if ( is_valid ) {
+		return true;
+	} else {
+		return false;
+	}
+
+}
+
+			$('#orderform').on('submit', function(evt, item) {
+				if ( checkVerify(evt) == false ) {
+					evt.preventDefault();
+				}
+			});
 
 </script>
 @stop
