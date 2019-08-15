@@ -21,11 +21,11 @@
                         class="img-responsive" style="width:100%;min-height: 150px;max-height: 150px;"></div>
 
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-0">@{{ community }}
-                            <br>@{{ title }}</h4>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{size}}</small>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{beds}} Bedrooms</small>
-                            <small style="background:silver;border-radius:5px!important;padding:1px 5px;white-space: nowrap;">@{{baths}} Baths</small>
+                            <h4 class="mb-0">
+                                @{{ title }}
+                                <br><small>@{{ community }}</small>
+                            </h4>
+                            <small class="attrbadge">@{{size}}</small><small class="attrbadge">@{{beds}} Bedrooms</small><small class="attrbadge">@{{baths}} Baths</small>
                         </div>
                     </a>
 </script>
@@ -60,13 +60,12 @@
 
 
 <script id="homePreview" type="x-tmpl-mustache">
-    <img src="@{{ photos.1.url }}@{{^photos.1.url}}img/stockphotos/grass-meadow-gray-forest.jpg@{{/photos.1.url}}" class="img-responsive" style="width:calc(100% - 10px);min-height: 150px;margin:5px;">
+    <img src="@{{#photos.1.url}}/imgstorage/@{{ photos.1.url }}_sm.jpg@{{/photos.1.url}}@{{^photos.1.url}}img/stockphotos/grass-meadow-gray-forest.jpg@{{/photos.1.url}}" class="img-responsive" style="width:calc(100% - 10px);min-height: 150px;margin:5px;">
     <div id="capper" style="margin:5px;background: #f9f9f9;border:1px solid #e0e0e0;padding: 20px;overflow-y:auto;">
             <h2 style="margin-top:0;">
-                <div style="padding:20px 10px;">
                 <span style="color: black;">@{{ title }}</span> 
+                <br>
                 <small>
-                    <br>
                     <a href="@{{ citylink }}">
                         @{{ city }}, @{{ state }}
                     </a> &middot;
@@ -74,26 +73,25 @@
                         @{{ community }}
                     </a>
                 </small>
-                </div>
-
             </h2>
-                <div class="col-md-8 pricebox"><span style="font-size:3em;">@{{price_formatted}}</span></div>
-                <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
                     <table class="table">
                         <tr>
                             <td><i class="fas fa-bed"></i></td>
-                            <td>@{{ beds }} Bedroom(s)</td>
+                            <td>@{{ beds }} Bed</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-toilet"></i></td>
-                            <td>@{{ baths }} Bathroom(s)</td>
+                            <td>@{{ baths }} Bath</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-ruler-combined"></i></td>
-                            <td>@{{ square_footage }} sqft.</td>
+                            <td>Approx. @{{ square_footage }} sqft.</td>
                         </tr>
                     </table>         
                 </div>
+                <div class="col-md-6"><h3>@{{price_formatted}}</h3></div>
                 <div class="col-md-12" style="">
                     <a  target="_blank" href="/home/@{{id}}" class="btn btn-primary" style="width: 48%;">View Home Profile</a>
                     <a  target="_blank" href="" class="btn btn-primary" style="width: 48%;">Watch Home</a>
@@ -105,6 +103,7 @@
                     <a  target="_blank" href="" class="btn btn-primary" style="width: calc(16% - 3px);margin-top: 2px;"><i class="fa fa-print"></i></a>
                     
                 </div>
+            </div>
     </div>
 </script>
 <script id="communityPreview" type="x-tmpl-mustache">

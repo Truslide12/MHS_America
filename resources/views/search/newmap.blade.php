@@ -330,6 +330,7 @@
                             data.features[i].properties['home_count'] = data.features[i].properties.homes.length;
                         }
                     }
+                    Lyra.shuffle();
                     map.getSource('results').setData(data);
                     console.log("caching communities");
                     t_cache.communities = data;
@@ -761,22 +762,27 @@
             }
         });
 
+        $(window).resize(function() {
+            sidebarheight();
+        });
+
     });
 
 function sidebarheight() {
     if ( is_mobile_mode ) { return false; }
 
-    f1 = $("#header-wrapper").height();
-    f2 = $("#firstrow").height();
-    f3 = $("#footer-wrapper").height();
+    // f1 = $("#header-wrapper").height();
+    // f2 = $("#firstrow").height();
+    // f3 = $("#footer-wrapper").height();
 
-    a = $(window).height();
-    b = $("body").height();
-    c = $("#footer-wrapper").height();
-    d = a-(b+c+0);
+    // a = $(window).height();
+    // b = $("body").height();
+    // c = $("#footer-wrapper").height();
+    // d = a-(b+c+0);
 
-    console.log("setting map..", (a-(f1+f2+f3+20)) )
-    $("#map, #sideview, #capper").height(a-(f1+f2+f3+20));
+    //console.log("setting map..", (a-(f1+f2+f3+20)) )
+    //$("#map, #sideview, #capper").height(a-(f1+f2+f3+20));
+    $("#map, #sideview, #capper").height($(window).height() - 161);
     //$("#capper").height(d-105);
 }
 
