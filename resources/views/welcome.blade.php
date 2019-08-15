@@ -58,7 +58,6 @@
 @endif
 
 
-<!-- test -->
 
 	<style type="text/css">
 		.profile-container {
