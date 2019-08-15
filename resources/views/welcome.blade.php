@@ -378,7 +378,7 @@
 	<div class="row clearfix nudge white">
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
-				<h1 class="no-margin-t">Recently Listed Homes</h1>
+				<h1 class="no-margin-t text-center">Recently Listed Homes</h1>
 			</div>
 		</div>
 	</div>
@@ -539,7 +539,7 @@
 	@endif
 
 	<script type="text/javascript">
-		$('#map').vectorMap({
+		/* $('#map').vectorMap({
 			map: 'usa_en',
 			backgroundColor: 'transparent',
 			zoomOnScroll: false,
@@ -558,6 +558,8 @@
 		@if($welcomebox == true && 1==2)
 		$('#welcomebox').modal();
 		@endif
+
+		*/
 
 
 		function changeHomes()
@@ -591,11 +593,24 @@
 		    node.addEventListener('animationend', handleAnimationEnd)
 		}
 
+		function resizeBackdrop() {
+			var offset = $('#header-wrapper').height() + $('#logo-wrapper').height() + 45;
+			$('#great-welcome').height($(window).height() - offset);
+		}
+
+		$(window).on('resize', function(event) {
+			resizeBackdrop();
+		});
+
 
 		$(".clickycard").on('click', function(event){
 		    event.stopPropagation();
 		    event.stopImmediatePropagation();
 		    window.location = $(this).attr("href")
+		});
+
+		$(function() {
+			resizeBackdrop();
 		});
 
 		/**
