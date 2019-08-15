@@ -604,7 +604,8 @@
 		});
 
 		function resizeBackdrop() {
-			var offset = $('#header-wrapper').height() + $('#logo-wrapper').height() + 45;
+			//var offset = $('#header-wrapper').height() + $('#logo-wrapper').height() + 45;
+			var offset = 209;
 			$('#great-welcome').height($(window).height() - offset);
 		}
 
