@@ -47,27 +47,31 @@
 		</ul>
 		@endif
 		<h4>My watchlists</h4>
-		<div class="row">
-			<div class="col-xs-4">
-				@if($active == 'communities')
-				<img src="/img/icons/icon-park-active.png" alt="Communities" title="Communities">
-				@else
-				<a href="{{ URL::route('account-communities') }}"><img src="/img/icons/icon-park.png" alt="Communities" title="Communities"></a>
-				@endif
-			</div>
-			<div class="col-xs-4">
-				@if($active == 'homes')
-				<img src="/img/icons/icon-home-active.png" alt="Homes" title="Homes">
-				@else
-				<a href="{{ URL::route('account-homes') }}"><img src="/img/icons/icon-home.png" alt="Homes" title="Homes"></a>
-				@endif
-			</div>
-			<div class="col-xs-4">
-				@if($active == 'spaces')
-				<img src="/img/icons/icon-space-active.png" alt="Spaces" title="Spaces">
-				@else
-				<a href="{{ URL::route('account-spaces') }}"><img src="/img/icons/icon-space.png" alt="Spaces" title="Spaces"></a>
-				@endif
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-4">
+						@if($active == 'communities')
+						<img src="/img/icons/icon-park-active.png" alt="Communities" title="Communities" class="img-responsive">
+						@else
+						<a href="{{ URL::route('account-communities') }}"><img src="/img/icons/icon-park.png" alt="Communities" title="Communities" class="img-responsive"></a>
+						@endif
+					</div>
+					<div class="col-xs-4">
+						@if($active == 'homes')
+						<img src="/img/icons/icon-home-active.png" alt="Homes" title="Homes" class="img-responsive">
+						@else
+						<a href="{{ URL::route('account-homes') }}"><img src="/img/icons/icon-home.png" alt="Homes" title="Homes" class="img-responsive"></a>
+						@endif
+					</div>
+					<div class="col-xs-4">
+						@if($active == 'spaces')
+						<img src="/img/icons/icon-space-active.png" alt="Spaces" title="Spaces" class="img-responsive">
+						@else
+						<a href="{{ URL::route('account-spaces') }}"><img src="/img/icons/icon-space.png" alt="Spaces" title="Spaces" class="img-responsive"></a>
+						@endif
+					</div>
+				</div>
 			</div>
 		</div>
 		@if(1==2)
