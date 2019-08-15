@@ -397,7 +397,7 @@
 
 
 	</div>
-</div><div class="row about texture-1" style="padding-top: 20px;">
+</div><div class="row about texture-1" style="padding:20px 0 40px;">
 	<div class="col-lg-8" style="padding: 0px 40px;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
 		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->year }} {{ $home->brand }} {{ $home->model }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
