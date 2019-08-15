@@ -47,6 +47,30 @@
 		</ul>
 		@endif
 		<h4>My watchlists</h4>
+		<div class="row">
+			<div class="col-xs-4">
+				@if($active == 'communities')
+				<img src="/img/icons/icon-park-active.png" alt="Communities" title="Communities">
+				@else
+				<a href="{{ URL::route('account-communities') }}"><img src="/img/icons/icon-park.png" alt="Communities" title="Communities"></a>
+				@endif
+			</div>
+			<div class="col-xs-4">
+				@if($active == 'homes')
+				<img src="/img/icons/icon-home-active.png" alt="Homes" title="Homes">
+				@else
+				<a href="{{ URL::route('account-homes') }}"><img src="/img/icons/icon-home.png" alt="Homes" title="Homes"></a>
+				@endif
+			</div>
+			<div class="col-xs-4">
+				@if($active == 'spaces')
+				<img src="/img/icons/icon-space-active.png" alt="Spaces" title="Spaces">
+				@else
+				<a href="{{ URL::route('account-spaces') }}"><img src="/img/icons/icon-space.png" alt="Spaces" title="Spaces"></a>
+				@endif
+			</div>
+		</div>
+		@if(1==2)
 		<ul class="list-group">
 			<li class="list-group-item @if($active == 'communities') active @endif">
 				<h4 class="list-group-item-heading">
@@ -94,6 +118,7 @@
 				</h4>
 			</li>@endif
 		</ul>
+		@endif
 
 		<h4>Get Started</h4>
 		<ul class="list-group">
