@@ -322,7 +322,7 @@ class OctaviaController extends Pony {
 				$spaces = $community->spaces;
 			}
 			foreach ($spaces as $space) {
-				#just demo
+				//just demo
 				if($space->id == 2) {
 					$photo = "img/stockphotos/stolen.jpg";
 					$price = "$500";
@@ -333,7 +333,6 @@ class OctaviaController extends Pony {
 					$price = null;
 					$type = null;
 				}
-				###
 
 				$feature = [
 					'id' => $space->id,
