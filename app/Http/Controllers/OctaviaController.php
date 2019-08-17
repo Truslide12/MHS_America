@@ -92,7 +92,7 @@ class OctaviaController extends Pony {
 				$query->whereIn('status', [4, 5]);
 			});
 		}
-		if(Input::get('filters.age', 0) > 0 ) {
+		if(Input::get('filters.age', 0) >= 0 ) {
 			$query = $query->where('profiles.age_type', Input::get('filters.age'));
 		}
 
@@ -189,7 +189,7 @@ class OctaviaController extends Pony {
 							}, 'homes' => function($query) {
 								$query->select('id', 'profile_id', 'title', 'beds', 'baths', 'price', 'shape', 'square_footage', 'photos');
 							}])
-						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.pets, profiles.description, profiles.phone, profiles.address, profiles.zipcode, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'));
+						->addSelect(DB::raw('profiles.id, profiles.title, profiles.city_id, profiles.state_id, profiles.pets, profiles.age_type, profiles.description, profiles.phone, profiles.address, profiles.zipcode, regexp_replace(st_astext(profiles.service_area), \'[A-Z()]\', \'\', \'g\') as service_area, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude'));
 
 
 		if(Input::get('filters.pets', 0) == 1) {
@@ -201,7 +201,7 @@ class OctaviaController extends Pony {
 		if(Input::get('filters.homes', 0) == 1) {
 			$query = $query->has('homes');
 		}
-		if(Input::get('filters.age', 0) > 0 ) {
+		if(Input::get('filters.age', 0) >= 0 ) {
 			$query = $query->where('profiles.age_type', Input::get('filters.age'));
 		}
 
