@@ -695,10 +695,10 @@
             mapinvalid = true;
             refreshMapResults();
         });
-        $(document).on('click', '#optSpaces,#optHomes', function(event){
+        /* $(document).on('click', '#optSpaces,#optHomes', function(event){
             mapinvalid = true;
             refreshMapResults();
-        });
+        });*/
 
         var resetSyncBtn = function() {
             var searchBtn = $('[data-action="search"]');
