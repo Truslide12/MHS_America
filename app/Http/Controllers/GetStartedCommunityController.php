@@ -1073,13 +1073,28 @@ class GetStartedCommunityController extends Pony {
 		$profile->city_id 		= $data->city_id;
 		$profile->company_id 	= $company_id;
 		$profile->age_type 		= $data->age_type;
+
 		if (!$profile->save()) {
 
 			return Redirect::route($this->PRODUCT_ROUTE)->withErrors(["Failed to create profile.."]);
 		}
 
+		$geocode = Geocoder::address(
+			$data->address,
+			'',
+			$data->city_id,
+			$data->state_id,
+			$data->zipcode,
+			$profile
+		);
+		$geocoding = $geocode['success'];
+
+		if($geocoding) {
+			$profile->update($geocode['data']);
+		}
+
 		return (object)[
-			"status" => true,
+			"status" => $geocoding,
 			"profile" => $profile
 		];
 	}
