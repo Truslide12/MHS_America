@@ -41,7 +41,8 @@ class BrowseController extends Pony {
 	{
 		return view('admin.browse.profiles')
 					->with('title', 'Browse profiles')
-					->with('menutitle', 'Browse Menu');
+					->with('menutitle', 'Browse Menu')
+					->with('profiles', Profile::orderBy('id', 'desc')->paginate(25));
 	}
 
 	public function getUserView(User $user)
