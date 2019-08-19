@@ -165,4 +165,14 @@ class BrowseController extends Pony {
 						->with('success', 'Company successfully removed.');
 	}
 
+	public function getProfileView(Profile $profile)
+	{
+		return view('admin.browse.profileview')
+					->with('title', 'Browse profiles')
+					->with('menutitle', 'Browse Menu')
+					->with('profile', $profile)
+					->with('homes', $profile->homes)
+					->with('spaces', $profile->spaces);
+	}
+
 }

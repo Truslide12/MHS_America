@@ -22,8 +22,8 @@
 					<td>{{ $profile->id }}</td>
 					<td>{{ $profile->title }}</td>
 					<td class="text-right">
-						<a href="{{ URL::route('admin-browse-profiles-view', array('user' => $profile->id)) }}" class="btn btn-xs btn-metis-4 btn-rect">View</a>
-						<a href="{{ URL::route('admin-browse-profiles-edit', array('user' => $profile->id)) }}" class="btn btn-xs btn-default btn-rect">Edit</a>
+						<a href="{{ URL::route('profile', array('profile' => $profile->id)) }}" target="_blank" class="btn btn-xs btn-metis-4 btn-rect">View</a>
+						<a href="{{ URL::route('editor', array('profile' => $profile->id)) }}" target="_blank" class="btn btn-xs btn-default btn-rect">Edit</a>
 					</td>
 				</tr>
 				@endforeach
