@@ -453,7 +453,7 @@ class EditorController extends Pony {
 
 			/* Update space count */
 			if($profile->spaces != Input::get('space_count', 0)) {
-				$profile_array['spaces'] = (Input::get('space_count', 0) < 1000) ? Input::get('space_count') : 0;
+				$profile_array['spaces'] = (Input::get('space_count', 0) < 1000) ? Input::get('space_count', 0) : 0;
 			}
 
 			/* Update rent */
