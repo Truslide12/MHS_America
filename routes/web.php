@@ -161,6 +161,8 @@ Route::group(array('prefix' => 'luna'), function()
 		{
 			/* Administration moderation panel */
 			Route::get('/', array('uses' => 'Admin\ModController@getIndex', 'as' => 'admin-moderation'));
+			/* Administration moderation panel - resolved reports */
+			Route::get('resolved', array('uses' => 'Admin\ModController@getResolved', 'as' => 'admin-moderation-resolved'));
 		});
 	});
 
