@@ -31,12 +31,13 @@ class GetStartedCommunityController extends Pony {
 	public $PRODUCT_ROUTE = "getstarted-community";
 	public $PRODUCT_VIEW = "getstarted.community";
 
-	public function getIndex(Company $company, State $states)
+	public function getIndex(Company $company)
 	{
 		/* debug lines */
 		//self::clearSession();
 		//dd( session("order_data"), session()->all() );
 		/**************************/
+		Input::flash();
 
 		if( session("product") != $this->PRODUCT_ID && session("product") != 0 ) { self::clearSession(); }
 		//session()->forget("active_step");
@@ -53,7 +54,7 @@ class GetStartedCommunityController extends Pony {
 												->with('has_account', FALSE)
 												->with('is_upgraded', FALSE)
 												->with('has_companies', FALSE)
-												->with('user', $user)
+												->with('user', $user )
 												->with('step_id', 1)
 												->with('states', $states);
 		} else {
@@ -130,13 +131,13 @@ class GetStartedCommunityController extends Pony {
 		}
 	}
 
-	public function postUserForm()
+	public function postUserForm(Company $company)
 	{
 		$user = Auth::user();
 		$states = State::orderBy('id', 'asc')->get();
 		$messageBag = new \Illuminate\Support\MessageBag(); //$messageBag->add('error', 'Username not filled in');
 		$has_account = $is_upgraded = $has_companies = FALSE;
-
+		$errors = null;
 		if( $user === null ) {
 
 			//not logged in, so lets create an account..
@@ -147,7 +148,18 @@ class GetStartedCommunityController extends Pony {
 				//upgrade an account..
 				$upgraded = self::postActivate();
 				if ( $upgraded['status'] ) {
-					return view($this->PRODUCT_VIEW.'.home');//->with('user', $created['user']);
+
+
+					$companies = self::postCompanyProcess();
+					if ( $companies['status'] ) {
+						
+						return redirect()->route($this->PRODUCT_ROUTE);
+
+					} else {
+						$errors = $companies['errors'];
+					}
+
+
 				} else {
 					$errors = $upgraded['errors'];
 				}
@@ -156,14 +168,20 @@ class GetStartedCommunityController extends Pony {
 				$errors = $created['errors'];
 			}
 
-			return view($this->PRODUCT_VIEW.".notloggedin")->with('title', "Form Incomplete!")
+			if( $errors ) {
+				//dd(Input::except('password', 'password_confirmation'));
+				return view($this->PRODUCT_VIEW.".notloggedin")->with('title', "Form Incomplete!")
 												->with('redirect', $this->PRODUCT_ROUTE)
 												->with('states', $states)
 												->with('has_account', $has_account)
 												->with('is_upgraded', $is_upgraded)
 												->with('has_companies', $has_companies)
 												->withErrors($errors)
-												->withInput(Request::except('password', 'password_confirmation'));
+												->withInput(Input::except('password', 'password_confirmation'));	
+			} else {
+				return redirect()->route($this->PRODUCT_ROUTE);
+			}
+
 
 		} else {
 
@@ -178,7 +196,7 @@ class GetStartedCommunityController extends Pony {
 					$companies = self::postCompanyProcess();
 					if ( $companies['status'] ) {
 						
-						return view($this->PRODUCT_VIEW.'.home');//->with('user', $created['user']);
+						return redirect()->route($this->PRODUCT_ROUTE);
 
 					} else {
 						$errors = $companies['errors'];
@@ -190,8 +208,7 @@ class GetStartedCommunityController extends Pony {
 			} else {
 				$companies = self::postCompanyProcess();
 				if ( $companies['status'] ) {
-					self::getIndex();
-					return;
+						return redirect()->route($this->PRODUCT_ROUTE);
 				} else {
 					$errors = $companies['errors'];
 				}
@@ -218,7 +235,7 @@ class GetStartedCommunityController extends Pony {
 				'email' => 'required|email|unique:users,email',
 				'password' => 'required',
 				'password_confirmation' => 'required|same:password',
-				'agree' => 'required'
+				'agree-terms' => 'required'
 			),
 			array(
 				'username.required' => 'Please enter a username.',
@@ -234,7 +251,7 @@ class GetStartedCommunityController extends Pony {
 				'password_confirmation.required' => 'You must enter the password twice.',
 				'password_confirmation.same' => 'The passwords did not match.',
 
-				'agree.required' => 'You must agree to the terms of use and privacy policy.'
+				'agree-terms.required' => 'You must agree to the terms of use and privacy policy.'
 			)
 		);
 
@@ -285,6 +302,9 @@ class GetStartedCommunityController extends Pony {
 				'personal-city' => 'required|between:3,48',
 				'personal-state' => 'required|exists:states,id',
 				'personal-phone' => 'required',
+				'agree-auth' => 'required',
+				'agree-terms' => 'required'
+
 			)
 		);
 
@@ -301,6 +321,7 @@ class GetStartedCommunityController extends Pony {
 			if(Input::has('personal-address-2')) $user->addressb = Input::get('personal-address-2');
 			$user->city = Input::get('personal-city');
 			$user->state = Input::get('personal-state');
+			$user->zip_code = Input::get('personal-zip');
 			$user->phone = preg_replace('/\D+/', '', Input::get('personal-phone'));
 			$user->business = 1;
 
@@ -401,13 +422,14 @@ class GetStartedCommunityController extends Pony {
 		$validator = Validator::make(Input::all(),
 			array(
 				'business-name' => 'required|between:4,64',
-				'business-phone' => 'required|phone:US',
-				'business-fax' => 'phone:US',
+				'business-phone' => 'required',
 				'business-address-1' => 'required|between:5,48',
-				'business-address-2' => 'between:5,48',
+				'business-address-2' => 'between:0,48',
 				'business-state' => 'required|exists:states,id',
 				'business-city' => 'required|exists:places,id,state_id,'.intval(Input::get('business-state', 0)),
 				'business-zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
+				'agree-auth' => 'required',
+				'agree-terms' => 'required'
 			)
 		);
 
@@ -418,7 +440,7 @@ class GetStartedCommunityController extends Pony {
 			
 			$city = Geoname::where('state_id' ,Input::get('business-state'))->where('id', Input::get('business-city'))->first();
 
-			if(!is_a($city, Eloquent::class)) {
+			if(!is_a($city, Geoname::class)) {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
 				$messageBag->add('error', 'uh-oh. Something happened in transit. Please try again. Contact technical support if this persists. (ERROR: CityLookupFailed)');
@@ -435,8 +457,8 @@ class GetStartedCommunityController extends Pony {
 			$company->name = str_slug(Input::get('business-name'));
 			$company->street_addr = Input::get('business-address-1');
 			$company->street_addr2 = Input::get('business-address-2');
-			$company->phone = Input::get('business-phone');
-			$company->fax = Input::get('business-fax');
+			$company->phone = preg_replace('/\D+/', '', Input::get('business-phone'));
+			$company->fax = preg_replace('/\D+/', '', Input::get('business-fax'));
 			$company->state_id = Input::get('business-state');
 			$company->city_id = $city->id;
 			$company->verified = 0;
@@ -462,6 +484,9 @@ class GetStartedCommunityController extends Pony {
 					$messageBag = new \Illuminate\Support\MessageBag();
 					$messageBag->add('error', 'uh-oh. Something happened in transit. Please mark down this information, and contact technical support. (ERROR: CompanyRoleError, Company ID: '.$company->id.', User ID: '.Auth::user()->id.')');
 					return Array("status" => false, "errors" => $messageBag);
+				  } else {
+				  	$company->claimed = true;
+				  	$company->save();
 				  }
 				}
 

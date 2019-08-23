@@ -205,14 +205,6 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">City</label>
-									<div class="col-md-9">
-								      <select class="form-control" id="community-city" name="community-city" disabled>
-								      	<option value="0" data-abbr="xx" >First Select State</option>
-								      </select>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="control-label col-md-3">State</label>
 									<div class="col-md-3">
 
@@ -227,6 +219,14 @@
 									<label class="control-label col-md-3">Zip code</label>
 									<div class="col-md-3">
 										<input type="text" name="community-zip" id="community-zip" class="form-control" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">City</label>
+									<div class="col-md-9">
+								      <select class="form-control" id="community-city" name="community-city" disabled>
+								      	<option value="0" data-abbr="xx" >First Select State</option>
+								      </select>
 									</div>
 								</div>
 				</div>

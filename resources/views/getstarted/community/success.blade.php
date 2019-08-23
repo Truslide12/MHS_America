@@ -85,8 +85,17 @@
 				<div class="row">
 					<div class="col-md-7">
 						<div class="receipt_box">
+
+
+						@if(array_key_exists('transaction_data', Session::get("order_data")))
 							<h3 class="cool">Payment Success!</h3><hr class="hr-blue">
 							Welcome to MHS America! Your community profile has been created, and you can now begin expanding on your profile.<br><br>
+						@else
+							<h3 class="cool">Success!</h3><hr class="hr-blue">
+							Welcome to MHS America! Your community profile has been created, and you can now view your profile.<br><br>
+						@endif
+
+
 
 							<div style="margin:10px 20px;">
 								@if(array_key_exists('transaction_data', Session::get("order_data")))
@@ -94,8 +103,6 @@
 								<strong>You Paid:</strong> ${{ (Session::get("order_data")['transaction_data']['transaction_total']/100)  }}<br>
 								<strong>Transaction Code:</strong> {{ Session::get("order_data")['transaction_data']['transaction_code']  }}<br>
 								@else
-								<strong>You Paid:</strong> Free Profile<br>
-								<strong>Transaction Code:</strong> N/A<br>
 								@endif
 								<br>
 								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Address:</div>
@@ -107,7 +114,12 @@
 
 								<br><br>
 
-								<a href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}" class="btn btn-success btn-sm btn-align-fix" style="font-size: 1.5em;width:100%;padding: 10px;">Continue to Park Details</a>
+						@if(array_key_exists('transaction_data', Session::get("order_data")))
+							<a href="{{ URL::route('editor', array('profile' => Session::get('order_data')['profile_data']->id, 'from_company' => Session::get('order_data')['company_data']->id)) }}" class="btn btn-success btn-sm btn-align-fix" style="font-size: 1.5em;width:100%;padding: 10px;">Please Add Park Details</a>
+						@else
+							<a href="{{ URL::route('profile', array('profile' => Session::get('order_data')['profile_data']->id)) }}" class="btn btn-success btn-sm btn-align-fix" style="font-size: 1.5em;width:100%;padding: 10px;">View Park Profile</a>
+						@endif
+								
 
 								@if(1==2)
 								<div style="width: 100%;border-bottom: 1px solid black;font-weight: bold;margin-bottom: 4px;">Quick Links</div>

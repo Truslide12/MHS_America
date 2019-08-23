@@ -134,7 +134,7 @@ class BusinessController extends Pony {
 			$company->sec_hash = $sec_hash;
 			$company->about_us = '';
 			$company->mission = '';
-
+			$company->claimed = true;
 			
 			if(!$company->save()) {
 				/* Nuuuuuuuu! D: */

@@ -151,7 +151,7 @@
 										<div class="col-md-9" style="background: #eee!important;text-align: left;">
 										
 											<input type="checkbox" name="agree-to-autorenew" id="agree-to-autorenew" value="1"> 
-						                	I understand this $149.99 subscription will auto-renew annually if not not canceled.</a>
+						                	I understand this $149.99 subscription will auto-renew annually if not canceled.</a>
 
 										</div>
 									</div>

@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="/css/ticketsystem.css">
+	<link rel="stylesheet" type="text/css" href="/css/validationFD/validationFD.css">
+
 @stop
 
 @section('content-above')
@@ -100,7 +102,8 @@
 </div>
 @endif
 <div class="row white mb-0" id="createform" style="padding: 10px 0px;@if(!$has_account && !$errors->count() > 0)display: none;@endif">
-	<form class="form-horizontal row" action="getstarted" method="post">
+	<form class="form-horizontal row" id="setupform" action="getstarted" method="post">
+	{{ csrf_field() }}
 	<div class="col-md-10 col-md-offset-1">
 		@include('layouts.partial.errors')
 		@if ( ! $has_account || 1==1 )
@@ -110,25 +113,25 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Username</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" @if($user) value="{{$user->username}}" readonly @endif>
+		      <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" @if($user) value="{{$user->username}}" readonly @else value="{{ Input::get('username') }}" @endif @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Password</label>
 		    <div class="col-sm-9">
-		      <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="Password" @if($user) value="wizard" readonly @endif>
+		      <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="Password" @if($has_account) value="********" readonly @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Email</label>
 		    <div class="col-sm-9">
-		      <input type="email" class="form-control" id="email" name="email" placeholder="Email" @if($user) value="{{$user->email}}" readonly @endif>
+		      <input type="email" class="form-control" id="email" name="email" placeholder="Email" @if($user) value="{{$user->email}}" readonly @else value="{{ Input::get('email') }}" @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Password</label>
 		    <div class="col-sm-9">
-		      <input type="password" class="form-control" id="password_confirmation" autocomplete="off" name="password_confirmation" placeholder="Password" @if($user) value="wizard" readonly @endif>
+		      <input type="password" class="form-control" id="password_confirmation" autocomplete="off" name="password_confirmation" placeholder="Password" @if($has_account) value="********" readonly @endif>
 		    </div>
 		  </div>
 		  @endif
@@ -137,25 +140,25 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>First Name</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-firstname" name="personal-firstname" placeholder="First Name" @if($user && $user->first_name) value="{{$user->first_name}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-firstname" name="personal-firstname" placeholder="First Name"  @if($user && $user->first_name) value="{{$user->first_name}}" readonly @else value="{{ Input::get('personal-firstname') }}" @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Last Name</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-lastname" name="personal-lastname" placeholder="Last Name" @if($user && $user->last_name) value="{{$user->last_name}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-lastname" name="personal-lastname" placeholder="Last Name" @if($user && $user->last_name) value="{{$user->last_name}}" readonly @else value="{{ Input::get('personal-lastname') }}" @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
-		    <label for="" class="col-sm-3 control-label">Address 1</label>
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Address 1</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-address-1" name="personal-address-1" placeholder="" @if($user && $user->address) value="{{$user->address}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-address-1" name="personal-address-1" placeholder="" @if($user && $user->address) value="{{$user->address}}" readonly @else value="{{ Input::get('personal-address-1') }}" @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label">Address 2</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-address-2" name="personal-address-2" placeholder="" @if($user && $user->addressb) value="{{$user->addressb}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-address-2" name="personal-address-2" placeholder="" @if($user && $user->addressb) value="{{$user->addressb}}" readonly @else value="{{ Input::get('personal-address-2') }}" @endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
@@ -176,7 +179,7 @@
 		      	<option value="0" data-abbr="xx">First Select State</option>
 		      	 @if($user && $user->city)
 		      	  @php
-				  	$cityname = Geoname::byOSM($user->city);
+				  	$cityname = App\Models\Geoname::find($user->city);
 				  @endphp
 		      	 <option value="{{$user->city}}" selected>{{$cityname->place_name}}</option>
 		      	 @endif
@@ -186,33 +189,37 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Zip</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-zip" name="personal-zip" placeholder="" @if($user && $user->zip_code) value="{{$user->zip_code}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-zip" name="personal-zip" placeholder="" @if($user && $user->zip_code) value="{{$user->zip_code}}" readonly  @else value="{{ Input::get('personal-zip') }}"@endif>
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label">Phone</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="personal-phone" name="personal-phone" placeholder="" @if($user && $user->phone) value="{{$user->phone}}" readonly @endif>
+		      <input type="text" class="form-control" id="personal-phone" name="personal-phone" placeholder="" @if($user && $user->phone) value="{{$user->phone}}" readonly @else value="{{ Input::get('personal-phone') }}" @endif>
 		    </div>
 		  </div>
 		  @endif
 		  @if ( ! $has_companies )
 		  <div class="formhead">Company Information</div>
 
-
+		    <div class="col-sm-3 col-md-offset-2" style="padding-left: 0;display: none;">
+				<label class="radio-inline">
+				  <input type="radio" name="inlineRadioOptions" id="inlineRadioD" value="-1" checked> Empty Default
+				</label>
+		    </div>
 		    <div class="col-sm-3 col-md-offset-2" style="padding-left: 0;">
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0" onclick="setMode(this.value);"> I Am or I Represent a Private Owner
+				  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0" onclick="setMode(this.value);" @if( Input::get("inlineRadioOptions") == "0") checked @endif> I Am or I Represent a Private Owner
 				</label>
 		    </div>
 		    <div class="col-sm-3" style="padding-left: 0;">
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1" onclick="setMode(this.value);" checked> I Own or Manage a Management Company
+				  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1" onclick="setMode(this.value);" @if( Input::get("inlineRadioOptions") == "1") checked @endif> I Own or Manage a Management Company
 				</label>
 		    </div>
 		    <div class="col-sm-3" style="padding-left: 0;">
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2" onclick="setMode(this.value);"> I Work for or with a Management Company
+				  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2" onclick="setMode(this.value);" @if( Input::get("inlineRadioOptions") == "2") checked @endif> I Work for or with a Management Company
 				</label>
 		    </div>
 
@@ -224,7 +231,7 @@
 		    	<div style="width: 80%;border-top: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;padding: 15px 0px;">
 		    	<p style="margin:0px;padding: 0px;font-family: Lato;color:#606060;">
 		    		<span id="desc_a" style="display: none;">I Own or Represent the Community I am trying to promote.</span>
-		    		<span id="desc_b" >I Own or Represent a Company responsible for promoting this Community.</span>
+		    		<span id="desc_b" style="display: none;" >I Own or Represent a Company responsible for promoting this Community.</span>
 		    		<span id="desc_c" style="display: none;">I am an Employee of a Company that is responsible for promoting this Community.</span>
 		    		&nbsp;
 		    	</p>
@@ -235,7 +242,7 @@
 		  <div class="form-group  col-md-12" style="margin-left: -58px!important;position: relative;max-width: 95%;">
 		    <label for="" class="col-sm-2 control-label"><span class="req_field">*</span>Name</label>
 		    <div class="col-sm-9 companyname">
-		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="business-name" name="business-name" placeholder="Business Name">
+		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="business-name" name="business-name" placeholder="Business Name" value="{{ Input::get('business-name') }}" >
 		    <a class="btn btn-default companybtn" onclick="createCompany();">Create</a>
 		    </div>
 		  </div>
@@ -245,29 +252,29 @@
 				<span id="name-warning"></span>
 			</div>
 		  </div>
-		  <div class="business-fields" style="display: none;">
+		  <div class="business-fields" @if( ! Input::get("business-name") ) style="display: none;" @endif>
 		  <div class="form-group  col-md-6">
-		    <label for="" class="col-sm-3 control-label">Phone</label>
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Phone</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-phone" name="business-phone" placeholder="">
+		      <input type="text" class="form-control" id="business-phone" name="business-phone" placeholder="" value="{{ Input::get('business-phone') }}">
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label">Fax</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-fax" name="business-fax" placeholder="">
+		      <input type="text" class="form-control" id="business-fax" name="business-fax" placeholder="" value="{{ Input::get('fax-phone') }}">
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
-		    <label for="" class="col-sm-3 control-label">Address 1</label>
+		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Address 1</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-address-1" name="business-address-1" placeholder="">
+		      <input type="text" class="form-control" id="business-address-1" name="business-address-1" placeholder="" value="{{ Input::get('business-address-1') }}" >
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label">Address 2</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-address-2" name="business-address-2" placeholder="">
+		      <input type="text" class="form-control" id="business-address-2" name="business-address-2" placeholder="" value="{{ Input::get('business-address-2') }}">
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
@@ -292,7 +299,7 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Zip</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-zip" name="business-zip" placeholder="">
+		      <input type="text" class="form-control" id="business-zip" name="business-zip" placeholder="" value="{{ Input::get('business-zip') }}">
 		    </div>
 		  </div>
 		</div>
@@ -308,11 +315,11 @@
 		  <div class="form-group  col-md-12" style="display: flex!important;align-content: center;align-items: center;justify-content: center;background:none;padding: 10px 0px;margin-top: 25px;">
 		  	<div class="col-md-5 col-sm-offset-1" style="">
 		  		<div class="" style="background: none;margin: auto auto;margin-bottom: 10px;">
-                	<input type="checkbox" name="agree" name="agree" value="1"> 
+                	<input type="checkbox" name="agree-auth" name="agree-auth" value="1"> 
                 	<span id="auth_text">I am Authorized to Create this Company</span>
                 </div>
 		  		<div class="" style="background: none;margin: auto auto;">
-                	<input type="checkbox" name="agree" name="agree" value="1"> 
+                	<input type="checkbox" name="agree-terms" name="agree-terms" value="1"> 
                 	I agree to and accept the <a href="{{ URL::route('page', array('slug' => 'terms')) }}" tabindex="5">terms of use</a>
                 	and <a href="{{ URL::route('page', array('slug' => 'privacy')) }}" tabindex="6">privacy policy</a>
                 </div>
@@ -324,6 +331,9 @@
 		    </div>
 		  </div>
 		</form>
+		  <div class="form-group col-md-12" id="error-screen" style="display: none;">
+
+		  </div>
 	</div>
 </div>
 @stop
@@ -348,6 +358,7 @@
 	</div>
 
 <script src="{{ URL::route('welcome') }}/js/typeahead.bundle.js"></script>
+<script src="/js/validationFD/validationFD.js"></script>
 <script type="text/javascript">
 	var selected_company = false;
 	var user_warnings = 1; //0 = no warnings, 1 = hint warnings, 2 = modal warnings
@@ -500,7 +511,7 @@
 			.end()
 			.append('<option>Select a city...</option>');
 
-		$('#submitbtn').prop('disabled', 'disabled');
+		//$('#submitbtn').prop('disabled', 'disabled');
 
 		if(abbr != '') {
 			$.getJSON("/derpy/cities/" + abbr, function(result) {
@@ -517,9 +528,9 @@
 		var city = $('#personal-city').val();
 
 		if(city == '') {
-			$('#submitbtn').prop('disabled', 'disabled');
+			//$('#submitbtn').prop('disabled', 'disabled');
 		}else{
-			$('#submitbtn').prop('disabled', false);
+			//$('#submitbtn').prop('disabled', false);
 		}
 	});
 
@@ -533,7 +544,7 @@
 			.end()
 			.append('<option>Select a city...</option>');
 
-		$('#submitbtn').prop('disabled', 'disabled');
+		//$('#submitbtn').prop('disabled', 'disabled');
 
 		if(abbr != '') {
 			$.getJSON("/derpy/cities/" + abbr, function(result) {
@@ -550,9 +561,9 @@
 		var city = $('#business-city').val();
 
 		if(city == '') {
-			$('#submitbtn').prop('disabled', 'disabled');
+			//$('#submitbtn').prop('disabled', 'disabled');
 		}else{
-			$('#submitbtn').prop('disabled', false);
+			//$('#submitbtn').prop('disabled', false);
 		}
 	});
 
@@ -577,14 +588,14 @@ function setMode(mode) {
 		 $("#desc_a").show();
 		 $("#auth_text").html("I am Authorized to Promote this Community");
 		 fromAbove();
-		 $("#submitbtn").attr('disabled', false);
+		 //$("#submitbtn").attr('disabled', false);
 		break;
 		case 1:
 		 $("#business-name").attr("readonly", false);
 		 $(".companybtn").html("Create").attr('readonly', false);
 		 $("#desc_b").show();
 		 $("#auth_text").html("I am Authorized to Create this Company");
-		 $("#submitbtn").attr('disabled', true);
+		 //$("#submitbtn").attr('disabled', true);
 		 $(".companybtn").attr('disabled', false).css("display", "initial");
 		break;
 		case 2:
@@ -592,7 +603,7 @@ function setMode(mode) {
 		 $(".companybtn").attr('readonly', false);
 		 $("#desc_c").show();
 		 $("#auth_text").html("I am Authorized to Join this Company");
-		 $("#submitbtn").attr('disabled', true);
+		 //$("#submitbtn").attr('disabled', true);
 		 $(".companybtn").html("Create").attr('disabled', false).css("display", "initial");
 		break;
 	}
@@ -735,7 +746,7 @@ function setMode(mode) {
 			.end()
 			.append('<option>Select a city...</option>');
 
-		$('#submitbtn').prop('disabled', 'disabled');
+		//$('#submitbtn').prop('disabled', 'disabled');
 	}
 
 	function lockForm() {
@@ -770,7 +781,7 @@ function setMode(mode) {
 			.end()
 			.append('<option>Select a city...</option>');
 
-		$('#submitbtn').prop('disabled', 'disabled');
+		//$('#submitbtn').prop('disabled', 'disabled');
 		$(".business-fields").hide();
 	
 	}
@@ -836,5 +847,139 @@ function setMode(mode) {
 		$("#join_id").val(null);
 		selected_company = false;
 	}
+
+
+	function validateAccountInfo() {
+		var username = $("#username");
+		var email = $("#email");
+		var password = $("#password");
+		var password_conf = $("#password_confirmation");
+
+	}
+
+function checkVerify(e) {
+
+
+	var validation = [	
+		["string", "community-zip"],
+		["string", "community-name"],
+		["string", "community-address1"],
+		["int", "community-state"],
+		["int", "community-city"],
+		["int", "company-id"],
+		["age", "community-type"]
+	];
+
+
+	is_valid = true;
+	for( v in validation ) {
+		elem = $( "#"+validation[v][1] );
+		switch( validation[v][0] ) {
+			case "string":
+				if(elem.val() == null || elem.val() == '' ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+			case "int":
+				
+				if(elem.val() == null || elem.val() == '' || elem.val() == '0' || elem.val() == 0 ) {
+					is_valid = false;
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+			case "age":
+				at = $("input[name=community-type]:checked").val();
+				elem = $(".ageblock");
+				console.log(at);
+				if(at  == null || at == '' || at == -1) {
+					is_valid = false;
+					
+					elem.css({
+						    "background": "#ffe0e0",
+						    "outline": "none",
+						    "border-color": "#f9c0c0",
+						    "box-shadow": "0 0 3px #f9c0c0"
+						});
+				} else {
+					elem.css({
+						    "background": "#f4fcf4",
+						    "outline": "none",
+						    "border-color": "green",
+						    "box-shadow": "0 0 3px #fff",
+						});
+				}
+			break;
+		}
+
+
+	}
+
+	if ( is_valid ) {
+		return true;
+	} else {
+		return false;
+	}
+
+}
+
+
+
+
+  var validation = [  
+    ["username", "string|require"],
+    ["password", "string|require|min:8"],
+    ["password_confirmation", "string|require|min:8"],
+    ["email", "email|require"],
+    ["personal-firstname", "string|require"],
+    ["personal-lastname", "string|require"],
+    ["personal-address-1", "string|require"],
+    ["personal-address-2", "string|nullable|max:32"],
+    ["personal-state", "numeric|require|min:1|max:50"],
+    ["personal-city", "numeric|require|min:1"],
+    ["personal-zip", "numeric|require|integer"],
+    ["personal-phone", "phone|require"],
+    ["inlineRadioOptions", "radio|in:0,1,2"],
+    ["agree-terms", "checkbox|require"],
+    ["agree-auth", "checkbox|require"],
+  ];
+
+  var messages = [
+  	["password|min", "password must be at least 8 characters."],
+  	["agree-terms|checkbox", "You must agree to our terms."],
+  ];
+
+
+  setupform = new ValidationFD({
+  	form: "setupform",
+  	rules: validation,
+  	messages: messages
+  });
+
+
 </script>
 @stop

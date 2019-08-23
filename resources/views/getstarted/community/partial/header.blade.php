@@ -109,7 +109,7 @@
 		<div class="col-md-12">
 			<div class="wzrd">
 			@php
-				if($step_id){
+				if(isset($step_id)){
 				 $s = $step_id;
 				} else { $s = 2; }
 				$steps = Array(1=>"Sign In", 2=>"Order Form", 3=>"Confirmation", 4=>"Payment", 5=>"Success");
