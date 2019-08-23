@@ -59,7 +59,7 @@ class ProfileAuthenticate {
 		$me = $request->user();
 
 		//Can I even?
-		if(!($profile->company_id > 0 && $me->hasRoleForCompany('admin', $profile->company_id))  && !$me->canForProfile($perm, $prof_id)) {
+		if(!($profile->company_id > 0 && $me->hasRoleForCompany('admin', $profile->company_id))  && !$me->canForProfile($perm, $prof_id) && !$me->hasRole('admin')) {
 			if($request->ajax()) {
 				return response('Unauthorized.', 401);
 			}else{

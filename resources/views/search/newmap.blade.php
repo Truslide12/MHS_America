@@ -63,9 +63,9 @@
                         <ul class="dropdown-menu">
                             <li @if(!in_array(Input::get('age', -1), [0,1,2])) class="active" @endif><a href="#" data-value="-1" data-title="Age restrictions">No preference</a></li>
                             <li role="separator" class="divider"></li>
-                            <li @if(Input::get('age', '') == 0) class="active" @endif><a href="#" data-value="0" data-title="All Ages">All Ages</a></li>
-                            <li @if(Input::get('age', '') == 1) class="active" @endif><a href="#" data-value="1" data-title="Senior / 55+">Senior / 55+</a></li>
-                            <li @if(Input::get('age', '') == 2) class="active" @endif><a href="#" data-value="2" data-title="Senior Only">Strictly Senior</a></li>
+                            <li @if(Input::get('age', -1) == 0) class="active" @endif><a href="#" data-value="0" data-title="All Ages">All Ages</a></li>
+                            <li @if(Input::get('age', -1) == 1) class="active" @endif><a href="#" data-value="1" data-title="Senior / 55+">Senior / 55+</a></li>
+                            <li @if(Input::get('age', -1) == 2) class="active" @endif><a href="#" data-value="2" data-title="Senior Only">Strictly Senior</a></li>
                         </ul>
                     </div>
                 </div>
@@ -695,10 +695,10 @@
             mapinvalid = true;
             refreshMapResults();
         });
-        $(document).on('click', '#optSpaces,#optHomes', function(event){
+        /* $(document).on('click', '#optSpaces,#optHomes', function(event){
             mapinvalid = true;
             refreshMapResults();
-        });
+        });*/
 
         var resetSyncBtn = function() {
             var searchBtn = $('[data-action="search"]');

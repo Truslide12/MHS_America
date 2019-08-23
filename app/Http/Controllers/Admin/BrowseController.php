@@ -41,7 +41,8 @@ class BrowseController extends Pony {
 	{
 		return view('admin.browse.profiles')
 					->with('title', 'Browse profiles')
-					->with('menutitle', 'Browse Menu');
+					->with('menutitle', 'Browse Menu')
+					->with('profiles', Profile::orderBy('id', 'desc')->paginate(25));
 	}
 
 	public function getUserView(User $user)
@@ -162,6 +163,16 @@ class BrowseController extends Pony {
 
 		return redirect()->route('admin-browse-companies')
 						->with('success', 'Company successfully removed.');
+	}
+
+	public function getProfileView(Profile $profile)
+	{
+		return view('admin.browse.profileview')
+					->with('title', 'Browse profiles')
+					->with('menutitle', 'Browse Menu')
+					->with('profile', $profile)
+					->with('homes', $profile->homes)
+					->with('spaces', $profile->spaces);
 	}
 
 }

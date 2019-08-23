@@ -208,7 +208,6 @@
 	</div>
 </div>
 <div class="row" data-columns id="gridlock">
-		@if($profile->company_id > 0)
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -216,15 +215,20 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				@if($profile->senior == 1)
+				@if($profile->age_type == 2)
 				<div class="brick brick-gray">
 					<strong>Senior</strong>
 				</div>
-				@else
+				@elseif($profile->age_type == 1)
+				<div class="brick brick-gray">
+					<strong>55+</strong>
+				</div>
+				@elseif($profile->age_type === 0)
 				<div class="brick brick-gray">
 					<strong>All Ages</strong>
 				</div>
 				@endif
+			@if($profile->company_id > 0)
 				@if($is_paid_profile)
 				@if($profile->rent > 0)
 				<div class="brick">
@@ -291,9 +295,10 @@
 				@if( $is_paid_profile && trim($profile->description) != '')
 				<p>{{ $profile->description }}</p>
 				@endif
+
+			@endif
 			</div>
 		</div>
-		@endif
 		@if( $is_paid_profile && $plan->hasFeature('manage_amenities') && $profile->hasAmenities() )
 		<div class="panel panel-default">
 			<div class="panel-heading">

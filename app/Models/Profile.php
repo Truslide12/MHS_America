@@ -456,7 +456,7 @@ class Profile extends EloquentModel {
 			for($x = 1; $x < 8; $x++) {
 				
 				$current = $stored_days[$x];
-				$open = !($current == 'x');
+				$open = !(in_array($current, ['x', ',', '']));
 
 				if ($open) {
 					list($start, $end) = explode(',', $current);
