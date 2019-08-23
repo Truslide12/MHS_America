@@ -9,7 +9,11 @@
     @if(count($reports) == 0)
 	<div class="padding-y hidden-xs hidden-sm"></div><div class="padding-y hidden-xs hidden-sm"></div>
 	<div class="padding-y"></div><div class="padding-y"></div>
-	<h3 class="text-center padding-y"><em>There are no unresolved reports.</em><br><small><a href="{{ URL::route('admin-moderation-resolved') }}">View Resolved Reports</a></small></h3>
+	@if($showResolved)
+	<h3 class="text-center padding-y"><em>No resolved reports were found.</em><br><small><a href="{{ URL::route('admin-moderation') }}">View New Reports</a></small></h3>
+	@else
+	<h3 class="text-center padding-y"><em>No unresolved reports were found.</em><br><small><a href="{{ URL::route('admin-moderation-resolved') }}">View Resolved Reports</a></small></h3>
+	@endif
 	<div class="padding-y"></div><div class="padding-y"></div>
 	<div class="padding-y hidden-xs hidden-sm"></div><div class="padding-y hidden-xs hidden-sm"></div>
 	@else
