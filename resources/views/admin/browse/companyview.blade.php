@@ -46,7 +46,7 @@
 		@foreach($profiles as $prof)
 		<div class="box">
 			<div class="panel-body">
-				<a href="{{ URL::route('admin-browse-profiles-view', array('profile_wt' => $prof->id)) }}" class="btn btn-rect btn-metis-4 pull-right">View</a>
+				<div class="pull-right"><a href="{{ URL::route('profile', array('profile' => $prof->id)) }}" target="_blank" class="btn btn-rect btn-metis-4">View</a> <a href="{{ URL::route('editor', array('profile' => $prof->id)) }}" target="_blank" class="btn btn-rect btn-metis-3">Edit</a></div>
 				<h5><strong>{{ $prof->title }}</strong></h5>
 			</div>
 		</div>
