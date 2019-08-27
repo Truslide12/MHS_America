@@ -890,7 +890,8 @@ HomeEditorIO.prototype.BuildReview = function() {
     //console.log("ph", this.home.photos);
     if ( this.home.photos !== null ) {
       if ( this.home.photos[1] ) {
-        $("#photo-preview").attr('src', this.home.photos[1].url);
+        
+        $("#photo-preview").attr('src', "/imgstorage/"+this.home.photos[1].url+"_crop.jpg");
       }
     } else {
 

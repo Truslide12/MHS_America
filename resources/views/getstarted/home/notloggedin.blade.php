@@ -101,7 +101,7 @@
 	</div>
 </div>
 @endif
-<div class="row white mb-0" id="createform" style="padding: 10px 0px;@if(!$has_account && !$errors->count() > 0)display: none;@endif">
+<div class="row white mb-0" id="createform" style="padding: 10px 0px;@if(!$has_account && !$errors->count() > 0) display: none; @endif">
 	<form class="form-horizontal row" id="setupform" action="getstarted" method="post">
 	{{ csrf_field() }}
 	<div class="col-md-10 col-md-offset-1">
@@ -113,7 +113,7 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Username</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" @if($user) value="{{$user->username}}" readonly @else value="{{ Input::get('username') }}" @endif @endif>
+		      <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" @if($user) value="{{$user->username}}" readonly @else value="{{ Input::get('username') }}" @endif >
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
@@ -175,7 +175,7 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>City</label>
 		    <div class="col-sm-9">
-		      <select class="form-control" id="personal-city" name="personal-city" disabled>
+		      <select class="form-control" id="personal-city" name="personal-city">
 		      	<option value="0" data-abbr="xx">First Select State</option>
 		      	 @if($user && $user->city)
 		      	  @php
@@ -201,7 +201,7 @@
 		  @endif
 		  @if ( ! $has_companies )
 		  <div class="formhead">Company Information</div>
-
+<div id="whoami">
 		    <div class="col-sm-3 col-md-offset-2" style="padding-left: 0;display: none;">
 				<label class="radio-inline">
 				  <input type="radio" name="inlineRadioOptions" id="inlineRadioD" value="-1" checked> Empty Default
@@ -222,7 +222,8 @@
 				  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2" onclick="setMode(this.value);" @if( Input::get("inlineRadioOptions") == "2") checked @endif> I Work for or with a Management Company
 				</label>
 		    </div>
-
+</div>
+<div id="iam" style="display: none;">
 		    <div class="col-sm-12" style="padding-top: 24px;padding-bottom: 24px;font-size: 1.2em;display: flex;align-content: center;align-items: center;justify-content: center;">
 
 		    	<div style="width: 20%;border-top: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;padding: 15px 10px;text-align: right;font-weight: bold;">
@@ -234,6 +235,7 @@
 		    		<span id="desc_b" style="display: none;" >I Own or Represent a Company responsible for promoting this Community.</span>
 		    		<span id="desc_c" style="display: none;">I am an Employee of a Company that is responsible for promoting this Community.</span>
 		    		&nbsp;
+		    		<a style="float: right;" onclick="resetCompany();">reset</a>
 		    	</p>
 		    	</div>
 
@@ -243,7 +245,7 @@
 		    <label for="" class="col-sm-2 control-label"><span class="req_field">*</span>Name</label>
 		    <div class="col-sm-9 companyname">
 		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="business-name" name="business-name" placeholder="Business Name" value="{{ Input::get('business-name') }}" >
-		    <a class="btn btn-default companybtn" onclick="createCompany();">Create</a>
+		    <a class="btn btn-default companybtn" onclick="createCompany();" style="display: none;">Create</a>
 		    </div>
 		  </div>
 		  <div class="form-group col-md-12">
@@ -252,6 +254,7 @@
 				<span id="name-warning"></span>
 			</div>
 		  </div>
+</div>
 		  <div class="business-fields" @if( ! Input::get("business-name") ) style="display: none;" @endif>
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Phone</label>
@@ -262,7 +265,7 @@
 		  <div class="form-group  col-md-6">
 		    <label for="" class="col-sm-3 control-label">Fax</label>
 		    <div class="col-sm-9">
-		      <input type="text" class="form-control" id="business-fax" name="business-fax" placeholder="" value="{{ Input::get('fax-phone') }}">
+		      <input type="text" class="form-control" id="business-fax" name="business-fax" placeholder="" value="{{ Input::get('business-fax') }}">
 		    </div>
 		  </div>
 		  <div class="form-group  col-md-6">
@@ -312,7 +315,7 @@
 		  </div>
 		</div>
 		  @endif
-		  <div class="form-group  col-md-12" style="display: flex!important;align-content: center;align-items: center;justify-content: center;background:none;padding: 10px 0px;margin-top: 25px;">
+		  <div class="form-group  col-md-12" style="display: flex!important;align-content: center;align-items: center;justify-content: center;background:none;padding: 10px 0px;margin-top: 125px;">
 		  	<div class="col-md-5 col-sm-offset-1" style="">
 		  		<div class="" style="background: none;margin: auto auto;margin-bottom: 10px;">
                 	<input type="checkbox" name="agree-auth" name="agree-auth" value="1"> 
@@ -360,6 +363,7 @@
 <script src="{{ URL::route('welcome') }}/js/typeahead.bundle.js"></script>
 <script src="/js/validationFD/validationFD.js"></script>
 <script type="text/javascript">
+	var clicked_comp = { title: "" };
 	var selected_company = false;
 	var user_warnings = 1; //0 = no warnings, 1 = hint warnings, 2 = modal warnings
 
@@ -381,6 +385,7 @@
 			});
 
 			$('#business-name').on('typeahead:selected', function(evt, item) {
+				clicked_comp = item;
 				selectCompany(item.id);
 				$(this).typeahead("val", "");
 			    // do what you want with the item here
@@ -403,7 +408,7 @@
 			    	return false;
 			    }
 			    if( getCompanyMode() == 1 ) {
-
+			    	$(".companybtn").attr("disabled", true);
 			    	if ( item.claimed === true ) {
 				    	$(this).typeahead("val", item.title);
 				    	$("#business-name").attr("readonly", true);
@@ -446,7 +451,7 @@
 			    	}
 
 
-
+			    	getCompanyData(item);
 			    	return false;
 			    }
 			    if( getCompanyMode() == 2 ) {
@@ -577,6 +582,13 @@ function create() {
 //what a user's role is.
 active_mode = 1;
 function setMode(mode) {
+	if ( $("#personal-firstname").val() == null || $("#personal-firstname").val() == "" ||
+		$("#personal-lastname").val() == null || $("#personal-lastname").val() == "" ) {
+		$("input:radio[name=inlineRadioOptions]").val([-1]);
+		return false;
+	}
+	$("#whoami").slideUp(200)
+		$("#iam").slideDown(200);
 	deselectCompany();
 	$("#name-warning").parent().hide();
 	$("#desc_a, #desc_b, #desc_c, #codebox").hide();
@@ -592,7 +604,7 @@ function setMode(mode) {
 		break;
 		case 1:
 		 $("#business-name").attr("readonly", false);
-		 $(".companybtn").html("Create").attr('readonly', false);
+		 $(".companybtn").attr('readonly', false);
 		 $("#desc_b").show();
 		 $("#auth_text").html("I am Authorized to Create this Company");
 		 //$("#submitbtn").attr('disabled', true);
@@ -634,6 +646,8 @@ function setMode(mode) {
 				}
 				return false;
 			}
+			$("#business-name").attr("readonly", true);
+			$(".companybtn").attr("disabled", true);
 			if ( getCompanyMode() == 2 ) {
 				switch ( user_warnings )
 				{
@@ -678,7 +692,16 @@ function setMode(mode) {
 	//do business under their name, not
 	//a company..
 	function fromAbove() {
+		if ( $("#personal-firstname").val() == null || $("#personal-firstname").val() == "" ||
+			 $("#personal-firstname").val() == null || $("#personal-firstname").val() == "" ) {
+				$("input:radio[name=inlineRadioOptions]").val([-1]);
+				return false;
+		}
 
+		var dba_name = $("#personal-firstname").val() + " " + $("#personal-lastname").val();
+		clicked_comp = { title: dba_name };
+
+		$("#business-name").val( dba_name ).attr("placeholder", "");
 		$("#business-name").val( $("#personal-firstname").val() + " " + $("#personal-lastname").val() ).attr("placeholder", "");
 		$("#business-name").attr("readonly", true);
 		if ( $("#personal-address-1").val() ) {
@@ -792,7 +815,7 @@ function setMode(mode) {
 
 
 
-	function getCompanyData(name, id) {
+	function getCompanyData(item) {
 
 		switch ( getCompanyMode() ) {
 			case 0:
@@ -808,7 +831,7 @@ function setMode(mode) {
 			break;
 		}
 
-		$.getJSON("/derpy/companies/" + name + "/" + id, function(result) {
+		$.getJSON("/derpy/companies/" + item.name + "/" + item.id, function(result) {
 
 			result = result[0];
 			$("#business-name").attr("readonly", true).val(result.title);
@@ -825,7 +848,7 @@ function setMode(mode) {
 			.find('option')
 			.remove()
 			.end()
-			.append('<option>'+result.city_name+'</option>');
+			.append('<option value="'+result.city_id+'">'+result.city_name+'</option>');
 
 			$("#business-state").prop('readonly', 'readonly')
 			.val(result.state_id);
@@ -846,6 +869,7 @@ function setMode(mode) {
 	function deselectCompany() {
 		$("#join_id").val(null);
 		selected_company = false;
+		clicked_comp = { title:"" }
 	}
 
 
@@ -856,97 +880,6 @@ function setMode(mode) {
 		var password_conf = $("#password_confirmation");
 
 	}
-
-function checkVerify(e) {
-
-
-	var validation = [	
-		["string", "community-zip"],
-		["string", "community-name"],
-		["string", "community-address1"],
-		["int", "community-state"],
-		["int", "community-city"],
-		["int", "company-id"],
-		["age", "community-type"]
-	];
-
-
-	is_valid = true;
-	for( v in validation ) {
-		elem = $( "#"+validation[v][1] );
-		switch( validation[v][0] ) {
-			case "string":
-				if(elem.val() == null || elem.val() == '' ) {
-					is_valid = false;
-					elem.css({
-						    "background": "#ffe0e0",
-						    "outline": "none",
-						    "border-color": "#f9c0c0",
-						    "box-shadow": "0 0 3px #f9c0c0"
-						});
-				} else {
-					elem.css({
-						    "background": "#f4fcf4",
-						    "outline": "none",
-						    "border-color": "green",
-						    "box-shadow": "0 0 3px #fff",
-						});
-				}
-			break;
-			case "int":
-				
-				if(elem.val() == null || elem.val() == '' || elem.val() == '0' || elem.val() == 0 ) {
-					is_valid = false;
-					elem.css({
-						    "background": "#ffe0e0",
-						    "outline": "none",
-						    "border-color": "#f9c0c0",
-						    "box-shadow": "0 0 3px #f9c0c0"
-						});
-				} else {
-					elem.css({
-						    "background": "#f4fcf4",
-						    "outline": "none",
-						    "border-color": "green",
-						    "box-shadow": "0 0 3px #fff",
-						});
-				}
-			break;
-			case "age":
-				at = $("input[name=community-type]:checked").val();
-				elem = $(".ageblock");
-				console.log(at);
-				if(at  == null || at == '' || at == -1) {
-					is_valid = false;
-					
-					elem.css({
-						    "background": "#ffe0e0",
-						    "outline": "none",
-						    "border-color": "#f9c0c0",
-						    "box-shadow": "0 0 3px #f9c0c0"
-						});
-				} else {
-					elem.css({
-						    "background": "#f4fcf4",
-						    "outline": "none",
-						    "border-color": "green",
-						    "box-shadow": "0 0 3px #fff",
-						});
-				}
-			break;
-		}
-
-
-	}
-
-	if ( is_valid ) {
-		return true;
-	} else {
-		return false;
-	}
-
-}
-
 
 
 
@@ -963,6 +896,16 @@ function checkVerify(e) {
     ["personal-city", "numeric|require|min:1"],
     ["personal-zip", "numeric|require|integer"],
     ["personal-phone", "phone|require"],
+
+    ["business-name", "string|require"],
+    ["business-phone", "phone|require"],
+    ["business-fax", "phone|nullable"],
+    ["business-city", "numeric|require|integer|min:1"],
+    ["business-state", "numeric|require|min:1|max:50"],
+    ["business-zip", "numeric|require|integer"],
+    ["business-address-1", "string|require"],
+    ["business-address-2", "string|nullable|max:32"],
+
     ["inlineRadioOptions", "radio|in:0,1,2"],
     ["agree-terms", "checkbox|require"],
     ["agree-auth", "checkbox|require"],
@@ -971,6 +914,7 @@ function checkVerify(e) {
   var messages = [
   	["password|min", "password must be at least 8 characters."],
   	["agree-terms|checkbox", "You must agree to our terms."],
+  	["agree-auth|checkbox", "You must confirm you are authorized."],
   ];
 
 
@@ -980,6 +924,36 @@ function checkVerify(e) {
   	messages: messages
   });
 
+$("#business-name").attr("readonly", true);
+
+
+			$('#business-name').on('blur', function(evt, item) {
+				console.log(clicked_comp.title)
+				if ( typeof clicked_comp.title !== undefined && clicked_comp.title != "" ) {
+					$("#business-name").val( clicked_comp.title );
+				}
+				return false;
+			});
+
+
+function resetCompany(){
+	deselectCompany();
+	active_mode = 1;
+	$("input:radio[name=inlineRadioOptions]").val([-1]);
+	setMode(0);
+		$("#whoami").slideDown(200)
+		$("#iam").slideUp(200);
+}
+
+function prefill_business_data(data) {
+	$("business-phone").val ( data.phone );
+	$("business-zip").val ( data.zip_code );
+	$("business-address-1").val ( data.street_addr );
+	//force these pass validation.. wont be used anyway
+	$("business-state").val ( 1 );
+	$("business-city").val ( 1 );
+	console.log(data)
+}
 
 </script>
 @stop

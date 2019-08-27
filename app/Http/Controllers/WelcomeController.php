@@ -44,4 +44,15 @@ class WelcomeController extends Pony {
 		return $response;
 	}
 	
+	public function getPromo()
+	{
+
+		$response = view('promote.park-owner')
+					->with('nofooter', true)
+					->with('canvas', Canvas::getDefault());
+
+		return $response;
+	}
+
 }
+

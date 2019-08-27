@@ -24,9 +24,9 @@ var ValidationFD = function (params) {
 
 
  document.getElementById(this.form_id).addEventListener('submit', function(e){
-  e.preventDefault();
+  //e.preventDefault();
   if ( this.validate() == true ) {
-    e.preventDefault();
+    //e.preventDefault();
   } else {
     e.preventDefault();
   }
@@ -58,6 +58,7 @@ ValidationFD.prototype.validate = function( rules, messages ) {
   for ( var rule in this.rules ) {
     var is_valid = true;
     var mode = null;
+    var $null_out_flag = false;
     var field_id = this.rules[rule][0];
     var requirements = this.rules[rule][1].split("|");
     //console.log(field_id, requirements)
@@ -66,21 +67,21 @@ ValidationFD.prototype.validate = function( rules, messages ) {
       //first check for built in requirements.
       if ( requirements[requirement] == "require" ) {
         var field_val = document.getElementById(field_id).value;
+        requirements.splice(requirement, 1);
         if( field_val === null || field_val === "" ) {
-                  //requirements.splice(requirement);
-
+          //requirements.splice(requirement);
           this.active_test.add_error( field_id+" is required.", field_id, requirements[requirement] );
           break;
         }
-        requirements.splice(requirement, 1);
       }
       if ( requirements[requirement] == "nullable" ) {
+        requirements.splice(requirement, 1);
         var field_val = document.getElementById(field_id).value;
         if( field_val === null || field_val === "" ) {
           //its okay to be null..
+          $null_out_flag = true;
           break;
         }
-        requirements.splice(requirement, 1);
       }
 
       //next check plugin validations
@@ -96,7 +97,11 @@ ValidationFD.prototype.validate = function( rules, messages ) {
     }
     //console.log("validating ", field_id, " using ", mode, "with", requirements);
     //call the mode function
-    validation = this.run_validation(field_id, mode, requirements);
+    if ( $null_out_flag == false ) {
+      validation = this.run_validation(field_id, mode, requirements);
+    } else {
+      continue;
+    }
 
     if ( validation ) {
       this.accept_field( field_id );
@@ -123,7 +128,7 @@ ValidationFD.prototype.validate = function( rules, messages ) {
 ValidationFD.prototype.run_validation = function( field, type, requirements ) {
   var validation_type = window[this.form_id]["validate_"+type];
   if ( typeof validation_type !== 'function' ) {
-    console.log("error: validation type "+validation_type+" could not be found.");
+    console.log("error: validation type "+validation_type+" could not be found.", field, type, requirements);
     return false;
   } else {
     return validation_type.bind(this).apply(window, [field, requirements]);
@@ -296,7 +301,8 @@ ValidationFD.prototype.validate_numeric = function( input, requirements ) {
 
 ValidationFD.prototype.validate_phone = function( input, requirements ) {
   var val = document.getElementById(input).value;
-  if ( val.match(/\d/g).length == 10 ) {
+  if ( val == null ) { return false; }
+  if ( val.match(/\d/g) && val.match(/\d/g).length == 10 ) {
     return true;
   } else {
     this.active_test.add_error("this field ("+input+") has error. Phone number must be valid 10 digit number.", input, "phone");
@@ -348,7 +354,15 @@ ValidationFD.prototype.validate_checkbox = function( input, requirements ) {
 }
 
 ValidationFD.prototype.validate_radio = function( input, requirements ) {
-  var val = document.querySelector("[name='"+input+"']").value
+  var ops = document.querySelectorAll("input[name='"+input+"']");
+  var val = null;
+  for ( v in ops ) {
+    if ( ops[v].checked == true ) {
+      val = ops[v].value;
+      break;
+    }
+  }
+
   for( requirement in requirements ) {
     var meets_requirement = true;
     var params = requirements[requirement].split(":");
@@ -362,7 +376,7 @@ ValidationFD.prototype.validate_radio = function( input, requirements ) {
           }
         }
         if ( in_flag == false ) {
-          this.active_test.add_error("this field ("+input+") has error ("+params[0]+")", input, params[0]);
+          this.active_test.add_error("this field ("+input+", "+val+") has error ("+params[0]+")", input, params[0]);
           meets_requirement = false;
         }
       break;

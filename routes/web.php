@@ -796,6 +796,9 @@ Route::group(array('prefix' => 'luna'), function()
 	Route::get('parkowner', function() { return redirect()->route('community-promo'); });
 
 	/* Homepage (GET) */
+	Route::get('promotest', array('uses' => 'WelcomeController@getPromo', 'as' => 'test-promo'));
+
+	/* Homepage (GET) */
 	Route::get('/', array('uses' => 'WelcomeController@getIndex', 'as' => 'welcome'));
 
 	// $app->bind('WikiController', function($app) {

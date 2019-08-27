@@ -65,7 +65,7 @@ class DerpyController extends Pony {
 							->leftJoin('states', 'companies.state_id', '=', 'states.id')
 							->leftJoin('users', 'companies.state_id', '=', 'users.id')
 							->leftJoin('places', DB::raw('places.id::bigint'), '=', 'companies.city_id')
-							->select('users.username', 'companies.id', 'companies.name', 'companies.title', 'companies.claimed', 'companies.zip_code', 'states.title as state', 'places.place_name as city')
+							->select('users.username', 'companies.id', 'companies.name', 'companies.title', 'companies.claimed', 'companies.zip_code', 'companies.city_id', 'companies.phone', 'companies.street_addr', 'states.title as state', 'places.place_name as city')
 							->get()->toArray();
 			return Response::json($data, 200);
 		}
