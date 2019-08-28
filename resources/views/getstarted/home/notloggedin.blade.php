@@ -224,27 +224,68 @@
 		    </div>
 </div>
 <div id="iam" style="display: none;">
-		    <div class="col-sm-12" style="padding-top: 24px;padding-bottom: 24px;font-size: 1.2em;display: flex;align-content: center;align-items: center;justify-content: center;">
+		    <div class="col-sm-12" style="padding-top: 24px;font-size: 1.2em;display: flex;align-content: center;align-items: center;justify-content: center;">
 
-		    	<div style="width: 20%;border-top: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;padding: 15px 10px;text-align: right;font-weight: bold;">
-		    		<p style="margin:0px;padding: 0px;color:#4a879e;"><i class="fa fa-user"></i> Who I am:</p>
-		    	</div>
-		    	<div style="width: 80%;border-top: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;padding: 15px 0px;">
+
+		    	<div style="width: 100%;border-top: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;padding: 15px 0px;">
 		    	<p style="margin:0px;padding: 0px;font-family: Lato;color:#606060;">
-		    		<span id="desc_a" style="display: none;">I Own or Represent the Community I am trying to promote.</span>
-		    		<span id="desc_b" style="display: none;" >I Own or Represent a Company responsible for promoting this Community.</span>
-		    		<span id="desc_c" style="display: none;">I am an Employee of a Company that is responsible for promoting this Community.</span>
-		    		&nbsp;
+
+		    		
 		    		<a style="float: right;" onclick="resetCompany();">reset</a>
+		    		<div id="desc_a">
+		    			<span style="margin:0px;margin-left:22px;padding: 0px;color:#4a879e;"><i class="fa fa-user"></i> Who I am:</span>
+		    			<span>I Own or Represent the Community I am trying to promote.</span>
+		    			<hr>
+		    			<ul>
+		    				<li>You will do business under a personal business account.</li>
+		    			</ul>
+		    		</div>
+		    		<div id="desc_b">
+		    			<span style="margin:0px;margin-left:22px;padding: 0px;color:#4a879e;"><i class="fa fa-user"></i> Who I am:</span>
+		    			<span>I Own or Represent a Company responsible for promoting this Community.</span>
+		    			<hr>
+		    			<ul>
+		    				<li>You will do business under a company business account.</li>
+		    				<li>You will become administrator for this company.</li>
+		    				<li>You may invite employees to join your company account (<a taret="_blank" href="">read more</a>).</li>
+		    			</ul>
+		    			<div style="padding:22px;">
+		    			<strong>If your company is already claimed on MHS America:</strong>
+		    			<ul>
+		    				<li>A manager may have already established an account on our platform.</li>
+		    				<li>If you believe it to be an error please <a taret="_blank" href="">contact us</a></li>
+		    			</ul>
+		    			</div>
+		    		</div>
+		    		<div id="desc_c">
+		    			<span style="margin:0px;margin-left:22px;padding: 0px;color:#4a879e;"><i class="fa fa-user"></i> Who I am:</span>
+		    			<span>I am an Employee of a Company that is responsible for promoting this Community.</span>
+		    			<hr>
+		    			<div style="padding:22px;">
+		    			<strong>If your employer is on MHS America:</strong>
+		    			<ul>
+		    				<li>You will do business under your employers business account.</li>
+		    				<li>You will be required to input an invitation code before joining.</li>
+		    				<li>Your employer can be shown on your profile.</li>
+		    			</ul>
+		    			<br>
+		    			<strong>If your employer is not on MHS America:</strong>
+		    			<ul>
+		    				<li>You will do business under a personal business account.</li>
+		    				<li>Your employer can be shown on your profile.</li>
+		    				<li>If your employer joins in the future, you can be invited to their company account.</li>
+		    			</ul>
+		    			</div>
+		    		</div>
 		    	</p>
 		    	</div>
 
 		    </div>
 
-		  <div class="form-group  col-md-12" style="margin-left: -58px!important;position: relative;max-width: 95%;">
+		  <div class="form-group  col-md-12" style="margin-top:24px;margin-left: -58px!important;position: relative;max-width: 95%;">
 		    <label for="" class="col-sm-2 control-label"><span class="req_field">*</span>Name</label>
 		    <div class="col-sm-9 companyname">
-		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="business-name" name="business-name" placeholder="Business Name" value="{{ Input::get('business-name') }}" >
+		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="business-name" name="business-name" placeholder="Business Name"  value="{{ Input::get('business-name') }}">
 		    <a class="btn btn-default companybtn" onclick="createCompany();" style="display: none;">Create</a>
 		    </div>
 		  </div>
@@ -328,8 +369,9 @@
                 </div>
 		  	</div>
 		    <div class="col-sm-6">
-		    	<input type="hidden" name="join_id" value="">
-		    	<input type="hidden" name="claim_id" value="">
+				<input type="hidden" name="join_id" id="join_id" value="">
+		    	<input type="hidden" name="claim_id" id="claim_id" value="">
+		    	<input type="hidden" name="company_name" id="company_name" value="">
 		    	<button class="btn btn-primary pull-right" id="submitbtn" style="margin-right: 32px;width: 80%;padding: 25px;">Get Started</button>
 		    </div>
 		  </div>
@@ -817,22 +859,9 @@ function setMode(mode) {
 
 	function getCompanyData(item) {
 
-		switch ( getCompanyMode() ) {
-			case 0:
-				return;
-			break;
-			case 1:
-				$("#claim_id").val(result.id);
-				$("#join_id").val(null);
-			break;
-			case 2:
-				$("#claim_id").val(null);
-				$("#join_id").val(result.id);
-			break;
-		}
-
+		console.log("go fishin")
 		$.getJSON("/derpy/companies/" + item.name + "/" + item.id, function(result) {
-
+			console.log(result);
 			result = result[0];
 			$("#business-name").attr("readonly", true).val(result.title);
 			$("#business-address-1").attr("readonly", true).val(result.street_addr);
@@ -859,8 +888,30 @@ function setMode(mode) {
 			} else if ( getCompanyMode() == 2 ) {
 				$("#auth_text").html("I am Authorized to Join this Company");
 			}
+
+			$("#company_name").val(result.name);
+			switch ( parseInt(getCompanyMode()) ) {
+				case 0:
+					return;
+				break;
+				case 1:
+					if( result.claimed == true ) {
+						$("#claim_id").val(null);
+						$("#join_id").val(result.id);
+					} else {
+						$("#claim_id").val(result.id);
+						$("#join_id").val(null);
+					}
+				break;
+				case 2:
+					$("#claim_id").val(null);
+					$("#join_id").val(result.id);
+				break;
+			}
+
 		});
 	}
+
 
 	function selectCompany(id) {
 		$("#join_id").val(id);
@@ -945,15 +996,31 @@ function resetCompany(){
 		$("#iam").slideUp(200);
 }
 
-function prefill_business_data(data) {
-	$("business-phone").val ( data.phone );
-	$("business-zip").val ( data.zip_code );
-	$("business-address-1").val ( data.street_addr );
-	//force these pass validation.. wont be used anyway
-	$("business-state").val ( 1 );
-	$("business-city").val ( 1 );
-	console.log(data)
-}
+
+
+@if( Input::get("inlineRadioOptions") )
+
+setMode({{Input::get("inlineRadioOptions")}});
+
+@endif
+
+@if( Input::get("join_id") )
+
+var i = { id: {{ Input::get("join_id") }} , name: "{{ Input::get("company_name") }}" };
+getCompanyData(i);
+$("#companybtn").attr("disabled", true);
+$("#codebox").show();
+
+@endif
+
+@if( Input::get("claim_id") )
+
+var i = { id: {{ Input::get("claim_id") }} , name: "{{ Input::get("company_name") }}" };
+getCompanyData(i);
+$("#companybtn").attr("disabled", true);
+$("#codebox").show();
+
+@endif
 
 </script>
 @stop

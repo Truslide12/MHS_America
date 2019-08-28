@@ -13,12 +13,12 @@ use App\Models\State;
 use App\Models\Geoname;
 use App\Models\Profile;
 use App\Models\Company;
+use App\Models\CompanyInvite;
 use App\Models\StorePaymentSources;
 use App\Models\StoreTransaction;
 use App\Models\StorePurchase;
 use App\Models\Subscription;
 use Phaza\LaravelPostgis\Geometries\Point;
-
 /*{
 use Stripe\Customer
 use Stripe\Charge
@@ -30,6 +30,7 @@ class GetStartedCommunityController extends Pony {
 	public $PRODUCT_ID = 1;
 	public $PRODUCT_ROUTE = "getstarted-community";
 	public $PRODUCT_VIEW = "getstarted.community";
+	public $works_with = null; /*unfortunate*/
 
 	public function getIndex(Company $company)
 	{
@@ -346,34 +347,41 @@ class GetStartedCommunityController extends Pony {
 			break;
 			case 1:
 				//Create a Company
-				//self::postCompanyCreate();
-				//self::postCompanyClaim();
-				$company_created = self::postCompanyCreate(FALSE, FALSE, TRUE);
-				return $company_created;
+				if ( Input::get('join_id') == NULL && Input::get('claim_id') == NULL ) {
+
+					//next the personal business account
+					$company_created = self::postCompanyCreate(FALSE, FALSE, TRUE);
+					return $company_created;
+
+				} else {
+					if( Input::get('claim_id') == NULL ) {
+						$company_joined = self::postCompanyJoin();
+						return $company_joined;
+					} else {
+						$company_claimed = self::postCompanyClaim();
+						return $company_claimed;
+					}
+					
+				}
+
+				
 			break;
 			case 2:
 				//Join a Company
 				//Does the company exists?
 				if ( Input::get('join_id') == NULL ) {
-
 					//first create the company..
 					$skeleton_company_created = self::postCompanyCreate(FALSE, FALSE, FALSE);
-
+					$this->works_with = $skeleton_company_created['company']->id;
 					//next the personal business account
 					$company_created = self::postCompanyCreate(TRUE, TRUE, TRUE);
 					return $company_created;
 
 				} else {
-
 					$company_joined = self::postCompanyJoin();
 					return $company_joined;
 				}
 
-				//Does the user want to claim?
-				//--yes: create
-				//--no: personal account..
-				$company_created = self::postCompanyCreate(TRUE, TRUE);
-				return $company_created;
 			break;
 		}
 
@@ -390,7 +398,7 @@ class GetStartedCommunityController extends Pony {
 	public function postCompanyJoin() {
 		$validator = Validator::make(Input::all(),
 			array(
-				'code' => 'required|size:15|alpha_num'
+				'invite-code' => 'required|between:15,16|alpha_num'
 			)
 		);
 
@@ -400,11 +408,15 @@ class GetStartedCommunityController extends Pony {
 		}else{
 			$invite = CompanyInvite::byCode(Input::get('invite-code'))->where('email', Auth::user()->email)->first();
 			
-			if(!is_a($invite, 'Eloquent')) {
+			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
 				return Array("status" => false, "errors" => $messageBag );
 			}
 
+			if( $invite->company_id != Input::get('join_id') ) {
+				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'The invite code you used was not issued by this company.'));
+				return Array("status" => false, "errors" => $messageBag );
+			}
 			$me = Auth::user();
 
 			$me->attachToCompany($invite->company_id, $invite->role_id);
@@ -414,7 +426,37 @@ class GetStartedCommunityController extends Pony {
 	}
 
 	public function postCompanyClaim() {
-		//
+		$validator = Validator::make(Input::all(),
+			array(
+				'claim_id' => 'required',
+				'agree-auth' => 'required',
+				'agree-terms' => 'required'
+			)
+		);
+
+		if($validator->fails()) {
+			return Array("status" => false, "errors" => $validator);
+
+		}else{
+			$company = Company::find( Input::get("claim_id") );
+			if ( $company->claimed == true ) {
+				//error already claimed!
+				$messageBag = new \Illuminate\Support\MessageBag();
+				$messageBag->add('error', 'This company appears to already be claimed.');
+				return Array("status" => false, "errors" => $messageBag);
+			} else {
+					if(!Auth::user()->attachToCompany($company->id, 'admin')) {
+					//And return a fail if fail
+					$messageBag = new \Illuminate\Support\MessageBag();
+					$messageBag->add('error', 'uh-oh. Something happened in transit. Please mark down this information, and contact technical support. (ERROR: CompanyRoleError, Company ID: '.$company->id.', User ID: '.Auth::user()->id.')');
+					return Array("status" => false, "errors" => $messageBag);
+				  } else {
+				  	$company->claimed = true;
+				  	$company->save();
+				  	return Array("status" => true, "company" => $company);
+				  }
+			}
+		}
 	}
 
 	public function postCompanyCreate($is_personal = false, $is_private = false, $is_claiming = true)
@@ -451,24 +493,45 @@ class GetStartedCommunityController extends Pony {
 			$sec_hash = bcrypt($sec_key);
 
 			$company = new Company;
-				
-			$company->title = Input::get('business-name');
-			//$company->name = strtolower(str_replace(' ', '', Input::get('name')));
-			$company->name = str_slug(Input::get('business-name'));
-			$company->street_addr = Input::get('business-address-1');
-			$company->street_addr2 = Input::get('business-address-2');
-			$company->phone = preg_replace('/\D+/', '', Input::get('business-phone'));
-			$company->fax = preg_replace('/\D+/', '', Input::get('business-fax'));
-			$company->state_id = Input::get('business-state');
-			$company->city_id = $city->id;
-			$company->verified = 0;
-			$company->sec_hash = $sec_hash;
-			$company->about_us = '';
-			$company->mission = '';
-			$company->zip_code = Input::get('business-zip_code');
-			$company->is_personal = $is_personal;
-			$company->is_private = $is_private;
-
+			
+			if ( $is_personal ) {
+				$bname = Input::get('personal-firstname') ." ". Input::get('personal-lastname');
+				$company->title = $bname;
+				$company->name = str_slug($bname);
+				$company->street_addr = Input::get('business-address-1');
+				$company->street_addr2 = Input::get('business-address-2');
+				$company->phone = preg_replace('/\D+/', '', Input::get('business-phone'));
+				$company->fax = preg_replace('/\D+/', '', Input::get('business-fax'));
+				$company->state_id = Input::get('business-state');
+				$company->city_id = $city->id;
+				$company->verified = 0;
+				$company->sec_hash = $sec_hash;
+				$company->about_us = '';
+				$company->mission = '';
+				$company->zip_code = Input::get('business-zip');
+				$company->is_personal = $is_personal;
+				$company->is_private = $is_private;
+				if( $this->works_with ) {
+					$company->works_with = $this->works_with;
+					$this->works_with= null;
+				}
+			} else {
+				$company->title = Input::get('business-name');
+				$company->name = str_slug(Input::get('business-name'));
+				$company->street_addr = Input::get('business-address-1');
+				$company->street_addr2 = Input::get('business-address-2');
+				$company->phone = preg_replace('/\D+/', '', Input::get('business-phone'));
+				$company->fax = preg_replace('/\D+/', '', Input::get('business-fax'));
+				$company->state_id = Input::get('business-state');
+				$company->city_id = $city->id;
+				$company->verified = 0;
+				$company->sec_hash = $sec_hash;
+				$company->about_us = '';
+				$company->mission = '';
+				$company->zip_code = Input::get('business-zip');
+				$company->is_personal = $is_personal;
+				$company->is_private = $is_private;
+			}
 			if(!$company->save()) {
 				/* Nuuuuuuuu! D: */
 				$messageBag = new \Illuminate\Support\MessageBag();
