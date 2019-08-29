@@ -1,0 +1,21 @@
+	.card-image {
+			position: relative;
+	}
+	.card-image span {
+		position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;
+	}
+	.card-image img {
+		min-width: 100%;
+	}
+	.card-title .row {
+		margin-top: 5px;
+	}
+	.card-title .row:first-of-type {
+		margin-top: initial;
+	}
+	.card-title .row .col-md-12 {
+		margin-top: 5px;
+	}
+	.card-title .row .col-md-12 small {
+		text-align: right;
+	}

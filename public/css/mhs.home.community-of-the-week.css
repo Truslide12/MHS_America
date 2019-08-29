@@ -1,0 +1,96 @@
+.community-of-the-week-section {
+	padding:25px 0;padding-bottom: 1in;
+}
+.cotw_text {
+	padding: 20px 100px 20px 100px;
+}
+.cotw-under {
+	border-bottom:5px solid #143366;
+	/*-webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);*/
+}
+.cotw-img {
+	width: 292px;
+	height: 268px;
+	border-radius: 10px!important;
+	border:5px solid #fff;
+	/*-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);*/
+}
+.comm_week_box {
+	padding: 22px;
+	margin-bottom: 100px;
+}
+
+.comm_week_banner {
+	background-color: silver;
+	border: 0px solid #dedede;
+	border-bottom: 0px;
+	position: relative;
+}
+
+.comm_week_text {
+	color: #000;
+	padding: 22px;
+	font-size: 1.2em;
+	z-index: 2;
+	border: 1px solid #dedede;
+	background-color: #f5f5f5;
+  	-webkit-box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+	-moz-box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+	box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+
+
+}
+.comm_week_label {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 4em;
+	font-family: Voltaire;
+	z-index: 2;
+	width: 100%;
+	padding: 10px;
+	color: snow;
+}
+
+.comm_week_label::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: -1;
+	background-color: #000;
+	opacity: 0.4;
+}
+
+@media (max-width:767px) {
+	.comm_week_label {
+		font-size: 2em;
+	}
+
+}
+@media only screen and (max-width: 767.98px) {
+
+	.cotw_text {
+		padding: 12px 20px 12px 20px;
+	}
+}
+
+.comm_week_text strong {
+	float: right;font-size: 1.25em;font-family: Voltaire;
+}
+.comm_week_text strong:first-of-type {
+	float: left;
+}
+.comm_week_text > .clearfix {
+	padding-bottom: 10px;
+}
+.comm_week_banner img {
+	width: 100%;
+}

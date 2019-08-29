@@ -1,3 +1,5 @@
+
+<!-- Start Latest Homes -->
 	<div class="row clearfix nudge white">
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
@@ -17,12 +19,12 @@
 					@foreach( $da->data as $home )
 					<div class="mhs-slide" id="slide-{{$loop->index}}">
 						<div class="card clickycard" href="home/{{ $home->id }}">
-			                <div class="card-image" style="position: relative;">
-			                    <img class="img-responsive" src="/imgstorage/{{$img[$loop->index]}}_sm.jpg" style="min-width: 100%;">
+			                <div class="card-image">
+			                    <img class="img-responsive" src="/imgstorage/{{$img[$loop->index]}}_sm.jpg">
 			                        <div class="fs-ribbon" style="border-top-color: {{$home->sales_ribbon->color}}!important;">
 								        <div class="txt">{!!$home->sales_ribbon->text!!}</div>
 								    </div>
-			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;">${{number_format($home->price)}}</span>
+			                    <span>${{number_format($home->price)}}</span>
 			                </div><!-- card image -->
 
 			                <div class="card-content">
@@ -32,19 +34,19 @@
 			                    		{{$home->title}}
 			                    	</div>
 			                    	</div>
-			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		<small style="text-align: right;width: 100%;">{{$home->beds}}bd &middot; {{$home->baths}}ba &middot; {{$home->type_label}}[{{$home->dim_label}}]</small><br>
+			                    		<small>{{$home->beds}}bd &middot; {{$home->baths}}ba &middot; {{$home->type_label}}[{{$home->dim_label}}]</small><br>
 			                   		</div>
 			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="row">
 				                    	<div class="col-md-12">
-				                    		<small style="text-align: right;">{{$home->profile->title}}</small>
+				                    		<small>{{$home->profile->title}}</small>
 				                   		</div>
 			                   		</div>
-			                   		<div class="row" style="margin-top: 5px;">
+			                   		<div class="row">
 			                   			<div class="col-md-12">
-				                    		<small style="text-align: right;">{{$home->city->place_name}} {{strtoupper($home->state->abbr)}}, {{$home->zipcode}}</small>
+				                    		<small>{{$home->city->place_name}} {{strtoupper($home->state->abbr)}}, {{$home->zipcode}}</small>
 				                   		</div>
 			                   		</div>
 			                    </span>                    
@@ -57,12 +59,12 @@
 					@if( $lh < 4 )
 					<div class="mhs-slide" id="slide-1">
 						<div class="card clickycard" href="">
-			                <div class="card-image" style="position: relative;">
-			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png" style="min-width: 100%;">
+			                <div class="card-image">
+			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png">
 			                        <div class="fs-ribbon" style="border-top-color: red!important;">
 								        <div class="txt">List Yours</div>
 								    </div>
-			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:blue;font-family: Voltaire;">$39.99</span>
+			                    <span style="color: blue;">$39.99</span>
 			                </div><!-- card image -->
 
 			                <div class="card-content">
@@ -72,25 +74,23 @@
 			                    		$39.99 for 180 Day Listing
 			                    	</div>
 			                    	</div>
-			                   		<div class="row" style="margin-top: 5px;">
+			                   		<div class="row">
 			                   			<div class="col-md-12">
-				                    		<small style="text-align: right;"> - Promote Online</small>
+				                    		<small> - Promote Online</small>
 				                   		</div>
 			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		<small style="text-align: right;width: 100%;"> - 5 Photos</small><br>
+			                    		<small> - 5 Photos</small><br>
 			                   		</div>
 			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
+			                    	<div class="row">
 				                    	<div class="col-md-12">
-				                    		<small style="text-align: right;"> - Detailed Home Information</small>
+				                    		<small> - Detailed Home Information</small>
 				                   		</div>
 			                   		</div>
 			                    </span>                    
 			                </div><!-- card content -->
-
-
 			            </div>
 					</div>
 					@endif
@@ -98,3 +98,4 @@
 			</div>
 		</div>
 	</div>
+<!-- End Latest Homes -->

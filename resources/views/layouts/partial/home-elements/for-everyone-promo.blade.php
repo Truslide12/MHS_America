@@ -1,21 +1,25 @@
-	<div class="row clearfix nudge white" style="text-align: center;font-size: 1.5em;padding-bottom: 100px;padding-top: 0px;">
-		<div class="col-md-12" style="text-align: center;">
-			<h3 style="color:#005499;font-family:Lato;margin-bottom: 15px;padding-bottom: 20px;">Built for Everyone</h3>
-			<div class="thick-hr" style="width: 80%;margin: 0 auto 10px;"></div>
+
+<!-- Start Built for Everyone Promo -->
+	<div class="row clearfix nudge white for-everyone-promo-row">
+		<div class="col-md-12">
+			<h3>Built for Everyone</h3>
+			<div class="thick-hr"></div>
 		</div>
 		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/sell-a-mobile-home">Mobile Home Sellers</a>
+			<a href="/sell-a-mobile-home">Mobile Home Sellers</a>
 		</div>
 		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/buy-a-mobile-home">Mobile Home Buyers</a>
+			<a href="/buy-a-mobile-home">Mobile Home Buyers</a>
 		</div>
 		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/mobile-home-sales-agent">Mobile Home Sales Agents</a>
+			<a href="/mobile-home-sales-agent">Mobile Home Sales Agents</a>
 		</div>
 		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/promote-mobile-home-park">Mobile Home Park Owners</a>
+			<a href="/promote-mobile-home-park">Mobile Home Park Owners</a>
 		</div>
-		<div class="col-md-12" style="text-align: center;">
-			<div class="thick-hr" style="width: 80%;margin: 10px auto 0;"></div>
+		<div class="col-md-12">
+			<div class="thick-hr"></div>
 		</div>
 	</div>
+<!-- End Built for Everyone Promo -->
+

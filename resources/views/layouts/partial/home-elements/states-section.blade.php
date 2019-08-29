@@ -1,106 +1,14 @@
-<style type="text/css">
-	
-.statecontainer {
-	width: 100%;
-	padding:0;
-	position: relative;
-	display: flex;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-}
-.statecol {
-	width: 20%;
-	display: inline-block;
-	text-align: center;
-	margin: auto;
-}
-.statecol a {
-	display: block;
-	background: none;
-	height: 2em;
-	padding: auto auto;
-	padding-top: 3px;
-}
 
-.statecol a:hover {
-	display: block;
-	background: #d6e5ff;
-}
-
-.statebanner {
-	height: 20vh;
-	background: url('{{ URL::route('welcome') }}/img/stockphotos/autumn-colors-country-417099.jpg');
-	background-size: 100%;
-	background-position: center 65%;
-	display: flex;
-}
-
-.statebanner h3 {
-	font-size: 2em;
-	color: snow;
-	margin: auto auto;
-}
-
-
-
-			.mailer {
-				background: rgba(66, 134, 244, 0);
-				width: 100%;
-				padding:3px 3px!important;
-				border-radius: 5px!important;
-				position: relative;
-				margin: auto;
-				color: gray;
-				display: flex;
-			}
-
-
-
-@media only screen and (max-width: 767.98px) {
-
-	.statecontainer {
-		width: 100%;
-		padding:0;
-		position: relative;
-		display: block;
-	}
-
-	.statecol {
-		width: 100%;
-		display: inline-block;
-	}
-
-	.statecol a {
-		font-size: 1.5em;
-		text-align: left;
-	}
-
-}
-
-.thick-hr {
-    border: 0;
-    height: 3px;
-    background: #333;
-    background: -webkit-gradient(linear, 0 0, 100% 0, 
-    	from( 			rgba(40, 107, 255,.1) ), 
-    	to(   			rgba(40, 107, 255,.1) ), 
-    	color-stop(50%, rgba(40, 107, 255,.25) ) );
-
-    width: 100%;
-}
-</style>
+<!-- Start States Section -->
 	<div class="row clearfix nudge white">
-		<div class="col-md-12" style="padding: 0;">
+		<div class="col-md-12 nopad">
 			<div class="statebanner pulse" id="statebanner">
 				<h3>We're serving customers all across America.</h3>
 			</div>
 		</div>
 	</div>
-
-	<div class="row clearfix nudge white">
+	<div class="row clearfix nudge white states-section">
 		<div class="col-md-12">
-			<div class="page-header no-margin-t" style="border: 0px solid white!important;margin-bottom: 1in;">
 				<div class="statecontainer">
 					<div class="statecol">
 						<a href="/explore/al">Alabama</a>
@@ -163,6 +71,6 @@
 						<a href="/explore/wy">Wyoming</a>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
+<!-- Start States Section -->

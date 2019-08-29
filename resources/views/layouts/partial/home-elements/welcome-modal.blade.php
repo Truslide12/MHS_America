@@ -15,3 +15,25 @@
 	    </div>
 	  </div>
 	</div>
+
+		<script type="text/javascript">
+		$('#map').vectorMap({
+			map: 'usa_en',
+			backgroundColor: 'transparent',
+			zoomOnScroll: false,
+			enableZoom: false,
+			regionStyle: {
+				initial: {fill: '#7f8efe', stroke: '#cccccc', 'stroke-width': 1},
+				hover: {fill: '#2233aa'},
+				selected: {fill: '#00b7ea'}
+			},
+			onRegionClick: function(element, code, region)
+				{
+					$('body').append($('<form>').attr('method',"GET").attr('id','link-'+code).attr('action','{{ URL::route('welcome') }}/explore/' + code + '/'));
+					$('#link-'+code).append($("#srcinput")).submit();
+				}
+		}).hide();
+
+		@if($welcomebox == true)
+		$('#welcomebox').modal();
+		</script>

@@ -53,21 +53,15 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/welcome.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/cardscroller.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/animate.css">
-	<style type="text/css">
-		.profile-container {
-			display: -webkit-box;
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-			flex-wrap: wrap;
-		}
-		.profile-container .profile-panel {
-			display: flex;
-			flex-direction: column;
-			align-content:stretch;
-			width: 100%;
-		}
-	</style>
+	
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.search-section.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.for-everyone-promo.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.latest-homes.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.community-of-the-week.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.products-promo.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.mission-and-goals.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.home.states-section.css">
+
 @stop
 
 @section('attrs-body')ng-controller="PrimaryController"@stop
@@ -84,235 +78,17 @@
 		</div>
 	</div>
 	<div class="row clearfix nudge white hidden-xs" id="map-container">
-		<div class="col-md-12">
-			<div id="map" style="width: 100%; height: 50em"></div>
-		</div>
+		<!-- gap -->
 	</div>
 
-
-	<div class="row clearfix white">
-		@if(1==2)
-		<div class="jumbotron text-center" id="great-welcome" style="display:flex;background: url('{{ URL::route('welcome') }}./img/backdrops/panoramas/stockfreeimages-1663421-prairie-by-bruce2-high.jpg');background-size: auto 100%;background-position: center center;">
-		<div class="jumbotron text-center" id="great-welcome" style="display:flex;background: url('{{ URL::route('welcome') }}./img/stockphotos/blue-sky-clear-sky-cold-346529.jpg');background-size: 100% auto;background-position: top center;">
-		<div class="jumbotron text-center" id="great-welcome" style="padding:0px;display:flex;flex-direction:column;background: url('{{ URL::route('welcome') }}./img/stockphotos/adventure-daylight-formation-141784.jpg');background-position: 75% 80%;background-size: auto 100%;animation: animatedBackground 30s linear forwards;">
-		@endif
-		<div class="jumbotron text-center" id="great-welcome" style="display:flex;background: url('{{ URL::route('welcome') }}./img/backdrops/panoramas/stockfreeimages-1663421-prairie-by-bruce2-high.jpg');background-size: auto 100%;background-position: center center;">
-
-<form action="search" method="post" style="width: 100%">
-		{{ csrf_field() }}
-		<div class="v2box" style="margin: 50px auto 10px auto;">
-			<div style="width: 100%;padding: auto auto;" class="">
-				<h1 style="font-size: 2.25em;text-align: center;color: #fff;">Search Mobile Home Spaces Across America</h1>
-			</div>
-			<div style="clear: all;padding: 3px;"></div>
-			<div class="sexy">
-
-				<input type="text" name="input" placeholder="Anywhere, USA" class="sexy-stop">
-				<div class="sexy-wrap"><select name="mode" class="sexy-drop">
-					<option value="1">Homes</option>
-					<option value="2">Spaces</option>
-					<option value="0">Communities</option>
-				</select></div>
-				<button class="btn-primary sexy-roll"><i class="fa fa-search" style="margin: auto auto;"></i></button>
-			</div>
-			<div style="clear: all;padding: 3px;"></div>
-		</div>
-
-		<div class="mobox" style="">
-			<div style="width: 100%;padding: auto auto;" class="">
-				<h1 style="font-size: 2.25em;text-align: center;color: #000;">Search Mobile Home Spaces Across America</h1>
-			</div>
-			<div style="clear: all;padding: 3px;"></div>
-
-				<input type="text" name="" placeholder="Anywhere, USA" class="form-control moboxstop">
-				<select name="" class="form-control moboxdrop">
-					<option>Homes</option>
-					<option>Spaces</option>
-					<option>Communities</option>
-					<option>Dealers</option>
-				</select>
-				<button class="btn-primary form-control moboxroll"><i class="fa fa-search" style="margin: auto auto;"></i> Search MHS America</button>
-			<div style="clear: all;padding: 3px;"></div>
-		</div>
-</form>
-		</div>
-		<style type="text/css">
-		@keyframes animatedBackground {
-			0%  {	background-position: 75% 80%;background-size: auto 100%;	}
-			100% {	background-position: 90% 80%;background-size: auto 125%;	}
-		}
-			.v2box i { font-weight: 400!important; }
-			.v2box {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				align-content: center;
-				justify-content: center;
-				margin: auto;
-				background: rgba(26, 48, 84, 0.75);
-				padding: 16px 10px 10px 10px;
-				width: 80%;
-				height: auto;
-				clear: both;
-				border-radius: 5px!important;
-
-			}
-
-			.sexy {
-				background: rgba(255, 255, 255, 1);
-				width: 100%;
-				padding:3px 3px!important;
-				border-radius: 5px!important;
-				position: relative;
-				margin: auto;
-				color: gray;
-				font-size: 1.5em;
-				display: flex;
-			}
-			.sexy input,
-			.sexy select,
-			.sexy option {
-				outline: 0 none !important;
-				border: 0px solid #fff;
-				font-size: 1.2em;
-				line-height: 1.2em;
-				padding: 5px 7px!important;
-				background: rgba(255, 255, 255, 0);
-			}
-			.sexy-stop {
-				min-height:100%;
-				width: 65%;
-				margin:0!important;
-				display:inline-flex;
-				float:left;
-				border: 0px;
-				border-right: 1px solid gray!important;
-			}
-			.sexy-stop::after {
-				content: "Where";
-				position: absolute;
-				top: 100px;
-				right: 0px;
-				background: red;
-				z-index: 200;
-				border: 1px solid blue;
-
-			}
-			.sexy-drop {
-				min-height:100%;
-				width: 100%;
-				margin:0!important;
-				display:inline-flex;
-				float:left;
-				border: 0px;
-				cursor: pointer!important;
-				   -webkit-appearance: none;
-				   -moz-appearance: none;
-				   appearance: none;
-			}
-			.sexy-wrap {
-				padding: 0;
-				margin: 0;
-				width: 25%;
-				position: relative;
-			}
-			.sexy-wrap::after {
-			    content:"\f078";
-			    font-family: FontAwesome;
-			    color: #aeaeae;
-			    position: absolute; 
-			    right: 0; 
-			    top: 0;
-			    z-index: 1;
-			    display: inline-block;
-    			padding: 5px 10px;
-    			background: linear-gradient(90deg, rgba(255,255,255,0),rgba(255,255,255,1));
-			    pointer-events: none;
-			}
-			.sexy-roll {
-				min-height:100%;
-				width:10%;
-				margin:0!important;
-				display:inline-flex;
-				float:left;
-				border: 0px;
-				clear: all;
-				cursor: pointer!important;
-			}
-			.sexy-drop > option {
-				padding: 0 0 !important;
-				margin: 0 0 !important;
-				cursor: pointer!important;
-				background-color: #fff;
-				font-size: 1em;
-			}
-				.mobox {
-					display: none;
-				}
-			@media (max-width:767px) {
-				#great-welcome {padding:10px;}
-				.btn-group-lg {margin:0 20px;}
-				.btn-group-lg .btn {display:block;margin-bottom:10px;}
-				#login-tray {padding-top:20px;width: 100%;}
-				.mobox {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					align-content: center;
-					justify-content: center;
-					margin: auto;
-					background: none;
-					padding: 4px 2px 2px 2px;
-					width: 90%;
-					height: auto;
-					clear: both;
-				}
-				.mobox > div {
-					color: black;
-				}
-				.v2box {
-					display: none;
-				}
-				.moboxstop,
-				.moboxdrop,
-				.moboxroll {
-					margin-bottom: 10px;
-				}
-			}
-
-				.fs-ribbon {
-				  -webkit-transform: rotate(-45deg); 
-				     -moz-transform: rotate(-45deg); 
-				      -ms-transform: rotate(-45deg); 
-				       -o-transform: rotate(-45deg); 
-				          transform: rotate(-45deg); 
-				    border: 25px solid transparent;
-				    border-top: 25px solid #03bafc;
-				    position: absolute;
-				    bottom: 0px;
-				    right: -40px;
-				    padding: 0 10px;
-				    width: 120px;
-				    color: white;
-				    font-family: sans-serif;
-				    size: 11px;
-				    text-align: center;
-				}
-				.fs-ribbon .txt {
-				    position: absolute;
-				    top: -21px;
-				    left: -3px;
-				}​
-		</style>
-	</div>
-
-		@include('layouts.partial.errors')
-		@include('layouts.partial.home-elements.for-everyone-promo')
-		@include('layouts.partial.home-elements.latest-homes')
-		@include('layouts.partial.home-elements.community-of-the-week')
-		@include('layouts.partial.home-elements.products-promo')
-		@include('layouts.partial.home-elements.mission-and-goals')
-		@include('layouts.partial.home-elements.states-section')
+	@include('layouts.partial.home-elements.search-section')
+	@include('layouts.partial.errors')
+	@include('layouts.partial.home-elements.for-everyone-promo')
+	@include('layouts.partial.home-elements.latest-homes')
+	@include('layouts.partial.home-elements.community-of-the-week')
+	@include('layouts.partial.home-elements.products-promo')
+	@include('layouts.partial.home-elements.mission-and-goals')
+	@include('layouts.partial.home-elements.states-section')
 	
 @stop
 
@@ -325,25 +101,6 @@
 
 
 	<script type="text/javascript">
-		$('#map').vectorMap({
-			map: 'usa_en',
-			backgroundColor: 'transparent',
-			zoomOnScroll: false,
-			enableZoom: false,
-			regionStyle: {
-				initial: {fill: '#7f8efe', stroke: '#cccccc', 'stroke-width': 1},
-				hover: {fill: '#2233aa'},
-				selected: {fill: '#00b7ea'}
-			},
-			onRegionClick: function(element, code, region)
-				{
-					$('body').append($('<form>').attr('method',"GET").attr('id','link-'+code).attr('action','{{ URL::route('welcome') }}/explore/' + code + '/'));
-					$('#link-'+code).append($("#srcinput")).submit();
-				}
-		}).hide();
-		@if($welcomebox == true && 1==2)
-		$('#welcomebox').modal();
-		@endif
 
 
 		function changeHomes()

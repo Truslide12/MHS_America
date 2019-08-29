@@ -1,0 +1,203 @@
+		@keyframes animatedBackground {
+			0%  {	background-position: 75% 80%;background-size: auto 100%;	}
+			100% {	background-position: 90% 80%;background-size: auto 125%;	}
+		}
+			.v2box i { font-weight: 400!important; }
+			.v2box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				align-content: center;
+				justify-content: center;
+				background: rgba(26, 48, 84, 0.75);
+				padding: 16px 10px 10px 10px;
+				width: 80%;
+				height: auto;
+				clear: both;
+				border-radius: 5px!important;
+				margin: 50px auto 10px auto;
+			}
+
+			.v2box_title {
+				width: 100%;
+				padding: auto auto;
+			}
+			.v2box_title h2 {
+				font-size: 2.25em;
+				text-align: center;
+				color: #fff;
+			}
+			.sexy {
+				background: rgba(255, 255, 255, 1);
+				width: 100%;
+				padding:3px 3px!important;
+				border-radius: 5px!important;
+				position: relative;
+				margin: auto;
+				color: gray;
+				font-size: 1.5em;
+				display: flex;
+			}
+			.sexy input,
+			.sexy select,
+			.sexy option {
+				outline: 0 none !important;
+				border: 0px solid #fff;
+				font-size: 1.2em;
+				line-height: 1.2em;
+				padding: 5px 7px!important;
+				background: rgba(255, 255, 255, 0);
+			}
+			.sexy-stop {
+				min-height:100%;
+				width: 65%;
+				margin:0!important;
+				display:inline-flex;
+				float:left;
+				border: 0px;
+				border-right: 1px solid gray!important;
+			}
+			.sexy-stop::after {
+				content: "Where";
+				position: absolute;
+				top: 100px;
+				right: 0px;
+				background: red;
+				z-index: 200;
+				border: 1px solid blue;
+
+			}
+			.sexy-drop {
+				min-height:100%;
+				width: 100%;
+				margin:0!important;
+				display:inline-flex;
+				float:left;
+				border: 0px;
+				cursor: pointer!important;
+				   -webkit-appearance: none;
+				   -moz-appearance: none;
+				   appearance: none;
+			}
+			.sexy-wrap {
+				padding: 0;
+				margin: 0;
+				width: 25%;
+				position: relative;
+			}
+			.sexy-wrap::after {
+			    content:"\f078";
+			    font-family: FontAwesome;
+			    color: #aeaeae;
+			    position: absolute; 
+			    right: 0; 
+			    top: 0;
+			    z-index: 1;
+			    display: inline-block;
+    			padding: 5px 10px;
+    			background: linear-gradient(90deg, rgba(255,255,255,0),rgba(255,255,255,1));
+			    pointer-events: none;
+			}
+			.sexy-roll {
+				min-height:100%;
+				width:10%;
+				margin:0!important;
+				display:inline-flex;
+				float:left;
+				border: 0px;
+				clear: all;
+				cursor: pointer!important;
+			}
+			 .sexy-roll i {
+			 	margin: auto auto;
+			 }
+			.sexy-drop > option {
+				padding: 0 0 !important;
+				margin: 0 0 !important;
+				cursor: pointer!important;
+				background-color: #fff;
+				font-size: 1em;
+			}
+				.mobox {
+					display: none;
+				}
+				.search_spacer {
+					clear: all;
+					padding: 3px;
+				}
+				.full-form {
+					width: 100%;
+				}
+				#great-welcome {
+					display:flex;
+					background: url('{{ URL::route('welcome') }}./img/backdrops/panoramas/stockfreeimages-1663421-prairie-by-bruce2-high.jpg');
+					background-size: auto 100%;
+					background-position: center center;
+				}
+			@media (max-width:767px) {
+				#great-welcome {padding:10px;}
+				.btn-group-lg {margin:0 20px;}
+				.btn-group-lg .btn {display:block;margin-bottom:10px;}
+				#login-tray {padding-top:20px;width: 100%;}
+				.mobox {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					align-content: center;
+					justify-content: center;
+					margin: auto;
+					background: none;
+					padding: 4px 2px 2px 2px;
+					width: 90%;
+					height: auto;
+					clear: both;
+				}
+				.mobox > div {
+					color: black;
+				}
+				.mobox_title {
+					width: 100%;
+					padding: auto auto;
+				}
+				.mobox_title h2 {
+					font-size: 2.25em;
+					text-align: center;
+					color: #000;
+					font-weight: bold;
+				}
+				.v2box {
+					display: none;
+				}
+				.moboxstop,
+				.moboxdrop,
+				.moboxroll {
+					margin-bottom: 10px;
+				}
+				.moboxroll i {
+					margin: auto auto;
+				}
+			}
+
+				.fs-ribbon {
+				  -webkit-transform: rotate(-45deg); 
+				     -moz-transform: rotate(-45deg); 
+				      -ms-transform: rotate(-45deg); 
+				       -o-transform: rotate(-45deg); 
+				          transform: rotate(-45deg); 
+				    border: 25px solid transparent;
+				    border-top: 25px solid #03bafc;
+				    position: absolute;
+				    bottom: 0px;
+				    right: -40px;
+				    padding: 0 10px;
+				    width: 120px;
+				    color: white;
+				    font-family: sans-serif;
+				    size: 11px;
+				    text-align: center;
+				}
+				.fs-ribbon .txt {
+				    position: absolute;
+				    top: -21px;
+				    left: -3px;
+				}​
