@@ -13,6 +13,13 @@
 	.for-everyone-promo-row .col-md-3 a {
 		font-family: Voltaire;color:#0d0d73;font-weight: bold;
 	}
+
 	.for-everyone-promo-row .thick-hr {
-		width: 80%;margin: 0 auto 10px;
+		width: 80%;
+		margin: 10px auto;
+	}
+
+	.for-everyone-promo-row .thick-hr:first-of-type {
+		width: 80%;
+		margin: 10px auto;
 	}
