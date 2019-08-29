@@ -227,23 +227,6 @@ background-repeat: no-repeat !important;
 
 	<div class="row clearfix nudge white" style="padding:25px 0;padding-bottom: 1in;">
 
-
-
-		<div class="comm_week_box">
-			<div class="comm_week_banner">
-				<img src="/imgstorage/cover_{{$community_of_week->cover}}_crop.jpg" style="width: 100%">
-				<div class="comm_week_label">Community of the Week</div>
-			</div>
-			<div class="comm_week_text">
-				<div class="clearfix" style="padding-bottom: 10px;">
-				<strong style="float: left;font-size: 1.25em;font-family: Voltaire;">{{ $community_of_week->title }}</strong>
-				<strong style="float: right;font-size: 1.25em;font-family: Voltaire;">Community of the Week - {{ $community_of_week->week }}</strong>
-				</div>
-				{!! $community_of_week->description !!}
-			</div>
-		</div>
-
-
 		<div class="col-md-12 dude" id="promobanner" style="height:33rem;">
 			<div class="btnbox">
 				<div style="width: 30%;float:left;padding: 12px;background:rgba(1,200,1,0);">
@@ -279,39 +262,5 @@ background-repeat: no-repeat !important;
 
 
 
-	<div class="row clearfix nudge white" style="display: none;padding:55px 0;padding-bottom:75px;text-align: center;font-size: 1.5em;">
-		<div class="col-md-3"><div class="counter">21</div>Homes for Sale</div>
-		<div class="col-md-3"><div class="counter">04</div>Recently Sold</div>
-		<div class="col-md-3"><div class="counter">12</div>Communities</div>
-		<div class="col-md-3"><div class="counter">14</div>Spaces Available</div>
-	</div>
 
 
-	<div class="row clearfix nudge white" style="text-align: center;font-size: 1.5em;padding-bottom: 1in;">
-		<div class="col-md-12">
-			<h3 style="color:#005499;font-family:Lato;margin-bottom: 15px;">Our Mission &amp; Goals</h3>
-			<div class="row clearfix nudge white" id="goalsbox" style="animation-delay: 0.5s!important;">
-				<div class="col-md-4" style="padding: 10px 30px">
-					<img src="{{ URL::route('welcome') }}/img/stockphotos/couple-home-house-1288482.jpg" class="goal-imgs">
-					<h3 class="goals-title">To our Customers</h3>
-					<p>Our goal is to bring a more efficient and positive experience to the mobile home buyers and sellers while at the same
-						time bringing mobile home parks and services direct to consumers.
-					</p>
-				</div>
-				<div class="col-md-4" style="padding: 10px 30px">
-					<img src="{{ URL::route('welcome') }}/img/stockphotos/accomplishment-agreement-business-1249158.jpg" class="goal-imgs">
-					<h3 class="goals-title">To our Sponsors</h3>
-					<p>The staff and management at Mobile Home Spaces Across America is dedicated to
-						promoting mobile home parks and mobile home services throughout the country.
-					</p>
-				</div>
-				<div class="col-md-4" style="padding: 10px 30px">
-					<img src="{{ URL::route('welcome') }}/img/stockphotos/achievement-agreement-arms-1068523.jpg" class="goal-imgs">
-					<h3 class="goals-title">To our Industry</h3>
-					<p>Our mission is to provide an innovative platform for buyers and sellers in the mobile home market.
-						Our platform strives to revolutionize the way our industry operates online.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>

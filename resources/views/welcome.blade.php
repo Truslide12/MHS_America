@@ -51,14 +51,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/js/jquery-jvectormap-1.2.2.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/badges.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/welcome.css">
-
-@if ( $demo == 1 )
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/cardscroller.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/animate.css">
-@endif
-
-
-
 	<style type="text/css">
 		.profile-container {
 			display: -webkit-box;
@@ -81,7 +75,7 @@
 @contentclass('pull-up')
 @section('content')
 
-	@if(1==1)
+
 	<div class="row clearfix nudge white">
 		<div class="col-md-12 text-center" id="logo-wrapper">
 			<p class="lead hidden-xs hidden-sm">Find mobile homes, vacant spaces,<br>and professional contractors...</p>
@@ -94,8 +88,7 @@
 			<div id="map" style="width: 100%; height: 50em"></div>
 		</div>
 	</div>
-	@endif
-	@if($demo == 1)
+
 
 	<div class="row clearfix white">
 		@if(1==2)
@@ -313,235 +306,23 @@
 		</style>
 	</div>
 
-	@else
-	<div class="row clearfix nudge white">
-		<div class="jumbotron text-center" id="great-welcome" style="background: url({{ URL::route('welcome') }}./img/backdrops/panoramas/welcome-backdrop.jpg);background-size: cover;">
-			@if(Auth::check())
-			<h3>Hi, {{ ($user->first_name == '') ? $user->username : $user->first_name }}!</h3>
-			@endif
-			<h1>What are you looking for?</h1>
-			<p></p>
-			<div class="btn-group-lg" role="group">
-				<a href="{{ URL::route('communities') }}" type="button" class="btn btn-success">Communities</a>
-				<a href="{{ URL::route('homes') }}" type="button" class="btn btn-primary">Homes</a>
-				<a href="{{ URL::route('spaces') }}" type="button" class="btn btn-primary">Spaces</a>
-				@if(1==2)<a href="{{ URL::route('professionals') }}" type="button" class="btn btn-primary">Pros</a>
-				<a href="#" type="button" class="btn btn-primary">People</a>@endif
-			</div>
-			<p id="login-tray">
-				@if(Auth::check())
-				<a href="{{ URL::route('account') }}" class="btn btn-default">Go to Dashboard</a>
-				@if($user->business == 1)<a href="{{ URL::route('account-business') }}" class="btn btn-default">Business Center</a>@endif
-				@else
-				<a href="{{ URL::route('account-login') }}" class="btn btn-sm btn-default">Sign in</a>&nbsp; &ndash; or &ndash; &nbsp;
-				<a href="{{ URL::route('account-register') }}" class="btn btn-sm btn-default">Register for free</a>
-				@endif
-			</p>
-		</div>
-		<style type="text/css">
-			@media (max-width:767px) {
-				#great-welcome {padding:10px;}
-				.btn-group-lg {margin:0 20px;}
-				.btn-group-lg .btn {display:block;margin-bottom:10px;}
-				#login-tray {padding-top:20px;}
-			}
-		</style>
-	</div>
-	@endif
-
-
-	<div>
 		@include('layouts.partial.errors')
-	</div>
-
-	<div class="row clearfix nudge white" style="text-align: center;font-size: 1.5em;padding-bottom: 100px;padding-top: 0px;">
-		<div class="col-md-12" style="text-align: center;">
-			<h3 style="color:#005499;font-family:Lato;margin-bottom: 15px;padding-bottom: 20px;">Built for Everyone</h3>
-			<div class="thick-hr" style="width: 80%;margin: 0 auto 10px;"></div>
-		</div>
-		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/sell-a-mobile-home">Mobile Home Sellers</a>
-		</div>
-		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/buy-a-mobile-home">Mobile Home Buyers</a>
-		</div>
-		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/mobile-home-sales-agent">Mobile Home Sales Agents</a>
-		</div>
-		<div class="col-md-3">
-			<a style="font-family: Voltaire;color:#0d0d73;font-weight: bold;" href="/promote-mobile-home-park">Mobile Home Park Owners</a>
-		</div>
-		<div class="col-md-12" style="text-align: center;">
-			<div class="thick-hr" style="width: 80%;margin: 10px auto 0;"></div>
-		</div>
-</div>
-
-	<div class="row clearfix nudge white">
-		<div class="col-md-12">
-			<div class="page-header no-margin-t">
-				<h1 class="no-margin-t text-center">Recently Listed Homes</h1>
-			</div>
-		</div>
-	</div>
-
-
-	@if ( $demo == 1 )
-	<div class="row clearfix nudge white" style="padding-bottom: 1in;">
-		<div class="col-md-12">
-			<div class="page-header no-margin-t">
-				<div class="mhs-slideshow">
-					@if(1==2)
-					<div class="mhs-slide-left-btn" onclick="changeHomes();"><i class="fa fa-chevron-left"></i></div>
-					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
-					<div class="mhs-slideshow-loader"><small>Loading</small></div>
-					@endif
-					@foreach( $da->data as $home )
-					<div class="mhs-slide" id="slide-{{$loop->index}}">
-						<div class="card clickycard" href="home/{{ $home->id }}">
-			                <div class="card-image" style="position: relative;">
-			                    <img class="img-responsive" src="/imgstorage/{{$img[$loop->index]}}_sm.jpg" style="min-width: 100%;">
-			                        <div class="fs-ribbon" style="border-top-color: {{$home->sales_ribbon->color}}!important;">
-								        <div class="txt">{!!$home->sales_ribbon->text!!}</div>
-								    </div>
-			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:snow;font-family: Voltaire;  text-shadow: 2px 2px #000;">${{number_format($home->price)}}</span>
-			                </div><!-- card image -->
-
-			                <div class="card-content">
-			                    <span class="card-title">
-			                    	<div class="row">
-			                    	<div class="col-md-12">
-			                    		{{$home->title}}
-			                    	</div>
-			                    	</div>
-			                    	<div class="row" style="margin-top: 5px;">
-			                    	<div class="col-md-12">
-			                    		<small style="text-align: right;width: 100%;">{{$home->beds}}bd &middot; {{$home->baths}}ba &middot; {{$home->type_label}}[{{$home->dim_label}}]</small><br>
-			                   		</div>
-			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
-				                    	<div class="col-md-12">
-				                    		<small style="text-align: right;">{{$home->profile->title}}</small>
-				                   		</div>
-			                   		</div>
-			                   		<div class="row" style="margin-top: 5px;">
-			                   			<div class="col-md-12">
-				                    		<small style="text-align: right;">{{$home->city->place_name}} {{strtoupper($home->state->abbr)}}, {{$home->zipcode}}</small>
-				                   		</div>
-			                   		</div>
-			                    </span>                    
-			                </div><!-- card content -->
-
-
-			            </div>
-					</div>
-					@endforeach
-					@if( $lh < 4 )
-					<div class="mhs-slide" id="slide-1">
-						<div class="card clickycard" href="">
-			                <div class="card-image" style="position: relative;">
-			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png" style="min-width: 100%;">
-			                        <div class="fs-ribbon" style="border-top-color: red!important;">
-								        <div class="txt">List Yours</div>
-								    </div>
-			                    <span style="position: absolute;top: 10px;right: 10px;font-size:32px;color:blue;font-family: Voltaire;">$39.99</span>
-			                </div><!-- card image -->
-
-			                <div class="card-content">
-			                    <span class="card-title">
-			                    	<div class="row">
-			                    	<div class="col-md-12">
-			                    		$39.99 for 180 Day Listing
-			                    	</div>
-			                    	</div>
-			                   		<div class="row" style="margin-top: 5px;">
-			                   			<div class="col-md-12">
-				                    		<small style="text-align: right;"> - Promote Online</small>
-				                   		</div>
-			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
-			                    	<div class="col-md-12">
-			                    		<small style="text-align: right;width: 100%;"> - 5 Photos</small><br>
-			                   		</div>
-			                   		</div>
-			                    	<div class="row" style="margin-top: 5px;">
-				                    	<div class="col-md-12">
-				                    		<small style="text-align: right;"> - Detailed Home Information</small>
-				                   		</div>
-			                   		</div>
-			                    </span>                    
-			                </div><!-- card content -->
-
-
-			            </div>
-					</div>
-					@endif
-				</div>
-			</div>
-		</div>
-	</div>
-	@else
-
-	@endif
-
-	@if ( $demo == 1 )
-		@include('layouts.partial.actionblock')
-
-		@include('layouts.partial.statesblock')
-	@else
-	<div class="row clearfix nudge gray stamped">
-		<div class="col-md-12">
-			<div class="page-header no-push no-border">
-				<h3><span class="hidden-xs" aria-hidden="true">Explore manufactured housing by state</span><span class="visible-xs">Browse by state</span></h3>
-			</div>
-		</div>
-		@if(Config::get('app.angular') == true)
-		<div ng-repeat="state in states" class="col-xs-12 col-sm-6 col-md-2b loctile">
-			<a href="/explore/{[ state.abbr ]}">
-				<span>{[state.title]}</span>
-			</a>
-		</div>
-		@else
-		@foreach($states as $state)
-		<div class="col-xs-12 col-sm-6 col-md-2b loctile">
-			<a href="{{ URL::route('state', array('state' => $state->abbr)) }}">
-				<span>{{ $state->title }}</span>
-			</a>
-		</div>
-		@endforeach
-		@endif
-	</div>
-
-	@endif
+		@include('layouts.partial.home-elements.for-everyone-promo')
+		@include('layouts.partial.home-elements.latest-homes')
+		@include('layouts.partial.home-elements.community-of-the-week')
+		@include('layouts.partial.home-elements.products-promo')
+		@include('layouts.partial.home-elements.mission-and-goals')
+		@include('layouts.partial.home-elements.states-section')
+	
 @stop
 
 @section('incls-body')
-	@if($welcomebox == true && 1==2)
-	<!-- Modal -->
-	<div class="modal fade" id="welcomebox" tabindex="-1" role="dialog" aria-labelledby="welcomeboxLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="welcomeboxLabel">Welcome to MHS America!</h4>
-	      </div>
-	      <div class="modal-body">
-	        We'd like to take a moment to point you in the right direction. The menu at the top of the page will allow you to search for mobile home communities, mobile homes, vacant spaces and professional services. You can also use the map to browse the national MHS community.
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">Thanks!</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	@endif
 	<script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.interface.js"></script>
 	<script type="text/javascript" src="{{ URL::route('welcome') }}/js/jquery-jvectormap-1.2.2.min.js"></script>
 	<script type="text/javascript" src="{{ URL::route('welcome') }}/js/maps/jquery.vmap.usa.js"></script>
 	<script type="text/javascript" src="{{ URL::route('welcome') }}/js/gdp-data.js"></script>
-
-	@if ( $demo == 1 )
 	<script type="text/javascript" src="{{ URL::route('welcome') }}/js/rokocb.js"></script>
-	@endif
+
 
 	<script type="text/javascript">
 		$('#map').vectorMap({
