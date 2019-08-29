@@ -3,7 +3,7 @@
 return [
 	'report_reason' => [
 		'Please select a Report Reason',
-		'Improperly Represented Content',
+		'Inaccurate Content',
 		'Harassment or Bullying',
 		'SPAM',
 		'Illegal Content',
