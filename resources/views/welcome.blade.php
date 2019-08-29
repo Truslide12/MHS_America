@@ -64,7 +64,6 @@
 
 @stop
 
-@section('attrs-body')ng-controller="PrimaryController"@stop
 
 @contentclass('pull-up')
 @section('content')

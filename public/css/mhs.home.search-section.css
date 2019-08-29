@@ -22,7 +22,7 @@
 				width: 100%;
 				padding: auto auto;
 			}
-			.v2box_title h2 {
+			.v2box_title h1 {
 				font-size: 2.25em;
 				text-align: center;
 				color: #fff;
@@ -128,12 +128,7 @@
 				.full-form {
 					width: 100%;
 				}
-				#great-welcome {
-					display:flex;
-					background: url('{{ URL::route('welcome') }}./img/backdrops/panoramas/stockfreeimages-1663421-prairie-by-bruce2-high.jpg');
-					background-size: auto 100%;
-					background-position: center center;
-				}
+
 			@media (max-width:767px) {
 				#great-welcome {padding:10px;}
 				.btn-group-lg {margin:0 20px;}

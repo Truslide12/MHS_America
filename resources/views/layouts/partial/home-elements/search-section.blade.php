@@ -6,7 +6,7 @@
 		{{ csrf_field() }}
 		<div class="v2box">
 			<div class="v2box_title">
-				<h2>Search Mobile Home Spaces Across America</h2>
+				<h1>Search Mobile Home Spaces Across America</h1>
 			</div>
 			<div class="search_spacer"></div>
 			<div class="sexy">
