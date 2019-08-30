@@ -22,7 +22,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				@if($role->name == 'admin')<button type="button" class="btn btn-sm btn-danger pull-right" data-toggle="modal" data-target="#lockoutBox"><i class="fa fa-exclamation-circle"></i> Emergency lockout</button>@endif
+				@if($role->name == 'admin' && 1==2)<button type="button" class="btn btn-sm btn-danger pull-right" data-toggle="modal" data-target="#lockoutBox"><i class="fa fa-exclamation-circle"></i> Emergency lockout</button>@endif
 				<a href="{{ URL::route('account-business-company-users-create', array('company' => $company->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-link"></i> Link a new user</a>
 				<a href="{{ URL::route('account-business') }}" class="btn btn-sm btn-default hidden">Change default user privileges</a>
 			</div>
@@ -46,6 +46,7 @@
 @stop
 
 @section('incls-body')
+@if(1==2)
 <!-- Modal -->
 <div class="modal fade" id="lockoutBox" tabindex="-1" role="dialog" aria-labelledby="lockoutLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -66,4 +67,5 @@
     </div>
   </div>
 </div>
+@endif
 @stop
