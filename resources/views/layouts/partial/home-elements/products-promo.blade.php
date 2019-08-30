@@ -32,7 +32,8 @@
 				</div>
 			</div>
 		</div>
-		<div>
+	</div>
+	<div class="row clearfix nudge white products-promo-section-mobile">
 		<div class="col-md-4 tri_sectional">
 			<div>
 	        <div>
@@ -61,7 +62,6 @@
 	        </div>
 	    	</div>
       	</div>
-		</div>
 	</div>
 <!-- End Products Promo Section -->
 
