@@ -57,6 +57,18 @@
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.js"></script>
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.angular.js"></script>
+  @if(isset($captcha_action))
+  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8"></script>
+  <script type="text/javascript">
+    pony.add(function() {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8', {action: '{{ $captcha_action }}'}).then(function(token) {
+          //
+        });
+      });
+    });
+  </script>
+  @endif
   @yield('incls-body')
   <!-- <script type="text/javascript" src="/js/app.js"></script> -->
 </body>
