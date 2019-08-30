@@ -18,9 +18,9 @@
 					<div class="innersidebox">
 						<div class="listheader">Community Profiles</div>
 						<ul>
-							<li>Promote your Community Online</li>
-							<li>Advertise Vacant Spaces</li>
-							<li>Advertise Homes for Sale</li>
+							<li>Promote your Community for Free</li>
+							<li>Upgrade your profile for $149.99</li>
+							<li>Advertise your vacant spaces</li>
 						</ul>
 						<a href="/page/community-plans" class="btn btn-success promobtn"><i class="fa fa-group"></i> Promote Community</a>
 					</div>
@@ -44,7 +44,7 @@
 	          <p>
 	            List a home anywhere in the US for up to 6 months at $39.99
 	          </p>
-	          <a href="" class="btn btn-success">See More</a>
+	          <a href="/page/home-plans" class="btn btn-success">See More</a>
 	        </div>
 	    	</div>
       	</div>
@@ -56,9 +56,9 @@
 	          </div>
 	          <h3>Promote Mobile Home Park</h3>
 	          <p>
-	            Promote your mobile home park and vacant spaces for only $149.99/year
+	            Promote your mobile home park for free. Upgrade for $149.99/year and advertise your vacant spaces.
 	          </p>
-	          <a href="" class="btn btn-success">See More</a>
+	          <a href="/page/community-plans" class="btn btn-success">See More</a>
 	        </div>
 	    	</div>
       	</div>
