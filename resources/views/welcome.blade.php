@@ -45,7 +45,6 @@
 @section('incls-head-early')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css">
 
 @stop
 
