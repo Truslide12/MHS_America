@@ -100,6 +100,8 @@ class DerpyController extends Pony {
 							->get()->toArray();
 
 		$data[0]['cover'] = Profile::where('id', $company_id)->first()->photos->first()->cover ?? null;
+		$data[0]['claimed'] = Profile::where('id', $company_id)->first()->is_claimed();
+		$data[0]['premium'] = Profile::where('id', $company_id)->first()->has_active_subscription();
 
 		return Response::json($data, 200);
 

@@ -27,7 +27,9 @@
 .promobanner {
 	height:33rem;
 }
-
+.tri_sectional {
+	display: none;
+}
 @media only screen and (max-width: 767.98px) {
 
 	.img {
@@ -37,7 +39,55 @@
 	#promobanner {
 		display: none!important;
 	}
+	.products-promo-section {
+		padding:12px 0;
+		margin-top: 0px;
+		padding-bottom: 12px;
+	}
+	.tri_sectional {
+		padding: 0;
+		padding-bottom: 48px;
+	}
+	.tri_sectional div {
+		text-align: center;
+		padding-top: 14px;
+		padding-left: 22px;
+		padding-right: 22px;
 
+	}
+	.tri_sectional > div > div {
+		/*in a floating box
+		border:1px solid #dedede;
+		background: #f5f5f5;
+		box-shadow: 0px 10px 2px -4px rgba(0,0,0,0.16);
+		*/
+		
+	}
+	.tri_sectional div div {
+		text-align: center;
+
+	}
+	.tri_sectional i {
+		font-size: 9em;margin:auto;
+		color: #005499;
+	}
+	.tri_sectional div p {
+		font-size: 2.5em;
+	}
+	.tri_sectional div h3 {
+		font-family: Voltaire;
+		font-size: 3em;
+		padding: 0;
+		color: #4a879e;
+
+	}
+	.tri_sectional div .btn {
+		font-size: 3em;
+		padding: 0;
+		width: 100%;
+		margin-bottom: 12px;
+
+	}
 }
 
 li {

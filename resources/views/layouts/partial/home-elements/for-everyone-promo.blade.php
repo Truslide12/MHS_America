@@ -5,16 +5,16 @@
 			<h3>Built for Everyone</h3>
 			<div class="thick-hr"></div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 clearfix">
 			<a href="/sell-a-mobile-home">Mobile Home Sellers</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 clearfix">
 			<a href="/buy-a-mobile-home">Mobile Home Buyers</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 clearfix">
 			<a href="/mobile-home-sales-agent">Mobile Home Sales Agents</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 clearfix">
 			<a href="/promote-mobile-home-park">Mobile Home Park Owners</a>
 		</div>
 		<div class="col-md-12">

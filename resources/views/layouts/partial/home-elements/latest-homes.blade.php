@@ -7,7 +7,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row clearfix nudge white" style="padding-bottom: 1in;">
+	<div class="row clearfix nudge white latest-homes-section">
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
 				<div class="mhs-slideshow">
@@ -57,14 +57,14 @@
 					</div>
 					@endforeach
 					@if( $lh < 4 )
-					<div class="mhs-slide" id="slide-1">
+					<div class="mhs-slide" id="slide-{{$lh}}">
 						<div class="card clickycard" href="">
 			                <div class="card-image">
 			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png">
 			                        <div class="fs-ribbon" style="border-top-color: red!important;">
 								        <div class="txt">List Yours</div>
 								    </div>
-			                    <span style="color: blue;">$39.99</span>
+			                    <span style="color: red;text-shadow: none;">$39.99</span>
 			                </div><!-- card image -->
 
 			                <div class="card-content">

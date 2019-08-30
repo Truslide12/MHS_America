@@ -80,6 +80,13 @@ box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);*/
 	.cotw_text {
 		padding: 12px 20px 12px 20px;
 	}
+		.comm_week_box {
+		margin-bottom: 12px;
+	}
+	.community-of-the-week-section {
+		padding: 12px 0;
+		padding-bottom: 12px;
+	}
 }
 
 .comm_week_text strong {

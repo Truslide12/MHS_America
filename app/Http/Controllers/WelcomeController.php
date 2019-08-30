@@ -47,7 +47,7 @@ class WelcomeController extends Pony {
 	public function getPromo()
 	{
 
-		$response = view('promote.buy-mobile-home')
+		$response = view('promote.park-owner')
 					->with('nofooter', true)
 					->with('canvas', Canvas::getDefault());
 

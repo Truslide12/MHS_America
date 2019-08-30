@@ -536,13 +536,22 @@ class Profile extends EloquentModel {
 	{
 		//force ghosts to free
 		if( $this->company_id == 0 ) { return false; }
-		if ( $this->subscription->id > 0 ) {
-			if ( strtotime($this->subscription->ends_at) > strtotime(now()) ) {
-				return true;
-			} else {
-				return false;
-			}
+		if ( $this->subscription_id > 0 ) {
+			if ( $this->subscription->id > 0 ) {
+				if ( strtotime($this->subscription->ends_at) > strtotime(now()) ) {
+					return true;
+				} else {
+					return false;
+				}
+			} else { return false; }
 		} else { return false; }
+	}
+
+	public function is_claimed()
+	{
+		//force ghosts to free
+		if( $this->company_id == 0 ) { return false; }
+		return true;
 
 	}
 
