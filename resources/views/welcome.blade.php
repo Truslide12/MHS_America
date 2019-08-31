@@ -5,7 +5,7 @@
 	* I know this needs work just improving a bit
 	* from what we had.
 	********************************************/
-	$da = file_get_contents("http://mhsamerica.loc/api/latest/homes");
+	$da = file_get_contents("http://mhsamerica.com/api/latest/homes");
 	$da = json_decode($da);
 	$img = Array();
 	$lh = 0;
