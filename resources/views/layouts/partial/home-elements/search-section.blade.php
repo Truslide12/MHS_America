@@ -1,7 +1,8 @@
 
 <!-- Start Search Section -->
 	<div class="row clearfix white">
-		<div class="jumbotron text-center" id="great-welcome">
+		<div class="jumbotron text-center" id="great-welcome" style="position: relative;">
+		<div class="mir" style="display: none;"></div>
 		<form action="search" method="post" class="full-form">
 		{{ csrf_field() }}
 		<div class="v2box">
@@ -35,6 +36,7 @@
 			<div class="search_spacer"></div>
 		</div>
 		</form>
+		<div class="mkr" style="display: none;"></div>
 		</div>
 	</div>
 <!-- End Search Section -->

@@ -5,24 +5,24 @@
 			<div class="btnbox">
 				<div class="sidebox">
 					<div class="innersidebox">
-						<div class="listheader">Home Listings</div>
+						<div class="listheader">Home<br> Listings</div>
 						<ul>
-							<li>List home anywhere in the US</li>
+							<li>List home from anywhere in the US</li>
 							<li>List for up to 6 Months at $39.99</li>
-							<li>List in Minutes!</li>
+							<li>List your home in Minutes!</li>
 						</ul>
-						<a href="/page/home-plans" class="btn btn-success promobtn"><i class="fa fa-home"></i> Sell Home</a>
+						<a href="/page/home-plans" class="btn btn-success promobtn">Sell Home</a>
 					</div>
 				</div>
 				<div class="sidebox">
 					<div class="innersidebox">
-						<div class="listheader">Community Profiles</div>
+						<div class="listheader">Community<br> Profiles</div>
 						<ul>
-							<li>Promote your Community for Free</li>
+							<li>Promote your community for free</li>
 							<li>Upgrade your profile for $149.99</li>
 							<li>Advertise your vacant spaces</li>
 						</ul>
-						<a href="/page/community-plans" class="btn btn-success promobtn"><i class="fa fa-group"></i> Promote Community</a>
+						<a href="/page/community-plans" class="btn btn-success promobtn">Promote Community</a>
 					</div>
 				</div>
 				<div class="outside-sidebox">

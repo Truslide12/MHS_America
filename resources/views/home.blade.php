@@ -332,7 +332,9 @@
 	#footer-wrapper {
 		margin-bottom: 10vh;
 	}
-
+	#slide-1 {
+		display: inline-block!important;
+	}
 }
 
 		</style>
@@ -370,8 +372,8 @@
 						//print_r($ph);
 					@endphp
 					@for ( $h = 1; $h <= $pc; $h++ )
-					@if( $h > 1 )
-					<div class="mhs-slide" id="slide-{{$h}}">
+					@if( $h > 0 )
+					<div class="mhs-slide" id="slide-{{$h}}" @if($h == 1) style="display: none;" @endif>
 						<div class="card">
 			                <div class="card-image">
 			                    <img id="photo{{$h}}" class="img-responsive" src="/imgstorage/{{$ph[$h]['url']}}_sm.jpg" onclick="popBackdrop(this.id);">

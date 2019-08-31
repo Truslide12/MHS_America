@@ -232,27 +232,51 @@ class AccountController extends Pony {
 
 	public function postSettings()
 	{
-		$validator = Validator::make(Request::all(), array(
-			'first_name' => 'required|between:2,48|alpha_dash',
-			'last_name' => 'required|between:2,48|alpha_dash',
-			'email' => 'required|email',
-			'password_confirmation' => 'required_with:password|same:password|min:8'
-		),
-		array(
-			'first_name.required' => 'Your first name is required.',
-			'first_name.between' => 'Your first name must be between 2 and 48 characters.',
-			'first_name.alpha_dash' => 'Your first name can only contain letters and dashes.',
+		$update_password = false;
+		if ( Request::input('password', '') != '' ) {
+			//we want to do this with password..
+			$validator = Validator::make(Request::all(), array(
+				'first_name' => 'required|between:2,48|alpha_dash',
+				'last_name' => 'required|between:2,48|alpha_dash',
+				'email' => 'required|email',
+				'password' => 'required:password||min:8',
+				'password_confirmation' => 'required_with:password|same:password|min:8'
+			),
+			array(
+				'first_name.required' => 'Your first name is required.',
+				'first_name.between' => 'Your first name must be between 2 and 48 characters.',
+				'first_name.alpha_dash' => 'Your first name can only contain letters and dashes.',
 
-			'last_name.required' => 'Your last name is required.',
-			'last_name.between' => 'Your last name must be between 2 and 48 characters.',
-			'last_name.alpha_dash' => 'Your last name can only contain letters and dashes.',
+				'last_name.required' => 'Your last name is required.',
+				'last_name.between' => 'Your last name must be between 2 and 48 characters.',
+				'last_name.alpha_dash' => 'Your last name can only contain letters and dashes.',
 
-			'email.required' => 'Your email is required.',
-			'email.email' => 'That email is not valid.',
+				'email.required' => 'Your email is required.',
+				'email.email' => 'That email is not valid.',
 
-			'password_confirmation.required_with' => 'You must enter the password two times.',
-			'password_confirmation.same' => 'The password must be identical in both boxes.',
-		));
+				'password_confirmation.required_with' => 'You must enter the password two times.',
+				'password_confirmation.same' => 'The password must be identical in both boxes.',
+			));
+			$update_password = true;
+		} else {
+			$validator = Validator::make(Request::all(), array(
+				'first_name' => 'required|between:2,48|alpha_dash',
+				'last_name' => 'required|between:2,48|alpha_dash',
+				'email' => 'required|email',
+			),
+			array(
+				'first_name.required' => 'Your first name is required.',
+				'first_name.between' => 'Your first name must be between 2 and 48 characters.',
+				'first_name.alpha_dash' => 'Your first name can only contain letters and dashes.',
+
+				'last_name.required' => 'Your last name is required.',
+				'last_name.between' => 'Your last name must be between 2 and 48 characters.',
+				'last_name.alpha_dash' => 'Your last name can only contain letters and dashes.',
+
+				'email.required' => 'Your email is required.',
+				'email.email' => 'That email is not valid.',
+			));
+		}
 
 		if($validator->fails()) {
 			return redirect()->route('account-settings')
@@ -266,7 +290,7 @@ class AccountController extends Pony {
 			$me->last_name = Request::input('last_name');
 			$me->email = Request::input('email');
 
-			if(Request::input('password', '') != ''){
+			if( $update_password ){
 				$me->password = Hash::make(Request::input('password'));
 			}
 
