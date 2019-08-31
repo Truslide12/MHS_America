@@ -818,8 +818,14 @@ class BusinessController extends Pony {
 
 		$sub = $company->subscriptions->where('id', (int)$source_id)->first();
 		$customer 	= \Stripe\Customer::retrieve($company->stripe_customer_id);
-		$t = $customer->subscriptions->retrieve($sub->stripe_subscription_id)->cancel(array("cancel_at_period_end" => true ));
-		if( $t->cancel_at_period_end ) {
+
+		$target_sub = $customer->subscriptions->retrieve($sub->stripe_subscription_id);
+		$t = $customer->subscriptions->retrieve($sub->stripe_subscription_id);
+		$t->cancel_at_period_end = true;
+
+
+		//dd($t);
+		if( $t->save() ) {
 			$store_subscription = Subscription::where('stripe_subscription_id', $t->id)->first();
 			$store_subscription->auto_renew = false;
 			$store_subscription->save();
