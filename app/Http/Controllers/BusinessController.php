@@ -178,7 +178,7 @@ class BusinessController extends Pony {
 			return redirect()->route('account-business-company-link')
 							->withErrors($validator);
 		}else{
-			$invite = CompanyInvite::byCode($invite_code)->where('email', 'LIKE', Auth::user()->email)->first();
+			$invite = CompanyInvite::byCode($invite_code)->where('email', 'ILIKE', Auth::user()->email)->first();
 			
 			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
@@ -207,7 +207,7 @@ class BusinessController extends Pony {
 			return redirect()->route('account-business-company-link')
 							->withErrors($validator);
 		}else{
-			$invite = CompanyInvite::byCode(Input::get('code'))->where('email', 'LIKE', Auth::user()->email)->first();
+			$invite = CompanyInvite::byCode(Input::get('code'))->where('email', 'ILIKE', Auth::user()->email)->first();
 			
 			if(!is_a($invite, CompanyInvite::class)) {
 				$messageBag = new \Illuminate\Support\MessageBag(array('error' => 'Could not validate the code. The most common cause is that the email on your MHS account and the email which we sent the code to do not match. If this is the case, change the email in your personal settings or ask the company to resend to the correct email address.'));
@@ -306,7 +306,7 @@ class BusinessController extends Pony {
 		//Can I edit users?
 		if(!$me->hasRoleForCompany('admin', $company->id) && !$me->canForCompany('manage_users', $company->id)) return redirect()->route('account-business-company', array('company' => $company->id));
 
-		$validator = Validator::make(Input::all(),
+		$validator = Validator::make(['email' => strtolower(Input::get('email'))],
 			array(
 				'email' => 'required|email|unique:company_invites,email,NULL,id,company_id,'.$company->id
 			),
@@ -321,7 +321,7 @@ class BusinessController extends Pony {
 							->withErrors($validator);
 		}else{
 			$invite = new CompanyInvite;
-			$invite->email = Input::get('email');
+			$invite->email = strtolower(Input::get('email'));
 			$invite->code = createCode(15);
 			$invite->company_id = $company->id;
 			$invite->role_id = Role::where('name', 'editor')->first()->id;
