@@ -41,10 +41,12 @@
 		</div>
 	</div>
 	<div class="row clearfix nudge white" style="padding-top: 20vh;padding-bottom: 20vh;border-bottom: 0px solid black;">
-		<div class="col-md-12 clearfix">
-			<h3 style="font-size: 2.3em;border-bottom: 1px solid black;width: 75%;margin-left: 20%;">Do you work in the Mobile Home Industry?</h3>
+		<div class="col-md-3 col-md-offset-1 clearfix">
+			<img style="max-width: 100%;margin-top: 22px;" src="/img/stockphotos/salesagent-sq.jpeg">
+		</div>
+		<div class="col-md-7 clearfix">
+			<h3 style="font-size: 2.3em;border-bottom: 1px solid black;width: 75%;margin-top: 0;">Do you work in the Mobile Home Industry?</h3>
 			<p style="font-size: 2em;">
-				<img style="max-width: 25%;border-radius: 50%!important;float: left;-webkit-shape-outside:circle();shape-outside: circle();margin: 12px;" src="/img/stockphotos/salesagent-sq.jpeg">
 				If you're a professional in the mobile home industry we would love to hear your feedback on the direction of our platform. MHS America strives to revolutionize the way our industry operates online. To do that we need to understand the industry as a whole. With our decades of experience in the industry we know a lot, but we want to know what <em>you</em> want.
 			</p>
 			<p style="font-size: 2em;">

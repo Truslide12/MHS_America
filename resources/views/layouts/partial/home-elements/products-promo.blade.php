@@ -5,7 +5,7 @@
 			<div class="btnbox">
 				<div class="sidebox">
 					<div class="innersidebox">
-						<div class="listheader">Home<br> Listings</div>
+						<div class="listheader">Home Listings</div>
 						<ul>
 							<li>List home from anywhere in the US</li>
 							<li>List for up to 6 Months at $39.99</li>
@@ -16,7 +16,7 @@
 				</div>
 				<div class="sidebox">
 					<div class="innersidebox">
-						<div class="listheader">Community<br> Profiles</div>
+						<div class="listheader">Community Profiles</div>
 						<ul>
 							<li>Promote your community for free</li>
 							<li>Upgrade your profile for $149.99</li>

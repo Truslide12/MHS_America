@@ -11,20 +11,20 @@
 		</div>
 
 		<div class="col-md-3 clearfix" style="text-align: center;">
-			<img style="max-width: 380px;max-height: 240px;" src="/img/mhs_empty_thumb.png">
-			<a style="font-size: 2em;" href="/page/contact">Spot 1</a>
+			<img style="max-width: 100%;" src="/img/premium-partners/national-ad.png">
+			<a style="font-size: 2em;" href="/page/contact">Partner 1</a>
 		</div>
 		<div class="col-md-3 clearfix" style="text-align: center;">
-			<img style="max-width: 380px;max-height: 240px;" src="/img/mhs_empty_thumb.png">
-			<a style="font-size: 2em;" href="/page/contact">Spot 2</a>
+			<img style="max-width: 100%;" src="/img/premium-partners/national-ad.png">
+			<a style="font-size: 2em;" href="/page/contact">Partner 2</a>
 		</div>
 		<div class="col-md-3 clearfix" style="text-align: center;">
-			<img style="max-width: 380px;max-height: 240px;" src="/img/mhs_empty_thumb.png">
-			<a style="font-size: 2em;" href="/page/contact">Spot 3</a>
+			<img style="max-width: 100%;" src="/img/premium-partners/national-ad.png">
+			<a style="font-size: 2em;" href="/page/contact">Partner 3</a>
 		</div>
 		<div class="col-md-3 clearfix" style="text-align: center;">
-			<img style="max-width: 380px;max-height: 240px;" src="/img/mhs_empty_thumb.png">
-			<a style="font-size: 2em;" href="/page/contact">Spot 4</a>
+			<img style="max-width: 100%;" src="/img/premium-partners/national-ad.png">
+			<a style="font-size: 2em;" href="/page/contact">Partner 4</a>
 		</div>
 
 		<div class="col-md-12 clearfix" style="border-top: 1px solid black;margin-top:22px;">

@@ -106,7 +106,6 @@
     height: 8vh;
     width: 8vh;
     border-radius: 4vh!important;
-    background: rgba(255,255,255,.5);
     position: absolute;
     bottom: 10px;
     left: calc(50vw - 4vh);
@@ -122,11 +121,24 @@
   }
   .mkr:after {
     font-family: FontAwesome;
+    font-size: 4em;
     content: "\f078";
+    color: #aeaeae;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
   }
-
+  .mkr:hover:after {
+    color: #fff;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+  }
   .mkr:hover {
-    background: rgba(255,255,255,.8);
+    cursor: pointer;
+    color: #fff;
     -webkit-transition: all 0.5s linear;
     -moz-transition: all 0.5s linear;
     -o-transition: all 0.5s linear;
@@ -137,7 +149,9 @@
     padding-top: 20vh!important;
     padding-bottom: 20vh;
   }
-
+  #goalsbox {
+    margin:0 ;
+  }
 
 @media only screen and (max-width: 767.98px) {
   .goal-imgs {
@@ -145,6 +159,10 @@
   }
   .mission-and-goals-section {
     width: 100%;
+  }
+  .nudge {
+    width: 100%;
+    margin: auto auto;
   }
 }
 

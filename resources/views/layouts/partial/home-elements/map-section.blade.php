@@ -20,6 +20,7 @@
 	height: 2em;
 	padding: auto auto;
 	padding-top: 3px;
+	font-size: 1.25em;
 }
 
 .mapcol a:hover {
@@ -53,6 +54,12 @@
 	color: snow;
 	margin: auto auto;
 	text-align: center;
+}
+
+@media only screen and (max-width: 767.98px) {
+	.mapbanner {
+		height: 20vh;
+	}
 }
 
 </style>
