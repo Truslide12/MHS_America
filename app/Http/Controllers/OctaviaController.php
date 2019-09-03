@@ -484,4 +484,49 @@ class OctaviaController extends Pony {
 	}
 
 
+	public function postProcessIncomingStripeWebhook(Request $request)
+	{
+		$data = $request->json()->all();
+
+		if($data['object'] == 'event' && is_array($data['data']['object'])) {
+			$event_id = $data['id'];
+			$object = $data['data']['object'];
+			switch ($data['type']) {
+				case 'balance.available':
+					if ($object['object'] == 'balance') {
+						// *shrug*
+						// $object['available']['amount']
+						// $object['pending']['amount']
+					}
+					break;
+				case 'charge.dispute.closed':
+				case 'charge.dispute.created':
+				case 'charge.dispute.funds_reinstated':
+				case 'charge.dispute.funds_withdrawn':
+				case 'charge.dispute.updated':
+					if ($object['object'] == 'dispute') {
+						// *shrug*
+					}
+					break;
+				case 'customer.subscription.created':
+				case 'customer.subscription.deleted':
+				case 'customer.subscription.updated':
+					if ($object['object'] == 'subcription') {
+						// UPDATE SUBSCRIPTION AS NEEDED
+
+						//Subscription has ended
+						if(!is_null($object['ended_at'])) {
+							// $object['id']
+						}
+					}
+					break;
+				default:
+					// Nothing
+					break;
+			}
+		}
+
+		return $this->jsonAPI([]);
+	}
+
 }
