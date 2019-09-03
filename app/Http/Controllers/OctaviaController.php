@@ -492,6 +492,18 @@ class OctaviaController extends Pony {
 		 * https://stripe.com/docs/webhooks/signatures#verify-official-libraries
 		 */
 
+		/*
+			Additional security
+
+			//Webhook IPs (can still be spoofed though)
+			54.187.174.169
+			54.187.205.235
+			54.187.216.72
+			54.241.31.99
+			54.241.31.102
+			54.241.34.107
+		*/
+
 
 		if($data['object'] == 'event' && is_array($data['data']['object'])) {
 			$event_id = $data['id'];
