@@ -29,7 +29,7 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-					@if(Confide::user())
+					@if(Auth::user())
 						@include('layouts.partial.usermenu')
 					@else
 						@include('layouts.partial.guestmenu')

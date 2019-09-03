@@ -14,17 +14,13 @@
 		</span>
 		<h1>Account settings</h1>
 		<hr>
+				@include("layouts.partial.errors")
+
 	</div>
 </div>
 <div class="row white">
 	<div class="col-md-6">
 		<h3>Personal information</h3>
-		@if(Session::has('success'))
-		<div class="alert alert-success alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			{{ Session::get('success') }}
-		</div>
-		@endif
 		<form class="form-horizontal margin-t" action="{{ URL::route('account-settings-post') }}" method="POST" role="form">
 			<div class="form-group">
 				<label class="col-md-3 control-label">

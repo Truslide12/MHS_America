@@ -3,7 +3,7 @@
 	<div class="row clearfix nudge white mission-and-goals-section">
 		<div class="col-md-12">
 			<h2>Our Mission &amp; Goals</h2>
-			<div class="row clearfix nudge white" id="goalsbox">
+			<div class="" id="goalsbox">
 				<div class="col-md-4">
 					<img src="{{ URL::route('welcome') }}/img/stockphotos/couple-home-house-1288482.jpg" class="goal-imgs">
 					<h3 class="goals-title">To our Customers</h3>

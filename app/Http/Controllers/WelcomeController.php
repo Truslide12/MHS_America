@@ -24,7 +24,10 @@ class WelcomeController extends Pony {
 		}
 		$community_of_week->week = date("m/d/y", strtotime('last monday', strtotime('tomorrow')));
 
-		$response = view('welcome')
+		$blademode = "";
+		if ( isset($_GET["full"]) ) { $blademode = "-full"; }
+		
+		$response = view('welcome'.$blademode)
 					->with('latest_communities', Profile::byType('Community')->latest(5))
 					->with('latest_homes', Home::latest(5))
 					->with('hide_community_images', true)
@@ -47,7 +50,7 @@ class WelcomeController extends Pony {
 	public function getPromo()
 	{
 
-		$response = view('promote.park-owner')
+		$response = view('promote.buy-mobile-home')
 					->with('nofooter', true)
 					->with('canvas', Canvas::getDefault());
 
