@@ -495,7 +495,7 @@ class OctaviaController extends Pony {
 		/*
 			Additional security
 
-			//Webhook IPs (can still be spoofed though)
+			//Webhook IPs
 			54.187.174.169
 			54.187.205.235
 			54.187.216.72
