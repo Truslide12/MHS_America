@@ -488,13 +488,18 @@ class OctaviaController extends Pony {
 	{
 		$data = $request->json()->all();
 
+		/* TODO: Implement signature verification
+		 * https://stripe.com/docs/webhooks/signatures#verify-official-libraries
+		 */
+
+
 		if($data['object'] == 'event' && is_array($data['data']['object'])) {
 			$event_id = $data['id'];
 			$object = $data['data']['object'];
 			switch ($data['type']) {
 				case 'balance.available':
 					if ($object['object'] == 'balance') {
-						// *shrug*
+						// SAVE FOR DISPLAY ON ADMIN DASHBOARD *shrug*
 						// $object['available']['amount']
 						// $object['pending']['amount']
 					}
@@ -505,12 +510,13 @@ class OctaviaController extends Pony {
 				case 'charge.dispute.funds_withdrawn':
 				case 'charge.dispute.updated':
 					if ($object['object'] == 'dispute') {
-						// *shrug*
+						// I dunno yet. *shrug*
 					}
 					break;
 				case 'customer.subscription.created':
 				case 'customer.subscription.deleted':
 				case 'customer.subscription.updated':
+				case 'customer.subscription.trial_will_end':
 					if ($object['object'] == 'subcription') {
 						// UPDATE SUBSCRIPTION AS NEEDED
 
