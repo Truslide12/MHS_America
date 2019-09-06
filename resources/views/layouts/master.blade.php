@@ -32,7 +32,7 @@
 	<div class="row flexrow clearfix">
 		@if(isset($use_slim_footer))
 		<div class="col-sm-12 column">
-			@if(Request::is('search*'))
+			@if( isset($use_search_footer) )
 			<div class="footmodes" style="background: none;width: 100%;">
 				<a class="btn btn-default mode0" data-action="mode" data-mode="0" style="float:right;width:calc(30vw - 4px);height:auto;"><i class="fas fa-users"></i><br> Communities</a>
 				<a class="btn btn-default mode1" data-action="mode" data-mode="1" style="float:right;width:calc(30vw - 4px);height:auto;"><i class="fas fa-home"></i><br> Homes</a>

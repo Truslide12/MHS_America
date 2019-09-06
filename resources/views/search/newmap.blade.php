@@ -3,6 +3,10 @@
 @use-navbar-divider
 @use-slim-footer
 
+@php
+    $use_search_footer = true;
+@endphp
+
 @section('incls-head-early')
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
