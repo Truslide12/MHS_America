@@ -11,7 +11,7 @@
 	MHS America strives to provide the most current and accurate information as possible. Please be accurate with your listing and be sure to update your home status to <strong>Pending</strong> and <strong>Sold</strong> when applicable. This helps you by avoiding emails and phone calls on homes that have sold months ago. With this purchase you are now welcome to list this home on our platform for 180 Days.
 	
 	<div style="margin-top:14px;padding-left: 20px;">
-	<strong style="color: #f7a248;">Please Note:</strong> you will be required to verify the home is still activate after 90 days. The re-activation link will be sent to your email.
+	<strong style="color: #f7a248;">Please Note:</strong> You will be required to verify the home is still active after 90 days. The re-activation link will be sent to your email.
 	</div>
 </p><br>
 @if(1==2)
