@@ -152,7 +152,9 @@
   #goalsbox {
     margin:0 ;
   }
-
+  #promobanner {
+    min-height: 40vh;
+  }
 @media only screen and (max-width: 767.98px) {
   .goal-imgs {
     max-width: initial;
