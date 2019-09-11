@@ -433,9 +433,8 @@
 		});
 
 		if($('#infobox').parent().hasClass('col-md-6')) {
-			$('#infobox').detach().prependTo('#gridlock > .col-md-6:nth-child(1)');
+			$('#infobox').detach().prependTo('#gridlock > div:nth-child(1)');
 			$('#inforow').remove();
-
 			var grid = document.getElementById('gridlock');
 			salvattore.recreateColumns(grid);
 		}
