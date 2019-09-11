@@ -80,10 +80,14 @@ class ExploreController extends Pony {
 
 		$city = Geoname::byCityState($cityquery, $stateobj->id);
 
-		if(!is_object($city)) return redirect()->route('state', array('state' => $stateobj->abbr));
+		if(!is_object($city) || !is_a($city, Geoname::class)) {
+			return redirect()->route('state', array('state' => $stateobj->abbr));
+		}
 
 		$county = $city->counties()->first();
-		if(!is_object($county)) return redirect()->route('state', array('state' => $stateobj->abbr));
+		if(!is_object($county) || !is_a($county, County::class)) {
+			return redirect()->route('state', array('state' => $stateobj->abbr));
+		}
 
 		return redirect()->route('city', array('state' => $stateobj->abbr, 'county' => $county->name, 'city' => $city->name));
 	}

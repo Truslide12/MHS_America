@@ -30,7 +30,7 @@ class Geoname extends EloquentModel {
 
 	public function scopeByCityState($query, $city, $state)
 	{
-		return $query->where('place_name', 'like', $city)
+		return $query->where('place_name', 'ilike', $city)
 					 ->where('state_id', $state)->first();
 	}
 
