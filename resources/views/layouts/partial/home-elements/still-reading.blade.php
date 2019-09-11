@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="col-md-12 clearfix" style="border-top: 1px solid black;margin-top:22px;">
-			<a style="float: right;font-size: 2em;" href="/page/contact">Become a Premium Partner</a>
+			<a style="float: right;font-size: 2em;" href="/page/premium-partners">Become a Premium Partner</a>
 		</div>
 	</div>
 <!-- End Still Reading -->

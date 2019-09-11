@@ -105,8 +105,8 @@ li {
 
 
 .dude {
-background: url('/img/stockphotos/blue-sky-clear-sky-cold-346529.jpg')!important;
-background-size: 100% auto !important;
+background-image: url('/img/stockphotos/blue-sky-clear-sky-cold-346529-web.jpg')!important;
+background-size: 100% 100% !important;
 background-position: center center;
 background-repeat: no-repeat !important;
 }

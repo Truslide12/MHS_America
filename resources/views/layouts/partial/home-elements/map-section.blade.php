@@ -56,9 +56,34 @@
 	text-align: center;
 }
 
+.map-section {
+	padding-top: 1in;padding-bottom:1in;margin-bottom: 1in;border-top:1px solid gray;border-bottom: 1px solid gray;
+}
+
 @media only screen and (max-width: 767.98px) {
 	.mapbanner {
 		height: 20vh;
+		display: none;
+	}
+	.mapcol a,
+	.mapcol a:hover,
+	.mapcol a:active {
+		font-size: 1.5em;
+		text-align: left;
+		width: calc(100% - 2px);
+		margin: 2px;
+		background: #f5f5f5;
+		border: 1px solid #dedede;
+		float: left;
+		min-height: calc(10vh - 4px);
+		text-align: center;
+		display: inline-flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+	}
+	.map-section {
+		padding-top: 18px;padding-bottom:118px;margin-bottom: 18px;border-top:1px solid gray;border-bottom: 1px solid gray;
 	}
 }
 
@@ -71,7 +96,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row clearfix nudge white map-section" style="padding-top: 1in;padding-bottom:1in;margin-bottom: 1in;border-top:1px solid gray;border-bottom: 1px solid gray;">
+	<div class="row clearfix nudge white map-section" style="">
 		<div class="col-md-9 nopad">
 			<div style="width: 100%;" id="map"></div>
 		</div>

@@ -1,3 +1,43 @@
+@php
+
+  /*******************************************
+  * From dummy values to dumb values..
+  * I know this needs work just improving a bit
+  * from what we had.
+  ********************************************/
+  $da = Request::create('/api/latest/homes', 'GET');
+  $da = Route::dispatch($da);
+  //$da = file_get_contents("http://mhsamerica.loc/api/latest/homes");
+  //$da = json_decode($da->data);
+  //dd($da->getData()->data);
+
+  $f = $da->getData()->data;
+  
+  //dd($f);
+  
+  $img = Array();
+  $lh = 0;
+
+  if ( empty($f) ) { 
+    $lh = 0; 
+  } else {
+    foreach( $f as $d ) {
+      $lh++;
+      if ( $d->photos ) {
+        $p = (array) json_decode(stripslashes($d->photos));
+        if ( ! empty($p) ) {
+          $p = array_values($p)[0];
+          $img[] = $p->url;
+        } else {
+          $img[] = "nophoto"; 
+        }
+      } else {
+        $img[] = "nophoto"; 
+      }
+    }
+  }
+
+@endphp
 
 <!-- Start Latest Homes -->
 	<div class="row clearfix nudge white">
@@ -16,7 +56,7 @@
 					<div class="mhs-slide-right-btn" onclick="changeHomes();"><i class="fa fa-chevron-right"></i></div>
 					<div class="mhs-slideshow-loader"><small>Loading</small></div>
 					@endif
-					@foreach( $da->data as $home )
+					@foreach( $f as $home )
 					<div class="mhs-slide" id="slide-{{$loop->index}}">
 						<div class="card clickycard" href="home/{{ $home->id }}">
 			                <div class="card-image">

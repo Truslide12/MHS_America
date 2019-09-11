@@ -1,37 +1,3 @@
-@php
-
-  /*******************************************
-  * From dummy values to dumb values..
-  * I know this needs work just improving a bit
-  * from what we had.
-  ********************************************/
-  $da = file_get_contents("http://mhsamerica.com/api/latest/homes");
-  $da = json_decode($da);
-  $img = Array();
-  $lh = 0;
-
-  if ( empty($da) ) { 
-    $lh = 0; 
-  } else {
-    foreach( $da->data as $d ) {
-      $lh++;
-      if ( $d->photos ) {
-        $p = (array) json_decode(stripslashes($d->photos));
-        if ( ! empty($p) ) {
-          $p = array_values($p)[0];
-          $img[] = $p->url;
-        } else {
-          $img[] = "nophoto"; 
-        }
-      } else {
-        $img[] = "nophoto"; 
-      }
-    }
-  }
-
-@endphp
-
-
 @extends('layouts.boilerplate')
 @section('incls-head-early')
   <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
