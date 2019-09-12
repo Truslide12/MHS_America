@@ -562,7 +562,7 @@ class Profile extends EloquentModel {
 		if ( property_exists($sm, $t) ) {
 			return $sm->$t;
 		} else {
-			return "ff";
+			return "property does not exists";
 		}
 	}
 
