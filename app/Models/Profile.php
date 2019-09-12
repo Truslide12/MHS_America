@@ -555,4 +555,15 @@ class Profile extends EloquentModel {
 
 	}
 
+	public function socialmedia($t)
+	{
+		$sm = (object)json_decode($this->social_media, true);
+
+		if ( property_exists($sm, $t) ) {
+			return $sm->$t;
+		} else {
+			return "ff";
+		}
+	}
+
 }

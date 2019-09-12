@@ -370,6 +370,61 @@
 		  			</select>
 				</div>
 			</div>
+
+
+
+			<div class="form-group">
+				<div class="push-down"></div>
+				<label class="control-label col-md-3">Website</label>
+				<div class="col-md-9">
+					<input type="text" name="website" class="form-control" value="{{ $profile->socialmedia('website') }}" data-toggle="tooltip" data-placement="right" title="Place your parks website" placeholder="http://">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="push-down"></div>
+				<label class="control-label col-md-3">Commercial / Video</label>
+				<div class="col-md-9">
+					<input type="text" name="promovideo" class="form-control" value="{{ $profile->socialmedia('promovideo') }}" data-toggle="tooltip" data-placement="right" title="Place your parks website or social media" placeholder="link to youtube or .mp4 video file">
+					<small style="color: silver;float: right;">we will embed your video on your profile</small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="push-down"></div>
+				<label class="control-label col-md-3">Social Media</label>
+				<div class="col-md-9">
+					<div class="input-group" style="margin-bottom: 2px;">
+				    	<span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+						<input type="text" name="facebook" class="form-control" value="{{ $profile->socialmedia('facebook') }}" data-toggle="tooltip" data-placement="right" title="Place your parks facebook" placeholder="https://facebook.com/">
+					</div>
+				</div>
+
+				<label class="control-label col-md-3"></label>
+				<div class="col-md-9">
+					<div class="input-group" style="margin-bottom: 2px;">
+				    	<span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+						<input type="text" name="twitter" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="Place your parks twitter" placeholder="https://twitter.com/">
+					</div>
+				</div>
+
+				<label class="control-label col-md-3"></label>
+				<div class="col-md-9">
+					<div class="input-group" style="margin-bottom: 2px;">
+				        <span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
+				        <input type="text" name="linkedin" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="Place your parks linkedin" placeholder="https://linkedin.com/">
+				    </div>
+				</div>
+
+				<label class="control-label col-md-3"></label>
+				<div class="col-md-9">
+					<div class="input-group">
+				    	<span class="input-group-addon"><i class="fa fa-instagram"></i></span>
+						<input type="text" name="instagram" class="form-control" value="" data-toggle="tooltip" data-placement="right" title="Place your parks instagram" placeholder="https://instagram.com/">
+					</div>
+				</div>
+			</div>
+
 			@endif
 			<div class="form-group">
 				<div class="push-down"></div>
@@ -462,6 +517,9 @@
 	.hours-box {
 		font-size:0.8em;
 		padding:6px;
+	}
+	.input-group-addon i {
+		min-width: 25px;
 	}
 </style>
 <script src="{{ URL::route('welcome') }}/js/license_module.js"></script>
@@ -608,7 +666,9 @@ function init()
     	$("#additional_amenities_counter").html("+"+additional_amenities.length+" additional amenities");
 	  });
 
-
+format_phone("phone");
+format_phone("fax");
+window.scrollTo({top: 0});
 
 }
 
@@ -800,8 +860,7 @@ $(".phoneformat").keyup(function (e, v) {
 	format_phone(e.target.id, e);
 });
 
-format_phone("phone");
-format_phone("fax");
+
 
 function setSelectionRange(input, selectionStart, selectionEnd) {
   if (input.setSelectionRange) {

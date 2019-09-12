@@ -402,6 +402,13 @@ class EditorController extends Pony {
 			'utility_water' => 'numeric|between:0,2|nullable',
 			'utility_sewer' => 'numeric|between:0,2|nullable',
 			'utility_gas' => 'numeric|between:0,2|nullable',
+
+			'website' => 'nullable|url',
+			'promovideo' => 'nullable|url',
+			'facebook' => 'nullable|url',
+			'twitter' => 'nullable|url',
+			'linkedin' => 'nullable|url',
+			'instagram' => 'nullable|url',
 		],
 		[
 			'title.required' => 'Community name is required',
@@ -507,6 +514,54 @@ class EditorController extends Pony {
 			/* Utilities */
 			$profile_array['utilities'] = json_encode(array(Input::get('utility_water', 0), Input::get('utility_sewer', 0), Input::get('utility_gas', 0)));
 
+
+			/* Utilities */
+			$profile_array['social_media'] = [
+				"website" => Input::get("website"),
+				"promovideo" => Input::get("promovideo"),
+				"facebook" => Input::get("facebook"),
+				"twitter" => Input::get("twitter"),
+				"linkedin" => Input::get("linkedin"),
+				"instagram" => Input::get("instagram"),
+			];
+
+			$social_errors = [];
+			foreach( $profile_array['social_media'] as $platform => $link ) {
+				if(  in_array($platform, ['website']) || $link == null ) { continue; }
+
+				if( $platform == "promovideo" ) {
+					$tlink = str_replace("https://", "http://", $link);
+					preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $tlink, $match);
+					if ( array_key_exists(1, $match) ) {
+						$youtube_id = $match[1];
+					} else {
+						$youtube_id = false;
+					} 
+					if ( $youtube_id ) {
+						continue;
+					} else {
+						if ( substr( Input::get("promovideo") , -4) == ".mp4" ) {
+							continue;
+						} else {
+							$social_errors[] = "video link must be a youtube link or an .mp4 link";
+							continue;
+						}
+					}
+				}
+
+				if ( strpos($link,"{$platform}.com") === false ) {
+					$social_errors[] = $platform . " link is invalid";
+				} else {
+					
+				}
+			}
+
+			if( count($social_errors) > 0 ) {
+				return Redirect::route('editor', ['profile' => $profile->id, 'from_company' => $profile->company_id])
+							->withErrors($social_errors);
+			} else {
+				$profile_array['social_media'] = json_encode($profile_array['social_media']);
+			}
 
 			$hours_array = [];
 			$open_times = Input::get('open_hours');
