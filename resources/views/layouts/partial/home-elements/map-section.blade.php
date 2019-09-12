@@ -40,7 +40,7 @@
 
 .mapbanner {
 	height: 40vh;
-	background: url('/img/stockphotos/autumn-colors-country-417099.jpg');
+	background: url('/img/stockphotos/autumn-colors-country-417099-web.jpg');
 	background-size: 100%;
 	background-position: center 65%;
 	display: flex;
