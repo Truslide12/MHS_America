@@ -137,6 +137,7 @@
 	@endif
 	<div class="row nudge gray">
 		<div class="col-sm-12 col-md-12">
+			<div class="row clearfix no-border">
 				<div class="col-md-12">
 					<div class="page-header pull-up">
 						<h3>
