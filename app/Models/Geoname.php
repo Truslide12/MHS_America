@@ -108,9 +108,22 @@ class Geoname extends EloquentModel {
 		$base = Geoname::join('states', 'places.state_id', '=', 'states.id')->select('place_name', 'states.abbr');
 		if(strpos($query, ',') === false) {
 			if(is_numeric($query) && strlen(strval($query)) == 5) {
-				$token = $base->where('zipcode', $query);
+				//$token = $base->where('zipcode', $query);
+
+				/* Zippopotamus */
+				$url = "https://api.zippopotam.us/us/".strval($query);
+
+				$response = json_decode(file_get_contents($url), true);
+
+				if(is_array($response) && array_key_exists('places', $response) && count($response['places']) > 0) {
+					$is_zip = true;
+					$place = $response['places'][0];
+					$token = $base->where('place_name', 'ilike', $place['place name'])->where('states.abbr', 'ilike', $place['state abbreviation']);
+				}else{
+					return [];
+				}
 			}else{
-				$token = $base->where('place_name', 'like', $query.'%');
+				$token = $base->where('place_name', 'ilike', $query.'%');
 			}
 
 		}else{
@@ -119,13 +132,13 @@ class Geoname extends EloquentModel {
 			$state = trim($state);
 
 			if($state == '') {
-				$token = $base->where('place_name', 'like', $city);
+				$token = $base->where('place_name', 'ilike', $city);
 			}elseif(strlen($state) == 1) {
-				$token = $base->where('places.place_name', $city)->where('states.abbr', 'like', strtolower($state).'%');
+				$token = $base->where('places.place_name', $city)->where('states.abbr', 'ilike', strtolower($state).'%');
 			}elseif(strlen($state) == 2) {
-				$token = $base->where('places.place_name', $city)->where('states.abbr', 'like', strtolower($state));
+				$token = $base->where('places.place_name', $city)->where('states.abbr', 'ilike', strtolower($state));
 			}else{
-				$token = $base->where('places.place_name', $city)->where('states.title', 'like', ucwords($state));
+				$token = $base->where('places.place_name', $city)->where('states.title', 'ilike', ucwords($state));
 			}
 		}
 
