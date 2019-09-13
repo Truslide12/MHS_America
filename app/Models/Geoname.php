@@ -30,6 +30,33 @@ class Geoname extends EloquentModel {
 
 	public function scopeByCityState($query, $city, $state)
 	{
+		if(is_numeric($query) && strlen(strval($query)) == 5) {
+			//$token = $base->where('zipcode', $query);
+			$stateObject = State::find($state);
+			if(!is_a($stateObject, State::class)) {
+				return $query->whereRaw('1 <> 1');
+			}
+
+			/* Zippopotamus */
+			$url = "https://api.zippopotam.us/us/".strval($query);
+
+			$response = json_decode(file_get_contents($url), true);
+
+			if(is_array($response) && array_key_exists('places', $response) && count($response['places']) > 0) {
+				$place = $response['places'][0];
+				
+				//Must be in requested state
+				if(strtolower($place['state abbreviation']) != strtolower($stateObject->abbr)) {
+					return $query->whereRaw('1 <> 1');
+				}
+
+				//Fetch result
+				return $query->where('place_name', 'ilike', $place['place name'])
+					 ->where('state_id', $state)->first();
+			}
+		}
+
+		//Standard text query
 		return $query->where('place_name', 'ilike', $city)
 					 ->where('state_id', $state)->first();
 	}
