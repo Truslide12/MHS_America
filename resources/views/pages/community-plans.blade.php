@@ -5,6 +5,11 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
 @stop
 
+@php
+ $page_header = "Community Plans";
+  $meta_description = "MHS America is offering new and exciting promotional tools for mobile home park owners and property managers nation-wide. Promote for free, or upgrade and advertise your vacant spaces.";
+@endphp
+
 @section('page-title')
 Choose the plan that works for you..
 @stop

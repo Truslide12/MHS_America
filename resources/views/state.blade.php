@@ -2,9 +2,16 @@
 @use-navbar-divider
 @fix-navbar
 
+@php
+ $page_header = "Explore ". $state->title."'s Mobile Home Industry";
+ $meta_description = "MHS America invites you to explore the ". $state->title." mobile home industry. Find mobile homes and vacant spaces as well as services and contractors.";
+@endphp
+
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/js/jquery-jvectormap-1.2.2.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/welcome.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/cardscroller.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/mhs.latest-homes.simple.css">
 	@if($state->stylesheet == 1)
 	<link rel="stylesheet" type="text/css" href="/css/states/{{ $state->name }}.css">
 	@endif
@@ -12,6 +19,7 @@
 		var stateabbr = "{{ $state->abbr }}";
 	</script>
 @stop
+
 
 @section('attrs-body')ng-controller="StateController"@stop
 
@@ -129,6 +137,34 @@
 	@endif
 	<div class="row nudge gray">
 		<div class="col-sm-12 col-md-12">
+
+
+
+
+			<div class="row clearfix no-border"><a name="cities" class="page-anchor"></a>
+				<div class="col-md-12">
+					<div class="page-header pull-up">
+						<h3>
+							<a href="#top" class="up-anchor scroll-to pull-right" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" data-content="Back to top">
+								<span class="glyphicon glyphicon-chevron-up"></span>
+							</a>
+							Explore {{$state->title}}'s Mobile Home Industry</h3>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12" style="margin-bottom: 22px;">
+							<p style="font-size: 1.8em;">
+							MHS America is now serving the the mobile home industry in the state of {{$state->title}}. If you are looking to sell a mobile home in the state of {{$state->title}} take a look at our <a href="/page/home-plans">Home Listing Plan</a> for only $39.99. If you would like to buy a mobile home in {{$state->title}} the latest ones can be found directly below. You can narrow your search by county or city from the options on this page. If you are a mobile home park owner be sure to check out our <a href="/page/community-plans">Community Profile Plans</a>.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">&nbsp;</div>
+			</div>
+
+@include('layouts.partial.latest-homes-block')
+
+
 			<div class="row clearfix no-border"><a name="cities" class="page-anchor"></a>
 				<div class="col-md-12">
 					<div class="page-header pull-up">
@@ -307,6 +343,13 @@
 					}
 				}
 			});
+
+			$(".clickycard").on('click', function(event){
+		    	event.stopPropagation();
+		    	event.stopImmediatePropagation();
+		    	window.location = $(this).attr("href")
+			});
+
 		});
 	</script>
 @stop

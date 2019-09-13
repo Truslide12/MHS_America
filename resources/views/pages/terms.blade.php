@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "Privacy Policy";
+  $meta_description = "MHS America Privacy Policy.";
+@endphp
+
 @section('page-title')
 Terms of Use
 @stop

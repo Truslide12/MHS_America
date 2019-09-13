@@ -4,6 +4,10 @@
 <meta name="_token" content="{ csrf_token() }"/>
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
 @stop
+@php
+ $page_header = "For your Business";
+  $meta_description = "MHS America is offering new and exciting promotional tools for businesses working in the mobile home industry nation-wide. Join today and see how MHS America can help you.";
+@endphp
 
 @section('page-title')
 MHS Means Business for your Business

@@ -4,6 +4,11 @@
 Pick a Service to Get Started
 @stop
 
+@php
+ $page_header = "Get Started";
+  $meta_description = "MHS America is offering more than one way to promote. Start by letting us know what type of service you are looking for?";
+@endphp
+
 @section('page-content')
 <br><br><br>
 <center>

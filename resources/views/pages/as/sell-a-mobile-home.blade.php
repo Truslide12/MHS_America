@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "For Home Sellers";
+  $meta_description = "MHS America is offering new and exciting promotional tools for selling your mobile home. Join today and promote your mobile home sale.";
+@endphp
+
 @section('page-title')
 MHS For Home Sellers
 @stop

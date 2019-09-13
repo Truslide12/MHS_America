@@ -2,6 +2,11 @@
 @use-navbar-divider
 @fix-navbar
 
+@php
+ $page_header = "Explore ".$county->title." ".$state->title."'s Mobile Home Industry";
+  $meta_description = "MHS America invites you to explore the ".$county->title." ". $state->title." mobile home industry. Find mobile homes and vacant spaces as well as services and contractors.";
+@endphp
+
 @section('incls-head-early')
 <link rel="stylesheet" type="text/css" href="/css/widgets.css">
 @stop

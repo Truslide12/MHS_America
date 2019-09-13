@@ -5,6 +5,11 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
 @stop
 
+@php
+ $page_header = "Home Listing Plans";
+  $meta_description = "MHS America is offering new and exciting promotional tools for mobile home sellers nation-wide. Join today and list your mobile home for 6 months for only $39.99.";
+@endphp
+
 @section('page-title')
 Sell Your Home On MHS America
 @stop

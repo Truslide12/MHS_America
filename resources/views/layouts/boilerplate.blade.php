@@ -2,7 +2,7 @@
 <html lang="en" ng-app="twilight">
 <head>
   <meta charset="utf-8">
-  <title>MHS America</title>
+  <title>MHS America @if(isset($page_header))| {{$page_header}} @endif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @if(isset($meta_description))
   <meta name="description" content="{{ $meta_description }}">

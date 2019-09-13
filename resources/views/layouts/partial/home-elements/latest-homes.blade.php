@@ -97,8 +97,10 @@
 					</div>
 					@endforeach
 					@if( $lh < 4 )
+					@while( $lh < 4 )
+					@php $lh++; @endphp
 					<div class="mhs-slide" id="slide-{{$lh}}">
-						<div class="card clickycard" href="">
+						<div class="card clickycard" href="/page/home-plans">
 			                <div class="card-image">
 			                    <img class="img-responsive" src="/img/mhs_empty_thumb.png">
 			                        <div class="fs-ribbon" style="border-top-color: red!important;">
@@ -133,6 +135,7 @@
 			                </div><!-- card content -->
 			            </div>
 					</div>
+					@endwhile
 					@endif
 				</div>
 			</div>

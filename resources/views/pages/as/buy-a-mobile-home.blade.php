@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "For Home Buyers";
+  $meta_description = "MHS America is providing the best mobile home buying experience for our customers. On our platform you will find the most accurate information available to aid you in your home buying process.";
+@endphp
+
 @section('page-title')
 MHS For Mobile Home Buyers
 @stop

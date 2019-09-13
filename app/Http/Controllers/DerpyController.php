@@ -490,8 +490,23 @@ class DerpyController extends Pony {
 			return $h;
 		} else {
 			if ( strlen($zip) == 2 ) {
-				//by state
-				return 3;
+				$sid = State::where("abbr", strtolower($zip))->first()->id;
+				//latest on site
+				$h = Home::orderBy('id', 'DESC')
+						->where('status', '>', 1)
+						->where('state_id', $sid)
+						->with('city')
+						->with('state')
+						->with('profile')
+						->paginate(4);
+
+					foreach ($h as $i) {
+						$i->type_label = $i->size();
+						$i->dim_label = $i->dim_label();
+						$i->sales_ribbon = $i->sales_ribbon();
+					}
+
+				return $h;
 			} else {
 				//by zipcode
 				$h = Home::where('status', '>', 0)
@@ -525,14 +540,35 @@ class DerpyController extends Pony {
 			return $p;
 		} else {
 			if ( strlen($zip) == 2 ) {
-				//by state
-				return 3;
-			} else {
-				//by zipcode
-				$p = Profile::where('plan_id', '>', 0)
-						->where('zipcode', $zip)
+				//latest on site
+				$p = Profile::orderBy('id', 'DESC')
+						->where('plan_id', '>', 0)
+						->where('state_id', $zip)
 						->with('city')
+						->with('state')
+						->with('photos')
 						->paginate(4);
+
+					foreach ($p as $z) {
+						$z->photos = $z->photos();
+					}
+
+				return $p;
+			} else {
+				//latest on site
+				$p = Profile::orderBy('id', 'DESC')
+						->where('plan_id', '>', 0)
+						->where('zip_code', $zipcode)
+						->with('city')
+						->with('state')
+						->with('photos')
+						->paginate(4);
+
+					foreach ($p as $z) {
+						$z->photos = $z->photos();
+					}
+
+				return $p;
 			}
 		}
 

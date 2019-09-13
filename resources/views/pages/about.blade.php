@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "About Us";
+  $meta_description = "Learn more about MHS America as a company.";
+@endphp
+
 @section('page-title')
 About MHS America
 @stop

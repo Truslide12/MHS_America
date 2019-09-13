@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "For Park Owners";
+  $meta_description = "MHS America is offering new and exciting promotional tools for mobile home park owners nation-wide. Join today and promote your mobile home park community and vacant spaces.";
+@endphp
+
 @section('page-title')
 MHS For Mobile Home Park Owners
 @stop

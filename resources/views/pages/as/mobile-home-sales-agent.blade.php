@@ -1,5 +1,10 @@
 @extends('layouts.page')
 
+@php
+ $page_header = "For Sales Agents";
+  $meta_description = "MHS America is offering new and exciting promotional tools for sales agents nation-wide. Join today and promote your homes and communities.";
+@endphp
+
 @section('page-title')
 MHS For Mobile Home Sales Agents
 @stop
