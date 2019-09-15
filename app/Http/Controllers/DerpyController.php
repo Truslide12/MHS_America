@@ -116,7 +116,29 @@ class DerpyController extends Pony {
 		if(Input::get('query', '') == '') {
 			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', ($state == 'pr' ? 51 : $stateobj->id ) )->orderBy('place_name', 'asc')->get();
 		}else{
-			$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', ($state == 'pr' ? 51 : $stateobj->id ) )->where('place_name', 'like', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
+			$query = Input::get('query', '');
+			if(is_numeric($query) && strlen(strval($query)) == 5 && $state != 'pr') {
+				
+				/* Zippopotamus */
+				$url = "https://api.zippopotam.us/us/".strval($query);
+
+				$response = json_decode(file_get_contents($url), true);
+
+				if(is_array($response) && array_key_exists('places', $response) && count($response['places']) > 0) {
+					$place = $response['places'][0];
+					
+					//Must be in requested state
+					if(strtolower($place['state abbreviation']) == strtolower($stateobj->abbr)) {
+						$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', $stateobj->id )->where('place_name', 'ilike', $place['place name'])->orderBy('place_name', 'asc')->get();
+					}else{
+						$cities = [];
+					}
+				}else{
+					$cities = [];
+				}
+			}else{
+				$cities = Geoname::select([DB::raw('DISTINCT ON (place_name) 1 AS what'), 'places.id', 'places.place_name', 'places.state_id'])->where('state_id', ($state == 'pr' ? 51 : $stateobj->id ) )->where('place_name', 'ilike', Input::get('query').'%')->orderBy('place_name', 'asc')->get();
+			}
 		}
 		$cityArray = array();
 		foreach($cities as $city) {
