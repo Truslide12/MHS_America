@@ -1,0 +1,38 @@
+    	.colored {
+    		background: #4b6fb8!important;
+    		color: snow!important;
+    	}
+    	.techteam {
+            /*
+    		background: red!important;
+    		color: snow!important;
+            */
+            background-color: #f2dede!important;
+            border-color: #ebccd1!important;
+            color: #a94442!important;
+    	}
+    	.salesteam {
+            /*
+    		background: green!important;
+    		color: snow!important;
+            */
+            background-color: #dff0d8!important;
+            border-color: #d6e9c6!important;
+            color: #3c763d!important;
+    	}
+    	.supportteam {
+            /*
+    		background: #4b6fb8!important;
+    		color: snow!important;
+            */
+            background-color: #d9edf7!important;
+            border-color: #bce8f1!important;
+            color: #31708f!important;
+    	}
+
+    	.wholabel {
+    		padding: 5px 10px;
+    		border-radius: 5px;
+    		font-weight: normal;
+    		font-family: verdana;
+    	}

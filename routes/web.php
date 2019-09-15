@@ -40,18 +40,33 @@ Route::group(array('prefix' => 'luna'), function()
 		Route::get('content/pages', array('uses' => 'Admin\WelcomeController@getPages', 'as' => 'admin-content-pages'));
 		/* Administration content - news */
 		Route::get('content/news', array('uses' => 'Admin\WelcomeController@getNews', 'as' => 'admin-content-news'));
+		
+
+		/**************************************************************************************************************************************/
+		/* Administration customers management */
+		Route::get('customers', array('uses' => 'Admin\CustomersController@getIndex', 'as' => 'admin-customers'));
+		Route::get('customers/index', array('uses' => 'Admin\CustomersController@getCustomers', 'as' => 'admin-customers-index'));
+		Route::get('customers/company-accounts', array('uses' => 'Admin\CustomersController@getCompanyAccounts', 'as' => 'admin-customers-company-accounts'));
+		Route::get('customers/personal-accounts', array('uses' => 'Admin\CustomersController@getPersonalAccounts', 'as' => 'admin-customers-personal-accounts'));
+		Route::get('customers/lookup', array('uses' => 'Admin\CustomersController@getCustomerLookup', 'as' => 'admin-customers-lookup'));
+		Route::get('customer/{id}', array('uses' => 'Admin\CustomersController@getAccount', 'as' => 'admin-customer-edit'));
+		Route::post('customer/gift/home/{id}', array('uses' => 'Admin\CustomersController@postGiftHome', 'as' => 'admin-customer-gift-home'));
+
+		/**************************************************************************************************************************************/
 		/* Administration community management */
 		Route::get('communities', array('uses' => 'Admin\WelcomeController@getCommunitiesIndex', 'as' => 'admin-communities'));
-		/* Administration community management */
 		Route::get('communities/spotlight', array('uses' => 'Admin\WelcomeController@getCommunitiesSpotlight', 'as' => 'admin-communities-spotlight'));
-		/* Administration community management */
+		Route::get('communities/spotlight/{id}', array('uses' => 'Admin\WelcomeController@getCommunitiesSpotlightRecord', 'as' => 'admin-communities-spotlight-edit'));
+		Route::post('communities/spotlight/{id}', array('uses' => 'Admin\WelcomeController@postCommunitiesSpotlightRecord', 'as' => 'admin-communities-spotlight-edit-post'));
+		Route::post('communities/spotlights/new', array('uses' => 'Admin\WelcomeController@postCommunitiesSpotlightNew', 'as' => 'admin-communities-spotlight-new-post'));
+		Route::post('communities/spotlight/{id}/remove', array('uses' => 'Admin\WelcomeController@postCommunitiesSpotlightRemove', 'as' => 'admin-communities-spotlight-remove-post'));
 		Route::get('communities/amenities', array('uses' => 'Admin\WelcomeController@getCommunitiesAmenities', 'as' => 'admin-communities-amenities'));
 		Route::post('communities/amenities', array('uses' => 'Admin\WelcomeController@postCommunitiesAmenities', 'as' => 'admin-communities-amenities'));
-		/* Administration community management */
 		Route::get('communities/plans', array('uses' => 'Admin\WelcomeController@getCommunitiesPlans', 'as' => 'admin-communities-plans'));
-		/* Administration community management */
 		Route::get('communities/settings', array('uses' => 'Admin\WelcomeController@getCommunitiesSettings', 'as' => 'admin-communities-settings'));
+		
 
+		
 		/* Administration server status */
 		Route::get('server-status', array('uses' => 'Admin\WelcomeController@getServerStatus', 'as' => 'admin-server'));
 

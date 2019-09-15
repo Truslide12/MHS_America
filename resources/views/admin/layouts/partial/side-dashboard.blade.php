@@ -20,7 +20,7 @@
           </li>
           <li class="@if(Request::is('luna/communities*')) active @endif">
             <a href="{{ URL::route('admin-communities') }}">
-              <i class="fa fa-users"></i><span class="link-title"> Community Settings</span>
+              <i class="fa fa-home"></i><span class="link-title"> Community Dashboard</span>
             </a>
           </li>
           @if(Request::is('luna/communities*'))
@@ -31,7 +31,7 @@
               </li>
               <li class="subitem @if(Request::is('luna/communities/plans')) subactive @endif">
                 <a href="{{ URL::route('admin-communities-plans') }}">
-                  <i class="fa fa-tags"></i> <span class="link-title"> Plans</span>
+                  <i class="fa fa-tags"></i> <span class="link-title"> Profile Plans</span>
                 </a>
               </li>
               <li class="subitem @if(Request::is('luna/communities/amenities')) subactive @endif">
@@ -41,7 +41,34 @@
               </li>
               <li class="subitem @if(Request::is('luna/communities/settings')) subactive @endif">
                 <a href="{{ URL::route('admin-communities-settings') }}">
-                  <i class="fa fa-file-text-o"></i> <span class="link-title"> Application Settings</span>
+                  <i class="fa fa-file-text-o"></i> <span class="link-title"> Profile Settings</span>
+                </a>
+              </li>
+          @endif
+          <li class="@if(Request::is('luna/customer*')) active @endif">
+            <a href="{{ URL::route('admin-customers') }}">
+              <i class="fa fa-user"></i><span class="link-title"> Manage Customers</span>
+            </a>
+          </li>
+          @if(Request::is('luna/customer*'))
+              <li class="subitem @if(Request::is('luna/customers/index')) subactive @endif">
+                <a href="{{ URL::route('admin-customers-index') }}">
+                  <i class="fa fa-users"></i> <span class="link-title"> New Customers</span>
+                </a>
+              </li>
+              <li class="subitem @if(Request::is('luna/customers/company-accounts')) subactive @endif">
+                <a href="{{ URL::route('admin-customers-company-accounts') }}">
+                  <i class="fa fa-users"></i> <span class="link-title"> Company Accounts Index</span>
+                </a>
+              </li>
+              <li class="subitem @if(Request::is('luna/customers/personal-accounts')) subactive @endif">
+                <a href="{{ URL::route('admin-customers-personal-accounts') }}">
+                  <i class="fa fa-users"></i> <span class="link-title"> Personal Accounts Index</span>
+                </a>
+              </li>
+              <li class="subitem @if(Request::is('luna/customers/lookup')) subactive @endif">
+                <a href="{{ URL::route('admin-customers-lookup') }}">
+                  <i class="fa fa-certificate"></i> <span class="link-title"> Account Lookup</span>
                 </a>
               </li>
           @endif

@@ -5,23 +5,28 @@ use App\Models\Canvas;
 use App\Models\Home;
 use App\Models\Profile;
 use App\Models\State;
-
+use App\Models\CommunitySpotlight;
 class WelcomeController extends Pony {
 
 	public function getIndex()
 	{
 		//need to build admin panel option to change this..
 		//invalid park id results in default
-		$community_of_week = Profile::find(0);
-		if ( ! $community_of_week ) {
-			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', ];
-		} else {
+		$time = date("m/d/y", strtotime("now"));
+
+		$comid = CommunitySpotlight::where('starts_at', '<=', $time )
+									->where('expires_at', '>=', $time)->first();
+		if ( is_object($comid) ) {
+			$community_of_week = Profile::find($comid->community_id);
 			if ( $community_of_week->photos() ) {
 				$community_of_week->cover = $community_of_week->photos()->first()->cover;
 			} else {
 				$community_of_week->cover = "nocover";
 			}
+		} else {
+			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', ];
 		}
+		
 		$community_of_week->week = date("m/d/y", strtotime('last monday', strtotime('tomorrow')));
 
 		$blademode = "";
