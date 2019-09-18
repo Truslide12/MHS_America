@@ -24,4 +24,10 @@ class CommunitySpotlight extends EloquentModel {
 		return (object)["id"=>2,"name"=>"active","title"=>"Active"];
 	}
 
+	public function hitIt()
+	{
+		$this->impressions = $this->impressions + 1;
+		$this->save();
+	}
+
 }

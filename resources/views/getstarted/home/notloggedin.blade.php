@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @fix-navbar
 
+@php
+ $page_header = "Get Started: Home Listing";
+  $meta_description = "Get started now with your mobile home listing on MHS America. Advertise for up to 6 months for only $39.99";
+@endphp
+
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/profile.css">

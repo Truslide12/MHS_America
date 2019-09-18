@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @use-slim-footer
 
+@php
+ $page_header = "Register";
+  $meta_description = "Create your free MHS America user account and start exploring the mobile home industry today for free.";
+@endphp
+
 @section('incls-head')
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/static-footer.css">

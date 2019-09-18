@@ -2,6 +2,11 @@
 @fix-navbar
 @use-navbar-divider
 
+@php
+ $page_header = "Explore the Mobile Home Industry";
+  $meta_description = "MHS America offers both an easy to use directory service as well as location based map searching to explore the mobile home industry through the country.";
+@endphp
+
 @section('incls-head-early')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 @stop

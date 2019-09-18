@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @use-slim-footer
 
+@php
+ $page_header = "Log in";
+  $meta_description = "Log in to MHS America to recieve all benifits our platform has to offer.";
+@endphp
+
 @section('incls-head')
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/static-footer.css">

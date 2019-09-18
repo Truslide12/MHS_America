@@ -1,5 +1,10 @@
 @extends('layouts.search')
 
+@php
+ $page_header = "Search for Mobile Home Park Communities";
+  $meta_description = "Search MHS America's database for mobile home park communities throughout the united states.";
+@endphp
+
 @section('search-above')
 	<h2 class="text-center">
 		<img src="/img/text-community-search.png" alt="Community Search" class="img-responsive">

@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @use-slim-footer
 
+@php
+ $page_header = "New Password";
+  $meta_description = "Reset your MHS America account password.";
+@endphp
+
 @section('incls-head')
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/static-footer.css">

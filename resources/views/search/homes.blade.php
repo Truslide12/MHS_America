@@ -1,5 +1,10 @@
 @extends('layouts.search')
 
+@php
+ $page_header = "Search for Mobile Homes";
+  $meta_description = "Search MHS America's database for mobile homes throughout the united states.";
+@endphp
+
 @section('search-above')
 	<h2 class="text-center" style="margin-bottom:18px">
 		<img src="/img/text-home-search.png" alt="Mobile Home Search" class="img-responsive">

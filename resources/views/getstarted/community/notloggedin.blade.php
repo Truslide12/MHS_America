@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @fix-navbar
 
+@php
+ $page_header = "Get Started: Communities";
+  $meta_description = "Get started now with your free mobile home park community promotion on MHS America. Upgrade and customize your profile and advertise your vacant spaces.";
+@endphp
+
 @section('incls-head')
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/profile.css">
