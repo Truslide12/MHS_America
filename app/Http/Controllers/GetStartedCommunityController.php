@@ -57,7 +57,8 @@ class GetStartedCommunityController extends Pony {
 												->with('has_companies', FALSE)
 												->with('user', $user )
 												->with('step_id', 1)
-												->with('states', $states);
+												->with('states', $states)
+												->with('captcha_action', 'commctl-step1');
 		} else {
 			//Awesome, they are already a user, 
 			//lets get some more info..
@@ -112,7 +113,8 @@ class GetStartedCommunityController extends Pony {
 					->with('companies', Auth::user()->companies)
 					->with('title', $title)
 					->with('states', $states)
-					->with('step_id', $step);
+					->with('step_id', $step)
+					->with('captcha_action', 'commctl-step'.$step);
 		
 
 

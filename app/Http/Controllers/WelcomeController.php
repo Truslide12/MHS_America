@@ -41,16 +41,18 @@ class WelcomeController extends Pony {
 					->with('hide_community_images', true)
 					->with('hide_home_images', true)
 					->with('community_of_week', $community_of_week)
-					->with('canvas', Canvas::getDefault());
+					->with('canvas', Canvas::getDefault())
+					->with('captcha_action', 'homepage');
 
-		$welcomebox = true;
+/*		$welcomebox = true;
 		if(Cookie::get('welcomebox') == 'pony') {
 			$welcomebox = false;
 		}else{
 			$response->withCookie(Cookie::forever('welcomebox', 'pony'));
 		}
 
-		$response->with('welcomebox', $welcomebox);
+		$response->with('welcomebox', $welcomebox); */
+
 
 		return $response;
 	}

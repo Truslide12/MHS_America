@@ -71,9 +71,7 @@
   <script type="text/javascript">
     pony.add(function() {
       grecaptcha.ready(function() {
-        grecaptcha.execute('6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8', {action: '{{ $captcha_action }}'}).then(function(token) {
-          //
-        });
+        grecaptcha.execute('6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8', {action: '{{ $captcha_action }}'});
       });
     });
   </script>
