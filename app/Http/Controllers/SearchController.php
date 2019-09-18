@@ -33,7 +33,8 @@ class SearchController extends Pony {
 				->with('selector', $location)
 				->with('mode', 0)
 				->with('query', $input)
-				->with('canvas', Canvas::getDefault());
+				->with('canvas', Canvas::getDefault())
+				->with('captcha_action', 'search');
 	}
 
 	public function postMapView()
@@ -54,7 +55,8 @@ class SearchController extends Pony {
 				->with('selector', $location)
 				->with('mode', Input::get("mode"))
 				->with('query', $input)
-				->with('canvas', Canvas::getDefault());
+				->with('canvas', Canvas::getDefault())
+				->with('captcha_action', 'search');
 	}
 
 	public function getCommunities()

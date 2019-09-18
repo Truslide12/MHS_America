@@ -17,9 +17,8 @@ class WelcomeController extends Pony {
 		$comid = CommunitySpotlight::where('starts_at', '<=', $time )
 									->where('expires_at', '>=', $time)->first();
 
-		$comid->hitIt();
-
 		if ( is_object($comid) ) {
+			$comid->hitIt();
 			$community_of_week = Profile::find($comid->community_id);
 			if ( $community_of_week->photos() ) {
 				$community_of_week->cover = $community_of_week->photos()->first()->cover;
