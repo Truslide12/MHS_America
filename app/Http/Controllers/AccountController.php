@@ -9,6 +9,7 @@ use Input;
 use Validator;
 use Password;
 use Mail;
+use Session;
 
 use App\User;
 use App\Models\Canvas;
@@ -220,6 +221,8 @@ class AccountController extends Pony {
 	public function getLogout()
 	{
 		Auth::logout();
+
+		Session::flush();
         
         return redirect()->route('welcome');
 	}
