@@ -188,7 +188,7 @@ class AccountController extends Pony {
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
 		$data = [
-			'secret' => config('services.captcha_v2.secret_key'),
+			'secret' => config('services.recaptcha_v2.secret_key'),
 			'response' => Request::input('g-recaptcha-response'),
 			'remoteip' => $_SERVER['REMOTE_ADDR']
 		];
