@@ -397,7 +397,6 @@
 					} else {
 						$youtube_id = false;
 					} 
-
 				@endphp
 				@if( $youtube_id )
 				<div class="ytcontainer">

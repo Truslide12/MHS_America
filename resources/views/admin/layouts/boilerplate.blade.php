@@ -19,12 +19,27 @@
     <style type="text/css">
       .subitem > a {
         padding-left: 35px!important;
+        /***
+        background: #ccc;
+        margin-top: 0px;
+        border-top:0px solid black !important;
+        color: #333!important;
+        ***/
       }
+      /**
+      #menu>.subitem>a:hover {
+        padding-left: 35px!important;
+        background: #ccc;
+        margin-top: 0px;
+        border-top:0px solid black !important;
+        color: blue!important;
+      }
+      ***/
       .subactive > a {
         color: gold!important;
       }
       #content, .outer, .inner {
-        min-height: 750px!important;
+        min-height: 1000px!important;
       }
       .centerit {
         text-align: center;
@@ -40,6 +55,10 @@
       }
       .premium {
         background: #e8fdff!important;
+      }
+      .grouper {
+        padding: 10px 14px!important;
+        background: #111;color: gold;font-weight: bold;font-family: verdana;
       }
     </style>
 

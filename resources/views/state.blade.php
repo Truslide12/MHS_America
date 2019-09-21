@@ -158,6 +158,7 @@
 				<div class="clearfix">&nbsp;</div>
 			</div>
 
+<h3 style="font-family: Voltaire;text-transform: capitalize;">Mobile homes for sale in {{$state->title}}</h3>
 @include('layouts.partial.latest-homes-block')
 
 

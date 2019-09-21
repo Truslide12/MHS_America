@@ -43,7 +43,7 @@
 	<div class="row clearfix nudge white">
 		<div class="col-md-12">
 			<div class="page-header no-margin-t">
-				<h1 class="no-margin-t text-center">Recently Listed Homes</h1>
+				<h1 class="no-margin-t text-center" style="text-transform: capitalize;font-family:Voltaire;">Latest mobile homes for sale</h1>
 			</div>
 		</div>
 	</div>

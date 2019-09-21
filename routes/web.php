@@ -66,7 +66,25 @@ Route::group(array('prefix' => 'luna'), function()
 		Route::get('communities/settings', array('uses' => 'Admin\WelcomeController@getCommunitiesSettings', 'as' => 'admin-communities-settings'));
 		
 
-		
+		/***************************************************************************************************************
+		/* Administration: Sitemap Tool */
+		Route::get('sitemap', array('uses' => 'Admin\SiteMapController@getIndex', 'as' => 'admin-sitemap'));
+		Route::get('sitemap/manage', array('uses' => 'Admin\SiteMapController@getManage', 'as' => 'admin-sitemap-manage'));
+		Route::get('sitemap/settings', array('uses' => 'Admin\SiteMapController@getSettings', 'as' => 'admin-sitemap-settings'));
+
+		Route::post('sitemap/settings', array('uses' => 'Admin\SiteMapController@postSettings', 'as' => 'admin-sitemap-settings-post'));
+
+		Route::get('sitemap/generate/index', array('uses' => 'Admin\SiteMapGenController@generateSiteMap', 'as' => 'sitemap-gen'));
+		Route::get('sitemap/generate/explore/{state}', array('uses' => 'Admin\SiteMapGenController@generateExploreStateFile', 'as' => 'sitemap-explore'));
+		Route::get('sitemap/generate/profiles', array('uses' => 'Admin\SiteMapGenController@generateProfileFile', 'as' => 'sitemap-profiles'));
+		Route::get('sitemap/generate/statics', array('uses' => 'Admin\SiteMapGenController@generateStaticFile', 'as' => 'sitemap-static'));
+
+
+		/***************************************************************************************************************
+
+
+
+
 		/* Administration server status */
 		Route::get('server-status', array('uses' => 'Admin\WelcomeController@getServerStatus', 'as' => 'admin-server'));
 
@@ -818,6 +836,8 @@ Route::group(array('prefix' => 'luna'), function()
 
 	/* Homepage (GET) */
 	Route::get('promotest', array('uses' => 'WelcomeController@getPromo', 'as' => 'test-promo'));
+	
+
 
 	/* Homepage (GET) */
 	Route::get('/', array('uses' => 'WelcomeController@getIndex', 'as' => 'welcome'));

@@ -55,6 +55,21 @@ return [
             'visibility' => 'public',
         ],
 
+        'pages' => [
+            'driver' => 'local',
+            'root' => base_path('resources/views/pages'),
+        ],
+
+        'promos' => [
+            'driver' => 'local',
+            'root' => base_path('resources/views/pages/as'),
+        ],
+
+        'sitemaps' => [
+            'driver' => 'local',
+            'root' => base_path('public/sitemaps/xml'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
