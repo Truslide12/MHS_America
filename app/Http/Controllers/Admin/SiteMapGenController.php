@@ -459,7 +459,7 @@ private function logCreation($type, $name, $link_count, $children) {
 	$record->gen_time = self::getTime() - self::$start_time;
 	$record->link_count = $link_count;
 	$record->children = $children;
-	$record->file_size = File::size(getcwd()."\\sitemaps\\xml\\".$name);
+	$record->file_size = File::size(public_path()."/sitemaps/xml/".$name);
 	$record->save();
 }
 
