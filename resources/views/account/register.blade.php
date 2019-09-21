@@ -111,7 +111,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<div class="col-md-12">
-								<div class="g-recaptcha" data-size="compact" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
+								<div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
 							</div>
 						</div>
 					</div>
