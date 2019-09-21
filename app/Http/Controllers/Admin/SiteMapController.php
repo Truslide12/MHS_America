@@ -147,9 +147,9 @@ class SiteMapController extends Pony {
 		foreach ( Storage::disk('sitemaps')->files() as $file) {
 
 
-			$lastmod = File::lastModified(getcwd()."\\sitemaps\\xml\\".$file);
-			$size = File::size(getcwd()."\\sitemaps\\xml\\".$file);
-			$x = new \SimpleXMLElement( file_get_contents(getcwd()."\\sitemaps\\xml\\".$file) );
+			$lastmod = File::lastModified(public_path().'/sitemaps/xml/'.$file);
+			$size = File::size(public_path().'/sitemaps/xml/'.$file);
+			$x = new \SimpleXMLElement( file_get_contents(public_path().'/sitemaps/xml/'.$file) );
 			$links = $x->url->count();
 			$total_links += $links;
 			$total_size += $size;
