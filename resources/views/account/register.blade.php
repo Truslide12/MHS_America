@@ -109,7 +109,7 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="form-group text-right">
+						<div class="form-group text-right text-right">
 							<div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
 						</div>
 					</div>
