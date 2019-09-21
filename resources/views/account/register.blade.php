@@ -108,12 +108,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="form-group text-right text-right">
-							<div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="col-md-12">
+								<div class="g-recaptcha" data-size="compact" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
+							</div>
 						</div>
 					</div>
-	                <div class=" col-md-offset-6 col-md-6">
+	                <div class="col-md-6">
 	                	<div class="form-group">
 	                		<div class="col-md-12">
 	                			<button type="submit" class="btn btn-success cta btn-lg pull-right" tabindex="8" style="position:relative;z-index:1;">Create account</button>
