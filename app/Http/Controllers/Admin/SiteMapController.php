@@ -33,7 +33,7 @@ use App\Models\Server;
 class SiteMapController extends Pony {
 	
 
-	public $base = "http://mhsamerica.loc";
+	public $base = "https://mhsamerica.com";
 	static $start_time;
 	static $end_time;
 
