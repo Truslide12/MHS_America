@@ -215,7 +215,7 @@ class AccountController extends Pony {
 
 			/* -- Check captcha */
 			if($response['success'] === false || count($response['error-codes']) > 0) {
-				$messageBag = new \Illuminate\Support\MessageBag(['err' => 'The captcha failed.']);
+				$messageBag = new \Illuminate\Support\MessageBag(['err' => 'The captcha failed. '.htmlentities(json_encode($response))]);
 
 				return redirect()->route('account-register')
 								->withInput(Request::except('password', 'password_confirmation'))
