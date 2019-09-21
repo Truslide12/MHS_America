@@ -214,7 +214,7 @@ class AccountController extends Pony {
 			$response = json_decode($result, true);
 
 			/* -- Check captcha */
-			if(!is_array($response) || $response['success'] === false || count($response['error-codes']) > 0) {
+			if($response['success'] === false || count($response['error-codes']) > 0) {
 				$messageBag = new \Illuminate\Support\MessageBag(['err' => 'The captcha failed.']);
 
 				return redirect()->route('account-register')
