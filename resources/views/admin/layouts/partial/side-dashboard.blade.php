@@ -72,18 +72,6 @@
                 </a>
               </li>
           @endif
-          <li class="@if(Request::is('luna/meeting*')) active @endif">
-            <a href="{{ URL::route('admin-meeting-center') }}">
-              <i class="fa fa-fire"></i><span class="link-title"> Meetings Center</span>
-            </a>
-          </li>
-          @if(Request::is('luna/meeting*'))
-              <li class="subitem @if(Request::is('luna/meetings/lookup')) subactive @endif">
-                <a href="{{ URL::route('admin-meeting-center-lookup') }}">
-                  <i class="fa fa-users"></i> <span class="link-title"> Lookup Meeting</span>
-                </a>
-              </li>
-          @endif
           <li class="@if(Request::is('luna/server*')) active @endif">
             <a href="{{ URL::route('admin-server') }}">
               <i class="fa fa-tasks"></i><span class="link-title"> Server status</span>

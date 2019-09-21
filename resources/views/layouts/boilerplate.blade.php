@@ -66,7 +66,7 @@
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.js"></script>
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.angular.js"></script>
-  @if(isset($captcha_action))
+  @if(isset($captcha_action) && 1==2)
   <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha_v3.site_key') }}"></script>
   <script type="text/javascript">
     pony.add(function() {

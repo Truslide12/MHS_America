@@ -55,7 +55,8 @@ return [
     ],
 
     'recaptcha_v2' => [
-        'site_key' => env('RECAPTCHA_V2_SITE_KEY')
+        'site_key' => env('RECAPTCHA_V2_SITE_KEY'),
+        'secret_key' => env('RECAPTCHA_V2_SECRET_KEY')
     ],
 
     'recaptcha_v3' => [
