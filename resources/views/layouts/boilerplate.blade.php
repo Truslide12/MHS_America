@@ -67,11 +67,11 @@
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.js"></script>
   <script type="text/javascript" src="{{ URL::route('welcome') }}/js/mhs.angular.js"></script>
   @if(isset($captcha_action))
-  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8"></script>
+  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha_v3.site_key') }}"></script>
   <script type="text/javascript">
     pony.add(function() {
       grecaptcha.ready(function() {
-        grecaptcha.execute('6Lf1wLUUAAAAAEVSJIUi6q5DYGXuy-fsliGkiwg8', {action: '{{ $captcha_action }}'});
+        grecaptcha.execute('{{ config('services.recaptcha_v3.site_key') }}', {action: '{{ $captcha_action }}'});
       });
     });
   </script>

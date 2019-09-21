@@ -52,6 +52,14 @@ return [
 
     'cronserv' => [
         'key' => '83411758450251a62ae38578ec510c19'
+    ],
+
+    'recaptcha_v2' => [
+        'site_key' = env('RECAPTCHA_V2_SITE_KEY')
+    ],
+
+    'recaptcha_v3' => [
+        'site_key' = env('RECAPTCHA_V3_SITE_KEY')
     ]
 
 ];

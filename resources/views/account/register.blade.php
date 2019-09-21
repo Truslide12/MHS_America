@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/static-footer.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/login.css">
     <style type="text/css">.checkbox label:after{text-align:left;}</style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @stop
 
 @section('content-above')
@@ -102,9 +103,14 @@
 							<div class="padding-x">
 								<div class="checkbox">
                 					<input type="checkbox" name="agree" id="optAgree" value="1" tabindex="7"> 
-                					<label for="optAgree">I agree to the <a href="{{ URL::route('page', array('slug' => 'terms')) }}" tabindex="5">terms of use</a> and understand the <a href="{{ URL::route('page', array('slug' => 'privacy')) }}" tabindex="6">privacy policy</a></label>
+                					<label for="optAgree">I agree to the <a href="{{ URL::route('page', array('slug' => 'terms')) }}" tabindex="5">terms of use</a> and <a href="{{ URL::route('page', array('slug' => 'privacy')) }}" tabindex="6">privacy policy</a></label>
                 				</div>
 							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group text-right">
+							<div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_v2.site_key') }}"></div>
 						</div>
 					</div>
 	                <div class=" col-md-offset-6 col-md-6">
