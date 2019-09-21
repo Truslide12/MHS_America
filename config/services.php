@@ -55,11 +55,11 @@ return [
     ],
 
     'recaptcha_v2' => [
-        'site_key' = env('RECAPTCHA_V2_SITE_KEY')
+        'site_key' => env('RECAPTCHA_V2_SITE_KEY')
     ],
 
     'recaptcha_v3' => [
-        'site_key' = env('RECAPTCHA_V3_SITE_KEY')
+        'site_key' => env('RECAPTCHA_V3_SITE_KEY')
     ]
 
 ];
