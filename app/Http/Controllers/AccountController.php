@@ -183,6 +183,47 @@ class AccountController extends Pony {
 							->withErrors($validator);
 		}
 
+
+		/* ---------------------- CAPTCHA STUFF ------------------------------ */
+		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+
+		$data = [
+			'secret' => config('services.captcha_v2.secret_key'),
+			'response' => Request::input('g-recaptcha-response'),
+			'remoteip' => $_SERVER['REMOTE_ADDR']
+		];
+
+		$options = [
+			'http' => [
+				'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+				'method'  => 'POST',
+				'content' => http_build_query($data)
+			]
+		];
+		$context  = stream_context_create($options);
+		$result = file_get_contents($recaptcha_url, false, $context);
+		/* -- Check request */
+		if($result === false) {
+			$messageBag = new \Illuminate\Support\MessageBag(['err' => 'Server failed to contact Google to verify the captcha.']);
+
+			return redirect()->route('account-register')
+							->withInput(Request::except('password', 'password_confirmation'))
+							->withErrors($messageBag);
+
+		}else{
+			$response = json_decode($result, true);
+
+			/* -- Check captcha */
+			if(!is_array($response) || $response['success'] === false || count($response['error-codes']) > 0) {
+				$messageBag = new \Illuminate\Support\MessageBag(['err' => 'The captcha failed.']);
+
+				return redirect()->route('account-register')
+								->withInput(Request::except('password', 'password_confirmation'))
+								->withErrors($messageBag);
+			}
+		}
+		/* -------------------- END CAPTCHA STUFF ---------------------------- */
+
 		$user = new User;
 
 		$user->username = Request::input('username');
