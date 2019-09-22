@@ -307,7 +307,14 @@ class Geoname extends EloquentModel {
 			/* Zippopotamus */
 			$url = "https://api.zippopotam.us/us/".$zip_matches[1];
 
-			$results = json_decode(file_get_contents($url), true);
+			$apireq = @file_get_contents($url);
+
+			if($apireq === false && Str::startsWith($zip_matches[1], '00')) {
+				$url = "https://api.zippopotam.us/pr/".$zip_matches[1];
+				$apireq = @file_get_contents($url);
+			}
+
+			$results = json_decode($apireq, true);
 
 			if(is_array($results) && array_key_exists('places', $results) && count($results['places']) > 0) {
 				$is_zip = true;
