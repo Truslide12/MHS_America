@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DB;
+use Illuminate\Support\Str;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\MultiPolygon;
 use Phaza\LaravelPostgis\Geometries\Point;
