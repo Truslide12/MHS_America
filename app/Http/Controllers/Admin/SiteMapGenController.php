@@ -34,7 +34,7 @@ class SiteMapGenController extends Pony {
 		foreach ($sitemaps as $file) {
 			if( $file !== "sitemap.xml" ) {
 				//loc & lastmod
-				$lastmod = File::lastModified(getcwd()."\\sitemaps\\xml\\".$file);
+				$lastmod = File::lastModified(public_path().'/sitemaps/xml/'.$file);
 				$e[] = ['loc'=>$this->base.'/sitemaps/xml/'.$file, 'lastmod'=>date("m/d/y H:i:s",$lastmod)];
 				$mapfiles[] = self::XmlSiteMapBlock((object)$e[count($e)-1]);
 			}
@@ -94,7 +94,7 @@ class SiteMapGenController extends Pony {
 		$settings = SMSettings::where("name", "static-pages")->first();
 		foreach ( Storage::disk('pages')->files() as $file) {
 			$clean_name = str_replace(".blade.php", "", $file);
-			$lastmod = File::lastModified(getcwd()."\\..\\resources\\views\\pages\\".$file);
+			$lastmod = File::lastModified(base_path().'/resources/views/pages/'.$file);
 
 			$items[] = [
 				"color"=>$settings->badge_color,
@@ -119,7 +119,7 @@ class SiteMapGenController extends Pony {
 
 		foreach ( Storage::disk('promos')->files() as $file) {
 			$clean_name = str_replace(".blade.php", "", $file);
-			$lastmod = File::lastModified(getcwd()."\\..\\resources\\views\\pages\\as\\".$file);
+			$lastmod = File::lastModified(base_path().'/resources/views/pages/as/'.$file);
 
 			$items[] = [
 				"color"=>$settings->badge_color,
@@ -154,13 +154,13 @@ class SiteMapGenController extends Pony {
 			$clean_name = $page;
 			switch ($page) {
 				case 'search':
-					$lastmod = File::lastModified(getcwd()."\\..\\resources\\views\\search\\newmap.blade.php");
+					$lastmod = File::lastModified(base_path().'/resources/views/search/newmap.blade.php');
 					break;
 				case 'explore':
-					$lastmod = File::lastModified(getcwd()."\\..\\resources\\views\\explore.blade.php");
+					$lastmod = File::lastModified(base_path().'/resources/views/explore.blade.php');
 					break;
 				default:
-					$lastmod = File::lastModified(getcwd()."\\..\\resources\\views\\search\\".$page.".blade.php");
+					$lastmod = File::lastModified(base_path().'/resources/views/search/'.$page.'.blade.php');
 					break;
 			}
 			
@@ -188,11 +188,11 @@ class SiteMapGenController extends Pony {
 
 		$items = [];
 
-		$lm_login = File::lastModified(getcwd()."\\..\\resources\\views\\account\\login.blade.php");
-		$lm_register = File::lastModified(getcwd()."\\..\\resources\\views\\account\\register.blade.php");
-		$lm_recov = File::lastModified(getcwd()."\\..\\resources\\views\\account\\recovery\\home.blade.php");
-		$lm_user = File::lastModified(getcwd()."\\..\\resources\\views\\account\\recovery\\username.blade.php");
-		$lm_pass = File::lastModified(getcwd()."\\..\\resources\\views\\account\\recovery\\password.blade.php");
+		$lm_login = File::lastModified(base_path().'/resources/views/account/login.blade.php');
+		$lm_register = File::lastModified(base_path().'/resources/views/account/register.blade.php');
+		$lm_recov = File::lastModified(base_path().'/resources/views/account/recovery/home.blade.php');
+		$lm_user = File::lastModified(base_path().'/resources/views/account/recovery/username.blade.php');
+		$lm_pass = File::lastModified(base_path().'/resources/views/account/recovery/password.blade.php');
 
 		$items[] = ["color"=>"#000", "bgcolor"=> "#FAF898", "desc" => "ACCOUNT PAGE", "loc" => $this->base."/account/login", "lastmod" => date("m/d/y H:i:s", $lm_login), "priority" => 0.2, "changefreq" => "monthly"];
 		$items[] = ["color"=>"#000", "bgcolor"=> "#FAF898", "desc" => "ACCOUNT PAGE", "loc" => $this->base."/account/register", "lastmod" => date("m/d/y H:i:s", $lm_register), "priority" => 0.2, "changefreq" => "monthly"];
@@ -212,7 +212,7 @@ class SiteMapGenController extends Pony {
 		$receipt = (object)[];
 		$receipt->messages = array();
 		$links = array();
-		$links[] = ["color"=>"#fff", "bgcolor"=> "#000", "desc" => "HOME PAGE", "loc" => $this->base, "lastmod" => date("m/d/y", strtotime('now')), "priority" => 0.8, "changefreq" => "daily"];
+		$links[] = ["color"=>"#fff", "bgcolor"=> "#000", "desc" => "HOME PAGE", "loc" => $this->base, "lastmod" => date("Y-m-d", strtotime('now')), "priority" => 1, "changefreq" => "daily"];
 		$links = array_merge( $links , self::fetchSearchLinks() );
 		$links = array_merge( $links , self::fetchPromoLinks() );
 		$links = array_merge( $links , self::fetchStaticPageLinks() );
@@ -459,7 +459,7 @@ private function logCreation($type, $name, $link_count, $children) {
 	$record->gen_time = self::getTime() - self::$start_time;
 	$record->link_count = $link_count;
 	$record->children = $children;
-	$record->file_size = File::size(getcwd()."\\sitemaps\\xml\\".$name);
+	$record->file_size = File::size(public_path()."/sitemaps/xml/".$name);
 	$record->save();
 }
 
