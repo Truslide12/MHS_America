@@ -28,7 +28,7 @@
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="panel-heading">Forgot Username</div>
+                <div class="panel-heading"><h1 class="h1ph">Forgot Username</h1></div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ URL::route('account-recovery-username-post') }}" method="POST" role="form">
                     {{ csrf_field() }}

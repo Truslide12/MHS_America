@@ -31,8 +31,8 @@ Contact Us
             <div class="panel panel-default get-in-touch" style="pointer-events:all;">
                 <div class="tab-content">
 					<div class="tab-pane active" id="noteform">
-						<h3 class="text-center">
-							Get in Touch</h3>
+						<h1 class=" h1h3 text-center">
+							Get in Touch</h1>
 				        <div class="form-group">
 				            <input type="text" class="form-control" id="txtnm" placeholder="Name" required>
 				        </div>

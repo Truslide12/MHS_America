@@ -15,7 +15,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>Account Help Center</h4>
+				<h1 class="h1h4">Account Help Center</h1>
 			</div>
 			<div class="panel-body">
 				<div class="rowderp">

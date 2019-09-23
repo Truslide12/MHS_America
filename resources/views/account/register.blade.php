@@ -23,7 +23,7 @@
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h2>Register a free account...</h2>
+				<h1 class="h1h2">Register a free account...</h1>
 			</div>
 			<div class="panel-body">
 				<div class="rowderp">

@@ -90,18 +90,19 @@
 
 
 
-
-	h2 {
+	h1 { color: #4a879e;font-family: Voltaire; }
+	h2, h1 {
 		font-weight: bold;
 		font-size: 3.2em;
 	}
+
 </style>
 <div class="container" id="company-title">
 	<div class="row white" style="text-align: center;">
 		<div class="col-md-12">
-			<h2 style="margin-top:50px;margin-bottom: 50px;">
+			<h1 style="margin-top:50px;margin-bottom: 50px;">
 				Promote Your Community
-			</h2>
+			</h1>
 			<p class="lead"></p>
 		</div>
 	</div>

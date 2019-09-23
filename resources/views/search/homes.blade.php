@@ -7,8 +7,9 @@
 
 @section('search-above')
 	<h2 class="text-center" style="margin-bottom:18px">
-		<img src="/img/text-home-search.png" alt="Mobile Home Search" class="img-responsive">
+		<h1 class="text-center h1">Mobile home search</h1>
 	</h2>
+
 @stop
 
 @section('search')

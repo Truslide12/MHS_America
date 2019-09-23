@@ -7,7 +7,7 @@
 
 @section('search-above')
 	<h2 class="text-center">
-		<img src="/img/text-space-search.png" alt="Mobile Home Space Search" class="img-responsive">
+		<h1 class="text-center h1">Mobile home space search</h1>
 	</h2>
 @stop
 

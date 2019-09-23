@@ -20,3 +20,8 @@ box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 10px 20px rgba(0, 0,
 
 body{background-color:#002;}
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{overflow:hidden;}
+
+.h1h3 {
+	font-family: 'Voltaire', 'Droid Sans', 'Open Sans', 'Dejavu Sans', Arial, sans-serif;
+	font-size: 1.8em;
+}
