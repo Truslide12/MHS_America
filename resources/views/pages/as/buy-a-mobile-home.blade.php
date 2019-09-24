@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @php
- $page_header = "For Home Buyers";
+ $page_header = "For Mobile Home Buyers";
   $meta_description = "MHS America is providing the best mobile home buying experience for our customers. On our platform you will find the most accurate information available to aid you in your home buying process.";
 @endphp
 
@@ -176,6 +176,10 @@ h3, h1 {
 				MHS America doesn't charge Home Buyers for any of our services. Whether you are using our platform as a guest or as a registered users there are no fee's.
 			</p>
 
+			<h3>The Most Accurate Information Available</h3>
+			<p>
+				MHS America is focused on providing potential home buyers with the most accurate information available. We believe our online platform should mirror the real world data. That is why we require all home listings to be reactivated before going being automatically dropped from the site. Never see a home that's off the market!
+			</p>
 
 		</div>
 		<div class="col-md-6 col-sm-12">

@@ -1,6 +1,7 @@
 @extends('layouts.page')
 
 @php
+$expand_title = true;
  $page_header = "Terms of Use";
   $meta_description = "MHS America Terms of Use";
 @endphp

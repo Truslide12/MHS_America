@@ -6,6 +6,7 @@ Contact Us
 @stop
 
 @php
+$expand_title = true;
  $page_header = "Contact Us";
    $meta_description = "MHS America is always listening. Let us know your comments, questions, or concerns through this online contact form.";
 @endphp

@@ -252,6 +252,11 @@ class Home extends LocatableModel {
 		return $this->hasOne(Subscription::class, 'subscription_target');
 	}
 
+	public function receipt()
+	{
+		return $this->hasOne(StorePurchase::class, 'product_target');
+	}
+
 	public function getFeatures()
 	{
 		//Supports 1-999..

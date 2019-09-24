@@ -2,6 +2,8 @@
 @use-slim-footer
 
 @php
+$expand_title = true;
+
  $page_header = "Log in";
   $meta_description = "Log in to MHS America to recieve all benifits our platform has to offer.";
 @endphp

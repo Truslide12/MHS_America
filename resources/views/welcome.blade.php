@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @use-navbar-divider
 
+@php
+$expand_title = true;
+@endphp
+
+
 @section('incls-head-early')
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/widgets.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">

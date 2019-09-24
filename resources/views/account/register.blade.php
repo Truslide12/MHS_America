@@ -2,6 +2,7 @@
 @use-slim-footer
 
 @php
+$expand_title = true;
  $page_header = "Register";
   $meta_description = "Create your free MHS America user account and start exploring the mobile home industry today for free.";
 @endphp

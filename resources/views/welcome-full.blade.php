@@ -4,6 +4,10 @@
   <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css">
 
+@php
+$expand_title = true;
+@endphp
+
 @stop
 @section('incls-head')
   <link rel="stylesheet" type="text/css" href="{{ URL::route('welcome') }}/js/jquery-jvectormap-1.2.2.css">

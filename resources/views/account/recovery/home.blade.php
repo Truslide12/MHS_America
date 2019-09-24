@@ -1,6 +1,7 @@
 @extends('account.layouts.help-center')
 
 @php
+$expand_title = true;
  $page_header = "Account Recovery";
   $meta_description = "Get help when you've lost access to you MHS America account.";
 @endphp

@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @php
- $page_header = "For Park Owners";
+ $page_header = "For Mobile Home Park Owners";
   $meta_description = "MHS America is offering new and exciting promotional tools for mobile home park owners nation-wide. Join today and promote your mobile home park community and vacant spaces.";
 @endphp
 
@@ -185,7 +185,7 @@ h3, h1 {
 			</p>
 			<h3>Sell Everything</h3>
 			<p>
-				Your community is likely filled with value that you want future tenets to know about. MHS America lets you get the word out on everything you offer. Paid profiles have access to a large database of Park Amenities that can be added to your profile so that people know exactly what they get. We know every park has something special, so be sure to advertise it!
+				Your community is likely filled with value that you want future tenants to know about. MHS America lets you get the word out on everything you offer. Paid profiles have access to a large database of Park Amenities that can be added to your profile so that people know exactly what they get. We know every park has something special, so be sure to advertise it!
 			</p>
 			<h3>Get Call's When you want them.</h3>
 			<p>

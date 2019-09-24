@@ -2,6 +2,8 @@
 @use-slim-footer
 
 @php
+$expand_title = true;
+
  $page_header = "Forgot Password";
   $meta_description = "Get help when you've lost your MHS America account password.";
 @endphp

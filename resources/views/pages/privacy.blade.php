@@ -1,6 +1,7 @@
 @extends('layouts.page')
 
 @php
+$expand_title = true;
  $page_header = "Privacy Policy";
   $meta_description = "MHS America Privacy Policy last updated 4/16/2019.";
 @endphp

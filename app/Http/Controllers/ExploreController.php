@@ -4,6 +4,7 @@ use DB;
 use App;
 use Config;
 use Input;
+use Redirect;
 use App\Models\Advertisement;
 use App\Models\Canvas;
 use App\Models\Geoname;
@@ -160,6 +161,17 @@ class ExploreController extends Pony {
 					->with('county', $countyobj)
 					->with('derp', $countyobj->cities()->pluck('places.id'));
 					//->with('canvas', Canvas::forState($stateobj->name));
+	}
+
+	public function getFirstCounty($state)
+	{
+		$stateobj = State::byAbbr($state);
+		if(!is_object($stateobj)) return App::abort(404);
+
+		$countyobj = County::byState($stateobj->id)->first();
+		if(!is_object($countyobj)) return App::abort(404);
+		
+		 return Redirect::to("explore/{$state}/{$countyobj->name}");
 	}
 
 	public function getCity($state, $county, $city)

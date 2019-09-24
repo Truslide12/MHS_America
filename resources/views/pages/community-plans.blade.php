@@ -6,7 +6,7 @@
 @stop
 
 @php
- $page_header = "Community Plans";
+ $page_header = "Mobile Home Park Profile Plans";
   $meta_description = "MHS America is offering new and exciting promotional tools for mobile home park owners and property managers nation-wide. Promote for free, or upgrade and advertise your vacant spaces.";
 @endphp
 

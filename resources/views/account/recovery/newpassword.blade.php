@@ -2,6 +2,8 @@
 @use-slim-footer
 
 @php
+$expand_title = true;
+
  $page_header = "New Password";
   $meta_description = "Reset your MHS America account password.";
 @endphp
