@@ -29,3 +29,27 @@
 	}
 
 }
+
+				.fs-ribbon {
+				  -webkit-transform: rotate(-45deg); 
+				     -moz-transform: rotate(-45deg); 
+				      -ms-transform: rotate(-45deg); 
+				       -o-transform: rotate(-45deg); 
+				          transform: rotate(-45deg); 
+				    border: 25px solid transparent;
+				    border-top: 25px solid #03bafc;
+				    position: absolute;
+				    bottom: 0px;
+				    right: -40px;
+				    padding: 0 10px;
+				    width: 120px;
+				    color: white;
+				    font-family: sans-serif;
+				    size: 11px;
+				    text-align: center;
+				}
+				.fs-ribbon .txt {
+				    position: absolute;
+				    top: -21px;
+				    left: -3px;
+				}​
