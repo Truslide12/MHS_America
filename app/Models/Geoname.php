@@ -306,6 +306,7 @@ class Geoname extends EloquentModel {
 		if($zip_format == 1) {
 
 			/* Zippopotamus */
+			$puerto_rico = false;
 			$url = "https://api.zippopotam.us/us/".$zip_matches[1];
 
 			$apireq = @file_get_contents($url);
@@ -313,6 +314,7 @@ class Geoname extends EloquentModel {
 			if($apireq === false && Str::startsWith($zip_matches[1], '00')) {
 				$url = "https://api.zippopotam.us/pr/".$zip_matches[1];
 				$apireq = @file_get_contents($url);
+				$puerto_rico = true;
 			}
 
 			$results = json_decode($apireq, true);
@@ -327,7 +329,7 @@ class Geoname extends EloquentModel {
 						'lat' => $place['latitude'],
 						'lon' => $place['longitude']
 					],
-					'title' => $place['place name'].', '.$place['state abbreviation'],
+					'title' => $place['place name'].', '.( $puerto_rico ? $place['country abbreviation'] : $place['state abbreviation'] ),
 					'valid' => true,
 					'zoom' => 13,
 					'pitch' => 0
