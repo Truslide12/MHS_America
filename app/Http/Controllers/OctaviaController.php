@@ -2,6 +2,7 @@
 
 use Auth;
 use DB;
+use Log;
 use Response;
 use URL;
 use Validator;
