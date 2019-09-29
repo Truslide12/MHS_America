@@ -2,7 +2,6 @@
 
 use Auth;
 use DB;
-use Request;
 use Response;
 use URL;
 use Validator;
@@ -12,6 +11,7 @@ use App\Models\Profile;
 use App\Models\Plan;
 use Input;
 use Mail;
+use Illuminate\Http\Request;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Illuminate\Database\Eloquent\Builder;
@@ -503,6 +503,8 @@ class OctaviaController extends Pony {
 			54.241.31.102
 			54.241.34.107
 		*/
+
+		Log::channel('slack')->warning('Webhook: '.$data['type'], ['object' => json_encode($object || [], JSON_PRETTY_PRINT)]);
 
 
 		if($data['object'] == 'event' && is_array($data['data']['object'])) {
