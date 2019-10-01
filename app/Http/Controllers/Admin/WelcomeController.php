@@ -343,11 +343,7 @@ class WelcomeController extends Pony {
 	public function timeIsBooked($time) {
 		$r = CommunitySpotlight::where('starts_at', '<=', $time )
 								->where('expires_at', '>=', $time)->first();
-		if( count($r) > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
+		return is_a($r, CommunitySpotlight::class);
 	}
 
 	public function getCommunitiesAmenities()
