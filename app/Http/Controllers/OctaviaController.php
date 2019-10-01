@@ -505,12 +505,12 @@ class OctaviaController extends Pony {
 			54.241.34.107
 		*/
 
-		Log::channel('slack')->warning('Webhook: '.$data['type'], ['object' => json_encode($object || [], JSON_PRETTY_PRINT)]);
-
-
 		if($data['object'] == 'event' && is_array($data['data']['object'])) {
 			$event_id = $data['id'];
 			$object = $data['data']['object'];
+
+			Log::channel('slack')->warning('Webhook: '.$data['type'], ['object' => json_encode($object || [], JSON_PRETTY_PRINT)]);
+
 			switch ($data['type']) {
 				case 'balance.available':
 					if ($object['object'] == 'balance') {
