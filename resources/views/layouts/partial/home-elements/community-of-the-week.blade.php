@@ -13,7 +13,7 @@
 				<div class="clearfix">
 				<strong><a href="/profile/{{ $community_of_week->id }}">{{ $community_of_week->title }}</a>@if(is_a($cow_city, \App\Models\Geoname::class) && is_a($cow_county, \App\Models\County::class) && is_a($cow_state, \App\Models\State::class)) <small><a href="{{ URL::route('city', array('state' => $cow_state->abbr, 'county' => $cow_county->name, 'city' => $cow_city->name)) }}">
 						{{ $cow_city->place_name }}, {{ strtoupper($cow_state->abbr) }}
-					</a></small></strong>
+					</a></small>@endif </strong>
 				</div>
 				{{ $community_of_week->description }}
 			</div>
