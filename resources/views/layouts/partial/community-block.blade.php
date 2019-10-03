@@ -12,7 +12,7 @@
 								@endif
 								<br>
 								<small>
-									{{ $community->geoname->place_name }}, {{ strtoupper($community->state->abbr) }}{{ $community->tagline ? ' | '.$community->tagline : '' }}
+									{{ $community->geoname->place_name }}, {{ strtoupper($community->state->abbr) }}
 								</small>
 							</h3>
 							<p>
