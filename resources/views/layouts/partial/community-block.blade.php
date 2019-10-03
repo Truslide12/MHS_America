@@ -29,7 +29,13 @@
 								{{ preg_replace('/(^| )A ([aeiouAEIOU])/', '$1An $2', 'A '.$community->company->title.' Property' ) }}@if(Input::get('ref', '') != 'company' && !isset($hide_company_links)) <small>(<a href="{{ URL::route('company-communities', array('company' => $community->company_id)) }}">View all communities</a>)</small> @endif @endif
 							</p>
 							<p class="properties">
-								<span class="tape bg-info text-info">{{ ($community->senior == 1) ? 'Senior' : 'All Ages' }}</span>
+								@if($community->age_type == 2)
+								<span class="tape bg-info text-info">Senior</span>
+								@elseif($community->age_type == 1)
+								<span class="tape bg-info text-info">55+</span>
+								@elseif($community->age_type === 0)
+								<span class="tape bg-info text-info">All Ages</span>
+								@endif
 							@foreach(\App\Models\Profile::listProperties() as $p_name => $property)
 								@if($community->$p_name == 1)
 								<span class="tape bordered text-info">
