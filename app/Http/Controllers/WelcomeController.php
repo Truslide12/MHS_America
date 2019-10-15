@@ -26,7 +26,7 @@ class WelcomeController extends Pony {
 				$community_of_week->cover = "nocover";
 			}
 		} else {
-			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', 'city' => false, 'state' => false ];
+			$community_of_week = (object)['title'=>'None', 'description'=>'We don\'t seem to have a mobile home park selected for Community of the Week. If you would like to see your community here, be sure to <a href=\'/page/community-plans\'>create a paid profile</a>. We select one community from our paid profiles each week to be featured here.', 'cover' => 'nocover', 'week'=>'', 'city' => false, 'state' => false, 'county' => false ];
 		}
 		
 		$community_of_week->week = date("m/d/y", strtotime('last monday', strtotime('tomorrow')));
