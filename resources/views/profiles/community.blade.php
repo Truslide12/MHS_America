@@ -381,7 +381,7 @@
 		</div>
 		@endif
 		<!-- Social Box -->
-		@if(count($homes) > 0)
+		@if($is_paid_profile && is_object($profile->social_media) && ( $profile->socialmedia("website") || $profile->socialmedia("facebook") || $profile->socialmedia("twitter") || $profile->socialmedia("linkedin") || $profile->socialmedia("instagram") || $profile->socialmedia("promovideo") ) )
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
