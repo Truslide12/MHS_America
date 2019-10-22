@@ -476,7 +476,7 @@
 	</div>
 	<div class="col-lg-4"  style="padding-top: 45px;">
 
-		<div class="" id="rightbox" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
+		<div id="rightbox" style="background: #fefefe;padding: 25px 20px;border:1px solid #dedede;border-radius:5px!important;position: relative;">
 
 			<div class="price_box">${{ number_format($home->price) }}</div>
 			@include('layouts.partial.errors')
@@ -484,19 +484,19 @@
 				{!! csrf_field() !!}
 
 			<strong style="font-size: 1.5em;">Contact the Seller</strong><br>
-			<div class="" style="margin-bottom: 3px;">
+			<div style="margin-bottom: 3px;">
 				<input name="name" id="name" type="text" placeholder="Your Name" class="form-control" value="{{Input::old('name')}}">
 			</div>
-			<div class="" style="margin-bottom: 3px;">
+			<div style="margin-bottom: 3px;">
 				<input name="phone" type="text" placeholder="Phone Number" class="form-control" value="{{Input::old('phone')}}">
 			</div>
-			<div class="" style="margin-bottom: 3px;">
+			<div style="margin-bottom: 3px;">
 				<input name="email" type="text" placeholder="Email Address" class="form-control" value="{{Input::old('email')}}">
 			</div>
-			<div class="" style="margin-bottom: 3px;">
+			<div style="margin-bottom: 3px;">
 				 <textarea name="message" placeholder="Message" class="form-control">{{Input::old('message')}}</textarea>
 			</div>
-			<div class="" style="margin-bottom: 3px;text-align: right;">
+			<div style="margin-bottom: 3px;text-align: right;">
 				<button class="btn btn-success">Send Message</button>
 			</div>
 			</form>
@@ -525,21 +525,21 @@
 
 			@if( property_exists($seller, 'company') )
 			@if($seller->company != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Company:</strong> {{ $seller->company }}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'name') )
 			@if($seller->name != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Name:</strong> {{ $seller->name }}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'phone') )
 			@if($seller->phone != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Phone:</strong> {!! fuzzy_phone($seller->phone) !!}
 			</div>
 			@endif
@@ -547,14 +547,14 @@
 
 			@if( property_exists($seller, 'phone2') )
 			@if($seller->phone != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone2) !!}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'phone3') )
 			@if($seller->phone != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong style="visibility: hidden;">Phone:</strong> {!! fuzzy_phone($seller->phone3) !!}
 			</div>
 			@endif
@@ -563,21 +563,21 @@
 
 			@if( property_exists($seller, 'addr') )
 			@if($seller->addr != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Address:</strong> {{ $seller->addr }}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'email') && 1==2 )
 			@if($seller->email != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Email:</strong> {!! str_replace("@", "<code>@</code>", $seller->email) !!}
 			</div>
 			@endif
 			@endif
 			@if( property_exists($seller, 'license') )
 			@if($seller->license != '')
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>License:</strong> {{ $seller->license }}
 			</div>
 			@endif
@@ -585,22 +585,33 @@
 			<hr>
 			<div class="home_info_box">
 			<strong style="font-size: 1.5em;">Home Information</strong><br>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<?php $serials = json_decode($home->serial, true);
+					$serials = (is_array($serials)) ? array_filter($serials) : [];
+				 ?>
+			@if(count($serials) > 0)
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
+				<strong>Serials:</strong>
+				@foreach($serials as $serial)
+				{{ $serial }}<br>
+				@endforeach
+			</div>
+			@endif
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Make:</strong> {{ $home->brand }} 
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Model:</strong> {{ $home->model }}
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Year:</strong> {{ $home->year }}
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Size:</strong> {{ $home->size() }}-Wide
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Bedrooms:</strong> {{ $home->beds }} 
 			</div>
-			<div class="" style="font-size: 1.2em;margin-bottom: 5px;">
+			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Baths:</strong> {{ $home->baths }} 
 			</div>
 			</div>
