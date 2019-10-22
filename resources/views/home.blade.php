@@ -592,7 +592,7 @@
 			<div style="font-size: 1.2em;margin-bottom: 5px;">
 				<strong>Serials:</strong>
 				@foreach($serials as $serial)
-				{{ $serial }}<br>
+				<br>{{ $serial }}
 				@endforeach
 			</div>
 			@endif
