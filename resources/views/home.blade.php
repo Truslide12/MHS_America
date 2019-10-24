@@ -236,8 +236,7 @@
 
 @media only screen and (max-width: 800px) {
   .cotw-img,
-  .price_box,
-  .home_info_box {
+  .price_box {
     display: none;
   }
 	.location_block {
