@@ -381,7 +381,7 @@
 		</div>
 		@endif
 		<!-- Social Box -->
-		@if($is_paid_profile && is_object(json_decode($profile->social_media, true)) && ( $profile->socialmedia("website") || $profile->socialmedia("facebook") || $profile->socialmedia("twitter") || $profile->socialmedia("linkedin") || $profile->socialmedia("instagram") || $profile->socialmedia("promovideo") ) )
+		@if($is_paid_profile && is_array(json_decode($profile->social_media, true)) && ( $profile->socialmedia("website") || $profile->socialmedia("facebook") || $profile->socialmedia("twitter") || $profile->socialmedia("linkedin") || $profile->socialmedia("instagram") || $profile->socialmedia("promovideo") ) )
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
