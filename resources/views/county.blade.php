@@ -37,7 +37,7 @@
 			<div class="page-header-dis">
 			  <a class="btn btn-default pull-right margin-r-wide" href="{{ URL::route('state', array('state' => $state->abbr)) }}">Back to {{ $state->title }}</a>
 			  <h1>
-			  	{{ $county->title }}@if($county->hidesuffix != 1)<span class="hidden-inline-xs"> {{ $state->suffix != '' ? ucwords($state->suffix) : 'County' }}</span>, {{ strtoupper($state->abbr) }} @endif
+			  	{{ $county->title }}@if($county->hidesuffix != 1) {{ $state->suffix != '' ? ucwords($state->suffix) : 'County' }}, {{ strtoupper($state->abbr) }} @endif
 			  </h1>
 			  <p class="text-muted">The local manufactured housing industry</p>
 			</div>
