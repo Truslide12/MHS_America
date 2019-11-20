@@ -52,13 +52,7 @@
 <div class="row white mb-0" id="loginform" style="padding: 10px 0px;">
 	<div class="col-md-6 col-md-offset-1">
 		<p>
-		We are excited to see you are interested in promoting your
-		community with Mobile Home Spaces Across America. Before we
-		can get started, we're going to need you to know who you are.
-		</p>
-		<p>
-		If you already have an account with us, you can login
-		using the form to the right.
+		Please login to create a home listing, or create a new login if you don't already have one.
 		</p>
 		@if(!$errors->count() > 0)
 		<button class="btn btn-primary pull-right" onclick="create()">Create Account</button>
