@@ -920,14 +920,6 @@ class EditorController extends Pony {
 		//return $imgPath;
 		$g = Image::make(public_path("imgstorage/".$imgPath));
 
-		$g->text('mhsamerica.com', ($g->width()-160), ($g->height()-25), function($font) {
-    			$font->file("fonts/Voltaire-Regular.ttf");
-    			$font->size(25);
-    			$font->color(array(255, 255, 255, .5));
-    			$font->align('left');
-    			$font->valign('top');
-			});
-
 		//$multiple = 2.5;
 		$multiple_width = (Input::get('imgW') == 0) ? 1 : (1200 / Input::get('imgW'));
 		$multiple_height = (Input::get('imgH') == 0) ? 1 : (420 / Input::get('imgH'));
@@ -953,6 +945,14 @@ class EditorController extends Pony {
 
 		//Crop that image to user's liking
 		$g->crop( intval(floor(Input::get('cropW')*$multiple)), intval(floor(Input::get('cropH')*$multiple)), intval(floor(Input::get('imgX1')*$multiple)), intval(floor(Input::get('imgY1')*$multiple)) );
+
+		$g->text('mhsamerica.com', ($g->width()-160), ($g->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
 
 		$g->save($newPath);
 
