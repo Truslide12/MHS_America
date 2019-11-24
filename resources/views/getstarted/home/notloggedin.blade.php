@@ -266,7 +266,7 @@
 		    				<li>You will do business under your employers business account.</li>
 		    				<li>You will be required to input an invitation code before joining.</li>
 		    				<li>Your invitation code can be aquired via the admin for this company.</li>
-\		    				<li>Your employer can be shown on your profile.</li>
+		    				<li>Your employer can be shown on your profile.</li>
 		    			</ul>
 		    			<br>
 		    			<strong>If your employer is not on MHS America:</strong>
