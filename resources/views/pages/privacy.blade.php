@@ -72,7 +72,7 @@ Privacy Policy <small>was last updated and is effective as of November 26, 2019.
 
 <p>Our site is not intended for anyone under 13 years of age. We are sensitive to privacy issues and look to protect your child's information. We also strive to be fully compliant with the Children's Online Privacy Protection Act (COPPA). We strongly encourage parents and guardians to regularly monitor and supervise their children's online activities. We do not knowingly collect Personally Identifiable Information from children under 13 on our Site without first obtaining verifiable consent from the child's parent or guardian.</p>
 
-<p><span class="font-style:italic;">NOTICE: 
+<p><span style="font-style:italic;">NOTICE: 
 Visit <a href="https://www.consumer.ftc.gov/articles/0031-protecting-your-childs-privacy-online" target="_blank">https://www.consumer.ftc.gov/articles/0031-protecting-your-childs-privacy-online</a> for information from the Federal Trade Commission about protecting children's privacy online.
 </span></p>
 
@@ -86,7 +86,7 @@ Visit <a href="https://www.consumer.ftc.gov/articles/0031-protecting-your-childs
 
 <p>We treat the data of everyone who comes to our Site in accordance with this privacy policy, whatever their &ldquo;Do Not Track&rdquo; setting.</p>
 
-<p><span class="font-style:italic;">See more at: <a href="https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/" target="_blank">https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/</a>
+<p><span style="font-style:italic;">See more at: <a href="https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/" target="_blank">https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/</a>
 </span></p>
 
 <h4>Fair Information Practices</h4>
