@@ -60,6 +60,7 @@
 					<option value="2">Spaces</option>
 					<option value="0">Communities</option>
 				</select>
+				{{ csrf_field() }}
 				<button class="btn-primary form-control moboxroll"><i class="fa fa-search"></i> Search MHS America</button>
 			<div class="search_spacer"></div>
 		</div></form>
