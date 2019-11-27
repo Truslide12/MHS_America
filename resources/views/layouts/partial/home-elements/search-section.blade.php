@@ -47,21 +47,22 @@
 			</div>
 			@endif
 		</div>
+		</form>
+		<form action="search" method="post">
 		<div class="mobox">
 			<div class="mobox_title">
 				<h2>Search Mobile Home Spaces Across America</h2>
 			</div>
 			<div class="search_spacer"></div>
-				<input type="text" name="" placeholder="Anywhere, USA" class="form-control moboxstop">
-				<select name="" class="form-control moboxdrop">
-					<option>Homes</option>
-					<option>Spaces</option>
-					<option>Communities</option>
+				<input type="text" name="input" placeholder="Anywhere, USA" class="form-control moboxstop">
+				<select name="mode" class="form-control moboxdrop">
+					<option value="1">Homes</option>
+					<option value="2">Spaces</option>
+					<option value="0">Communities</option>
 				</select>
 				<button class="btn-primary form-control moboxroll"><i class="fa fa-search"></i> Search MHS America</button>
 			<div class="search_spacer"></div>
-		</div>
-		</form>
+		</div></form>
 		<div class="mkr" style="display: none;"></div>
 		</div>
 	</div>
