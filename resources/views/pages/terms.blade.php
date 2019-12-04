@@ -3,15 +3,20 @@
 @php
 $expand_title = true;
  $page_header = "Terms of Use";
-  $meta_description = "MHS America Terms of Use";
+  $meta_description = "MHS America Terms of Use last updated 12/04/19.";
 @endphp
 
 @section('page-title')
-Terms and Conditions of Use <small>was last updated and is effective as of December 4, 2019.</small>
+Terms and Conditions of Use <small>was last updated December 4, 2019.</small>
 @stop
 
 @section('page-content')
-</>
+<p>Please read these Terms and Conditions (also called &ldquo;Agreement&rdquo; or &ldquo;Terms and Conditions&rdquo;) carefully before using www.MHSAmerica.com  (&ldquo;the Site&rdquo;) operated by MHS America, Inc. (&ldquo;us&rdquo;, &ldquo;we&rdquo;, or &ldquo;our&rdquo;). This Agreement sets forth the legally binding terms and conditions for your use of the Site.</p>
+
+<p>By accessing or using the website, web page, client portal, or mobile application (&ldquo;Site&rdquo;) in any manner, including, but not limited to, visiting or browsing the Site or contributing content or other materials to the Site, you agree to be bound by these Terms and Conditions. If you do not agree with any of these terms, do not use or access this Site.</p>
+
+<p>Our Site and all of the contents, features and functionality, are owned by us. Our licensors are protected by United States and international intellectual property or proprietary rights laws. We reserve the right to amend our Site, and any service or material we provide on our Site, in our sole discretion without notice. We will not be liable if, for any reason, all or any part of our Site is unavailable at any time or for any period.</p>
+
 
 <h4>Permission to Use</h4>
 

@@ -7,7 +7,7 @@ $expand_title = true;
 @endphp
 
 @section('page-title')
-Privacy Policy <small>was last updated and is effective as of November 26, 2019.</small>
+Privacy Policy <small>was last updated November 26, 2019.</small>
 @stop
 
 @section('page-content')
