@@ -17,11 +17,13 @@
 		<h2>Activate Business Features</h2>
 		<p>For the safety of yourself and MHS company partners, we ask for additional personal information to be associated with your account before unlocking access to business features.</p>
 	</div>
-	<div class="col-sm-8">
+	<div class="form-group col-md-12" id="error-screen" @if($errors) @else style="display: none;" @endif>
 		@if($errors)
 			{{ implode(', ', $errors->all()) }}
 		@endif
-		<form role="form" action="{{ URL::route('account-business-activate-post') }}" method="POST">
+	</div>
+	<div class="col-sm-8">
+		<form role="form" name="setupform" id="setupform" action="{{ URL::route('account-business-activate-post') }}" method="POST">
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="firstname">First Name</label>
@@ -44,17 +46,20 @@
 				<input type="text" class="form-control" id="addressB" name="addressb" value="{{ Input::old('addressb') }}">
 			</div>
 			<div class="row">
-				<div class="form-group col-md-8">
-					<label for="city">City</label>
-					<input type="text" class="form-control" id="city" name="city" value="{{ Input::old('city') }}">
-				</div>
 				<div class="form-group col-md-4">
 					<label for="state">State</label>
 					<select id="state" name="state" class="form-control">
+						<option value="0">Select State</option>
 						@foreach(\App\Models\State::orderBy('title', 'asc')->get() as $state)
-						<option value="{{ $state->id }}" @if(Input::old('state') == $state->id) selected @endif>{{ $state->title }}</option>
+						<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}" @if(Input::old('state') == $state->id) selected @endif>{{ $state->title }}</option>
 						@endforeach
 					</select>
+				</div>
+				<div class="form-group col-md-8">
+					<label for="city">City</label>
+				    <select class="form-control" id="city" name="city" disabled>
+				    	<option value="0" data-abbr="xx">First Select State</option>
+				    </select>
 				</div>
 			</div>
 			<div class="row">
@@ -78,4 +83,61 @@
 		<p>By submitting this form, you agree to abide by our <a href="#">Terms of Use</a> and <a href="#">Ethical Business Practices</a>.</p>
 	</div>
 </div>
+@stop
+
+@section('incls-body')
+<script src="/js/validationFD/validationFD.js"></script>
+<script type="text/javascript">
+
+	$('#state').change(function() {
+		var abbr = $('#state option:selected').data('abbr');
+
+		$('#city')
+			.prop('disabled', 'disabled')
+			.find('option')
+			.remove()
+			.end()
+			.append('<option>Select a city...</option>');
+
+		//$('#submitbtn').prop('disabled', 'disabled');
+
+		if(abbr != '') {
+			$.getJSON("/derpy/cities/" + abbr, function(result) {
+				var options = $("#city");
+				$.each(result, function() {
+					options.append($("<option/>").val(this.name).text(this.title));
+				});
+
+				console.log("???");
+				options.prop('disabled', false);
+			});
+		}
+	});
+
+  var validation = [  
+    ["firstname", "string|require"],
+    ["lastname", "string|require"],
+    ["email", "email|require"],
+    ["addressA", "string|require"],
+    ["addressB", "string|nullable|max:32"],
+    ["state", "numeric|require|min:1|max:50"],
+    ["city", "numeric|require|min:1"],
+    ["phone", "phone|require"],
+    //["agree-terms", "checkbox|require"],
+    //["agree-auth", "checkbox|require"],
+  ];
+
+  var messages = [
+  	//["agree-terms|checkbox", "You must agree to our terms."],
+  	//["agree-auth|checkbox", "You must confirm you are authorized."],
+  ];
+
+
+  setupform = new ValidationFD({
+  	form: "setupform",
+  	rules: validation,
+  	messages: messages
+  });
+
+</script>
 @stop
