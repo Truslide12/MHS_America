@@ -6,6 +6,8 @@ use Log;
 use Request;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -90,6 +92,13 @@ class Handler extends ExceptionHandler
             // Return a JSON response with the response array and status code
             return response()->json($response, $status);
         }
+
+        /** MISSING TOKEN ON SEARCH **/
+        if( $exception instanceof TokenMismatchException && $request->path() == "search" ){
+            /*GO HOME*/
+            return redirect('')->withInput();
+        }
+
 
         // Default to the parent class' implementation of handler
         return parent::render($request, $exception);

@@ -39,8 +39,11 @@ class SearchController extends Pony {
 
 	public function postMapView()
 	{
-		$input = Input::get('input', '92399');
-		//if ( !$input) { $input = '92399'; }
+		$input = Input::get('input');
+		if ( $input == null ) {
+            return redirect('')->withInput();
+		}
+
 		$pagination_params = array(
 			'search' => $input
 		);

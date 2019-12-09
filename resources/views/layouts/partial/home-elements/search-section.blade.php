@@ -11,7 +11,7 @@
 			</div>
 			<div class="search_spacer"></div>
 			<div class="sexy">
-				<input type="text" name="input" placeholder="Anywhere, USA" class="sexy-stop">
+				<input type="text" name="input" placeholder="Anywhere, USA" value="{{ old('input', '') }}" class="sexy-stop">
 				<div class="sexy-wrap"><select name="mode" class="sexy-drop">
 					<option value="1">Homes</option>
 					<option value="2">Spaces</option>
@@ -54,7 +54,7 @@
 				<h2>Search Mobile Home Spaces Across America</h2>
 			</div>
 			<div class="search_spacer"></div>
-				<input type="text" name="input" placeholder="Anywhere, USA" class="form-control moboxstop">
+				<input type="text" name="input" placeholder="Anywhere, USA" value="{{ old('input', '') }}" class="form-control moboxstop">
 				<select name="mode" class="form-control moboxdrop">
 					<option value="1">Homes</option>
 					<option value="2">Spaces</option>
