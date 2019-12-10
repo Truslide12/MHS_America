@@ -176,6 +176,12 @@
         </div>
         <div id="sideview" style="overflow-y: auto;overflow-x: visible;">
             <div id="resultlist">
+                <div id="resultsinfo">
+                    <div>
+                    <img src="img/loading.gif">
+                    </div>
+                    <div>Loading Results...</div>
+                </div>
                 <div class="list-group">
                 </div>
             </div>
@@ -335,7 +341,12 @@
                         }
                     }
                     Lyra.shuffle();
-                    map.getSource('results').setData(data);
+                    if( data.features.length <= 0 ) {
+                        $('#resultsinfo').html('No items found').show();
+                    } else {
+                        map.getSource('results').setData(data);
+                        $('#resultsinfo').html("xxx").hide();
+                    }
                     console.log("caching communities");
                     t_cache.communities = data;
                     maploading = false;

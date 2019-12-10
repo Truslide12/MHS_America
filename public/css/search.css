@@ -30,3 +30,19 @@ input.form-control.search-box:focus {
 @media (max-width:480px) {
 	#logo {height:60px}
 }
+
+#resultsinfo {
+	padding: 22px;border:1px solid silver;border-radius: 5px!important;background:snow;width: 100%;flex-direction: column;display: flex;align-items: center;justify-content: center;
+}
+
+#resultsinfo > div:first-of-type {
+	background: snow;margin: auto auto;
+}
+
+#resultsinfo > div:nth-of-type(2) {
+	font-weight: bold;color: #007bdf;margin:auto auto;
+}
+
+#resultsinfo img {
+	margin: auto auto;height:32px;
+}
