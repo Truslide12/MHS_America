@@ -52,7 +52,7 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
 #resultlist .list-group-item.with-pic{border-color:#099;}
 
 @media (max-width: 991px) {
-	#map-container{margin:0 -15px;}
+	#map-container{margin:0 0 0 -15px;}
 	#resultlist .list-group-item{grid-column:1 / span 2;}
 }
 
