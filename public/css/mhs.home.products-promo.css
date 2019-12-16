@@ -93,6 +93,7 @@
 		width: 100%;
 		margin-bottom: 12px;
 		font-family: Voltaire;
+		text-transform: capitalize;
 
 	}
 }
@@ -135,5 +136,5 @@ background-repeat: no-repeat !important;
 	font-size: 1em;
 }
 .btnbox .sidebox .innersidebox .promobtn {
-	width: 100%;font-size: 2em;margin-top:10px;font-family: Voltaire;
+	width: 100%;font-size: 2em;margin-top:10px;font-family: Voltaire;text-transform: capitalize;
 }

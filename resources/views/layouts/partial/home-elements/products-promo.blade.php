@@ -11,7 +11,7 @@
 							<li>List for up to 6 Months at $39.99</li>
 							<li>List your home in Minutes!</li>
 						</ul>
-						<a href="/page/home-plans" class="btn btn-success promobtn">Sell Home</a>
+						<a href="/page/home-plans" class="btn btn-success promobtn">Get started</a>
 					</div>
 				</div>
 				<div class="sidebox">
@@ -22,7 +22,7 @@
 							<li>Upgrade your profile for $149.99</li>
 							<li>Advertise your vacant spaces</li>
 						</ul>
-						<a href="/page/community-plans" class="btn btn-success promobtn">Promote Community</a>
+						<a href="/page/community-plans" class="btn btn-success promobtn">Get started for free</a>
 					</div>
 				</div>
 				<div class="outside-sidebox">
@@ -44,7 +44,7 @@
 	          <p>
 	            List a home anywhere in the US for up to 6 months at $39.99
 	          </p>
-	          <a href="/page/home-plans" class="btn btn-success">See More</a>
+	          <a href="/page/home-plans" class="btn btn-success">Get started</a>
 	        </div>
 	    	</div>
       	</div>
@@ -58,7 +58,7 @@
 	          <p>
 	            Promote your mobile home park for free. Upgrade for $149.99/year and advertise your vacant spaces.
 	          </p>
-	          <a href="/page/community-plans" class="btn btn-success">See More</a>
+	          <a href="/page/community-plans" class="btn btn-success">Get started for free</a>
 	        </div>
 	    	</div>
       	</div>
