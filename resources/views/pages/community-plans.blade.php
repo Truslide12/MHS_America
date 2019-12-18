@@ -21,7 +21,7 @@ Choose the plan that works for you..
 		<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
 		<div class="price">Free</div>
 		<p class="action-call">
-			Looking to promote your community for free? MHS America is the perfect place to promote your community and get noticed.
+			Looking to promote your community for free? MHS America is the perfect place to promote your community and get noticed. With a free community profile you will be included on our national map and search results. 
 		</p>
 		<div class="card">
 		  <div class="card-holder">
@@ -50,7 +50,7 @@ Choose the plan that works for you..
 		<div style="margin-bottom: 10px;background-color: #f2f2f2;padding: 20px;border-radius: 10px!important;border:1px solid #cdcfd3;">
 		<div class="price">Premium</div>
 		<p class="action-call">
-			Ready to up your game? Subscribe to our premium service and gain access to even more tools to promote your community.
+			Subscribe to our premium service and gain access to even more tools to promote your community. Add links to your company website and social media profiles, enter a community description, list your amenities, and more.
 		</p>
 		<div class="card" style="position: relative;">
 			<div class="stickerprice">$149<sup><small>99</small></sup></div>

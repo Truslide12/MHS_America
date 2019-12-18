@@ -54,9 +54,9 @@
 	          <div>
 				<i class="fa fa-users"></i>
 	          </div>
-	          <h3>Promote Mobile Home Park</h3>
+	          <h3>Promote Mobile Home Park Communities</h3>
 	          <p>
-	            Promote your mobile home park for free. Upgrade for $149.99/year and advertise your vacant spaces.
+	            Promote your mobile home park communities for free.<br><br> Upgrade for $149.99/year and advertise your vacant spaces.
 	          </p>
 	          <a href="/page/community-plans" class="btn btn-success">Get started for free</a>
 	        </div>
