@@ -1023,6 +1023,14 @@ class EditorController extends Pony {
 			//Resize image to size
 			$image->fit(1080, 810);
 
+			$image->text('mhsamerica.com', ($image->width()-160), ($image->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
+
 			$image->save('imgstorage/home_'.$name.'_crop.jpg');
 
 			$image->resize(280, 210);
@@ -1078,6 +1086,14 @@ class EditorController extends Pony {
 
 		//Crop that image to user's liking
 		$g->crop( intval(floor(Input::get('cropW')*$multiple)), intval(floor(Input::get('cropH')*$multiple)), intval(floor(Input::get('imgX1')*$multiple)), intval(floor(Input::get('imgY1')*$multiple)) );
+
+		$g->text('mhsamerica.com', ($g->width()-160), ($g->height()-25), function($font) {
+    			$font->file("fonts/Voltaire-Regular.ttf");
+    			$font->size(25);
+    			$font->color(array(255, 255, 255, .5));
+    			$font->align('left');
+    			$font->valign('top');
+			});
 
 		$g->save($newPath);
 
