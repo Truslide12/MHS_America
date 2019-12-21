@@ -20,7 +20,6 @@ Privacy Policy <small>was last updated November 26, 2019.</small>
 <ul>
 	<li>Personally Identifiable Information: information that is specific to you as an individual, like your name, postal address, e-mail address, or telephone number.</li>
 	<li>User Information: incorporates all of your Personally Identifiable Information and any other forms of information.</li>
-</li>
 </ul>
 
 <h4>Our Information Collection, Use, and Disclosure Practices</h4>
