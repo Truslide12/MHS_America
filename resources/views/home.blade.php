@@ -472,6 +472,21 @@
 			</div>
 		</div>
 
+		<hr>
+		<h3><i class="fa fa-map-marker"></i> Location Information</h3>
+		<div class="row build-opts" style="font-size: 1.4em;">
+			<div class="col-md-12">
+				<ul>
+					<li><strong>Community:</strong> {{ $home->profile->title }}</li>
+					<li><strong>Address:</strong> {{ $home->profile->address }}</li>
+					<li><strong></strong> SPC {{ $home->space_number }}</li>
+					<li><strong></strong> {{ $home->profile->city->place_name }} {{ strtoupper($home->profile->state->abbr) }}, {{ $home->profile->zipcode }}</li>
+
+				</ul>
+			</div>
+		</div>
+
+
 	</div>
 	<div class="col-lg-4"  style="padding-top: 45px;">
 
