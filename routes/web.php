@@ -82,6 +82,24 @@ Route::group(array('prefix' => 'luna'), function()
 
 		/***************************************************************************************************************
 
+		/***************************************************************************************************************
+		/* Administration: homes */
+		Route::get('homes/dashboard', array('uses' => 'Admin\HomeListingsController@getIndex', 'as' => 'admin-homes-dashboard'));
+		Route::get('homes/vouchers', array('uses' => 'Admin\HomeListingsController@getVouchers', 'as' => 'admin-homes-vouchers'));
+
+		Route::get('homes/vouchers/prune/{status}', array('uses' => 'Admin\HomeListingsController@PruneVouchers', 'as' => 'admin-homes-vouchers-prune'));
+
+
+		Route::post('homes/voucher/generate', array('uses' => 'Admin\HomeListingsController@postVouchers', 'as' => 'admin-homes-vouchers-post'));
+
+		Route::get('homes/voucher/{code}', array('uses' => 'Admin\HomeListingsController@getVoucher', 'as' => 'admin-homes-voucher'));
+
+		Route::post('homes/voucher/{code}', array('uses' => 'Admin\HomeListingsController@postVoucher', 'as' => 'admin-homes-voucher-post'));
+
+		Route::get('homes/settings', array('uses' => 'Admin\HomeListingsController@getSettings', 'as' => 'admin-homes-settings'));
+
+
+		/***************************************************************************************************************
 
 
 
@@ -236,6 +254,8 @@ Route::group(array('prefix' => 'luna'), function()
 		Route::get('{state}/region/{region}', array('uses' => 'ExploreController@getRegion', 'as' => 'region'));
 		/* Explore a county (GET) */
 		Route::get('{state}/{county}', array('uses' => 'ExploreController@getCounty', 'as' => 'county'));
+		Route::get('{state}/{county}/{item}', array('uses' => 'ExploreController@getCounty', 'as' => 'county-items'))->where('item', '(mobile-home-parks|mobile-homes-for-sale|mobile-home-spaces|mobile-home-professionals)');
+
 		/* Explore a city (GET) */
 		Route::get('{state}/{county}/{city}', array('uses' => 'ExploreController@getCity', 'as' => 'city'));
 
@@ -270,6 +290,7 @@ Route::group(array('prefix' => 'luna'), function()
 
 			/* Account business activate (GET) */
 			Route::get('business/activate', array('uses' => 'BusinessController@getActivate', 'as' => 'account-business-activate'));		
+
 
 			Route::group([], function()
 			{	
@@ -350,6 +371,10 @@ Route::group(array('prefix' => 'luna'), function()
 						Route::get('{company}/billing/manage-subscriptions/cancel/{source_id}', array('uses' => 'BusinessController@getCompanyBillingManageSubscriptionsCancelSubscription', 'as' => 'account-business-company-billing-manage-subscriptions-cancel-subscription'));
 						/* Account business manage billing (GET) */
 						Route::get('{company}/billing/manage-subscriptions/renew/{source_id}', array('uses' => 'BusinessController@getCompanyBillingManageSubscriptionsRenewSubscription', 'as' => 'account-business-company-billing-manage-subscriptions-renew-subscription'));
+
+						/* Account business manage billing > Promo Codes (GET) */
+						Route::get('{company}/billing/listing-voucher', array('uses' => 'BusinessController@getCompanyBillingListingVoucher', 'as' => 'account-business-company-billing-listingvoucher'));
+						Route::post('{company}/billing/listing-voucher', array('uses' => 'BusinessController@postCompanyBillingListingVoucher', 'as' => 'account-business-company-billing-listingvoucher-post'));
 
 						/* Account business manage billing (GET) */
 						Route::get('{company}/billing/manage-cards', array('uses' => 'BusinessController@getCompanyBillingManageCards', 'as' => 'account-business-company-billing-manage-cards'));
@@ -835,7 +860,7 @@ Route::group(array('prefix' => 'luna'), function()
 	Route::get('parkowner', function() { return redirect()->route('community-promo'); });
 
 	/* Homepage (GET) */
-	Route::get('promotest', array('uses' => 'WelcomeController@getPromo', 'as' => 'test-promo'));
+	Route::get('promotest/{slug}', array('uses' => 'WelcomeController@getPromo', 'as' => 'test-promo'));
 	
 
 

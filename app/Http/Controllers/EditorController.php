@@ -1208,11 +1208,19 @@ class EditorController extends Pony {
 			}
 			
 
+		    try {
+		        $home->save();
+				return json_encode(array("status"=>true, "home_id"=>$home->id));
+		    } catch (\Exception $e) {
+		    	return json_encode(array("status"=>false, "errors"=>$e->getMessage() ));
+		    }
+		    /*
 			if($home->save()) {
 				return json_encode(array("status"=>true, "home_id"=>$home->id));
 			} else {
 				return json_encode(array("status"=>fail));
 			}
+			*/
 
 		}
 
