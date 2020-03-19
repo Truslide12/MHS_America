@@ -45,6 +45,28 @@
                 </a>
               </li>
           @endif
+          <li class="@if(Request::is('luna/homes*')) active @endif">
+            <a href="{{ URL::route('admin-homes-dashboard') }}">
+              <i class="fa fa-home"></i><span class="link-title"> Home Listings</span>
+            </a>
+          </li>
+          @if(Request::is('luna/homes*'))
+              <li class="subitem @if(Request::is('luna/homes/dashboard')) subactive @endif">
+                <a href="{{ URL::route('admin-homes-dashboard') }}">
+                  <i class="fa fa-dashboard"></i> <span class="link-title"> Dashboard</span>
+                </a>
+              </li>
+              <li class="subitem @if(Request::is('luna/homes/voucher*')) subactive @endif">
+                <a href="{{ URL::route('admin-homes-vouchers') }}">
+                  <i class="fa fa-ticket"></i> <span class="link-title"> Listing Vouchers</span>
+                </a>
+              </li>
+              <li class="subitem @if(Request::is('luna/homes/settings')) subactive @endif">
+                <a href="{{ URL::route('admin-homes-settings') }}">
+                  <i class="fa fa-gears"></i> <span class="link-title"> Listing Settings</span>
+                </a>
+              </li>
+          @endif
           <li class="@if(Request::is('luna/customer*')) active @endif">
             <a href="{{ URL::route('admin-customers') }}">
               <i class="fa fa-user"></i><span class="link-title"> Manage Customers</span>

@@ -8,6 +8,7 @@ use Request;
 use Response;
 use Session;
 use Mail;
+use Carbon\Carbon;
 use App\User;
 use App\Models\Banner;
 use App\Models\Campaign;
@@ -16,6 +17,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\CompanyInvite;
 use App\Models\Geoname;
+use Geocoder;
 use App\Models\Profile;
 use App\Models\Permission;
 use App\Models\Subscription;
@@ -26,6 +28,9 @@ use App\Models\Role;
 use App\Models\ProfileUser;
 use App\Models\HomeUser;
 use App\Models\CompanyUser;
+use App\Models\ListingVoucher;
+use App\Models\Home;
+
 
 use App\Mail\CompanyInviteSent;
 
@@ -1520,5 +1525,408 @@ class BusinessController extends Pony {
 		return (object)["card"=>$card,"customer"=>$customer];
 	}
 
+
+	public function getCompanyBillingListingVoucher(Company $company)
+	{
+
+		return view('account.business.company.listing-voucher')
+					->with('company', $company)
+					->with('canvas', Canvas::getDefault());
+	}
+
+	public function postCompanyBillingListingVoucher(Company $company)
+	{
+		$data = (object)[];
+
+
+
+		if( Input::exists("step") ) {
+			switch( Input::get("step") ) {
+				case 'get-home':
+					$view = "listing-voucher";
+					$c = self::checkVoucherCode($company);
+					//$c->code = whateverii;
+					if( ! $c->status ) {
+							return view('account.business.company.'.$view)
+							->with('company', $company)
+							->with('data', null)
+							->withErrors( $c->errors )
+							->with('canvas', Canvas::getDefault());
+					}
+
+					$data = self::redeemHome();
+
+					if( $data->status ) {
+						$c->code->status = 2;
+						$c->code->home_id = $data->home->id;
+						$c->code->save();
+						return redirect()->route('editor-edithome', array('home' => $data->home->id ));
+					} else {
+
+						$data->step = "check-code";
+						$data->product = (object)[
+							'title' => 'MHS Home Listing',
+							'product_term' => 180,
+							'price' => '$0.00',
+							'savings' => '$39.99',
+							'terms' => 'This home listing term is for 180 days and begins the day this voucher code is processed. After 90 days you will be required to reactivate the listing status.',
+						];
+						//dd(Input::all());
+
+						$data->code = (object)[ 'code' => Input::get('voucher-code') ];
+						return view('account.business.company.'.$view)
+							->with('company', $company)
+							->with('data', $data)
+							->withErrors( $data->errors )
+							->with('canvas', Canvas::getDefault());
+					}
+				break;
+				case 'check-code':
+					$view = "listing-voucher";
+					$data = self::checkVoucherCode($company);
+					if( $data->status ) {
+						$data->step = "check-code";
+					} else {
+
+							return view('account.business.company.'.$view)
+							->with('company', $company)
+							->with('data', null)
+							->withErrors( $data->errors )
+							->with('canvas', Canvas::getDefault());
+					}
+				break;
+				default:
+					$view = "listing-voucher";
+					$data = null;
+				break;
+			}
+		} else {
+			$view = "listing-voucher";
+			$data = null;
+		}
+
+		//dd( Input::all() );
+		return view('account.business.company.'.$view)
+					->with('company', $company)
+					->with('data', $data)
+					->with('canvas', Canvas::getDefault());
+	}
+
+	private function checkVoucherCode(Company $company = null) {
+
+		$validator = Validator::make(Request::all(),
+			array(
+				'voucher-code' => 'required',
+			)
+		);
+
+		if($validator->fails()) {
+			return (object)['status' => false, 'errors' => $validator];
+		}
+
+
+		$code = ListingVoucher::byCode( Input::get('voucher-code') );
+
+		if ( $code instanceof ListingVoucher ) {
+
+			/* stat check */
+			if( $code->status > 1 || $code->satus == -1 ) { /* (-1)Expired (0)Available (1)Pending (2)Claimed (3)Invalid */
+				switch ($code->status) {
+					case 2: $err = "This voucher code has already been claimed."; break;
+					case -1: $err = "This voucher code has expired."; break;
+					/**case 4: $err = "This voucher code has been recalled."; break;**/
+					default: $err = "This voucher code has an error. Contact support. "; break;
+				}
+				return (object)['status'=>false, 'errors'=>[$err]];
+			}
+			/* exp check */
+			if( strtotime($code->expires_at) < strtotime(now()) ) {
+				$code->status = -1;
+				$code->save();
+				return (object)['status'=>false, 'errors'=>['This voucher code has expired']];
+			}
+			/* this even urs dogg */
+			if( $code->company_id > 0 ) {
+				if( $company ) {
+					if( $company->id != $code->company_id ) {
+						return (object)['status'=>false, 'errors'=>['This voucher code was issued to another account.']];
+					}
+				} else {
+					return false; /*should break if this case occurs.. 
+									but only will occur if we call without 
+									paramater.. optional paramater..
+									*/
+				}
+				
+			}
+			/* One day we will need to detect product type and act 
+			   accordingly.. for now paul says only needs to work 
+			   for homes.
+			 */
+			$product = (object)[
+				'title' => 'MHS Home Listing',
+				'product_term' => 180,
+				'price' => '$0.00',
+				'savings' => '$39.99',
+				'terms' => 'This home listing term is for 180 days and begins the day this voucher code is processed. After 90 days you will be required to reactivate the listing status.',
+			];
+			return (object)['status'=>true, 'code'=>$code, 'product'=>$product];
+
+		} else {
+			return (object)['status'=>false, 'errors'=>['The voucher code you entered ('.Input::get('voucher-code').') could not be found.']];
+		}
+		
+	}
+
+	protected function loadOrCreateStripeCustomer($company_id, $email = null) {
+		$target_company = Company::where('id', $company_id)->first();
+
+		if( $target_company->stripe_customer_id == null ) {
+
+			if( $email == null ) {
+				//email wasnt passed to function, check if its in POST
+				$validator = Validator::make(Input::all(),
+					array(
+						'billing-email' => 'required|email',
+					)
+				);
+
+				if($validator->fails()) {
+					dd( Input::all() );
+				} else {
+					$email = Input::get('billing-email');
+				}
+
+			}
+
+			//create new stripe customer..
+
+			$scustomer = \Stripe\Customer::create([
+				"email" => $email,
+
+				"metadata" => [
+				  "CompanyID" => $target_company->id,
+				  "CompanyName" => $target_company->title,
+				  "IsPersonalAccount" => $target_company->is_personal,
+				]
+			]);
+
+			if( $scustomer->email && $scustomer->id)
+
+			//store business email in companies
+			$target_company->stripe_customer_email = $scustomer->email;
+			//store customer id (cus_) in 
+			$target_company->stripe_customer_id = $scustomer->id;
+
+			$target_company->save();
+
+			$customer 	= \Stripe\Customer::retrieve($target_company->stripe_customer_id);
+		} else {
+			$customer 	= \Stripe\Customer::retrieve($target_company->stripe_customer_id);
+		}
+
+		return (object)["customer"=>$customer];
+	}
+
+	private function redeemHome()
+	{
+
+		if ( Input::get('community-id') ) {
+			$rules = array(
+				'account-id' => 'required|numeric|min:1',
+				'community-id' => 'required|numeric',
+				'space-number' => 'required'
+			);
+		} else {
+			$rules = array(
+				'account-id' => 'required|numeric|min:1',
+				'space-number' => 'required',
+
+				'new-community-name' => 'required|between:5,32',
+				'park_type' => 'required|between:0,2',
+				'park_address' => 'required|between:5,48',
+				'park_state' => 'required|exists:states,id',
+				'park_city' => 'required|exists:places,id,state_id,'.intval(Input::get('park_state', 0)),
+				'park_zip' => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
+
+			);
+		}
+
+
+		$validator = Validator::make(Request::all(), $rules);
+
+		if($validator->fails()) {
+			return (object)['status' => false, 'errors' => $validator];
+		}
+
+		$company = Auth::user()->companies->where('id', Input::get('account-id'))->first();
+		if ( ! $company ) {
+			dd("error: failed to load requested company");
+		}
+
+
+		$company_id = $company->id;
+
+		$community = Profile::where('id', Input::get('community-id'))->first();
+		if( !is_a($community, Profile::class) ) {
+			//Enter ghost park...
+			//dd($community);
+			$pd = (object)[
+				'title' 	=> Input::get('new-community-name'),
+				'phone' 	=> null,
+				'fax' 		=> null,
+				'address' 	=> Input::get('park_address'),
+				'zipcode' 	=> Input::get('park_zip'),
+				'state_id' 	=> Input::get('park_state'),
+				'county_id' => 0, /*need to find how to retrieve this..*/
+				'city_id' 	=> Input::get('park_city'),
+				'age_type' 	=> Input::get('park_type')
+			];
+			$community = self::createGhostPark($company_id, $pd);
+			if ( $community->status == false ) {
+				return (object)['status' => false, 'errors' => $community->error];
+			} else {
+				$community = $community->profile;
+			}
+		} else {
+			//Pull up that community..
+			//$community = Profile::where('id', Input::get('community-id'))->firstOrFail();
+		}
+		//Now add the home...
+		$space_number = Input::get('space-number');
+
+		$space_check = Home::where('space_number', $space_number)
+							->where('profile_id', $community->id)
+							->whereIn('status', [1,4,5])
+							->where('exp_date', '>', Carbon::now() )
+							->get();
+
+		//dd($space_check->count());
+		if ( $space_check->count() > 0 ) {
+			return (object)['status' => false, 'errors' => 'There is already a home listed at this address.'];
+		}
+
+		//create the home...
+		$new_home = new Home;
+		$new_home->city_id 			= $community->city_id;
+		$new_home->title 			= 'Home for Sale';
+		$new_home->profile_id 		= $community->id;	/*of community?*/
+		$new_home->status 			= 1;
+		$new_home->beds 			= 0;
+		$new_home->baths	 		= 0;
+		$new_home->dims_json 		= json_encode([]);
+		$new_home->seller_info 		= json_encode([]);
+		$new_home->address 			= $community->address;
+		$new_home->zipcode 			= $community->zipcode;
+		$new_home->state_id 		= $community->state_id;
+		$new_home->description 		= "";
+		$new_home->location 		= $community->location;
+		$new_home->space_number 	= $space_number;
+		$new_home->specs 			= '{"siding":"0","skirting":"0","roof_angle":"0","roof_mat":"0","windows":"0","wall_thickness":"0","kitchen_floor":"0","floor":"0","setup":"0","strap":"0"}';
+		$new_home->seller_info 		= '{"company":null,"name":null,"phone":null,"addr":null,"email":null,"license":null,"promo":{"type":"0","param1":null,"param2":null,"param3":null}}';
+		$new_home->photos 			= "{}";
+		$new_home->features 		= "[]";
+		$new_home->appliances 		= "[]";
+		$new_home->serial 			= "[null,null,null]";
+		$new_home->decal 			= "[null,null,null]";
+		$new_home->hud 				= "[null,null,null]";
+		$new_home->exp_date 		=  Carbon::now()->addDays(180);
+		$new_home->company_id 		= $company_id;
+
+
+		//$0 Charge entry to stripe..
+		/*
+		* not doing this shit..
+		*
+
+
+		$customer = self::loadOrCreateStripeCustomer($company_id, null);
+		$company = Company::where('id', $company_id)->first();
+
+			$charge = \Stripe\Charge::create([
+						  'amount' => 0,
+						  'currency' => 'usd',
+						  "customer" => $company->stripe_customer_id,
+						  "metadata" => [
+				  				"StoreItemID" => 2,
+				  				"StoreItemName" => 'Home Listing',
+				  		  ]
+						]);
+		if ( $charge->status == "succeeded" ) {
+
+		*/
+
+		if ( $new_home->save() ) {
+
+				return (object)[
+					"status" => true,
+					"home" => $new_home
+				];
+
+		} else{
+			Input::flash();
+			return (object)['status' => false, 'errors' => 'something'];
+		}
+
+	}
+
+
+
+	public function createGhostPark($company_id, $data)
+	{
+		$profile = new Profile;
+		$profile->title 		= $data->title;
+		$profile->type 			= 'Community';
+		$profile->phone 		= $data->phone;
+		$profile->fax 			= $data->fax;
+		$profile->address 		= $data->address;
+		$profile->zipcode 		= $data->zipcode;
+		$profile->state_id 		= $data->state_id;
+		$profile->county_id 	= $data->county_id;
+		$profile->city_id 		= $data->city_id;
+		$profile->company_id 	= 0;//$company_id;
+		$profile->age_type 		= $data->age_type;
+
+
+			//check if this address is taken??
+			$addr_available = false;
+			$addr_available = Profile::where('address', Input::get('park_address'))
+										->where('zipcode', Input::get('park_zip'))
+										->where('state_id', Input::get('park_state'))
+										->where('city_id', Input::get('park_city'))->first();
+		//dd($addr_available);
+		if($addr_available) {
+			return (object)[
+				"status" => false,
+				"error" => "There is already a park at this address"
+			];
+		}
+
+		if (!$profile->save()) {
+			return (object)[
+				"status" => false,
+				"error" => "Failed to save new profile"
+			];
+		}
+
+		$geocode = Geocoder::address(
+			$data->address,
+			'',
+			$data->city_id,
+			$data->state_id,
+			$data->zipcode,
+			$profile
+		);
+		$geocoding = $geocode['success'];
+
+		if($geocoding) {
+			$profile->update($geocode['data']);
+		}
+
+		return (object)[
+			"status" => $geocoding,
+			"profile" => $profile
+		];
+	}
 
 }

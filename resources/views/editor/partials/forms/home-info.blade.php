@@ -54,7 +54,7 @@
 							</label>
 						</div>
 						<div class="col-sm-4 col-md-3">
-							<select name="size" id="homeSize" id="homeSize" class="form-control">
+							<select name="size" id="homeSize" id="homeSize" class="form-control" onchange="showfields(this.value)">
 								<option value="0"@if(Input::old('size', 0) == 0) selected="selected"@endif>--Select--</option>
 								<option value="1"@if(Input::old('size', 0) == 1) selected="selected"@endif>Single-Wide</option>
 								<option value="2"@if(Input::old('size', 0) == 2) selected="selected"@endif>Double-Wide</option>
@@ -135,105 +135,73 @@
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							<span style="color:red;">*</span> Serial #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="serial1" id="serial1" class="form-control">
 							<!--<a href="">Add Decal/Label #</a> | <a href="">Add HCD/HUD #</a>-->
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('sn2')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t" id="sn2" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							Serial #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="serial2" id="serial2" class="form-control">
-							<small class="pull-right" onclick="hidefield('sn2')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('sn3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t"  id="sn3" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							Serial #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="serial3" id="serial3" class="form-control">
-							<small class="pull-right" onclick="hidefield('sn3')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							Decal #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="decal1" id="decal1" class="form-control">
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('dc2')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t"  id="dc2" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							Decal #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="decal2" id="decal2" class="form-control">
-							<small class="pull-right" onclick="hidefield('dc2')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('dc3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t"  id="dc3" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							Decal #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="decal3" id="decal3" class="form-control">
-							<small class="pull-right" onclick="hidefield('dc3')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
-
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							HCD/HUD #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="hud1" id="hud1" class="form-control">
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('hd2')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t"  id="hd2" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							HCD/HUD #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="hud2" id="hud2" class="form-control">
-							<small class="pull-right" onclick="hidefield('hd2')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
-							<span onclick="showfield('hd3')" class="fa fa-plus-circle" style="cursor: pointer;color:green;font-size: 25px;"></span>
 						</div>
 					</div>
 					<div class="form-group margin-t padding-t"  id="hd3" style="display: none;">
 						<label class="col-sm-2 col-md-2 control-label text-right">
 							HCD/HUD #
 						</label>
-						<div class="col-sm-9 col-md-7">
+						<div class="col-sm-10 col-md-8">
 							<input type="text" name="hud3" id="hud3" class="form-control">
-							<small class="pull-right" onclick="hidefield('hd3')"><a>remove</a></small>
-						</div>
-						<div class="col-sm-1 col-md-1">
-
 						</div>
 					</div>
 
@@ -293,7 +261,7 @@
 					$("#hud2").val(		Editor.home.hud[1]);
 					$("#hud3").val(		Editor.home.hud[2]);
 
-
+					showfields(Editor.home.size);
 
 					Editor.settings.preValidation = true;
 					Editor.ValidateHomeInfo();
@@ -432,5 +400,16 @@
 			function hidefield(id){
 				$("#"+id).hide();
 			}
-			
+			function showfields(amount) {
+				console.log("home has ", amount, "ids..");
+				for ( i = 2; i <= 3; i++ ) {
+				  if( i <= amount ) {
+				  	//console.log("show: #serial"+i+", #decal"+i+", #hud"+i);
+					$("#sn"+i+", #dc"+i+", #hd"+i).show();
+				  } else {
+				  	//console.log("hide: #serial"+i+", #decal"+i+", #hud"+i);
+					$("#sn"+i+", #dc"+i+", #hd"+i).hide();
+				  }
+				}
+			}
 		</script>

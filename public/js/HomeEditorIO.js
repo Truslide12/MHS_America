@@ -67,8 +67,8 @@ HomeEditorIO.prototype.MoveNext = function(step) {
   if ( ! step ) {
     var v = this.CollectValues();
     if ( v ) {
-      this.SaveChanges( $("#current_step").val() );
-      newPony(this.GetNextPage( $("#current_step").val() ));
+      this.SaveChanges( $("#current_step").val(), "next" );
+      //newPony(this.GetNextPage( $("#current_step").val() ));
     }
   } else {
     newPony(step);
@@ -79,8 +79,8 @@ HomeEditorIO.prototype.MoveBack = function(step) {
   if ( ! step ) {
     var v = this.CollectValues();
     if ( v ) {
-      this.SaveChanges( $("#current_step").val() );
-      newPony(this.GetPrevPage( $("#current_step").val() ));
+      this.SaveChanges( $("#current_step").val(), "prev" );
+      //newPony(this.GetPrevPage( $("#current_step").val() ));
     }
   } else {
     newPony(step);
@@ -940,7 +940,7 @@ HomeEditorIO.prototype.updateStatus = function() {
   $("#status-field").html(s);
 }
 
-HomeEditorIO.prototype.SaveChanges = function(input_step) {
+HomeEditorIO.prototype.SaveChanges = function(input_step, direction) {
 
 
             //Save Data..
@@ -977,9 +977,15 @@ HomeEditorIO.prototype.SaveChanges = function(input_step) {
                     */
 
                     that.updateStatus();
+                    if( direction == "prev" ) {
+                      newPony(that.GetPrevPage( input_step ));
+                    } else {
+                      newPony(that.GetNextPage( input_step ));
+                    }
                   }, 500);
                 } else if ( e.status === false ) {
                   //error occured
+                  alert("An unexpected error has occured. Please contact technical support.\r\n\r\n"+e.errors);
                   setTimeout(function(){
                   $("#save_status").html("<b>Data Save Failed..</b>").delay(1000).fadeOut();
                   }, 500);

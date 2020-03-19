@@ -93,6 +93,7 @@
 
 			<hr>
 
+				<a href="billing/listing-voucher" class="btn btn-xs btn-default no-padding-t"><small>Claim Promo Code</small></a>
 				<a href="billing/manage-cards" class="btn btn-xs btn-default no-padding-t"><small>Manage Cards</small></a>
 				<a href="billing/manage-subscriptions" class="btn btn-xs btn-default no-padding-t"><small>Manage Subscriptions</small></a>
 			</div>
