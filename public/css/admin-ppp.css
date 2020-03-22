@@ -30,6 +30,26 @@
             color: #31708f!important;
     	}
 
+        .otherteam{
+            background-color:rgb(245, 247, 217);
+            border-bottom-color:rgb(241, 239, 188);
+            color: #8a8867!important;
+
+        }
+
+        .yellowteam{
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404!important;
+
+        }
+
+        .silverteam{
+            color: #383d41!important;
+            background-color: #e2e3e5;
+            border-color: #d6d8db;
+        }
+
     	.wholabel {
     		padding: 5px 10px;
     		border-radius: 5px;
