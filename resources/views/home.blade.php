@@ -348,7 +348,7 @@
 			<h3 style="width: 100%;background:#0163b2;color:snow;padding: 7px;margin: 0px;">{{ $home->title }} <span class="mobo_price">${{ number_format($home->price) }}<span></h3>
 			<div class="cotw-under" style="width: 100%;background:#005499;color:snow;padding: 7px;font-size: 0.8em;margin:0px;">
 				<div style="width: 100%;">
-					<h4 class="location_block" style="">{{ $home->profile->title }} SPC {{$home->space_number}} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
+					<h4 class="location_block" style=""><a href="/profile/{{ $home->profile_id }}">{{ $home->profile->title }}</a>, Spc {{$home->space_number}} | {{ $home->city->place_name }}, {{ strtoupper($home->state->abbr) }} {{ $home->zipcode }}</h4>
 				</div>
 			</div>
 
@@ -401,7 +401,13 @@
 </div><div class="row about texture-1" style="padding:20px 0 40px;">
 	<div class="col-lg-8" style="padding: 0px 40px;">
 		<h3><i class="fa fa-home"></i> About this home</h3>
-		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">{{ $home->year }} {{ $home->brand }} {{ $home->model }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
+		<div style="text-align: right;color:#4a879e;font-size: 1.25em;margin-bottom: 7px;">
+			@if($profile->age_type == 2)
+			Senior &middot; 
+			@elseif($profile->age_type == 1)
+			55+ &middot; 
+			@endif
+			{{ $home->year }} {{ $home->brand }} {{ $home->model }} &middot; {{ $home->beds }} Bedrooms &middot; {{ $home->baths }} Baths &middot; <span style="white-space: nowrap;">Approx {{ $home->square_footage }} sqft</span></div>
 		
 		<p style="font-size: 1.4em;">
 			{{ $home->description }}
