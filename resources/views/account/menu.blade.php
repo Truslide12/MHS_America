@@ -127,7 +127,7 @@
 		<h4>Get Started</h4>
 		<ul class="list-group">
 			<li class="list-group-item">
-				<h4 class="list-group-item-heading"><a href="page/home-plans">List a Home</a></h4>
+				<h4 class="list-group-item-heading"><a href="/page/home-plans">List a Home</a></h4>
 			</li>
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading"><a href="/page/community-plans">Register a Community</a></h4>
