@@ -7,6 +7,7 @@ use Config;
 
 use App\Models\Geoname;
 use App\Models\State;
+use App\Models\County;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
