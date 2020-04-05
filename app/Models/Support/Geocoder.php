@@ -153,6 +153,9 @@ class Geocoder {
 										$profile_array['county_id'] = $newcounty->id;
 										$profile_array['state_id'] = $newCityItem->state_id;
 
+										//Update the city to county pivot table for Explore
+										\DB::table('city_county')->insert(['city_id' => $newCityItem->id, $newcounty->id]);
+
 										$city_updated = true;
 									}else{
 										$geocoding_works = false;
