@@ -144,7 +144,7 @@ class Geocoder {
 									$newCityItem->loc_type = 2;
 									$newCityItem->intptlat = $firstCity['location']['lat'];
 									$newCityItem->intptlon = $firstCity['location']['lng'];
-									$newCityItem->geometry = \DB::raw('ST_Multi(ST_Buffer(ST_SetSRID(ST_MakePoint('.$firstCity['location']['lng'].', '.$firstCity['location']['lat'].'), 4326), 0.01))');
+									$newCityItem->geometry = \DB::raw('ST_Multi(ST_Buffer(ST_SetSRID(ST_MakePoint('.$firstCity['location']['lng'].', '.$firstCity['location']['lat'].'), 4269), 0.01))');
 									$newCityItem->center_point = \DB::raw('ST_SetSRID(ST_MakePoint('.$firstCity['location']['lng'].', '.$firstCity['location']['lat'].'), 4326)');
 									$newCityItem->objectid = 0;
 
