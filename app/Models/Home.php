@@ -27,9 +27,9 @@ class Home extends LocatableModel {
 			["id" => 1,  "name" => "dining",			"title" => "Dining Room"],
 			["id" => 2,  "name" => "office",			"title" => "Office"],
 			["id" => 3,  "name" => "swamp",				"title" => "Swamp Cooler"],
-			["id" => 4,  "name" => "central",			"title" => "Centeral Air"],
+			["id" => 4,  "name" => "central",			"title" => "Central Air"],
 			["id" => 5,  "name" => "island",			"title" => "Island"],
-			["id" => 6,  "name" => "glamor_bath",		"title" => "Glamor Bath"],
+			["id" => 6,  "name" => "glamor_bath",		"title" => "Glamour Bath"],
 			["id" => 7,  "name" => "jacuzzi",			"title" => "Jacuzzi"],
 			["id" => 8,  "name" => "walk_in",			"title" => "Walk-in Closet"],
 			["id" => 9,  "name" => "dormer",			"title" => "Dormer"],
@@ -40,7 +40,7 @@ class Home extends LocatableModel {
 			["id" => 14, "name" => "shed",				"title" => "Shed"],
 			["id" => 15, "name" => "carport",			"title" => "Carport"],
 			["id" => 16, "name" => "garage",			"title" => "Garage"],
-			["id" => 17, "name" => "fridge",			"title" => "Refridgerator"],
+			["id" => 17, "name" => "fridge",			"title" => "Refrigerator"],
 			["id" => 18, "name" => "stove",				"title" => "Range/Stove"],
 			["id" => 19, "name" => "oven",				"title" => "Oven"],
 			["id" => 20, "name" => "microwave",			"title" => "Microwave"],
@@ -68,7 +68,7 @@ class Home extends LocatableModel {
 	private static $materialsList = [
 		0  => "Unknown",
 		1  => "Metal",
-		2  => "Hardiboard",
+		2  => "Hardie Board",
 		3  => "Wood",
 		4  => "Block",
 		5  => "Composite",
@@ -121,7 +121,7 @@ class Home extends LocatableModel {
 		'Double',
 		'Triple',
 		'Quadruple',
-		'Daaaaamn'
+		'' // Daaaaaamn
 	);
 
 	public function size()
