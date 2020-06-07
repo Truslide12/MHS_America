@@ -7,6 +7,7 @@ use Config;
 
 use App\Models\Geoname;
 use App\Models\State;
+use App\Models\County;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
@@ -90,7 +91,84 @@ class Geocoder {
 							}
 						}
 					}else{
-						$geocoding_works = false;
+						//Add city to database
+
+						/* START FETCHING CITY (LIKELY A NEIGHBORHOOD REALLY) FROM GEOCOD.IO */
+						$city_request = $firstItem['address_components']['city'].', '.$firstItem['address_components']['state'].' '.$firstItem['address_components']['zip'];
+
+						/* API call */
+						$city_req = Config::get('services.geocodio.geocode').'?q='.urlencode($city_request).'&fields=census&api_key='.Config::get('services.geocodio.api_key');
+						$city_res = json_decode(file_get_contents($city_req), true);
+						
+						/* Log errors and skip processing if necessary */
+						if(is_array($city_res) && array_key_exists('error', $city_res)) {
+							$geocoding_works = false;
+							Log::channel('slack_geocodio_critical')->critical($city_res['error']);
+						}
+						
+						/* FINISH FETCHING CITY */
+
+						if ($geocoding_works && is_array($city_res)) {
+							/* Log warnings */
+							if(array_key_exists('_warnings', $city_res)) {
+								Log::channel('slack_geocodio_warning')->warning('Warnings', $city_res['_warnings']);
+							}
+
+							/* PROCESS NEW CITY */
+							if (array_key_exists('results', $city_res) && count($city_res['results']) > 0) {
+								$firstCity = $city_res['results'][0];
+
+								$county_name = trim(str_replace(['Municipality', 'Borough', 'Parish', 'County', 'Census Area'], '', $firstCity['address_components']['county']));
+								$newcounty = County::where('countyshapes.name', 'LIKE', str_ident($county_name))->where('state_id', $newstate->id)->first();
+
+								if (is_object($newcounty) && is_a($newcounty, Eloquent::class)) {
+									//Dummy FIPS in the correct county
+									$fips_code = $newcounty->admin_fips.'99';
+									/* Check for census data - alt source for FIPS codes */
+									//if (array_key_exists('fields', $firstItem) && array_key_exists('census', $firstItem['fields']) && is_array($firstItem['fields']['census']) && count($firstItem['fields']['census']) > 0) {
+									//	$firstCensusItem = array_values($firstItem['fields']['census'])[0];
+									//
+									//}
+
+
+									$newCityItem = new Geoname;
+									$newCityItem->place_name = $firstCity['address_components']['city'];
+									$newCityItem->name = str_ident($firstCity['address_components']['city']);
+									$newCityItem->state_id = $newstate->id;
+									$newCityItem->fips_code = $fips_code;
+									$newCityItem->placens = '';
+									$newCityItem->awater = 0;
+									$newCityItem->aland = 0;
+									$newCityItem->classfp = 'U4';
+									$newCityItem->funcstat = 'S';
+									$newCityItem->loc_type = 2;
+									$newCityItem->intptlat = $firstCity['location']['lat'];
+									$newCityItem->intptlon = $firstCity['location']['lng'];
+									$newCityItem->geometry = \DB::raw('ST_Multi(ST_Buffer(ST_SetSRID(ST_MakePoint('.$firstCity['location']['lng'].', '.$firstCity['location']['lat'].'), 4269), 0.01))');
+									$newCityItem->center_point = \DB::raw('ST_SetSRID(ST_MakePoint('.$firstCity['location']['lng'].', '.$firstCity['location']['lat'].'), 4326)');
+									$newCityItem->objectid = 0;
+
+									if ($newCityItem->save()) {
+										$profile_array['city_id'] = $newCityItem->id;
+										$profile_array['county_id'] = $newcounty->id;
+										$profile_array['state_id'] = $newCityItem->state_id;
+
+										//Update the city to county pivot table for Explore
+										\DB::table('city_county')->insert(['city_id' => $newCityItem->id, $newcounty->id]);
+
+										$city_updated = true;
+									}else{
+										$geocoding_works = false;
+									}
+
+								}else{
+									$geocoding_works = false;
+								}
+							}
+						}else{
+							$geocoding_works = false;
+						}
+						
 					}
 				}else{
 					$geocoding_works = false;
