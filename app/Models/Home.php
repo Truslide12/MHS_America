@@ -153,11 +153,26 @@ class Home extends LocatableModel {
 				return (object)["color" => "#f5b32f", "text" => 'PENDING'];
 			break;
 			default:
-				if ( $this->type == 1 ) {
-					return (object)["color" => "#03bafc", "text" => 'FOR RENT'];
-				} else {
-					return (object)["color" => " #03bafc", "text" => 'FOR SALE'];
+				$d = json_decode($this->seller_info);
+				switch( $d->promo->type) {
+					case 1:
+						return (object)["color" => " #32a852;font-size:0.75em;font-weight:bold", "text" => 'OPEN HOUSE'];
+					break;
+					case 2:
+						return (object)["color" => " #d42906;font-size:0.9em;font-weight:bold", "text" => 'PRICE DROP'];
+					break;
+					case 3:
+						return (object)["color" => " #0647d4", "text" => 'UPDATED'];
+					break;
+					default:
+						if ( $this->type == 1 ) {
+							return (object)["color" => "#03bafc", "text" => 'FOR RENT'];
+						} else {
+							return (object)["color" => " #03bafc", "text" => 'FOR SALE'];
+						}
+					break;
 				}
+
 			break;
 		}
 	}
