@@ -934,6 +934,14 @@ Route::group(array('prefix' => 'luna'), function()
 
 	});
 
+	Route::group(array('prefix' => 'getstarted/dealer'), function()
+	{
+		Route::get('', array('uses' => 'GetStartedDealerController@getIndex', 'as' => 'getstarted-dealer'));
+		Route::post('', array('uses' => 'GetStartedDealerController@postUserForm', 'as' => 'getstarted-dealer-post'));
+		Route::get('free', array('uses' => 'GetStartedDealerController@getFree', 'as' => 'getstarted-dealer-free'));
+		Route::post('checkgeo', array('uses' => 'GetStartedCommunityController@postCheckGeo', 'as' => 'getstarted-dealer-checkgeo'));
+	});
+
 	/* Support System
 	*/
 	Route::group(array('prefix' => 'support'), function()

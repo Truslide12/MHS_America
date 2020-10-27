@@ -71,7 +71,7 @@ class DerpyController extends Pony {
 		}
 
 		$data = Company::where('id',  $company_id)->where('name',  $company_name)->select('id', 'name', 'title', 'street_addr', 'street_addr2', 'zip_code', 'claimed', 'phone', 'fax', 'state_id', 'city_id', 'lockout' )->get()->toArray();
-		$data[0]['city_name'] = Geoname::where('id', $data[0]['city_id'] )->pluck('place_name')->first();;
+		$data[0]['city_name'] = Geoname::where('id', $data[0]['city_id'] )->pluck('place_name')->first();
 		$data[0]['state_name'] = State::where('id', $data[0]['state_id'])->pluck('title')->first();
 
 		return Response::json($data, 200);

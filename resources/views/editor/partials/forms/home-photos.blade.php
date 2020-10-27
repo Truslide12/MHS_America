@@ -276,7 +276,7 @@
 				photo_uploading_flag = true;
 				setTimeout(function(){
 					if ( photo_uploading_flag ) {
-						$("#photo_slot_text").html("<center>Image seems no not be uploding..<br> please refresh the page and try again</center>");
+						$("#photo_slot_text").html("<center>Uploading slowly..<br>Just give it 30 seconds.</center>");
 					}
 				}, 5000);
 				//$("#save_status").html("<b>Data Loaded..</b>").delay(1000).fadeOut();
@@ -285,7 +285,7 @@
 			function bindUpload(r) {
 				photo_uploading_flag = false;
 				croppic.reset();
-				$("#save_status, #photo_slot_text").html("<b>Photo Uploaded..</b>").delay(1000).fadeOut();
+				$("#save_status, #photo_slot_text").html("<b>Photo Uploaded</b>").delay(1000).fadeOut();
 				photodata.photos[active_slot] = r.slug
 				update_select( $("#photo-tag").val() );
 				paint_photo_demo(active_slot);
