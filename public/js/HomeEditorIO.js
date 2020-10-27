@@ -298,69 +298,63 @@ HomeEditorIO.prototype.ValidateHomeInfo = function() {
 HomeEditorIO.prototype.ValidateHomeSpecs = function() {
   var entered = 0;
   var rejected = 0;
-  if ( $("#siding").val() > 0 ) {
+  if ( $("#siding").val() > -1 ) {
     this.home.specs.siding = $("#siding").val();
     this.AcceptInput("#siding");
     entered++;
   }
 
-  if ( $("#skirting").val() > 0 ) {
+  if ( $("#skirting").val() > -1 ) {
     this.home.specs.skirting = $("#skirting").val();
     this.AcceptInput("#skirting");
     entered++;
   }
 
-  if ( $("#roof_angle").val() > 0 ) {
+  if ( $("#roof_angle").val() > -1 ) {
     this.home.specs.roof_angle = $("#roof_angle").val();
     this.AcceptInput("#roof_angle");
     entered++;
   }
 
-  if ( $("#roof_mat").val() > 0 ) {
+  if ( $("#roof_mat").val() > -1 ) {
     this.home.specs.roof_mat = $("#roof_mat").val();
     this.AcceptInput("#roof_mat");
     entered++;
   }
 
-  if ( $("#windows").val() > 0 ) {
+  if ( $("#windows").val() > -1 ) {
     this.home.specs.windows = $("#windows").val();
     this.AcceptInput("#windows");
     entered++;
   }
 
-  if ( $("#wall_thickness").val() > 0 ) {
+  if ( $("#wall_thickness").val() > -1 ) {
     this.home.specs.wall_thickness = $("#wall_thickness").val();
     this.AcceptInput("#wall_thickness");
     entered++;
   }
 
-  if ( $("#kitchen_floor").val() > 0 ) {
+  if ( $("#kitchen_floor").val() > -1 ) {
     this.home.specs.kitchen_floor = $("#kitchen_floor").val();
     this.AcceptInput("#kitchen_floor");
     entered++;
   }
 
-  if ( $("#floor").val() > 0 ) {
+  if ( $("#floor").val() > -1 ) {
     this.home.specs.floor = $("#floor").val();
     this.AcceptInput("#floor");
     entered++;
   }
 
-  if ( $("#setup").val() > 0 ) {
+  if ( $("#setup").val() > -1 ) {
     this.home.specs.setup = $("#setup").val();
     this.AcceptInput("#setup");
     entered++;
   }
 
-  if ( $("#strap").val() > 0 ) {
+  if ( $("#strap").val() > -1 ) {
     this.home.specs.strap = $("#strap").val();
     this.AcceptInput("#strap");
-    entered++;
-  }
-
-  if ( true ) {
-    this.home.specs.strap = $("#num_of_offsets").val();
-    this.AcceptInput("#num_of_offsets");
     entered++;
   }
 
@@ -380,7 +374,9 @@ HomeEditorIO.prototype.ValidateHomeSpecs = function() {
         this.RejectInput("#width"+i, "nan");
         rejected++;
       } else {
-        complex_dims[i].width = parseInt($("#width"+i).val());
+        var uw = parseInt($("#width"+i).val());
+        if( isNaN(uw) ) { uw = 0; }
+        complex_dims[i].width = uw;
         this.AcceptInput("#width"+i);
       }
     }
@@ -391,7 +387,9 @@ HomeEditorIO.prototype.ValidateHomeSpecs = function() {
         this.RejectInput("#length"+i, "nan");
         rejected++;
       } else {
-        complex_dims[i].length = parseInt($("#length"+i).val());
+        var ul = parseInt($("#length"+i).val());
+        if( isNaN(ul) ) { ul = 0; }
+        complex_dims[i].length = ul;
         this.AcceptInput("#length"+i);
       }
     }
@@ -402,8 +400,10 @@ HomeEditorIO.prototype.ValidateHomeSpecs = function() {
         this.RejectInput("#sqft"+i, "nan");
         rejected++;
       } else {
-        total_sqft += parseInt($("#sqft"+i).val());
-        complex_dims[i].square_footage = parseInt($("#sqft"+i).val());
+        var us = parseInt($("#sqft"+i).val());
+        if( isNaN(us) ) { us = 0; }
+        total_sqft += us;
+        complex_dims[i].square_footage = us;
         this.AcceptInput("#sqft"+i);
       }
     }

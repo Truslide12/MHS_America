@@ -1,4 +1,4 @@
-		<div class="well" id="preform" style="padding: 0px 100px;text-align: center;">
+		<div class="well" id="preform" style="padding: 0px 100px;text-align: center;display: none;">
 			<h2>How would you like to build your home profile?</h2>
 				<div class="margin-t" style="border:0px solid red;text-align: center;">
 					<button type="submit" id="wizard" class="btn btn-lg btn-primary cta pull-center" onmouseover="showhelper(this.id);" onmouseout="hidehelper(this.id);" onclick="showfrm();"><i class="fa fa-magic"></i> Use Setup Wizard</button>
@@ -21,7 +21,11 @@
 
 			function init(){
 
-
+if ( Editor.home.serial[0] ) { 
+goedit();
+} else {
+	$("#preform").fadeIn();
+}
 			}
 
 			function showfrm(){
