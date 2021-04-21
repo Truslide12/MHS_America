@@ -73,14 +73,14 @@
 					</div>
 					<div class="col-md-3">
 						@for($x = 0; $x < ceil(count($business_hours)/2); $x++ )<p>
-							<span class="pull-right"><em>{{ $business_hours[$x]['open'] ? $business_hours[$x]['start'] .' - '. $business_hours[$x]['end'] : 'Closed' }}</em></span>
 							{{ $business_hours[$x]['title'] }}
+							<span class="pull-right"><em>{{ $business_hours[$x]['open'] ? $business_hours[$x]['start'] .' - '. $business_hours[$x]['end'] : 'Closed' }}</em></span>
 						</p>@endfor
 					</div>
 					<div class="col-md-3">
 						@for($x = ceil(count($business_hours)/2); $x < count($business_hours); $x++ )<p>
-							<span class="pull-right"><em>{{ $business_hours[$x]['open'] ? $business_hours[$x]['start'] .' - '. $business_hours[$x]['end'] : 'Closed' }}</em></span>
 							{{ $business_hours[$x]['title'] }}
+							<span class="pull-right"><em>{{ $business_hours[$x]['open'] ? $business_hours[$x]['start'] .' - '. $business_hours[$x]['end'] : 'Closed' }}</em></span>
 						</p>@endfor
 					</div>
 					@endif
@@ -91,28 +91,28 @@
 					</div>
 					<div class="col-md-{{ $extent_contact }}">
 						@if($profile->office_tagline)<p>
-							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
 							Managed by
+							<span class="pull-right"><em>{{$profile->company->title}}</em></span>
 						</p>@elseif($profile->office_manager != '')<p>
-							<span class="pull-right"><em>{{$profile->office_manager}}</em></span>
 							Office Manager
+							<span class="pull-right"><em>{{$profile->office_manager}}</em></span>
 						</p>@endif
 						@if($profile->phone != '')<p>
-							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->phone,') ',3,0),'-',8,0) }}</em></span>
 							Phone
+							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->phone,') ',3,0),'-',8,0) }}</em></span>
 						</p>@endif
 						@if( $is_paid_profile && $profile->fax != '')<p>
-							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 							Fax
+							<span class="pull-right"><em>{{ '('.substr_replace(substr_replace($profile->fax,') ',3,0),'-',8,0) }}</em></span>
 						</p>@endif
 						@if(1==2)
 						@if( $is_paid_profile && $profile->office_email != '')<p>
-							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
 							Email
+							<span class="pull-right"><em>{{$profile->office_email}}</em></span>
 						</p>@endif
 						<p>
-							<span class="pull-right"><em><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></em></span>
 							Email
+							<span class="pull-right"><em><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></em></span>
 						</p>@endif
 					</div>
 					@endif
