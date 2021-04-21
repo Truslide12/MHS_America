@@ -231,7 +231,6 @@ th {
   .navbar {
     display: none;
   }
-  .btn {font-family:'Noto Sans', 'Droid Sans', Arial, sans-serif;}
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
@@ -2699,6 +2698,7 @@ select[multiple].form-group-lg .form-control {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-family:'Noto Sans', 'Droid Sans', Arial, sans-serif;
 }
 .btn:focus,
 .btn:active:focus,
