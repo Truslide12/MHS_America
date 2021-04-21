@@ -1,6 +1,6 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
-  font-family: sans-serif;
+  font-family: serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -254,6 +254,27 @@ th {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+@font-face {
+  font-family: 'Financier Text';
+  src: url('../fonts/financier-text-web-regular.eot');
+  src: url('../fonts/financier-text-web-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/financier-text-web-regular.woff2') format('woff2'), url('../fonts/financier-text-web-regular.woff') format('woff');
+  font-weight: 300 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Financier Text';
+  src: url('../fonts/financier-text-web-regular-italic.eot');
+  src: url('../fonts/financier-text-web-regular-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/financier-text-web-regular-italic.woff2') format('woff2'), url('../fonts/financier-text-web-regular-italic.woff') format('woff');
+  font-weight: 300 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Financier Display';
+  src: url('../fonts/financier-display-web-medium.eot');
+  src: url('../fonts/financier-display-web-medium.eot?#iefix') format('embedded-opentype'), url('../fonts/financier-display-web-medium.woff2') format('woff2'), url('../fonts/financier-display-web-medium.woff') format('woff');
+  font-weight: 400 700;
+  font-style: normal;
 }
 .glyphicon {
   position: relative;
@@ -879,7 +900,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+  font-family: "Financier Text", Garamond, serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -5281,7 +5302,7 @@ a.list-group-item-danger.active:focus {
   z-index: 1070;
   display: block;
   visibility: visible;
-  font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+  /* font-family: "Noto Sans", Helvetica, Arial, sans-serif; */
   font-size: 12px;
   font-weight: normal;
   line-height: 1.4;
@@ -6271,11 +6292,11 @@ h4,
 h5,
 h6,
 .panel h3 small {
-  font-family: 'Lato', 'Droid Sans', 'Open Sans', 'Dejavu Sans', Arial, sans-serif;
+  font-family: "Financier Display", Garamond, serif;
 }
 .panel h3,
 #footer-wrapper .lead {
-  font-family: 'Voltaire', 'Droid Sans', 'Open Sans', 'Dejavu Sans', Arial, sans-serif;
+  font-family: "Financier Display", Garamond, serif;
 }
 #footer-wrapper .lead {
   font-size: 1.48em;
