@@ -125,7 +125,7 @@
 			float: left;
 		}
 		.about h3 {
-			font-family: Lato;
+			font-family: "Financier Text", Garamond, serif;
 			color: #147aba;
 			font-weight: 900;
 			border-bottom: 1px solid #147aba;
@@ -209,6 +209,7 @@
 		.location_block {
 			width: 45%;
 			display: inline-block;
+			font-family: "Financier Text", Garamond, serif;
 		}
  
  		.mobo_price {

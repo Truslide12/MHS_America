@@ -13,7 +13,7 @@
 #map-container.closed{grid-template-columns:auto;}
 #map-container.closed #resultlist{display:none;}
 
-h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sans',Arial,sans-serif;} 
+h2,.panel-flat strong{} 
 
 .panel-flat {border-bottom-width:4px;}
 .panel-flat strong {font-size:120%;}
@@ -21,7 +21,7 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
 
 .texture-1 {background: #141414 url(../img/skewed-print-white.png) center top repeat;}
 .texture-2 {background: #141414 url(../img/skewed-print-black.png) center top repeat;}
-
+#searchBox,#filterbox{font-family:'Noto Sans', Arial, sans-serif;}
 .coralbg {
     background-color: #FA396F;
 } 
@@ -170,8 +170,8 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
     z-index: 500;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 61%, rgba(0,0,0,0.4) 89%, rgba(0,0,0,0) 100%);
+    font-family:"Financier Display", Garamond, serif;
     color: snow;
-    font-family: Voltaire;
     width: 100%;
     padding: 3px 5px;
 }
@@ -187,7 +187,7 @@ h2,.panel-flat strong{font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sa
     font-weight: bold;
     z-index: 10;
     color: rgba(255,255,255,1);
-    font-family: Lato;
+    font-family: "Financier Text", Garamond, serif;
     padding: auto auto;
     display: flex;
     align-items: center;
