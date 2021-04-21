@@ -37,8 +37,8 @@ a.btn.tape{font-size:1em !important;}
 .photo-block .label {display:block;margin-top:5px;}
 
 .home-block {border:1px solid #dedede;padding:10px 15px;margin:0 0 15px;color:#333;}
-.home-title {margin:0;font-family:'Voltaire','Droid Sans','Open Sans','Dejavu Sans',Arial,sans-serif;}
-.home-block .text-muted{font-family:'Lato','Droid Sans','Open Sans','Dejavu Sans',Arial,sans-serif;}
+.home-title {margin:0;font-family:"Financier Display", Garamond, serif;}
+.home-block .text-muted{font-family:"Financier Text", Garamond, serif;}
 .home-block .pull-left {margin-left:10px;}
 .home-block .pull-right {margin-right:10px;}
 .home-block .label {display:block;margin-top:5px;}

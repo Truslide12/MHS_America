@@ -2,7 +2,7 @@
 	text-align: center;font-size: 1.5em;padding-bottom: 1in;
 }
 .mission-and-goals-section h2 {
-	color:#005499;font-family:Lato;margin-bottom: 15px;
+	color:#005499;margin-bottom: 15px;
 }
 .counter {
 	font-size: 3.5em;
@@ -41,7 +41,7 @@
 
 .goals-title {
 	font-size: 1.33em;
-	font-family: Voltaire;
+	font-family: "Financier Display", Garamond, serif;
 	color: #4a879e;
 	text-decoration: none;
 	text-transform: capitalize;

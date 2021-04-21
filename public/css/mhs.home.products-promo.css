@@ -12,7 +12,7 @@
 	font-size: 2em;
 	margin: 0 0;
 	font-style: italic;
-	font-family:  "Lato", Helvetica, Arial, sans-serif;;
+	font-family: "Financier Display", Garamond, serif;
 	color: snow;
 	padding: 10px 50px;
 }
@@ -77,11 +77,11 @@
 		color: #005499;
 	}
 	.tri_sectional div p {
-		font-family: Lato;
+		font-family: "Financier Display", Garamond, serif;
 		font-size: 2em;
 	}
 	.tri_sectional div h3 {
-		font-family: Voltaire;
+		font-family: "Financier Display", Garamond, serif;
 		font-size: 3em;
 		padding: 0;
 		color: #4a879e;
@@ -92,14 +92,14 @@
 		padding: 0;
 		width: 100%;
 		margin-bottom: 12px;
-		font-family: Voltaire;
+		font-family: "Financier Display", Garamond, serif;
 		text-transform: capitalize;
 
 	}
 }
 
 li {
-	font-family:  "Lato", Helvetica, Arial, sans-serif!important;
+	/* font-family:  "Lato", Helvetica, Arial, sans-serif!important; */
 	font-size: 1.1em;
 }
 
@@ -136,5 +136,5 @@ background-repeat: no-repeat !important;
 	font-size: 1em;
 }
 .btnbox .sidebox .innersidebox .promobtn {
-	width: 100%;font-size: 2em;margin-top:10px;font-family: Voltaire;text-transform: capitalize;
+	width: 100%;font-size: 2em;margin-top:10px;font-family: "Financier Display", Garamond, serif;text-transform: capitalize;
 }
