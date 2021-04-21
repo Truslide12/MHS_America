@@ -899,7 +899,7 @@ html {
 }
 body {
   font-family: "Financier Text", Garamond, serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.42857143;
   color: #333333;
   background-color: #fff;
@@ -6202,16 +6202,16 @@ td.visible-print {
 }
 body {
   background: #143366;
-  font-size: 11px;
+  font-size: 14px;
 }
 @media (min-width: 768px) {
   body {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 @media (min-width: 992px) {
   body {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 h1 {
@@ -6258,10 +6258,10 @@ h6 {
 .list-group-item.active {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
 }
-.input-group-btn,
+/* .input-group-btn,
 .btn {
   font-size: 1em;
-}
+} */
 .input-lg + .input-group-btn .btn-lg {
   box-sizing: border-box;
   height: 46px;
