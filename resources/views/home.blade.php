@@ -99,7 +99,6 @@
 
 		}
 		.about {
-			font-family: Voltaire;
 			color: #545454;
 		}
 		.about ul {
