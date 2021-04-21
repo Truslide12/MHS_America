@@ -231,6 +231,7 @@ th {
   .navbar {
     display: none;
   }
+  .btn {font-family:'Noto Sans', 'Droid Sans', Arial, sans-serif;}
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
