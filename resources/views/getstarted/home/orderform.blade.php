@@ -59,197 +59,269 @@
 <form id="orderform" class="form-horizontal" action="{{ URL::route('getstarted-home') }}/checkgeo" method="POST" role="form">
 {{ csrf_field() }}
 
-			<div class="panel heavypad">
-				<!-- <div class="panel-heading">Current Location</div> -->
-				<div class="panel-body">
+<div class="panel heavypad">
+	<!-- <div class="panel-heading">Current Location</div> -->
+	<div class="panel-body">
 
-					@include('layouts.partial.errors')
-
-
-	            <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
-	               <h4 style="font-weight: bold;font-size: 1.5em;"> <i class="fa fa-briefcase"></i> Choose a Business Account</h4>
-	            </div>
-
-			      			<div class="col-xs-12 col-sm-11" style="padding: 15px;">
-								<div class="form-group">
-									<label class="control-label col-md-3">Business Account</label>
-									<div class="col-md-9">
-										<select name="company-id" id="company-id" class="form-control">
-											<option value="0">Select a Business Account..</option>
-											@foreach( $companies as $company )
-											<option value="{{$company->id}}">{{$company->title}} @if($company->is_personal) (Personal Business Account) @endif</option>
-	            							@endforeach
-										</select>
-									</div>
-								</div>
-							</div>
+		@include('layouts.partial.errors')
 
 
-	            <div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
+		<div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
+			<h4 style="font-weight: bold;font-size: 1.5em;"> <i class="fa fa-briefcase"></i> Choose a Business Account</h4>
+		</div>
 
-					<nav>
-					<ul class="nav nav-tabs">
-					  <li class="col-md-6 active" role="presentation" id="incomm">
-	               		<a class="commtab" onclick="setMode(1)"> <i class="fa fa-users"></i> In a Community</a>
-					  </li>
-					  <li class="col-md-6" role="presentation" id="notincomm">
-	               		<a class="commtab" onclick="setMode(2)"> <i class="fa fa-user"></i> Not in a Community.</a>
-					  </li>
-					</ul>
-					</nav>
-
-	            </div>
-
-
-	            <!--Community Form -->
-
-			      			<div class="col-xs-12 col-sm-11" id="commform" style="padding: 15px;">
-
-
-		  <div class="form-group" style="margin-top: 48px;">
-		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Hint:</label>
-		    <div class="col-sm-9" style="font-size: .9em;">
-		      Please select the community this home belongs to. If you cannot find your home's community, you can select the option to add your community to MHS.
-		    </div>
-		  </div>
-
-		  <div class="form-group" style="margin-top: 48px;">
-		    <label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Community</label>
-		    <div class="col-sm-9 companyname">
-		      <input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="community-name" name="community-name" placeholder="Community Name">
-		    <a class="btn btn-default companybtn" style="display: none;" onclick="fff();">Create</a>
-		    </div>
-		  </div>
-		  <div class="form-group">
-			<div class="alert alert-danger" id="name-alert-box" role="alert" style="width: 80%;margin-left: 14%;display: none;">
-				<button type="button" class="close" data-dismiss="alert" data-label="Close"><span aria-hidden="true">&times;</span></button>
-				<span id="name-warning"></span>
-			</div>
-		  </div>
-		  <div class="thoughtform" style="display: none;">
-		  						<div class="form-group">
-									<label class="control-label col-md-3"></label>
-									<div class="col-md-9">
-										<div class="col-md-4">
-											<img src="/img/nophoto.png" id="cimage" style="width: 100%;">
-										</div>
-										<div class="col-md-8" style="font-size: .8em;">
-											<div class="form-group">
-												<label class="col-md-4" style="text-align: right;">Community</label>
-												<div class="col-md-8">
-													<span id="cname"></span><br>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-4" style="text-align: right;">Address</label>
-												<div class="col-md-8">
-													<span id="caddr"></span><br>
-													<span id="ccity"></span> <span id="cstate"></span>, <span id="czip"></span>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-4" style="text-align: right;">Space</label>
-												<div class="col-md-8">
-													<input type="text" name="community-space" id="community-space" class="form-control" value="{{ old('community-address') }}" disabled>
-													<input type="hidden" name="community-id" id="community-id" value="0">
-												</div>
-											</div>
-
-
-										</div>
-									</div>
-								</div>
-
-
-			</div>
-		  <div class="truform" style="display: none;">
-		  						<div class="form-group">
-									<label class="control-label col-md-3">Age Restriction</label>
-									<div class="col-md-9 " >	
-													<div class="row-fluid">
-														<input type="radio" name="community-type" id="t_default" value="-1" style="display: none;" selected>
-														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
-															<input type="radio" name="community-type" id="t_family" value="0">
-															<label for="t_family">
-																Family
-															</label>
-														</div>
-													
-														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
-															<input type="radio" name="community-type" id="t_ffp" value="1">
-															<label for="t_ffp">
-																55+
-															</label>
-														</div>
-
-														<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
-															<input type="radio" name="community-type" id="t_senior" value="2">
-															<label for="t_senior">
-																Senior
-															</label>
-														</div>
-
-													</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-3">Street address</label>
-									<div class="col-md-9">
-										<input type="text" name="community-address1" id="community-address1" class="form-control" value="{{ old('community-address') }}">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-3">Space</label>
-									<div class="col-md-9">
-										<input type="text" name="community-address2" id="community-address2" class="form-control" value="{{ old('community-address') }}">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-3">State</label>
-									<div class="col-md-3">
-
-										<select class="form-control" id="community-state" name="community-state">
-		      							<option value="0" data-abbr="xx">Select State</option>
-							      		@foreach($states as $state)
-							      		<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
-										@endforeach
-		     							</select>
-
-									</div>
-									<label class="control-label col-md-3">Zip code</label>
-									<div class="col-md-3">
-										<input type="text" name="community-zip" id="community-zip" class="form-control" value="">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-3">City</label>
-									<div class="col-md-9">
-								      <select class="form-control" id="community-city" name="community-city" disabled>
-								      	<option value="0" data-abbr="xx" >First Select State</option>
-								      </select>
-									</div>
-								</div>
+		<div class="col-xs-12 col-sm-11" style="padding: 15px;">
+			<div class="form-group">
+				<label class="control-label col-md-3">Business Account</label>
+				<div class="col-md-9">
+					<select name="company-id" id="company-id" class="form-control">
+						<option value="0">Select a Business Account..</option>
+						@foreach( $companies as $company )
+						<option value="{{$company->id}}">{{$company->title}} @if($company->is_personal) (Personal Business Account) @endif</option>
+						@endforeach
+					</select>
 				</div>
-								<div class="form-group">
-									<label class="control-label col-md-3"></label>
-									<div class="col-md-9">
-										<button name="" id="verify_btn" class="btn btn-success hardstop" style="width: 100%;" value="" disabled>Verify</button>
-									</div>
+			</div>
+		</div>
+
+<!------------------------------ Choose Listing Type ---------------------------------------------------------->
+		<div class="col-xs-12 col-sm-12 text-left" style="border-bottom: 2px solid #eee;padding: 10px;">
+
+			<nav>
+			<ul class="nav nav-tabs">
+				<li class="col-md-6 active" role="presentation" id="incomm">
+				<a class="commtab" onclick="setMode(1)"> <i class="fa fa-users"></i> In a Community</a>
+				</li>
+				<li class="col-md-6" role="presentation" id="notincomm">
+				<a class="commtab" onclick="setMode(2)"> <i class="fa fa-user"></i> On Private Land</a>
+				</li>
+			</ul>
+			</nav>
+
+		</div>
+
+
+<!------------------------------- Community Form --------------------------------------------------------------->
+
+		<div class="col-xs-12 col-sm-11" id="commform" style="padding: 15px;">
+			
+			<div class="form-group" style="margin-top: 48px;">
+				<label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Hint:</label>
+				<div class="col-sm-9" style="font-size: .9em;">
+				Please select the community this home belongs to. If you cannot find your home's community, you can select the option to add your community to MHS.
+				</div>
+			</div>
+
+			<div class="form-group" style="margin-top: 48px;">
+				<label for="" class="col-sm-3 control-label"><span class="req_field">*</span>Community</label>
+				<div class="col-sm-9 companyname">
+				<input type="text" style="max-width:100%;" class="form-control" autocomplete="off" id="community-name" name="community-name" placeholder="Community Name">
+				<a class="btn btn-default companybtn" style="display: none;" onclick="fff();">Create</a>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="alert alert-danger" id="name-alert-box" role="alert" style="width: 80%;margin-left: 14%;display: none;">
+					<button type="button" class="close" data-dismiss="alert" data-label="Close"><span aria-hidden="true">&times;</span></button>
+					<span id="name-warning"></span>
+				</div>
+			</div>
+		  	
+			  <div class="thoughtform" style="display: none;">
+				<div class="form-group">
+					<label class="control-label col-md-3"></label>
+					<div class="col-md-9">
+						<div class="col-md-4">
+							<img src="/img/nophoto.png" id="cimage" style="width: 100%;">
+						</div>
+						<div class="col-md-8" style="font-size: .8em;">
+							<div class="form-group">
+								<label class="col-md-4" style="text-align: right;">Community</label>
+								<div class="col-md-8">
+									<span id="cname"></span><br>
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-md-4" style="text-align: right;">Address</label>
+								<div class="col-md-8">
+									<span id="caddr"></span><br>
+									<span id="ccity"></span> <span id="cstate"></span>, <span id="czip"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4" style="text-align: right;">Space</label>
+								<div class="col-md-8">
+									<input type="text" name="community-space" id="community-space" class="form-control" value="{{ old('community-address') }}" disabled>
+									<input type="hidden" name="community-id" id="community-id" value="0">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		  	<div class="truform" style="display: none;">
+				<div class="form-group">
+					<label class="control-label col-md-3">Age Restriction</label>
+					<div class="col-md-9 " >	
+						<div class="row-fluid">
+							<input type="radio" name="community-type" id="t_default" value="-1" style="display: none;" selected>
+							<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+								<input type="radio" name="community-type" id="t_family" value="0">
+								<label for="t_family">
+									Family
+								</label>
+							</div>
+						
+							<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+								<input type="radio" name="community-type" id="t_ffp" value="1">
+								<label for="t_ffp">
+									55+
+								</label>
+							</div>
 
+							<div class="col-md-4 ageblock" style="text-align:center;background-color: ;">
+								<input type="radio" name="community-type" id="t_senior" value="2">
+								<label for="t_senior">
+									Senior
+								</label>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Street address</label>
+					<div class="col-md-9">
+						<input type="text" name="community-address1" id="community-address1" class="form-control" value="{{ old('community-address') }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Space</label>
+					<div class="col-md-9">
+						<input type="text" name="community-address2" id="community-address2" class="form-control" value="{{ old('community-address') }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">State</label>
+					<div class="col-md-3">
+
+						<select class="form-control" id="community-state" name="community-state">
+						<option value="0" data-abbr="xx">Select State</option>
+						@foreach($states as $state)
+						<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
+						@endforeach
+						</select>
+
+					</div>
+					<label class="control-label col-md-3">Zip code</label>
+					<div class="col-md-3">
+						<input type="text" name="community-zip" id="community-zip" class="form-control" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">City</label>
+					<div class="col-md-9">
+						<select class="form-control" id="community-city" name="community-city" disabled>
+						<option value="0" data-abbr="xx" >First Select State</option>
+						</select>
+					</div>
+				</div>
+			</div>
+				<div class="form-group">
+					<label class="control-label col-md-3"></label>
+					<div class="col-md-9">
+						<button name="" id="verify_btn" class="btn btn-success hardstop" style="width: 100%;" value="" disabled>Verify</button>
+					</div>
+				</div>
+			</div>
+		</div>
 				<!-- /Community Form -->
-				<!-- Other Form -->
-			      			<div class="col-xs-12 col-sm-11" id="other" style="display: none;">
-								<div style="font-size: 1.5em;margin: 50px auto;width: 80%;">
-									<strong style="font-size: 2em;font-family: Voltaire;">Coming Soon</strong><br>
-								
-									MHS America is working to implement further services for private land and dealer lot homes. If this applies to your home we hope to be able to serve you soon.
-								</div>
-							</div>
-				<!-- /Other Form -->
+				
+<!----------------------------------- Private Land ----------------------------------------------------------->
+		<div class="form-group" style="margin-top: 48px;">
+			
+			<div class="form-group">
+				<div class="alert alert-danger" id="name-alert-box" role="alert" style="width: 80%;margin-left: 14%;display: none;">
+					<button type="button" class="close" data-dismiss="alert" data-label="Close"><span aria-hidden="true">&times;</span></button>
+					<span id="name-warning"></span>
 				</div>
 			</div>
+		  	
+			  <div class="thoughtform" style="display: none;">
+				<div class="form-group">
+					<label class="control-label col-md-3"></label>
+					<div class="col-md-9">
+						<div class="col-md-4">
+							<img src="/img/nophoto.png" id="cimage" style="width: 100%;">
+						</div>
+						<div class="col-md-8" style="font-size: .8em;">
+							<div class="form-group">
+								<label class="col-md-4" style="text-align: right;">Address</label>
+								<div class="col-md-8">
+									<span id="caddr"></span><br>
+									<span id="ccity"></span> <span id="cstate"></span>, <span id="czip"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4" style="text-align: right;">Space</label>
+								<div class="col-md-8">
+									<input type="text" name="community-space" id="community-space" class="form-control" value="{{ old('community-address') }}" disabled>
+									<input type="hidden" name="community-id" id="community-id" value="0">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		  	<div class="truform" style="display: none;">
+				<div class="form-group">
+					<label class="control-label col-md-3">Street address</label>
+					<div class="col-md-9">
+						<input type="text" name="community-address1" id="community-address1" class="form-control" value="{{ old('community-address') }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">Space</label>
+					<div class="col-md-9">
+						<input type="text" name="community-address2" id="community-address2" class="form-control" value="{{ old('community-address') }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">State</label>
+					<div class="col-md-3">
+
+						<select class="form-control" id="community-state" name="community-state">
+						<option value="0" data-abbr="xx">Select State</option>
+						@foreach($states as $state)
+						<option value="{{ $state->id }}" data-abbr="{{ $state->abbr }}">{{ $state->title }}</option>
+						@endforeach
+						</select>
+
+					</div>
+					<label class="control-label col-md-3">Zip code</label>
+					<div class="col-md-3">
+						<input type="text" name="community-zip" id="community-zip" class="form-control" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">City</label>
+					<div class="col-md-9">
+						<select class="form-control" id="community-city" name="community-city" disabled>
+						<option value="0" data-abbr="xx" >First Select State</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3"></label>
+				<div class="col-md-9">
+					<button name="" id="verify_btn" class="btn btn-success hardstop" style="width: 100%;" value="" disabled>Verify</button>
+				</div>
+			</div>
+		</div>
+			<!-- /Private Land -->
+		</div>
+	</div>
 </form>
 
 	</div>
