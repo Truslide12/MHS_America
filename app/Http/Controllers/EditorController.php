@@ -137,7 +137,7 @@ class EditorController extends Pony {
 					->with('profile', $profile)
 					->with('amenities', $amenities)
 					->with('states', $states)
-					->with('plan', $profile->plan)
+					->with('plan', $profile->plan_id)
 					->with('business_hours', $final_hours)
 					->with('hour_texts', $hour_texts)
 					->with('is_paid', $profile->has_active_subscription())

@@ -1,0 +1,38 @@
+body{background:#333}
+#name-wrapper {position:relative;z-index:20}
+#name-wrapper .container{padding:15px;color:#fff}
+#carousel-container{padding:0}
+.carousel-control.left,.carousel-control.right{background:none !important;}
+.carousel,.nameblock{background:#242424 url(/_/images/patterns/skewed_print.png) top left repeat}
+.carousel{height:360px}
+.carousel-caption{z-index:10;display:none}
+.carousel .item{height:280px}
+.carousel .container .photo{width:800px;height:280px;margin:0 auto;background-repeat:no-repeat}
+#profile-data .panel-body>div{padding:0 15px 0 0}
+#profile-data .panel-body,.tile-container{padding-right:0}
+.two-col{text-align:right;font-style:italic}
+.two-col span{float:left;font-style:normal}
+#left-col .panel-default,#right-col .panel-default{border-color:#999}
+#left-col .panel-default>.panel-heading{background:#10acc3;color:#fff;border-color:#999}
+#right-col .panel-default>.panel-heading{background:#cd5454;color:#fff;border-color:#999}
+.tile-container>div{margin:5px 0;padding:0 15px 0 0}
+.home-container{padding:15px 0 15px 15px}
+.home-container>div{padding:0 15px 0px 0}
+.info-tile {padding:7px 0;border:1px solid #ccc;background:#dedede;font-size:120%;text-align:center}
+.info-tile span{font-size:75%}
+.handicap {background-image:url(/_/images/icons/handicap.png);background-position:center center;background-repeat:no-repeat}
+.neighborhood{background-image:url(/_/images/icons/neighborhood-watch.png);background-position:center center;background-repeat:no-repeat}
+.space-container .info-tile{font-size:100%}
+.home-block{background:#dedede;padding:15px}
+.home-block .col-xs-6{padding:0}
+.home-block .image img{width:100%;height:auto}
+.home-block .home-price{color:#545454;background:#fff;position:relative;z-index:1;padding:5px 10px;margin:0 5px 15px;line-height:15px;margin-top:-30px}
+@media (min-width: 768px) {
+	.container .photo{margin-left:-40px}
+}
+@media (max-width: 992px) {
+	#photo1 .container .photo,#photo2 .container .photo,#photo3 .container .photo{margin-left:-40px;}
+}
+@media (max-width: 767px) {
+	#footer-menu ul{line-height:2}
+}

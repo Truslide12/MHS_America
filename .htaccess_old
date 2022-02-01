@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?mhsamerica.com$ [NC]
+RewriteCond %{REQUEST_URI} !^/oldsite/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /oldsite/$1
+RewriteCond %{HTTP_HOST} ^(www.)?mhsamerica.com$ [NC]
+RewriteRule ^(/)?$ oldsite/index.htm [L]

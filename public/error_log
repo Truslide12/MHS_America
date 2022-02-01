@@ -1,0 +1,47 @@
+[15-Oct-2013 13:18:24] PHP Fatal error:  Uncaught exception 'SmartyCompilerException' with message 'Syntax Error in template "./incl/xhtml/united-states-state.tpl"  on line 28 "&lt;header{if page.canvas.blacknotices == 1} class=&quot;black&quot;{/if}&gt;Sponsored Advertisements&lt;/header&gt;"  - Unexpected "."' in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php:627
+Stack trace:
+#0 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templateparser.php(3154): Smarty_Internal_TemplateCompilerBase->trigger_template_error()
+#1 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templateparser.php(3219): Smarty_Internal_Templateparser->yy_syntax_error(58, '.')
+#2 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_smartytemplatecompiler.php(105): Smarty_Internal_Templateparser->doParse(58, '.')
+#3 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php(171): Smarty_Internal_SmartyTemplateCompiler->doCo in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php on line 627
+[15-Oct-2013 14:09:42] PHP Fatal error:  Uncaught exception 'SmartyCompilerException' with message 'Syntax Error in template "./incl/xhtml/profile-community.tpl"  on line 965 "" unclosed {elseif} tag' in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php:627
+Stack trace:
+#0 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_smartytemplatecompiler.php(118): Smarty_Internal_TemplateCompilerBase->trigger_template_error('unclosed {elsei...')
+#1 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php(171): Smarty_Internal_SmartyTemplateCompiler->doCompile('?<section id="u...')
+#2 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(192): Smarty_Internal_TemplateCompilerBase->compileTemplate(Object(Smarty_Internal_Template))
+#3 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(251): Smarty_Internal_Compile_Block::compileChildBlock(Object(Smarty_Internal_SmartyTemplateC in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php on line 627
+[15-Oct-2013 14:10:36] PHP Fatal error:  Uncaught exception 'SmartyCompilerException' with message 'Syntax Error in template "./incl/xhtml/profile-community.tpl"  on line 965 "" unclosed {elseif} tag' in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php:627
+Stack trace:
+#0 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_smartytemplatecompiler.php(118): Smarty_Internal_TemplateCompilerBase->trigger_template_error('unclosed {elsei...')
+#1 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php(171): Smarty_Internal_SmartyTemplateCompiler->doCompile('?<section id="u...')
+#2 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(192): Smarty_Internal_TemplateCompilerBase->compileTemplate(Object(Smarty_Internal_Template))
+#3 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(251): Smarty_Internal_Compile_Block::compileChildBlock(Object(Smarty_Internal_SmartyTemplateC in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php on line 627
+[29-Oct-2013 22:08:33] PHP Fatal error:  Uncaught exception 'SmartyCompilerException' with message 'Syntax Error in template "./incl/xhtml/profile-community.tpl"  on line 127 "" unclosed {if} tag' in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php:627
+Stack trace:
+#0 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_smartytemplatecompiler.php(118): Smarty_Internal_TemplateCompilerBase->trigger_template_error('unclosed {if} t...')
+#1 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php(171): Smarty_Internal_SmartyTemplateCompiler->doCompile('?<section id="u...')
+#2 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(192): Smarty_Internal_TemplateCompilerBase->compileTemplate(Object(Smarty_Internal_Template))
+#3 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_compile_block.php(251): Smarty_Internal_Compile_Block::compileChildBlock(Object(Smarty_Internal_SmartyTemplateCompi in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php on line 627
+[30-Oct-2013 00:15:56] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:20:16] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:20:18] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:22:16] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:22:32] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:22:33] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[30-Oct-2013 00:22:34] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/spaces/public_html/newsite/modules/frontend/home.php on line 10
+[01-Nov-2013 00:02:09] PHP Fatal error:  Uncaught exception 'SmartyCompilerException' with message 'Syntax Error in template "./incl/xhtml/united-states-state.tpl"  on line 35 ".city-form {padding-top:2em;padding-bottom:2em;text-align:center;}"  - Unexpected ":", expected one of: "}" , " "' in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php:627
+Stack trace:
+#0 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templateparser.php(3154): Smarty_Internal_TemplateCompilerBase->trigger_template_error()
+#1 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templateparser.php(3219): Smarty_Internal_Templateparser->yy_syntax_error(2, ':')
+#2 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_smartytemplatecompiler.php(105): Smarty_Internal_Templateparser->doParse(2, ':')
+#3 /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php(171): Smarty_Internal_SmartyTemplateCompiler->doCompile('?<a name="map" .. in /home/spaces/public_html/newsite/incl/classes/sysplugins/smarty_internal_templatecompilerbase.php on line 627
+[04-Nov-2013 23:11:27] PHP Warning:  require(./incl/classes/database.mysql-classic.class.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/core/settei-core.php on line 53
+[04-Nov-2013 23:11:27] PHP Warning:  require(./incl/classes/database.mysql-classic.class.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/core/settei-core.php on line 53
+[04-Nov-2013 23:11:27] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required './incl/classes/database.mysql-classic.class.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/spaces/public_html/core/settei-core.php on line 53
+[09-Dec-2013 23:52:18] PHP Warning:  include(./settei-core.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/public/city.autocomplete.php on line 5
+[09-Dec-2013 23:52:18] PHP Warning:  include(./settei-core.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/public/city.autocomplete.php on line 5
+[09-Dec-2013 23:52:18] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening './settei-core.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/spaces/public_html/public/city.autocomplete.php on line 5
+[09-Dec-2013 23:52:33] PHP Warning:  require(./incl/classes/database.mysql-classic.class.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/core/settei-core.php on line 55
+[09-Dec-2013 23:52:33] PHP Warning:  require(./incl/classes/database.mysql-classic.class.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/spaces/public_html/core/settei-core.php on line 55
+[09-Dec-2013 23:52:33] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required './incl/classes/database.mysql-classic.class.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/spaces/public_html/core/settei-core.php on line 55
+[10-Jan-2014 23:43:07] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/spaces/public_html/public/profile_contact.php on line 16

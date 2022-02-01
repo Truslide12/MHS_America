@@ -1,0 +1,6 @@
+a.probox {margin:1em 0 0 0.6em;float:left;background:#fff;border:1px solid #ccc;display:block;width:180px;height:180px;font-size:1.4em;color:#333;text-decoration:none;text-align:center;line-height:4em;}
+a.probox:hover {border:1px solid #09f;}
+
+a.pro_electricians {
+background:#fff url(/_/images/categories/electricians.png) 35px 60px no-repeat;
+}

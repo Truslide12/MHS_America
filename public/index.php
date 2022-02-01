@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -58,3 +59,21 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+=======
+/******************************************
+ * Copyright 2012-2014 Kage-Mykel Edwards *
+ *          All Rights Reserved.          *
+ *----------------------------------------*
+ *        Meta:    Master Webpage         *
+ *                                        *
+ *              /index.php                *
+ ******************************************/
+
+$sector = "frontend";
+define('IGLOO', 1);
+$is_dashboard == true;
+chdir('../core');
+require "./settei-core.php";
+
+?>
+>>>>>>> 603ede087944a85397df1be330e4ee6fee904877
